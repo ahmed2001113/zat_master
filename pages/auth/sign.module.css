@@ -1,0 +1,82 @@
+.left{
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    justify-content: space-between;
+ }
+.left h1{ 
+    font-size: 30px;
+    font-weight: bold;
+}
+.g{
+    margin-bottom: 20px;
+}
+.g h5{
+    font-weight: lighter;
+    text-transform: uppercase;
+    margin: 40px 0px;
+}
+.left > button.submit{
+    margin-top:20px
+}
+.left input{
+    border:0px;
+border-bottom:1px solid #333;
+background: none;
+margin-bottom: 30px;
+border-radius: 0px;
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+     justify-content: flex-end;
+     height: fit-content;
+}
+.right h1{
+    align-self: flex-start;
+    justify-self: flex-start;
+    margin-bottom: auto;
+    font-weight: bold;
+    font-size: 23px;
+    text-transform: uppercase;
+}
+.right h3{
+    margin: 10px 0px;
+    text-transform: capitalize;
+    font-weight: 500;
+    margin-bottom: 30px;
+
+}
+.cooo{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 34%;
+    text-align: center;
+    justify-content: space-around;
+}
+.cooo h1{
+ 
+        font-weight: bold;
+        text-transform: capitalize;
+        margin-bottom: 20px;
+        font-size: 20px;
+    
+}
+.cooo input{
+    margin-bottom: 30px;
+    border: 0px;
+    border-bottom: 1px solid;
+    border-radius: 0px;
+}
+.cooo  h6{
+    margin:10px 0px;
+
+}
+.cooo a {
+ 
+   
+    text-transform: uppercase
+    ;
+}

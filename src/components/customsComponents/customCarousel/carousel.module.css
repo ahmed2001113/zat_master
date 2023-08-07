@@ -1,0 +1,70 @@
+.caption{
+    position: absolute;
+    right: 15%;
+    bottom: 1.25rem;
+    left: 15%;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    color: #fff;
+    text-align: left;
+    padding: 20px;
+    left: 0px;
+    bottom: unset;
+    font-size: 27px;
+    font-weight: bold;
+    color: #fff;
+    bottom: 4px;
+    color: #fff;
+    
+}
+
+
+.left_carousel{
+    height: 59px;
+    width: 65px;
+    background: #623d69;
+     margin-top: auto;
+    left: 30px;
+    border: 1px solid #fff0;
+    border-radius: 50%;
+    padding: 2px;
+    color: #333 !IMPORTANT;
+}
+.right_cartousl{
+    height: 59px;
+    width: 65px;
+    background: #623d69;
+     margin-top: auto;
+    left: 109px;
+    border: 1px solid #fff0;
+    border-radius: 50%;
+    padding: 2px;
+    color: #333 !IMPORTANT;
+    border: 1px dotted #333 !IMPORTANT;
+}
+
+ 
+   
+    
+    .button {
+        padding: ;
+    border: 1px solid #333;
+    font-weight: bold;
+    background: #623d69;
+    color: #333;
+    text-transform: uppercase;
+    padding: 22px;
+    border: 0px;
+    margin-top: 159px;
+    position: absolute;
+    top: 216%;
+    left: 12%;
+    color: #fff;
+    border-radius: 10px 41px 48px 20px;
+    }
+    .carousel-inner {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        height: 748px;
+    }
