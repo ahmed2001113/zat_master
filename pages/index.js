@@ -63,8 +63,8 @@ regularPrice:product.regularPrice
      }
   }) ||[]
 
- }catch(err){
-  console.log(err)
+ }catch(error){
+  console.log(error.response.data)
 }
  return{
   props:{

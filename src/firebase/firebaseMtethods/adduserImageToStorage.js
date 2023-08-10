@@ -18,7 +18,7 @@ export const adduserImageToStorage =async (image,user)=>{
             user
         }
      }catch(err){
-        console.log(err)
+        console.log(err.response.data)
      }
   
       

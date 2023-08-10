@@ -12,17 +12,18 @@ import { useRouter } from "next/router"
 import { useEffect } from "react";
 
 const Cat = ({data,footer_header})=>{
+  const router = useRouter();
   const {description,
     image,
     name ,products:{edges}} =data
     const formattingProducts =FormattingProductsArray(edges);
-    console.log(formattingProducts)
-  console.log(data)
-const router = useRouter();
+
 
 console.log(image)
-const {slug =[] } = router.query;
-console.log(data,slug)
+const {query:{slug} ,asPath } = router;
+const path = asPath.split('/')
+ 
+ // const lastparam = slug.pop();
 //return array of params
 useEffect(()=>{
 // async function get  (){
@@ -37,12 +38,18 @@ console.log(data)
   <RootLayout headerFooter={footer_header}>
     <div className="image_handler" > 
 
-  <Image src={image?.sourceUrl||''} width={1900} sizes="100vh" srcSet={image?.srcSet} height={500}/>
+ {
+  image && image.sourceUrl?
+  <Image src={image?.sourceUrl||''} width={1900} sizes="100vh" srcSet={image?.srcSet} height={500}/>:
+<>
+  
+</>
+ }
 
 
 
     </div>
-      <Store products={formattingProducts}/>
+      <Store category={path[path.length-1].toLocaleUpperCase()}  products={formattingProducts}/>
       </RootLayout>
         </>
     )
@@ -81,6 +88,7 @@ let data = {}
           footer_header:footer_header?.data,
           
         },
+        revalidate:10
 
         // revalidate:1
          

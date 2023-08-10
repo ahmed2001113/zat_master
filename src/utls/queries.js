@@ -36,7 +36,7 @@ export const PRODUCTS_QUERY =qql`query{
           }
         }
       }
-    }
+    } 
   }
 }`
 

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-  
+@import './store.css'
 .swiper-slide{
   background: none;
 }
@@ -14,12 +14,20 @@
   background: linear-gradient(0deg, rgba(0, 16, 34, 0.8) 0%, rgba(240, 244, 253, 0.2) 90%);
 }
 html,body{
-  background: #f8f8f8   !important;
+  background: #f7f8f9   !important;
   width: 100%;
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
 
+}
+.cert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cert img{
+  margin: 10px;
 }
 .opacity-100 {
   opacity: 1 !important;
@@ -376,4 +384,48 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-11zohuh-MuiSvgIcon-root {
 .carousel-control-prev, .carousel-control-next{
   height: fit-content;
   margin: auto;
+}
+
+.fixed-class {
+  position: fixed;
+  background: #fff;
+  width: 100%;
+  top: 0px;
+  padding: 6px;
+  transition: 0.5s all ease-in-out;
+  left: 0px;
+  height: auto;
+  border-bottom: 0px;
+  z-index: 7;
+  border: 0px !IMPORTANT;
+  filter: drop-shadow(0px 0px 60px rgba(0,0,0,0.15));
+  padding: 0px !important;
+}
+.sale{
+  position: absolute;
+  bottom: 21px;
+  left: 10px;
+  background: #603d6b;
+  padding: 2px 14px;
+  border-radius: 5px;
+  text-align: center;
+  text-transform: capitalize;
+  color: #fff;
+
+}
+.carousel-caption {
+  position: absolute;
+  right: 15%;
+  bottom: 1.25rem;
+  left: 15%;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  color: #fff;
+  text-align: left !important;
+  color: #000 !important;
+  font-family: sans-serif;
+}
+.col-md-12.image_holder {
+  position: relative;
+  height: 1000px;
 }

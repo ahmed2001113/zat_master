@@ -4,6 +4,7 @@ import styles from './mainproduct.module.css'
 import { useDispatch } from 'react-redux'
 import { PreviewActions } from '@/src/store/preview/preview.slice';
 import { CartActions } from '@/src/store/cart/cart.reducer';
+import Link from 'next/link';
 function  ProdutItemMain({product}) {
 const dispatch= useDispatch();
 const OpenPreview =()=> dispatch(PreviewActions.OPENPREVIEW(product));
@@ -15,17 +16,19 @@ const openCart = ()=>{
 }
    return (
     <>
-<div className="col-md-3 mb-2">
+<div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 pb-3 pb-md-6 pb-xl-8">
 <div className={`${styles.product}`}>
       
       <div className={`${styles.imageWrapper}`}>
       
-      <Image
+<Link href={`/product/${product?.id}`}>
+<Image
        src={product?.images[0]?.sourceUrl||product?.images[0]?.src}
       height={500}
        width={557} 
        objectFit='cover'
       sizes='100vw'/>
+</Link>
       
       
   <div className={`${styles.flex_v}`}>
@@ -37,8 +40,13 @@ const openCart = ()=>{
       <i className="fa-regular fa-eye"></i>     
        </button>
   </div>
+  {product?.onSale&&
+  <div className="sale">
+   On Sale 
+  </div>}
+
       </div>
-      <div className={`${styles.porduct_d}`}>
+      <div className={`${styles.porduct_d}  p-2 position-relative bg-white `}>
          <div  className={`${styles.Title}`} >
             <h6>{product.name}</h6>
             <p className={`${styles.price}`}>

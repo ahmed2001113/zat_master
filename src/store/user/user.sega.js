@@ -32,8 +32,8 @@ function* GetUserSnapShotData (userAuth, additionalDetails ){
                    
 }
          catch(err){
- 
-                yield put(userAction.signInFaild(err))
+ console.log(err.response.data)
+                yield put(userAction.signInFaild(err.response.data))
 
          }  
 }
@@ -64,7 +64,7 @@ try{
          location.href = '/'
 
 }catch(err){
-         yield put(userAction.signInFaild(err))
+         yield put(userAction.signInFaild(err.response.data))
 }
 }
 

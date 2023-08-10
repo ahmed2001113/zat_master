@@ -38,7 +38,7 @@ if(!gettingUserDocSnapSot.exists()){
     }
 
     catch(err){
-
+console.log(err.response.data)
     }
 
 }

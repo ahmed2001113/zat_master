@@ -1,5 +1,4 @@
-'use client'
-import { FetchCategoriesStart } from '@/src/store/categories/category.action';
+ import { FetchCategoriesStart } from '@/src/store/categories/category.action';
 import { persistor, store } from '@/src/store/store';
 import '@/styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.css'
