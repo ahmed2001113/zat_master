@@ -13,7 +13,9 @@ const openCart = ()=>{
  dispatch(CartActions.addItemToCart(product))
   
 }
-   return (
+  
+// c
+return (
     <>
 <div className="col-md-3 mb-2">
 <div className={`${styles.product}`}>
