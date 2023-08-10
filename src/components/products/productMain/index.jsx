@@ -14,6 +14,7 @@ const openCart = ()=>{
  dispatch(CartActions.addItemToCart(product))
   
 }
+// test
    return (
     <>
 <div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 pb-3 pb-md-6 pb-xl-8">
