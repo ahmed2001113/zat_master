@@ -55,6 +55,7 @@
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "eslint": "^8.47.0",
     "style-loader": "^3.3.3"
   }
 }
