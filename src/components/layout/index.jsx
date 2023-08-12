@@ -12,7 +12,7 @@ function RootLayout({children, headerFooter}) {
     <>
     <MainHeader header={header}/>
     
-    <main className="  mx-auto py-4 min-h-50vh">
+    <main className="  mx-auto  ">
 					{children}
 				</main>
 

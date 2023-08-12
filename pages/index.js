@@ -7,7 +7,7 @@ import { HEADER_FOOTER_ENDPOINT } from '../src/EndPoints'
  const inter = Inter({ subsets: ['latin'] })
   import client from '../src/utls/apolloConfigrations/apolloClient'
  import { useEffect } from 'react'
-import { Categories_query, Categories_query_all, PRODUCTS_QUERY } from '../src/utls/queries'
+import { Categories_query, Categories_query_all, GETCATEGORIES_WITH_NO_PARENT, PRODUCTS_QUERY } from '../src/utls/queries'
 import MainSlider from '@/src/components/Sliders/MainSlider'
 import Title from '@/src/components/title'
 import groupObjects from '@/src/utls/functions/GroupSubCategoriesByparentName'
@@ -17,9 +17,18 @@ import PreviewComponent from '@/src/components/previewComponent'
 import CartDrawer from '@/src/components/cartDrawer/cartDrawer'
 import Swipecarousel from '@/src/components/customsComponents/swipe_carousel/swipe.carousel'
 import { isEmpty } from 'lodash'
+import WithNoParentCategories from '@/src/components/productWithNoCategories/WithNoParentCategories'
  
-export default function Home({footer_header,products}) {
+export default function Home({footer_header,products,categoriesWithNoParent}) {
+  console.log(categoriesWithNoParent)
   // console.log(footer_header?.data)
+
+
+  // useEffect(()=>{
+  //   const get = (async()=>{
+
+  //   })()
+  // },[])
   if ( isEmpty( products ) ) {
 		return null;
 	}
@@ -32,7 +41,7 @@ export default function Home({footer_header,products}) {
 
      <SwippeCentered products={products}/>
 
-
+<WithNoParentCategories categories={categoriesWithNoParent}/>
       </RootLayout>
     </>
   )
@@ -42,7 +51,8 @@ export default function Home({footer_header,products}) {
 
 export const   getStaticProps = async( )=>{
  const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
-let  productResults = []
+let  productResults = [];
+let categoriesWithNoParent = []
  const SpecifiedCategories = ["Shirts","Unisex Hoodes"]
 try{
   const products =  await client.query({query:PRODUCTS_QUERY});
@@ -63,13 +73,24 @@ regularPrice:product.regularPrice
      }
   }) ||[]
 
+ }catch(error){
+  console.log(error.response.data)
+}
+
+try{
+  const {data:{productCategories:{nodes}}} =await client.query({
+    query:GETCATEGORIES_WITH_NO_PARENT });
+
+    categoriesWithNoParent = nodes
+console.warn(categoriesWithNoParent)
  }catch(err){
-  console.log(err)
+
 }
  return{
   props:{
     footer_header:footer_header?.data,
-    products:productResults
+    products:productResults,
+    categoriesWithNoParent:categoriesWithNoParent
   }
 }
 

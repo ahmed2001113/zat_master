@@ -4,19 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { cartItems } from "@/src/store/cart/cart.selector";
 import styles  from './cart.module.css'
+import Quantity from "../customsComponents/quantity/Quantity";
 
 const  CartItem  = ({item})=>{
-if(!item){
-  return 
-}
- const dispatch = useDispatch()
- const {id,quantity} = item;
-    const minVal = 1;
-    const maxVal=20;
-    const items = useSelector(cartItems)
-    
-    const [value, setValue] = useState(item.quantity);
-    
     const RemoveItem = (item)=>{
       // dispatch(setItemsAfterRemoved(CartItem,items))
       dispatch(CartActions.RemoveItem(item))
@@ -24,31 +14,12 @@ if(!item){
 
         
 } 
-const increaseValue = () => {
-
-  setValue((prevValue) => prevValue + 1);
-};
-
-const decreaseValue = () => {
-  if(value>minVal){
-
-    setValue((prevValue) => prevValue - 1);
-  }
-};
-useEffect(() => {
-  const itemsArray = items.map((i) => {
-    if (i.id === id) {
-      return {
-        ...i,
-        quantity: value,
-      };
-    } else {
-      return i;
-    }
-  });
-
-  dispatch(CartActions.setCartItems(itemsArray));
-}, [value]);
+if(!item){
+  return 
+}
+ 
+    
+   
     return(
 
 
@@ -59,11 +30,7 @@ useEffect(() => {
             </div>
             <div className="col-md-8">
               <h6>{item.name}</h6>
-              <div className="qtySelector text-center">
-      <i className="fa fa-minus decreaseQty" onClick={decreaseValue.bind(this)}></i>
-      <input  min={minVal} max={maxVal} type="text" className="qtyValue"     value={value}   readOnly />
-      <i className="fa fa-plus increaseQty" onClick={increaseValue.bind(this)}></i>
-    </div>
+       <Quantity item={item}/>
  
               <div className="buttons">
               <p>

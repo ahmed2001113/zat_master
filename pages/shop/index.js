@@ -1,11 +1,15 @@
+import { HEADER_FOOTER_ENDPOINT } from "@/src/EndPoints";
+import RootLayout from "@/src/components/layout";
 import ProdutItemMain from "@/src/components/products/productMain";
+import Store from "@/src/storeModule/store";
 import client from "@/src/utls/apolloConfigrations/apolloClient";
   // import {  getProductsData } from "@/src/utls/productCategories";
 import { All_PRODUCTS_QUERY } from "@/src/utls/queries";
+import axios from "axios";
  
  import { useEffect } from "react";
  
-const AllCategoriesProducts = ({products})=>{
+const AllCategoriesProducts = ({products,footer_header})=>{
 console.log(products)
   //return array of params
 useEffect(()=>{
@@ -23,14 +27,12 @@ useEffect(()=>{
      return(
 
         <>
-        <div className="row">
-             {
-                products.map(product=>{
+          <RootLayout headerFooter={footer_header}>
+          <Store 
+           products={products}/>
 
-                  return  <ProdutItemMain  product={product}/>
-                })
-            }
-         </div>
+ 
+         </RootLayout>
         </>
     )
 }
@@ -38,7 +40,7 @@ useEffect(()=>{
 
 export default AllCategoriesProducts
 
-
+let footer_header ={}  
 export async function getStaticProps(){
       let productsData =[];
  try {
@@ -46,6 +48,7 @@ export async function getStaticProps(){
     query:All_PRODUCTS_QUERY
   });
   
+
     productsData = products?.nodes?.map(product=>{
       return {
   description:product.description,
@@ -65,9 +68,17 @@ export async function getStaticProps(){
     console.log(error)
     
 }
+try {
+    footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
+
+} catch (error) {
+  console.log(error)
+
+}
     return{
         props:{
             products:productsData,
+            footer_header:footer_header?.data,
           },
           revalidate:10
     }

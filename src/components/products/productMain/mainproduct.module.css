@@ -5,6 +5,22 @@
 .imageWrapper img {
     height: 500px;
 }
+
+@media(min-width:1200px){
+    .imageWrapper{
+        width: 100%;
+        height: 609px;
+    
+    }
+ 
+    .imageWrapper img{
+        height: 100%;
+    }
+    .product{
+        width: 380PX !important;
+    }
+ 
+}
 .heart{
 
     font-size: 18px;
@@ -55,8 +71,7 @@ width: fit-content;
     text-align: left;
     padding: 10px;
     font-family: auto;
-    margin-top: 3px;
-
+ 
 }
 .Add{
      padding-bottom: 1px;

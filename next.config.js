@@ -8,7 +8,16 @@ const nextConfig = {
     loader:'default',
     domains: [ allowedImageWordPressDomain,allowedImageWordPressDomainz ],
 
-  }
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://zat98.com/:path*',
+      },
+    ]
+  },
+
 }
 
 module.exports = nextConfig

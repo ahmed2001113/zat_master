@@ -36,10 +36,112 @@ export const PRODUCTS_QUERY =qql`query{
           }
         }
       }
+    } 
+  }
+}`
+export const PRODUCT_BY_ID =qql`query Product($id: ID!) {
+  product(id: $id, idType: ID) {
+  productCategories{
+    nodes{
+      products{
+nodes {
+      id
+      slug
+      name
+      description
+      shortDescription
+      productId
+      image {
+        altText
+        srcSet
+        sourceUrl
+        title
+        uri
+        id
+      }
+     
+    
+      ... on SimpleProduct {
+        averageRating
+        price(format: RAW)
+        regularPrice(format: RAW)
+        stockStatus
+        status
+        stockQuantity
+        onSale
+        manageStock
+        galleryImages{
+          nodes{
+            sourceUrl
+            altText
+            srcSet
+          }
+        }
+      }
     }
+      }
+    }
+    
+  }
   }
 }`
 
+export const GETCATEGORIES_WITH_NO_PARENT =qql`
+query GetRootProductCategoriesAndProducts {
+  productCategories( last:6, where: {parent: 0,hideEmpty: true}) {
+         nodes{
+             id
+      slug
+      name
+	      image{
+          sourceUrl
+          altText
+          title
+          description
+          srcSet
+}
+      products{
+nodes {
+      id
+      slug
+      name
+      description
+      shortDescription
+      id
+      image {
+        altText
+        srcSet
+        sourceUrl
+        title
+        uri
+        id
+      }
+     
+    
+      ... on SimpleProduct {
+        averageRating
+        price(format: RAW)
+        regularPrice(format: RAW)
+        stockStatus
+        status
+        stockQuantity
+        onSale
+        manageStock
+        galleryImages{
+          nodes{
+            sourceUrl
+            altText
+            srcSet
+          }
+        }
+      }
+    }
+      }
+    }
+    
+  
+  }
+}`
 export const All_PRODUCTS_QUERY =qql`query{
   products (last:100){
     nodes {

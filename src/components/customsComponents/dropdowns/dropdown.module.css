@@ -1,0 +1,17 @@
+.basic{
+    background: none;
+    border: none;
+    color: #333 !IMPORTANT;
+    text-transform: uppercase;
+    background: #575758a1 !IMPORTANT;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1px 5px;
+    border-radius: 0px;
+    border: 1px solid #eee !important;
+    font-size: 14px;
+}
+.basic img{
+    width: 22px;
+}

@@ -16,3 +16,38 @@
     margin: auto unset;
     margin: auto;
 }
+.nav_top{
+    height: 128px;
+    padding: 14px;
+    width: 100%;
+    background-color: #fff;
+}
+.ml_auto{
+    margin:0px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+     padding: 6px;
+}
+.menu{
+    justify-content: space-around;
+}
+.menu a {
+    text-decoration: none;
+    text-transform: capitalize;
+}
+.menu .flex {
+    text-transform: capitalize;
+    font-size: 17px;
+    color: #000;
+}
+.menu .hidden.lg\:ml-8.lg\:block.lg\:self-stretch{
+    margin: 0px  !important;
+}
+.cart{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: capitalize;
+}

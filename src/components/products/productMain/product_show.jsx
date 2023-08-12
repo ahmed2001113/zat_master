@@ -5,25 +5,21 @@ import { useDispatch } from 'react-redux'
 import { PreviewActions } from '@/src/store/preview/preview.slice';
 import { CartActions } from '@/src/store/cart/cart.reducer';
 import Link from 'next/link';
-function  ProdutItemMain({product}) {
- const dispatch= useDispatch();
-const OpenPreview =()=> dispatch(PreviewActions.OPENPREVIEW(product));
-console.log(product)
-const openCart = ()=>{
-  dispatch( CartActions.setCartOpen(true))
- dispatch(CartActions.addItemToCart(product))
-  
-}
- 
-  
- 
-return (
- 
- 
+export default function Product_show({product,className,...others}) {
+    const dispatch= useDispatch();
+    const OpenPreview =()=> dispatch(PreviewActions.OPENPREVIEW(product));
+    console.log(product)
+    const openCart = ()=>{
+      dispatch( CartActions.setCartOpen(true))
+     dispatch(CartActions.addItemToCart(product))
+      
+    }
+  return (
+
  
     <>
-<div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 pb-3 pb-md-6 pb-xl-8">
-<div className={`${styles.product}`}>
+<div className={className} {...others}>
+<div   style={{width:'100% !important' }}>
       
       <div className={`${styles.imageWrapper}`}>
       
@@ -52,7 +48,7 @@ return (
   </div>}
 
       </div>
-      <div className={`${styles.porduct_d}  p-2 position-relative bg-white `}>
+      <div className={`${styles.porduct_d}  p-2 position-relative `} style={{background:'none'}}>
          <div  className={`${styles.Title}`} >
             <h6>{product.name}</h6>
             <p className={`${styles.price}`}>
@@ -79,9 +75,4 @@ return (
 </div>
  </>
   )
-  // 383∶575
 }
-
-export default  ProdutItemMain
- 
- 

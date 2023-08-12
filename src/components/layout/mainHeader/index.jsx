@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SelectCategoriesLinks } from '@/src/store/categories/category.selector';
 import cartSvg from '../../../../public/svgs/cart.svg';
 import user from '../../../../public/svgs/user.svg';
+import searchIcon from '../../../../public/svgs/search.svg'
+import Love from '../../../../public/svgs/love.svg'
 import { totalCart } from '@/src/store/cart/cart.selector';
 import { CartActions } from '@/src/store/cart/cart.reducer';
  const navigation = {
@@ -145,18 +147,30 @@ export default function MainHeader({header}) {
   console.log(quentity)
   const [open, setOpen] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
-
-  useEffect(() => {
-    setDomLoaded(true);
-  }, []);
-  const {headerMenuItems,siteDescription,siteLogoUrl,siteTitle} = header
+  
+  
+  const [scroll, setScroll] = useState(false);
+   const {headerMenuItems,siteDescription,siteLogoUrl,siteTitle} = header
 const categoriesLinks = useSelector(SelectCategoriesLinks);
+function Scroll() {
+  const scrolls = document.body.scrollTop > 50 || document.documentElement.scrollTop > 50;
+  
+  setScroll(scrolls)
+}
 
+useEffect(() => {
+  function handleScroll() { return Scroll() };
+  document.body.addEventListener("scroll", handleScroll);
+  setDomLoaded(true)
+  return () => {
+    document.body.removeEventListener("scroll", handleScroll);
+  }
+}, []);
 console.log(categoriesLinks)
   return (
     <>
 {domLoaded && ( <>
-<div className="">
+<div className={scroll ? "fixed-class" : "ddd "}id='main_navigation'>
 {/* Mobile menu */}
 <Transition.Root show={open} as={Fragment}>
   <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -298,12 +312,14 @@ console.log(categoriesLinks)
 </Transition.Root>
 
 <header className="relative ">
-  <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
+  {/* <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
     Get free delivery on orders over $100
-  </p>
+  </p> */}
 
-  <nav aria-label="Top" className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
+  <nav aria-label="Top" className={`mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 ${styles.nav_top}`}>
+    
     <div className=" ">
+      
       <div className="flex h-16 items-center">
         <button
           type="button"
@@ -312,18 +328,27 @@ console.log(categoriesLinks)
         >
           <span className="sr-only">Open menu</span>
          </button>
+    <div className="mr-auto">
+    <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+            <Link href="/auth/signin" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+              Sign in
+            </Link>
+            <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
+            <Link href="/auth/signup" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+              Create account
+            </Link>
+          </div>
+
+    </div>
         {/* Logo */}
-        <div className="mr-auto">
+        <div className={`${styles.ml_auto}`}>
           <Link href="/" className='flex ' style={{flexDirection:'column-reverse',alignItems:'center'}}>
-<Image  width={300} height={300} src={siteLogoUrl} alt='siteTitle'/>
+<Image  width={215} height={215} src={siteLogoUrl} alt='siteTitle'/>
            
            {/* logo */}
           </Link>
-        </div>
-
-        {/* Flyout menus */}
-        <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
-          <div className={`  flex h-full space-x-8`}>
+          <Popover.Group className="hidden lg:block lg:self-stretch">
+          <div className={`  flex h-full space-x-8 ${styles.menu}`}>
             {categoriesLinks&&categoriesLinks.map((category) => (
               <Popover key={category.name} className="flex">
                 {({ open }) => (
@@ -420,37 +445,47 @@ console.log(categoriesLinks)
             ))}
           </div>
         </Popover.Group>
-     
-        <div className=" flex items-center ml-auto">
-          <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-            <Link href="/auth/signin" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-              Sign in
-            </Link>
-            <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-            <Link href="/auth/signup" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-              Create account
-            </Link>
-          </div>
+        </div>
 
+        {/* Flyout menus */}
+
+     
+        <div className="  flex items-center ml-auto">
+     
       
 
           {/* Search */}
-          <div className="flex lg:ml-6">
+          {/* <div className="flex lg:ml-6">
             <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
+              user
              </a>
              <Image src={user} alt='cart' width={'30px' } height={'30px'}/>
 
-          </div>
+          </div> */}
 
           {/* Cart */}
-          <div className="ml-4 flow-root lg:ml-6" onClick={openCart}>
-            <a href="#" className="group -m-2 flex items-center p-2">
-            <Image src={cartSvg} alt='cart' width={'30px' } height={'30px'}/>
+          <div className={`ml-4 flow-root lg:ml-6 flex  ${styles.cart}`} onClick={openCart}>
+            
+             <Image src={Love} alt='cart' width={'20px' } height={'20px'}/>
 
+               <span className="sr-only">items in cart, view bag</span>
+              WishList
+           </div>
+          <div className={`ml-4 flow-root lg:ml-6 flex  ${styles.cart}`} onClick={openCart}>
+            
+             <Image src={searchIcon} alt='cart' width={'20px' } height={'20px'}/>
+
+               <span className="sr-only">items in cart, view bag</span>
+              Seach
+           </div>
+          <div className={`ml-4 flow-root lg:ml-6 flex  ${styles.cart}`} onClick={openCart}>
+            
               <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{quentity}</span>
+             <Image src={cartSvg} alt='cart' width={'30px' } height={'30px'}/>
+
               <span className="sr-only">items in cart, view bag</span>
-            </a>
-          </div>
+              Bag
+           </div>
         </div>
       </div>
     </div>
