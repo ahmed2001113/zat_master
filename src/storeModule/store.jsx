@@ -10,7 +10,8 @@ import CheckboxLabels from '../components/customsComponents/checkbox/checkBox';
 import { useEffect } from 'react';
 import FilterDrawer from './filterDrawer';
 import Image from 'next/image';
- export default function Store({products=[],category=''}) {
+ export default function Store({products=[],category='',...others}) {
+  console.log(products)
   const [scroll, setScroll] = useState(false);
   function Scroll() {
     const scrolls = document.body.scrollTop > 50 || document.documentElement.scrollTop > 50;
@@ -28,26 +29,24 @@ import Image from 'next/image';
  const [show,setShow]= useState(false)
   const [productData,setproducts] =useState(products||[]);
   const [sort,SetSort]= useState('name')
-    console.log(products);
-  const onChange = (e)=>{
-    console.log(e)
-  }
+   const onChange = (e)=>{
+   }
 
  const onChangeSort =(e)=>{
   const {value} = e.target;
   SetSort(value) 
  };
  const showFilter  = ()=>{
-  console.log('show');
-  setShow(true);
-  console.log(show)
- }
+   setShow(true);
+  }
+  useEffect(()=>{
+    setproducts(products)
+  },[products])
  useEffect(()=>{
-console.log(productData)
+ 
   switch(sort){
     case  'priceAsc':
-      console.log('object')
-      const priceAsc = productData.sort((a,b)=>a.price-b.price);
+       const priceAsc = productData.sort((a,b)=>a.price-b.price);
       return setproducts(priceAsc.slice());
        
   
@@ -60,14 +59,13 @@ console.log(productData)
         case  'name':
           const name = productData.sort(function(a, b) {
             return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-          });;
+          });
           return setproducts(name.slice()) ;
           case 'most':
             const productDataRating= productData.sort((a,b)=>{
                return b.rating - a.rating;
             })
-            console.log(productDataRating)
-           return setproducts(productDataRating.slice());
+            return setproducts(productDataRating.slice());
       
      default :   setproducts(productData.sort((a,b)=>{
 
@@ -79,8 +77,8 @@ console.log(productData)
  },[sort])
   return (
    
-   <>
-   <div className={`${styles.Top_Bar}`}>
+   <div {...others}>
+   <div className={`${styles.Top_Bar}`} >
     <h4 className={`${styles.title}`}>
       {category}
     </h4>
@@ -130,6 +128,6 @@ show={show} setShow={setShow}/>
 }
    </div>
  
-   </>
+   </div>
   )
 }

@@ -26,8 +26,7 @@ export default function CheckOut() {
   const Component = CheckoutComponents[current]
  
   
- console.log(current)
-  return (
+   return (
     <div className="row container-fluid " style={{height:'100vh'}}>
 <div className={`${styles.left} col-md-7`}>
 <div className={`${styles.wrapper} container `}>

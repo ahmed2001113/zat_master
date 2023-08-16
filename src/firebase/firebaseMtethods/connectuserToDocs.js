@@ -42,7 +42,7 @@ console.log(err.response.data)
     }
 
 }
-
+console.log(gettingUserDocSnapSot)
 return gettingUserDocSnapSot;
 
 }

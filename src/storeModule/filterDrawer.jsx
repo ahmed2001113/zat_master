@@ -10,19 +10,16 @@ export default function FilterDrawer({
   products,
   setProducts
 }){
-  console.log(show)
- const [Stock, SetStock] = useState([
+  const [Stock, SetStock] = useState([
   { id: 1, checked: true, label: 'in stock' ,value:'IN_STOCK'},
   { id: 2, checked: false, label: 'Out of stock' ,value:'OUT_OF_STOCK'},
  
 ]);
-const minPrice  = Math.min(...products.map(item=>item.regularPrice))
-const maxPrice  = Math.max(...products.map(item=>item.regularPrice))
+const minPrice  = Math.min(...products.map(item=>item.price))
+const maxPrice  = Math.max(...products.map(item=>item.price))
 const [prices,setPrice]=useState([minPrice,maxPrice])
-console.log(prices)
-const handleChangePrice = (event, value) => {
-  console.log(value)
-  setPrice(value);
+ const handleChangePrice = (event, value) => {
+   setPrice(value);
 };
 
       const handleChangeChecked = (id) => {
@@ -31,8 +28,7 @@ const handleChangePrice = (event, value) => {
           item.id === id ? { ...item, checked: !item.checked } : item
         );
         SetStock(changeCheckedCuisines);
-        console.log(changeCheckedCuisines)
-      };
+       };
 
 // Define a function to apply filters
 const applyFilters = () => {
@@ -80,7 +76,7 @@ const applyFilters = () => {
       <h5>
         Price
       </h5>
-      <SliderPrice  value={prices} min={minPrice} max={maxPrice} changePrice={handleChangePrice}/>
+      <SliderPrice  value={prices} min={minPrice===maxPrice?0:minPrice} max={maxPrice} changePrice={handleChangePrice}/>
       
 
    </div>

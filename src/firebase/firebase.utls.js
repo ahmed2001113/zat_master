@@ -8,16 +8,15 @@ import {
 import{ 
     getFirestore,
 }from 'firebase/firestore';
-
 const firebaseConfig = {
-    apiKey: "AIzaSyCr9HYQfixijjhd6v0TolQcPoWFxouvj0g",
-    authDomain: "ecommdb-8e602.firebaseapp.com",
-    projectId: "ecommdb-8e602",
-    storageBucket: "ecommdb-8e602.appspot.com",
-    messagingSenderId: "959301006037",
-    appId: "1:959301006037:web:919e125a231c7233d4285c",
-    measurementId: "G-24SEVC8BQV"
-};
+    apiKey: "AIzaSyCu3qsicyopUXABdoiraseld1e2wqy39Q8",
+    authDomain: "zat-project-67f7c.firebaseapp.com",
+    projectId: "zat-project-67f7c",
+    storageBucket: "zat-project-67f7c.appspot.com",
+    messagingSenderId: "397338942200",
+    appId: "1:397338942200:web:bed0dc40b9b8f6d302f90d",
+    measurementId: "G-526M2VPSFV"
+  };
 firebase.initializeApp(firebaseConfig);
 
 export const db = getFirestore();

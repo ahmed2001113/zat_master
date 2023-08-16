@@ -7,6 +7,7 @@ import styles  from './cart.module.css'
 import Quantity from "../customsComponents/quantity/Quantity";
 
 const  CartItem  = ({item})=>{
+  const dispatch = useDispatch()
     const RemoveItem = (item)=>{
       // dispatch(setItemsAfterRemoved(CartItem,items))
       dispatch(CartActions.RemoveItem(item))

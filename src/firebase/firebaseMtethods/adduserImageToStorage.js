@@ -8,12 +8,10 @@ export const adduserImageToStorage =async (image,user)=>{
     const {id}=user;
      try{
          const ImageRef = ref(storage,`images/${id}`);
-         console.log(ImageRef)
-        //  await deleteObject(ImageRef) 
+         //  await deleteObject(ImageRef) 
         const uploadImageToFireBase = await uploadBytes(ImageRef,image );
          const imageDownloadUrl = await getDownloadURL(uploadImageToFireBase.ref);
-         console.log(imageDownloadUrl)
-        return{
+         return{
             imageDownloadUrl,
             user
         }

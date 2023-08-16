@@ -2,8 +2,7 @@ import { isEmpty } from "lodash";
 
 export default function groupObjects(data) {
   const groups = [];
-  console.log(data)
-  for (const obj of data) {
+   for (const obj of data) {
     const parent = obj.parent.node.name;
     const groupIndex = groups.findIndex((group) => group.id === parent); 
      if (groupIndex === -1) {

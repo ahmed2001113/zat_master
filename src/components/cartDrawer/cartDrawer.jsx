@@ -15,7 +15,9 @@ const dispatch = useDispatch()
   const router = useRouter()
 const CheckoutCard = ()=>{
 
-  router.push('/checkout')
+  router.push('/checkout');
+      const handleClose = () => dispatch(CartActions.setCartOpen(false));
+
 }
   console.log(CartIems)
     const handleClose = () => dispatch(CartActions.setCartOpen(false));

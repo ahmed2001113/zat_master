@@ -18,24 +18,30 @@ import CartDrawer from '@/src/components/cartDrawer/cartDrawer'
 import Swipecarousel from '@/src/components/customsComponents/swipe_carousel/swipe.carousel'
 import { isEmpty } from 'lodash'
 import WithNoParentCategories from '@/src/components/productWithNoCategories/WithNoParentCategories'
+ import { getPage } from '@/src/utls/functions/get-page-seo'
  
-export default function Home({footer_header,products,categoriesWithNoParent}) {
-  console.log(categoriesWithNoParent)
-  // console.log(footer_header?.data)
+export default function Home({footer_header,products,categoriesWithNoParent,seo}) {
+ 
 
-
-  // useEffect(()=>{
-  //   const get = (async()=>{
-
-  //   })()
-  // },[])
+  useEffect(()=>{
+    // const get = (async()=>{
+    //   // const footer_header_2 = await client.query( {
+    //   //   query: GET_PAGE,
+    //   //   variables: {
+    //   //     uri: '/shop/men',
+    //   //   },
+    //   // } );
+    //   // console.log(footer_header_2.data.page)
+    //   const data = await getPage('/product-category/hoodies');
+    //   console.log(da)
+    // })()
+  },[])
   if ( isEmpty( products ) ) {
 		return null;
 	}
- console.log(products)
-    return (
+     return (
     <>
-   <RootLayout headerFooter={footer_header}>
+   <RootLayout headerFooter={footer_header} seo={seo}>
     <Swipecarousel />
     
 
@@ -51,9 +57,10 @@ export default function Home({footer_header,products,categoriesWithNoParent}) {
 
 export const   getStaticProps = async( )=>{
  const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
-let  productResults = [];
+ let  productResults = [];
 let categoriesWithNoParent = []
- const SpecifiedCategories = ["Shirts","Unisex Hoodes"]
+ const SpecifiedCategories = ["Shirts","Unisex Hoodes"];
+ let seo = []
 try{
   const products =  await client.query({query:PRODUCTS_QUERY});
   console.warn(products)
@@ -74,7 +81,7 @@ regularPrice:product.regularPrice
   }) ||[]
 
  }catch(error){
-  console.log(error.response.data)
+  console.log(error)
 }
 
 try{
@@ -86,12 +93,20 @@ console.warn(categoriesWithNoParent)
  }catch(err){
 
 }
+try {
+  seo = await getPage('home');
+
+} catch (error) {
+  
+}
  return{
   props:{
     footer_header:footer_header?.data,
     products:productResults,
-    categoriesWithNoParent:categoriesWithNoParent
-  }
+    categoriesWithNoParent:categoriesWithNoParent,
+    seo:seo[0]
+   },
+  revalidate:10
 }
 
 }

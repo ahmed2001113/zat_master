@@ -11,6 +11,7 @@ import { adduserImageToStorage } from '../../firebase/firebaseMtethods/adduserIm
 import { addUserDataBase } from '../../firebase/firebaseMtethods/adduserData';
  import { CartActions   } from '../cart/cart.reducer';
 import { userAction } from './user.reducer';
+import { wishlistActions } from '../wishlist/wishlistslice';
  //signing user and connect him||her to docs
 
 function* GetUserSnapShotData (userAuth, additionalDetails ){
@@ -19,15 +20,17 @@ function* GetUserSnapShotData (userAuth, additionalDetails ){
          try{
 
                 const snapShot = yield call(GetUserFromDocs,userAuth, additionalDetails );
+                console.log(snapShot)
                 const {id} =snapShot;
                      yield put( userAction.signInSuccess({id,...snapShot.data()}))
                  if(snapShot.data()){
 
 
-                        const {cart}=snapShot.data()
+                        const {cart,wishlist}=snapShot.data()
                         console.log(snapShot.data(),cart)
                                //once user sign in 
-           return  yield put(CartActions.setCartItems(cart));  
+           yield put(CartActions.setCartItems(cart));  
+            yield put(wishlistActions.setWishListItems(wishlist));  
                  }
                    
 }
@@ -59,7 +62,9 @@ function* CheckuserSession(){
 function* SignUPWithEmailANdPasswordProgress({payload}){
 const {email,password,displayName} = payload;
 try{
-        const {user } = yield call( CreateUser,email,password);
+        console.log(payload)
+        const {user } = yield call(CreateUser,email,password);
+        console.log(user)
          yield call(GetUserSnapShotData,user,{displayName});
          location.href = '/'
 
@@ -86,8 +91,7 @@ try{
 location.href = '/'
    yield call(GetUserSnapShotData,user)
    yield put(userAction.signInSuccess(user))
-console.log(user)
-
+ 
 }catch(err){
 
         yield put(userAction.signInFaild(err))
@@ -178,8 +182,7 @@ function* UploadUserDataProgress({payload:{data,user}}){
         const {currentUser} = yield call(OnAuthChangesAsync);
         const snapShot = yield call(GetUserFromDocs,currentUser);
         const {id} =snapShot
-        console.log(id)
-        yield put(userAction.UploadUserDataSuccess({id,...snapShot.data()}))
+         yield put(userAction.UploadUserDataSuccess({id,...snapShot.data()}))
 }
 
 function* UploadUserDataStart(){

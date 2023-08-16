@@ -12,8 +12,7 @@ function ProductSliderGrid({products}) {
   if ( isEmpty( products ) ) {
 		return null;
 	}
-    console.log(products)
-  return (
+   return (
     <div>
          <>
       <Title text={' New Arrivals'}>

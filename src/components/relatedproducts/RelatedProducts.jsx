@@ -18,8 +18,7 @@ export default function RelatedProducts({products,id}) {
     regularPrice:product.regularPrice
          }
       }) ||[];
-    console.log(productsAfter)
-  return (
+   return (
     
     
     <div className="row">
@@ -33,3 +32,4 @@ export default function RelatedProducts({products,id}) {
     </div>
   )
 }
+//s

@@ -17,8 +17,7 @@ FETCH_CATEGORIES_start(state,action){
 
 },
 FetchCategoriesSuccess(state,action){
-    console.log(action.payload)
-state.categories=action.payload;
+ state.categories=action.payload;
 state.isLoading=false
 
 },

@@ -15,8 +15,7 @@ export default function SwipperSingleLoopAuto({products}) {
   if ( isEmpty( products ) ) {
 		return null;
 	}
-  console.log(products)
-  return (
+   return (
     <>
       <Swiper
         slidesPerView={1}

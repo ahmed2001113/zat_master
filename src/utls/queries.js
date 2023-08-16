@@ -59,7 +59,22 @@ nodes {
         uri
         id
       }
-     
+      seo{
+        metaKeywords
+         fullHead 
+         title 
+         metaDesc 
+          schema { # The schema data of this product in JSON format
+                     pageType # The page type of this product (e.g. WebPage, Product, etc.)
+                     articleType # The article type of this product (e.g. None, Article, etc.)
+                     raw # The raw schema data in JSON-LD format
+                   }
+                breadcrumbs { # The breadcrumbs data of this product in JSON format
+                     url # The URL of the breadcrumb
+                     text # The text of the breadcrumb
+                   }
+       }
+          
     
       ... on SimpleProduct {
         averageRating

@@ -11,11 +11,11 @@ import { HEADER_FOOTER_ENDPOINT } from '@/src/EndPoints'
 import axios from 'axios'
 import RelatedProducts from '@/src/components/relatedproducts/RelatedProducts'
 import { useRouter } from 'next/router'
+import ModifyObjectOrArray from '@/src/utls/functions/ObjectArrayChange'
 export default function Product({product,footer_header,relatedProducts}) {
 const router = useRouter();
 const {product:id}=router.query;
-console.log(id)
-     useEffect(()=>{
+      useEffect(()=>{
          const get = (async()=>{
        
 
@@ -28,8 +28,8 @@ console.log(id)
     image,
     galleryImages,
     ...others
- }=product
- function getImages(images) {
+ }=product;
+  function getImages(images) {
     // Using object destructuring to get the length and the last element
     const {length, [length - 1]: lastImage} = images;
   
@@ -48,11 +48,9 @@ stockStatus,
 images:[...galleryImages?.nodes,image],
 ...others
      }
-     console.log(productAfterValidate)
- const [second,lastImage,restImages]= getImages(productAfterValidate?.images)
+  const [second,lastImage,restImages]= getImages(productAfterValidate?.images)
 //  const [ ,second,,...restImages] = productAfterValidate?.images;
-  console.log(restImages)
-  return (
+   return (
 <>
 <RootLayout headerFooter={footer_header}>
     
@@ -158,7 +156,7 @@ export async function getStaticProps({params}){
      try {
         const {data:{product:{productCategories:{nodes}}}} = await client.query({
             query:PRODUCT_BY_ID,
-            variables:{id:'cHJvZHVjdDoxNzU0'}
+            variables:{id:product.trim()}
         });
     
     relatedProducts = nodes[0]?.products?.nodes;

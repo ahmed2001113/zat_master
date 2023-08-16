@@ -8,8 +8,7 @@ import Link from 'next/link';
 export default function Product_show({product,className,...others}) {
     const dispatch= useDispatch();
     const OpenPreview =()=> dispatch(PreviewActions.OPENPREVIEW(product));
-    console.log(product)
-    const openCart = ()=>{
+     const openCart = ()=>{
       dispatch( CartActions.setCartOpen(true))
      dispatch(CartActions.addItemToCart(product))
       

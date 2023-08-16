@@ -1,15 +1,23 @@
+import { getPage } from "@/src/utls/functions/get-page-seo";
 import CartDrawer from "../cartDrawer/cartDrawer";
 import PreviewComponent from "../previewComponent";
 import Mainfooter from "./mainFooter";
 import MainHeader from "./mainHeader";
+import { useEffect } from "react";
+import Seo from "../seo";
+import Head from "next/head";
 
  
-function RootLayout({children, headerFooter}) {
-	const { header, footer } = headerFooter?.data || {};
+function RootLayout({children, headerFooter,seo,uri}) {
+ 	const { header, footer } = headerFooter?.data || {};
  
   return (
 
     <>
+    				<Seo seo={ seo || {} } uri={ uri || '' }/>
+<Head>
+  Home
+</Head>
     <MainHeader header={header}/>
     
     <main className="  mx-auto  ">

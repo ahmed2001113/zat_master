@@ -34,8 +34,7 @@ function SwippeCentered({products}) {
     {
       products.filter((item,idx)=>idx<9)
       .map(product=>{
-        console.log(product.id)
-        return(
+         return(
 
           <SwiperSlide key={product.id}>
 

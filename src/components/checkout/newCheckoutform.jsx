@@ -94,8 +94,7 @@ else{
  console.log(input)
 }
 useEffect(()=>{
-console.log(orderData);
-console.log(inintializeUserInferomation);
+ 
 
  
 },[orderData])

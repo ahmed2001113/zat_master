@@ -12,11 +12,21 @@ export const custemMiddleWare = (state)=>(next)=>(action)=>{
    
 next(action)    
     console.log('nextState:',state.getState());
-const {user:{currentUser},cart:{items} } = state.getState()
 
 if(action.type.slice(0,4) ==='cart'){
-    // console.log(currentUser,items,state,action)
+    const {user:{currentUser},cart:{items} } = state.getState()
+if(currentUser){
 
-    // state.dispatch(UploadUserDataStart({'cart':items},currentUser))
+     
+    state.dispatch(UploadUserDataStart({'cart':items},currentUser))
+}
+}
+console.log(action.type)
+if(action.type==='wishlist/setWishListItem'){
+    const {user:{currentUser},wishlist:{wishlistItems} } = state.getState()
+if(currentUser){
+ state.dispatch(UploadUserDataStart({'wishlist':wishlistItems},currentUser))
+}
+
 }
 }

@@ -5,16 +5,18 @@ import { useDispatch } from 'react-redux'
 import { PreviewActions } from '@/src/store/preview/preview.slice';
 import { CartActions } from '@/src/store/cart/cart.reducer';
 import Link from 'next/link';
+import { wishlistActions } from '@/src/store/wishlist/wishlistslice';
 function  ProdutItemMain({product}) {
  const dispatch= useDispatch();
 const OpenPreview =()=> dispatch(PreviewActions.OPENPREVIEW(product));
-console.log(product)
-const openCart = ()=>{
+ const openCart = ()=>{
   dispatch( CartActions.setCartOpen(true))
  dispatch(CartActions.addItemToCart(product))
   
 }
- 
+ const addToWishlist =()=>{
+      dispatch(wishlistActions.setWishListItem(product))
+ }
   
  
 return (
@@ -38,7 +40,7 @@ return (
       
       
   <div className={`${styles.flex_v}`}>
-  <button className={`${styles.heart}`}>
+  <button className={`${styles.heart}`} onClick={addToWishlist}>
       <i className="fa-solid fa-heart"></i>
       </button>
       

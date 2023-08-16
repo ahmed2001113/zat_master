@@ -12,15 +12,14 @@ import { useRouter } from "next/router"
 import { useEffect } from "react";
 
 const Cat = ({data,footer_header})=>{
-  const router = useRouter();
+   const router = useRouter();
   const {description,
     image,
     name ,products:{edges}} =data
-    const formattingProducts =FormattingProductsArray(edges);
+    const formattingProducts =FormattingProductsArray(edges?edges:data.products.nodes);
 
 
-console.log(image)
-const {query:{slug} ,asPath } = router;
+ const {query:{slug} ,asPath } = router;
 const path = asPath.split('/')
  
  // const lastparam = slug.pop();
@@ -31,8 +30,7 @@ useEffect(()=>{
 // }
 // get()
 },[])
-console.log(data)
-    return(
+     return(
 
         <>
   <RootLayout headerFooter={footer_header}>

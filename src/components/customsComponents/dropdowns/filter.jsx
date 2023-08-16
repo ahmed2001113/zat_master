@@ -2,8 +2,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import styles from './dropdown.module.css'
 import Image from 'next/image';
  function DropDownMenu({options,onChange,text,icon,...rest}) {
-    console.log(icon)
-  return (
+   return (
     <Dropdown  name="filter" onChange={onChange} {...rest}>
       <Dropdown.Toggle className={`${styles.basic}`}  id="dropdown-basic">
         {text} 

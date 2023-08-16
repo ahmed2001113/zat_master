@@ -13,6 +13,8 @@ import searchIcon from '../../../../public/svgs/search.svg'
 import Love from '../../../../public/svgs/love.svg'
 import { totalCart } from '@/src/store/cart/cart.selector';
 import { CartActions } from '@/src/store/cart/cart.reducer';
+import { userSelectMemo } from '@/src/store/user/user.selector';
+import { DropDownUser } from './dropdownUser';
  const navigation = {
   categories: [
     {
@@ -141,11 +143,12 @@ function classNames(...classes) {
 }
 
 export default function MainHeader({header}) {
+  const currentUser = useSelector(userSelectMemo);
+console.log(currentUser)
   const quentity = useSelector(totalCart);
   const dispatch= useDispatch()
   const openCart = ()=>dispatch(CartActions.setCartOpen(true))
-  console.log(quentity)
-  const [open, setOpen] = useState(false);
+   const [open, setOpen] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   
   
@@ -166,8 +169,7 @@ useEffect(() => {
     document.body.removeEventListener("scroll", handleScroll);
   }
 }, []);
-console.log(categoriesLinks)
-  return (
+   return (
     <>
 {domLoaded && ( <>
 <div className={scroll ? "fixed-class" : "ddd "}id='main_navigation'>
@@ -330,13 +332,22 @@ console.log(categoriesLinks)
          </button>
     <div className="mr-auto">
     <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-            <Link href="/auth/signin" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+      {currentUser?<>
+      <DropDownUser user={currentUser}/>
+      </>:
+      <div>
+                <Link href="/auth/signin" className="text-sm font-medium text-gray-700 hover:text-gray-800">
               Sign in
             </Link>
             <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
             <Link href="/auth/signup" className="text-sm font-medium text-gray-700 hover:text-gray-800">
               Create account
             </Link>
+      </div>
+      
+      
+      }
+    
           </div>
 
     </div>

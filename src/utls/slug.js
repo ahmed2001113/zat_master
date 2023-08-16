@@ -41,7 +41,7 @@ export const getPages = async () => {
 			}
 		} )
 		.catch( err => {
-			console.log( err.response.data.message )
+			console.log( err )
 			return [];
 		} );
 };

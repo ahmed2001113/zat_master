@@ -23,7 +23,7 @@ const MiddleWares = [
 const persisitConfig ={
     key:'root',
     storage:storageSession,
-    whitelist:[ 'cart', 'checkout']
+    whitelist:['checkout']
 };
  
 

@@ -9,8 +9,7 @@ export default function SortDropDown({
     onChange,
     ...others
 }) {
-  console.log(options)
-  return (
+   return (
     <Form.Select
     name={name}
     onChange={onChange}
