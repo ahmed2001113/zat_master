@@ -13,13 +13,20 @@ reducers:{
     setWishListItems:(state,action)=>{
 state.wishlistItems=action.payload
     },
+    
+    setWishlistOpen:(state,action)=>{
+state.open = !state.open
+    }
+    ,
     setWishListItem:(state,action)=>{
         const product=action.payload;
         const existingItem = state.wishlistItems.find(item=>item.id===product.id);
         if(existingItem){
-            state.message='this item is already in wishlist'
+            state.wishlistItems=  state.wishlistItems.filter(item=>item.id!==product.id)
+            state.message='Removed from wishlist'
+
         }else{
-            state.message='Added success'
+            state.message=`Added success ${product?.name}`
 
             state.wishlistItems.push(product)
 

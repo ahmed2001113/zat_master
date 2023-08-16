@@ -6,6 +6,7 @@ import MainHeader from "./mainHeader";
 import { useEffect } from "react";
 import Seo from "../seo";
 import Head from "next/head";
+import WishListDrawer from "../wishlistcomponents/wishlistdrawer";
 
  
 function RootLayout({children, headerFooter,seo,uri}) {
@@ -27,6 +28,7 @@ function RootLayout({children, headerFooter,seo,uri}) {
 <PreviewComponent/>
       <CartDrawer/>
 <Mainfooter footer={footer}/>
+<WishListDrawer/>
     </>
 
 

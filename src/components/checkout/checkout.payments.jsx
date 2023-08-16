@@ -28,7 +28,7 @@ import { CartActions } from "@/src/store/cart/cart.reducer";
 
 }
 
-export const CheckOutPayments = ()=>{
+export const CheckOutPayments = ({item})=>{
   const router = useRouter()
     const [value, setSelectedValue] =  useState('option1');
     const carts = useSelector(cartItems);

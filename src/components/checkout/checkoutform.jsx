@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Address from "./NewAddress";
 import validateAndSanitizeCheckoutForm from "@/src/validator/checkout";
 
- export const CheckOutForm = ()=>{
+ export const CheckOutForm = ({item})=>{
    const inintializeUserInferomation = useSelector(UserInferomationCheckoutSelector);
    const [input,setInput] = useState(inintializeUserInferomation)
  const dispatch = useDispatch()

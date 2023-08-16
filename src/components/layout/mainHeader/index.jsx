@@ -8,13 +8,13 @@ import styles from './mainHeader.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { SelectCategoriesLinks } from '@/src/store/categories/category.selector';
 import cartSvg from '../../../../public/svgs/cart.svg';
-import user from '../../../../public/svgs/user.svg';
 import searchIcon from '../../../../public/svgs/search.svg'
 import Love from '../../../../public/svgs/love.svg'
 import { totalCart } from '@/src/store/cart/cart.selector';
 import { CartActions } from '@/src/store/cart/cart.reducer';
 import { userSelectMemo } from '@/src/store/user/user.selector';
 import { DropDownUser } from './dropdownUser';
+import { wishlistActions } from '@/src/store/wishlist/wishlistslice';
  const navigation = {
   categories: [
     {
@@ -160,6 +160,7 @@ function Scroll() {
   
   setScroll(scrolls)
 }
+const handleShowClose = () => dispatch(wishlistActions.setWishlistOpen());
 
 useEffect(() => {
   function handleScroll() { return Scroll() };
@@ -340,9 +341,9 @@ useEffect(() => {
               Sign in
             </Link>
             <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-            <Link href="/auth/signup" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+            {/* <Link href="/auth/signup" className="text-sm font-medium text-gray-700 hover:text-gray-800">
               Create account
-            </Link>
+            </Link> */}
       </div>
       
       
@@ -475,7 +476,7 @@ useEffect(() => {
           </div> */}
 
           {/* Cart */}
-          <div className={`ml-4 flow-root lg:ml-6 flex  ${styles.cart}`} onClick={openCart}>
+          <div className={`ml-4 flow-root lg:ml-6 flex  ${styles.cart}`} onClick={handleShowClose}>
             
              <Image src={Love} alt='cart' width={'20px' } height={'20px'}/>
 
