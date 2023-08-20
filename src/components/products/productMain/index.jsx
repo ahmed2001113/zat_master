@@ -1,15 +1,20 @@
 import Image from 'next/image'
 import React from 'react'
 import styles from './mainproduct.module.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { PreviewActions } from '@/src/store/preview/preview.slice';
 import { CartActions } from '@/src/store/cart/cart.reducer';
 import Link from 'next/link';
 import { wishlistActions } from '@/src/store/wishlist/wishlistslice';
-function  ProdutItemMain({product}) {
+import { Checkbox } from '@mui/material';
+import { Favorite, FavoriteBorderOutlined } from '@mui/icons-material';
+import { wishlistSelector } from '@/src/store/wishlist/wishlistSelector';
+function  ProdutItemMain({product,isLove=false}) {
  const dispatch= useDispatch();
-const OpenPreview =()=> dispatch(PreviewActions.OPENPREVIEW(product));
- const openCart = ()=>{
+
+ const OpenPreview =()=> dispatch(PreviewActions.OPENPREVIEW(product));
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  const openCart = ()=>{
   dispatch( CartActions.setCartOpen(true))
  dispatch(CartActions.addItemToCart(product))
   
@@ -41,11 +46,14 @@ return (
       
   <div className={`${styles.flex_v}`}>
   <button className={`${styles.heart}`} onClick={addToWishlist}>
-      <i className="fa-solid fa-heart"></i>
+<i className="fa fa-heart fa-solid" style={{
+         color:isLove?'red':'black'
+      }}></i>
+
       </button>
       
       <button onClick={OpenPreview} className={`${styles.heart}`}>
-      <i className="fa-regular fa-eye"></i>     
+      <i className="fa-regular fa-eye"  ></i>     
        </button>
   </div>
   {product?.onSale&&

@@ -16,13 +16,13 @@ export function DropDownUser({user}) {
   return (
     <Dropdown>
       <Dropdown.Toggle className={`${stylse.dropdownbutton}`} variant="none" id="dropdown-basic">
-       <Image src={user} width={20} height={20}/>
+      <i class="fa-regular fa-user"></i>
        Hello,{
         user.displayName
        }
       </Dropdown.Toggle>
 
-      <Dropdown.Menu className={`${stylse.menu}`}>
+      <Dropdown.Menu className={`${stylse.men}`}>
         <Dropdown.Item  className={`${stylse.item}`} href="#/action-1">Account</Dropdown.Item>
         <Dropdown.Item   className={`${stylse.item}`} onClick={signoutUser}>Log out</Dropdown.Item>
        </Dropdown.Menu>

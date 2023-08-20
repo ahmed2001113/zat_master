@@ -14,11 +14,17 @@ import { CheckOutPayments } from '@/src/components/checkout/checkout.payments';
 import { currentStepSelector } from '@/src/store/checkoutSteps/checkout.selector';
  import { ApolloProvider } from '@apollo/client';
  import * as React from 'react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { CheckOutProduct } from '@/src/lib/queries/checkoutProduct';
 
-export default function CheckOut() {
-  const CartElments = useSelector(cartItems)
-  const CheckoutComponents = [CheckOutForm,CheckOutPayments]
-  const CartTotal = useSelector(totalPaid)
+export default function CheckOut({product}) {
+  if(!product)return;
+   const CartElments =  product
+  const CheckoutComponents = [CheckOutForm,CheckOutPayments];
+  const router = useRouter();
+  const {id}=router.query;
+   const CartTotal = product.price
   
   const {current,steps} = useSelector(currentStepSelector)
   const Component = CheckoutComponents[current]
@@ -45,7 +51,7 @@ export default function CheckOut() {
             <div className={`${styles.checkContent}`}>
               <ApolloProvider client={client}>
 
-           <Component item={'cart'}/>
+           <Component item={product}/>
               </ApolloProvider>
 
          
@@ -58,31 +64,28 @@ export default function CheckOut() {
  </div>
 </div>
 <div className="col-md-4">
-  <div className="CheckoutCart">
-    {
-      CartElments.map(el=>{
-        return <>
-        <div className={`${styles.cartItem}`}>
+  
+  
+         <div className={`${styles.cartItem}`}>
           <div className="row">
             <div className="col-md-3" style={{position:'relative'}}>
-            <Badge badgeContent={el.quantity} color="secondary">
+            <Badge badgeContent={'1'} color="secondary">
 
-              <Image className={`${styles.image}`} src={`${el.images[0].sourceUrl}`} width={70} height={70}/>
+              <Image className={`${styles.image}`}
+               src={`${product.image.sourceUrl}`} width={70}
+                height={70}/>
               </Badge>
             </div>
 <div className={`${styles.right} col`}>
-<p>{el.name}</p>
+<p>{product.name}</p>
 <p>
- LE {el.price} 
+ LE {product.price} 
 </p>
 </div>
           </div>
           <Divider light />
 
-        </div>
-        </>
-      })
-    }
+    
     
    </div>
  
@@ -103,17 +106,16 @@ LE  {CartTotal}
 
 export const getStaticProps =async ({params})=>{
 
-const {id}=params;
-const product = {}
+let {id}=params;
+let productItem = {}
 
 try {
-  const {data:{product:{productCategories:{nodes}}}} = await client.query({
-      query:PRODUCT_BY_ID,
+     const {data:{product}} = await client.query({
+      query:CheckOutProduct,
       variables:{id:id.trim()}
   });
-
-relatedProducts = nodes[0]?.products?.nodes;
-} catch (error) {
+  productItem = product
+ } catch (error) {
 
 console.warn(error)
 }
@@ -121,7 +123,7 @@ console.warn(error)
 
 return{
   props:{
-    product:'ss'
+    product:productItem
   }
 }
 }

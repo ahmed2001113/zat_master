@@ -4,7 +4,21 @@ import { Pagination } from 'swiper/modules';
 import ProdutItemMain from '../../products/productMain';
 import styles from './swipe.module.css'
 import { isEmpty } from 'lodash';
+import { useRouter } from 'next/router';
+import { wishlistSelector } from '@/src/store/wishlist/wishlistSelector';
+import { useSelector } from 'react-redux';
+
 function SwippeCentered({products}) {
+  const {wishlistItems} = useSelector(wishlistSelector);
+  const isWishlist=(id)=>{
+   return wishlistItems.some(item=>item.id===id)
+  };
+
+  const router = useRouter();
+  const ToShop = ()=>{
+    console.log('clicked')
+    router.push('/shop?filter=new_arrival')
+  }
   if ( isEmpty( products ) ) {
 		return null;
 	}
@@ -17,12 +31,11 @@ function SwippeCentered({products}) {
    Arrivalls</h1>
 
 <div className={`${styles.buttons_wrapper}`}>
-  <button >
-    shop Men
+  <button onClick={ToShop} >
+   
+   New Arrivals
   </button>
-  <button>
-    SHOP WOMMAN
-  </button>
+   
 </div>
   </div>
   <Swiper
@@ -38,7 +51,7 @@ function SwippeCentered({products}) {
 
           <SwiperSlide key={product.id}>
 
-          <ProdutItemMain product={product}/>
+          <ProdutItemMain  product={product} isLove={isWishlist(product.id)}/>
           </SwiperSlide>
 
         )

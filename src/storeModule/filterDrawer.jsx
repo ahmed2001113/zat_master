@@ -11,7 +11,7 @@ export default function FilterDrawer({
   setProducts
 }){
   const [Stock, SetStock] = useState([
-  { id: 1, checked: true, label: 'in stock' ,value:'IN_STOCK'},
+  { id: 1, checked: false, label: 'in stock' ,value:'IN_STOCK'},
   { id: 2, checked: false, label: 'Out of stock' ,value:'OUT_OF_STOCK'},
  
 ]);
@@ -33,15 +33,20 @@ const [prices,setPrice]=useState([minPrice,maxPrice])
 // Define a function to apply filters
 const applyFilters = () => {
   let updatedList = [...products]; 
-   const checkedItems = Stock.filter(item => item.checked).map(item => item.value);
+   const checkedItems = Stock
+   .filter(item => item.checked)
+   .map(item => item.value);
  updatedList = checkedItems.length
-      ? products.filter(item => checkedItems.includes(item.stockStatus))
+      ? products.filter(item =>
+         checkedItems.includes(item.stockStatus))
       : products;
     
       const MinPrice = prices[0];
       const MaxPrice = prices[1];
       updatedList = updatedList.filter(
-        (item) => item.regularPrice >= MinPrice && item.regularPrice <= MaxPrice
+        (item) => item.regularPrice >=
+         MinPrice && item.regularPrice 
+         <= MaxPrice
       );
   setProducts(updatedList);  
 };
@@ -49,7 +54,9 @@ const applyFilters = () => {
  
 
     return(
-      <Drawer  show={show} title={'Filter'} setShow={setShow} placement={'start '} className={`${styles.Drawer}` } >
+      <Drawer  show={show} title={'Filter'} 
+      setShow={setShow} placement={'start '} 
+      className={`${styles.Drawer}` } >
    <div className="body mb-auto">
    <h5>
         Avalibility
@@ -76,7 +83,8 @@ const applyFilters = () => {
       <h5>
         Price
       </h5>
-      <SliderPrice  value={prices} min={minPrice===maxPrice?0:minPrice} max={maxPrice} changePrice={handleChangePrice}/>
+      <SliderPrice  value={prices} min={minPrice===maxPrice?0:minPrice}
+       max={maxPrice} changePrice={handleChangePrice}/>
       
 
    </div>

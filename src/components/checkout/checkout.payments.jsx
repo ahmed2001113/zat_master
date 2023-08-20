@@ -31,8 +31,18 @@ import { CartActions } from "@/src/store/cart/cart.reducer";
 export const CheckOutPayments = ({item})=>{
   const router = useRouter()
     const [value, setSelectedValue] =  useState('option1');
-    const carts = useSelector(cartItems);
-    const TotalCart = useSelector(totalPaid)
+    let carts = [];
+    let TotalCart = 0;
+if(item){
+ carts = [item]
+TotalCart = item.price
+}else{
+ 
+ carts= useSelector(cartItems);
+ TotalCart = useSelector(totalPaid)
+}
+
+console.log(carts,TotalCart)
     const inintializeUserInferomation = useSelector(UserInferomationCheckoutSelector);
     const initial = {
         billing:{

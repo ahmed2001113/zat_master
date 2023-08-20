@@ -24,8 +24,7 @@
 .heart{
 
     font-size: 18px;
-    color: #000000a6;
-    /* border: 1px solid #623d69; */
+     /* border: 1px solid #623d69; */
     width: 34px;
     padding: 22px;
     display: flex;
@@ -38,8 +37,7 @@
     border: 1px solid #fff !important;
 }
 .heart:hover{
-    color:#623d69 !important;
-}
+ }
 .product{
     padding: 0px;
       margin: auto;

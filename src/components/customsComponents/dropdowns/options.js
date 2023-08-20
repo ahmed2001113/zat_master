@@ -17,6 +17,10 @@ export const Sortoptions ={
       {
         label:'Most Rated ',
         value:'most'
+      },
+      {
+        label:'New Arrival',
+        value:'new_arrival'
       }
     ]
   }

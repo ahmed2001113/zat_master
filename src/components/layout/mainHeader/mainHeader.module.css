@@ -63,8 +63,23 @@
     text-transform: capitalize;
 
 }
+.dropdownbutton i{
+    font-size: 11px;
+    margin: 0px 10px;
+    border: 1px solid #333;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .dropdownbutton:hover{
     background: none;
     color: #333;
     text-decoration: underline;
+}
+.men{
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 0px;
+    border: 1px solid #eee;
 }

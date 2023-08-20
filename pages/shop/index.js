@@ -8,11 +8,14 @@ import { getPage } from "@/src/utls/functions/get-page-seo";
   // import {  getProductsData } from "@/src/utls/productCategories";
 import { All_PRODUCTS_QUERY } from "@/src/utls/queries";
 import axios from "axios";
+import { Router, useRouter } from "next/router";
  
  import { useEffect, useRef, useState } from "react";
  
-const AllCategoriesProducts = ({products,footer_header,seo})=>{
- // this function it's worked correctly as i want 
+const AllCategoriesProducts = ({products,footer_header,seo,...others})=>{
+
+
+// this function it's worked correctly as i want 
  const {pageInfo,nodes}= products;
 const [loading,setLoading]=useState(false);
 const [pageInferomation,setPageInfo]=useState(pageInfo)
@@ -47,7 +50,7 @@ export async function getStaticProps(){
  try {
   const { data: {products} } = await client.query({
     query:ProductsInfinteScroll,
-    variables:{ first: 30, after: null }
+    variables:{ first: 1000, after: null }
   });
   categoryInferomation=products
   

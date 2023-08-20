@@ -10,11 +10,18 @@ import CheckboxLabels from '../components/customsComponents/checkbox/checkBox';
 import { useEffect } from 'react';
 import FilterDrawer from './filterDrawer';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
  export default function Store({products=[],category='',...others}) {
+  const router = useRouter();
+  const {query}=router;
+  console.log(query.filter)
   console.log(products)
   const [scroll, setScroll] = useState(false);
+  const [isSorted,setIsortedValue]=useState('name');
+
   function Scroll() {
-    const scrolls = document.body.scrollTop > 50 || document.documentElement.scrollTop > 50;
+    const scrolls = document.body.scrollTop > 50 || 
+    document.documentElement.scrollTop > 50;
     
     setScroll(scrolls)
   }
@@ -28,10 +35,16 @@ import Image from 'next/image';
   }, []);
  const [show,setShow]= useState(false)
   const [productData,setproducts] =useState(products||[]);
-  const [sort,SetSort]= useState('name')
+  console.log(productData)
+  const [sort,SetSort]= useState('')
    const onChange = (e)=>{
    }
-
+useEffect(()=>{
+  if(query.filter==='new_arrival'){
+    SetSort('new_arrival')
+  }
+  ()=>setproducts(products)
+ },[query.filter])
  const onChangeSort =(e)=>{
   const {value} = e.target;
   SetSort(value) 
@@ -66,12 +79,11 @@ import Image from 'next/image';
                return b.rating - a.rating;
             })
             return setproducts(productDataRating.slice());
-      
-     default :   setproducts(productData.sort((a,b)=>{
+            case'new_arrival':
+            return setproducts(products.slice())
 
-      return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
 
-     })) 
+     default :   setproducts([...products])
    }
 
  },[sort])
@@ -85,11 +97,14 @@ import Image from 'next/image';
 
     <div className={`${scroll&&styles.Top_Bar_scroll} ${styles.filterOptions}`}>
       <p className={`${styles.res}`}>{productData?.length} results</p>
-      {/* <DropDownMenu onChange={onChange} backgroundOrNot={false}  text={'filter'} icon={filter}/> */}
-      <SortDropDown  className={`${styles.sorting}`}
+      {/* <DropDownMenu onChange={onChange} backgroundOrNot={false}  t
+      ext={'filter'} icon={filter}/> */}
+      <SortDropDown  
+      className={`${styles.sorting}`}
       onChange={onChangeSort}
         label={Sortoptions.label} name={Sortoptions.name} options={Sortoptions.innerOptions}/>
-            <button className={`${styles.button}`} onClick={()=> showFilter()}>fliter <Image src={filter} width={25} height={25} /> </button>
+            <button className={`${styles.button}`} onClick={()=> showFilter()}>fliter 
+            <Image src={filter} width={25} height={25} /> </button>
 
     </div>
 
@@ -99,10 +114,7 @@ import Image from 'next/image';
    <div className="products_container container m-auto row">
 {productData?.length ?
 <>
-<FilterDrawer 
-products={products}
-setProducts={setproducts}
-show={show} setShow={setShow}/>
+
 
 {
   productData.map(
@@ -120,12 +132,16 @@ show={show} setShow={setShow}/>
 :<>
 <div className="no_products">
   <h1>
-    comming Soon !
+    There's no products here 
   </h1>
 </div>
 
 </>
 }
+<FilterDrawer 
+products={products}
+setProducts={setproducts}
+show={show} setShow={setShow}/>
    </div>
  
    </div>

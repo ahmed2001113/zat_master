@@ -1,5 +1,5 @@
 import client from '@/src/utls/apolloConfigrations/apolloClient'
-import { All_PRODUCTS_QUERY, PRODUCT_BY_ID } from '@/src/utls/queries'
+import { All_PRODUCTS_QUERY, PRODUCTS_QUERY, PRODUCT_BY_ID } from '@/src/utls/queries'
 import React, { useEffect } from 'react'
 import styles from './product.module.css'
 import Image from 'next/image'
@@ -12,66 +12,95 @@ import axios from 'axios'
 import RelatedProducts from '@/src/components/relatedproducts/RelatedProducts'
 import { useRouter } from 'next/router'
 import ModifyObjectOrArray from '@/src/utls/functions/ObjectArrayChange'
-export default function Product({product,footer_header,relatedProducts}) {
+import { ProductPage } from '@/src/lib/queries/productPage'
+import ReviewContainer from '@/src/components/reviewsComponents/productreviewContainter';
+import InfoSharpIcon from '@mui/icons-material/InfoSharp';
+  export default function Product({product,footer_header}) {
 const router = useRouter();
-const {product:id}=router.query;
-      useEffect(()=>{
+// const {product:id}=router.queryiapi
+
+// useEffect(()=>{
+//     const get=(()=>{
+//    try{
+// const products =axios.get('/api/product-preview',{
+//     params:{
+//         product_id:1753
+//     }
+// })
+// console.log(products.data)
+//    }catch(err){1234
+//     console.log(err)
+//    }
+ 
+//     })()
+// },[])
+console.log(product)
+
+const {
+    price,
+    seo
+    ,slug,
+    name,
+    stockQuantity,
+    stockStatus
+    ,regularPrice,
+    onSale,
+    productCategories,
+    averageRating,
+    comments,
+    galleryImages,
+    image,
+    id,
+    reviewCount,
+    reviews,
+    reviewsAllowed,
+    commentCount,
+    commentStatus,
+    databaseId,
+    status
+
+
+}=product
+if(status!=="publish")return
+console.log(product)
+const reviews_={
+    reviewCount,
+    reviews,
+    reviewsAllowed,
+    averageRating,
+    databaseId,
+
+}
+const similarProducts = productCategories?.nodes[0]?.products?.nodes;
+console.log(similarProducts)
+const images  = [image,...galleryImages?.nodes];
+const [first,...otherImages]=images
+        useEffect(()=>{
          const get = (async()=>{
-       
+      
+
 
         })()
     },[])
- const {stockQuantity,
-    slug,
-    name,
-    stockStatus,
-    image,
-    galleryImages,
-    ...others
- }=product;
-  function getImages(images) {
-    // Using object destructuring to get the length and the last element
-    const {length, [length - 1]: lastImage} = images;
-  
-    // Using array destructuring to get the second element
-    const [, secondImage,...restImages] = images;
-  
-    // Using the slice() method to get the rest of the elements, excluding the first and the last
-   
-    // Returning an array of second image, last image and rest of images
-     return [secondImage, lastImage, restImages];
-  }
-  
-     const productAfterValidate = {
-name,
-stockStatus,
-images:[...galleryImages?.nodes,image],
-...others
-     }
-  const [second,lastImage,restImages]= getImages(productAfterValidate?.images)
+
 //  const [ ,second,,...restImages] = productAfterValidate?.images;
    return (
 <>
 <RootLayout headerFooter={footer_header}>
     
-<div className="row">
+<div className="row" style={{background:'#fff',margin:'0px' ,padding:'0px' ,width:'100%'}}>
      
      <div className={`${styles.left} col-md-7`}>
      <div className="row" style={{padding:'0px'}}>
      <div className='col-md-12 image_holder'>
- 
-    {productAfterValidate.images?.length >2 ?
-      <Image style={{objectFit:'cover'}} className={`${styles.image_holder}`} src={second?.sourceUrl}
-       srcSet={second?.srcSet}  fill/>:
-      <Image   style={{objectFit:'cover'}}  className={`${styles.image_holder}`} src={image?.sourceUrl} 
-      srcSet={image?.srcSet}  fill/>
-      }
+     <Image style={{objectFit:'cover'}} className={`${styles.image_holder}`} src={image?.sourceUrl}
+       srcSet={image?.srcSet}  fill/>
      
      </div>
      {
      
-     productAfterValidate.images?.length && restImages.slice(0,-1).map(image=>{
-         return<div className='col-md-6 image_holder' style={{padding:'0px'}}>
+    images?.length >2&& otherImages.map(image=>{
+         return<div key={image.id} className='col-md-6 col-6 image_holder' style={{padding:'0px'}}>
  
  {image !==null&&<Image src={image?.sourceUrl} srcSet={image?.srcSet} width={600} height={800}/>}
              </div>
@@ -82,9 +111,9 @@ images:[...galleryImages?.nodes,image],
      </div>
      <div className={`${styles.right   } container col-md-5`}>
         <h6 className={`${styles.name}`}>{name}</h6>
-        <p  className={`${styles.desc}`} dangerouslySetInnerHTML={{__html:productAfterValidate?.shortDescription}}></p>
+        <p  className={`${styles.desc}`} dangerouslySetInnerHTML={{__html:product?.shortDescription}}/>
         <p className={`${styles.price}`}>
-         {productAfterValidate?.price} LE
+         {price} LE
       
         </p>
      
@@ -109,6 +138,19 @@ images:[...galleryImages?.nodes,image],
              </button>
      </div>
      
+
+     <div className={`${styles.d} row`}>
+        <div className="col-6 text-center">
+
+<a href="#review" color='default' style={{color:'#000',textDecoration:'none'}} >
+    <InfoSharpIcon/>
+Review Details
+</a>
+        </div>
+        <div className="col-6 text-center">
+ Made In Egypt
+        </div>
+     </div>
      </div>
      </div>
 
@@ -123,7 +165,15 @@ images:[...galleryImages?.nodes,image],
      </p>
 
 
-     <RelatedProducts id={id} products={relatedProducts} />
+     <RelatedProducts id={id} products={similarProducts} />
+
+<div className="containe">
+<div data-bs-spy="scroll" data-bs-target="#review" data-bs-root-margin="0px 0px -40%"
+ data-bs-smooth-scroll="true" className="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+
+     <ReviewContainer reviews={reviews_} id={'review'} image={image} i_name={name} />
+     </div>
+</div>
 </div>
 </RootLayout>
 </>
@@ -133,11 +183,10 @@ images:[...galleryImages?.nodes,image],
 
 
 export async function getStaticProps({params}){
-    const {product} =params;
+    const {product:id} =params;
     let footer_header = {}
     let productData ={}
-    let relatedProducts = []
-
+ 
     try {
         footer_header =await axios.get(HEADER_FOOTER_ENDPOINT);
     } catch (error) {
@@ -145,29 +194,21 @@ export async function getStaticProps({params}){
     }
     try {
         const {data} = await client.query({
-            query:All_PRODUCTS_QUERY
+            query:ProductPage,
+            variables:{id}
          });
-         const products = data?.products?.nodes;
-    
-          productData =  products.find(item=>item.id ===product);
+     
+          productData =   data?.product;
     } catch (error) {
         
     }
-     try {
-        const {data:{product:{productCategories:{nodes}}}} = await client.query({
-            query:PRODUCT_BY_ID,
-            variables:{id:product.trim()}
-        });
-    
-    relatedProducts = nodes[0]?.products?.nodes;
-    } catch (error) {
-    }
+     
      return{
     props:{
-        product:productData,
+        product:productData||{},
         footer_header:footer_header?.data,
-        relatedProducts:relatedProducts
-    } 
+     } ,
+    revalidate:10
 }
 
 }

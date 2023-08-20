@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './store.css'
+@import './store.css';
+@import url(https://fast.fonts.net/t/1.css?apiType=css&projectid=455b21e6-1c48-4884-a4c1-d20842d98eaf);.mCustomScrollbar {
+  -ms-touch-action: pinch-zoom;
+  touch-action: pinch-zoom
+};
+
 .swiper-slide{
   background: none;
 }
@@ -13,13 +18,21 @@
   height: 100%;
   background: linear-gradient(0deg, rgba(0, 16, 34, 0.8) 0%, rgba(240, 244, 253, 0.2) 90%);
 }
-html,body{
-  background: #f7f8f9   !important;
+.containe{
+   padding: 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 10px;
+  width: 100%;
+}
+html, body {
+  background: #f7f8f9 !important;
   width: 100%;
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
-
+  font-family: 'NeueHaasGroteskText W01' !IMPORTANT;
 }
 .cert {
     display: flex;
@@ -401,17 +414,19 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-11zohuh-MuiSvgIcon-root {
   filter: drop-shadow(0px 0px 60px rgba(0,0,0,0.15));
   padding: 0px !important;
 }
-.sale{
+.sale {
   position: absolute;
-  bottom: 21px;
+  top: 29px;
   left: 10px;
-  background: #603d6b;
-  padding: 2px 14px;
-  border-radius: 5px;
+  background: #623d6978;
   text-align: center;
-  text-transform: capitalize;
   color: #fff;
-
+  border-radius: 0px;
+  padding: 6px 29px;
+  text-shadow: 0 0 white;
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: inherit;
 }
 .carousel-caption {
   position: absolute;
