@@ -47,7 +47,7 @@ export default function Home({footer_header,products,categoriesWithNoParent,seo}
 
      <SwippeCentered products={products}/>
 
-<WithNoParentCategories categories={categoriesWithNoParent}/>
+{/* <WithNoParentCategories categories={categoriesWithNoParent}/> */}
       </RootLayout>
     </>
   )
@@ -84,15 +84,15 @@ regularPrice:product.regularPrice
   console.log(error)
 }
 
-try{
-  const {data:{productCategories:{nodes}}} =await client.query({
-    query:GETCATEGORIES_WITH_NO_PARENT });
+// try{
+//   const {data:{productCategories:{nodes}}} =await client.query({
+//     query:GETCATEGORIES_WITH_NO_PARENT });
 
-    categoriesWithNoParent = nodes
-console.warn(categoriesWithNoParent)
- }catch(err){
+//     categoriesWithNoParent = nodes
+// console.warn(categoriesWithNoParent)
+//  }catch(err){
 
-}
+// }
 try {
   seo = await getPage('home');
 
@@ -103,7 +103,7 @@ try {
   props:{
     footer_header:footer_header?.data,
     products:productResults,
-    categoriesWithNoParent:categoriesWithNoParent,
+    // categoriesWithNoParent:categoriesWithNoParent,
     seo:seo[0]
    },
   revalidate:10

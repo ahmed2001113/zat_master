@@ -7,8 +7,7 @@ import { useEffect } from "react";
 import Seo from "../seo";
 import Head from "next/head";
 import WishListDrawer from "../wishlistcomponents/wishlistdrawer";
-import { ApolloProvider } from "@apollo/client";
-import client from "@/src/utls/apolloConfigrations/apolloClient";
+ import client from "@/src/utls/apolloConfigrations/apolloClient";
 
  
 function RootLayout({children, headerFooter,seo,uri}) {
@@ -22,13 +21,11 @@ function RootLayout({children, headerFooter,seo,uri}) {
   Home
 </Head>
     <MainHeader header={header}/>
-    <ApolloProvider client={client}>
 
     <main className="  mx-auto  ">
 					{children}
 				</main>
-</ApolloProvider>
-<PreviewComponent/>
+ <PreviewComponent/>
       <CartDrawer/>
 <Mainfooter footer={footer}/>
 <WishListDrawer/>

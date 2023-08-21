@@ -452,3 +452,15 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-11zohuh-MuiSvgIcon-root {
 .image_handler img{
   object-fit: cover;
 }
+.end_nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.end_nav button{
+  margin: 10px;
+  border-radius: 0px;
+}
+.MuiCheckbox-colorPrimary.Mui-checked {
+  color: #000000 !IMPORTANT;
+}

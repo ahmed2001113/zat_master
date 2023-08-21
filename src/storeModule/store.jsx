@@ -11,6 +11,8 @@ import { useEffect } from 'react';
 import FilterDrawer from './filterDrawer';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+ import { ProductsInfinteScroll } from '../lib/queries/fetchcategoriesproductsinfinte';
+import { useQuery } from '@apollo/client';
  export default function Store({products=[],category='',...others}) {
   const router = useRouter();
   const {query}=router;
@@ -18,7 +20,7 @@ import { useRouter } from 'next/router';
   console.log(products)
   const [scroll, setScroll] = useState(false);
   const [isSorted,setIsortedValue]=useState('name');
-
+ 
   function Scroll() {
     const scrolls = document.body.scrollTop > 50 || 
     document.documentElement.scrollTop > 50;
@@ -112,6 +114,10 @@ useEffect(()=>{
    
 
    <div className="products_container container m-auto row">
+   <FilterDrawer 
+products={products}
+setProducts={setproducts}
+show={show} setShow={setShow}/>
 {productData?.length ?
 <>
 
@@ -138,10 +144,7 @@ useEffect(()=>{
 
 </>
 }
-<FilterDrawer 
-products={products}
-setProducts={setproducts}
-show={show} setShow={setShow}/>
+
    </div>
  
    </div>

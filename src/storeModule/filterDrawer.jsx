@@ -1,9 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
-import CheckboxBottons from "../components/customsComponents/checkbox/materilChec";
+import CheckboxBottons, { useStyles } from "../components/customsComponents/checkbox/materilChec";
  import styles from './store.module.css'
 import Drawer from "../components/customsComponents/drawers/CustmDrawer";
 import CheckboxButtons from "../components/customsComponents/checkbox/materilChec";
 import SliderPrice from "../components/customsComponents/sliders/priceRange";
+import { isNullableType } from "graphql";
+import { Checkbox, FormControlLabel } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { FiltersAction } from "../store/filters/filter.slice";
+import { FilterSelector } from "../store/filters/filtersSelectores";
 export default function FilterDrawer({
   show,
   setShow,
@@ -15,9 +20,19 @@ export default function FilterDrawer({
   { id: 2, checked: false, label: 'Out of stock' ,value:'OUT_OF_STOCK'},
  
 ]);
-const minPrice  = Math.min(...products.map(item=>item.price))
-const maxPrice  = Math.max(...products.map(item=>item.price))
-const [prices,setPrice]=useState([minPrice,maxPrice])
+const [onSale, setOnSale] = useState(true);
+const {prices:price}=useSelector(FilterSelector) ;
+const {minPrice,maxPrice}=price
+ 
+const [prices,setPrice]=useState([minPrice,maxPrice]);
+const dispatch = useDispatch();
+
+
+
+const handleChangeOnSale = (e)=>{
+  setOnSale(e.target.checked);
+
+}
  const handleChangePrice = (event, value) => {
    setPrice(value);
 };
@@ -32,23 +47,28 @@ const [prices,setPrice]=useState([minPrice,maxPrice])
 
 // Define a function to apply filters
 const applyFilters = () => {
-  let updatedList = [...products]; 
-   const checkedItems = Stock
-   .filter(item => item.checked)
-   .map(item => item.value);
- updatedList = checkedItems.length
-      ? products.filter(item =>
-         checkedItems.includes(item.stockStatus))
-      : products;
+  // let updatedList = [...products]; 
+
+  const filters  ={
+    minPrice:prices[0],
+    maxPrice:prices[1],
+    stockStatues:Stock.filter(item=>item.checked).map(({value})=>value)
+  }
+  dispatch(FiltersAction.addFilter({
     
-      const MinPrice = prices[0];
-      const MaxPrice = prices[1];
-      updatedList = updatedList.filter(
-        (item) => item.regularPrice >=
-         MinPrice && item.regularPrice 
-         <= MaxPrice
-      );
-  setProducts(updatedList);  
+      minPrice:prices[0],
+      maxPrice:prices[1],
+      stockStatues:Stock.filter(item=>item.checked).map(({value})=>value),
+      onSale
+
+
+  }));
+ 
+console.log(
+  filters 
+)
+
+ 
 };
 
  
@@ -74,17 +94,60 @@ const applyFilters = () => {
           })
         }
         
-   
+     
       </div>
       </div>
       <h5>
         Sale
       </h5>
-      <h5>
+      <FormControlLabel
+      classes={
+        {
+          root:{
+            '&$checked': {
+              color: '#000',
+            },
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row-reverse',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginLeft: 0,
+            color:"#000"
+          },
+          label:{
+            fontSize: '.8rem',
+            fontFamily: `'Raleway', sans-serif`,
+          }
+        }
+      }
+               label={'On Sale'}
+control={
+  
+  <Checkbox
+  checked={onSale}
+  onChange={handleChangeOnSale}
+  inputProps={{ 'aria-label': 'controlled' }}
+  
+/>
+}
+     >
+
+
+    
+        </FormControlLabel>
+
+      {
+        minPrice===maxPrice?null:
+<div>
+<h5>
         Price
       </h5>
-      <SliderPrice  value={prices} min={minPrice===maxPrice?0:minPrice}
-       max={maxPrice} changePrice={handleChangePrice}/>
+        <SliderPrice  value={prices} min={minPrice===maxPrice?0:minPrice}
+        max={maxPrice} changePrice={handleChangePrice}/>
+</div>
+      }
+   
       
 
    </div>
