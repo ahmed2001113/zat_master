@@ -1,16 +1,19 @@
  import Link from 'next/link';
-import React, { useState ,useEffect} from 'react'
+import React, { useState ,useEffect, useLayoutEffect} from 'react'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import styles from './sign.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { EmailSignInStart } from '@/src/store/user/user.actions';
-import { ErrorMessageSelector } from '@/src/store/user/user.selector';
+import { ErrorMessageSelector, userSelectMemo } from '@/src/store/user/user.selector';
+import { useRouter } from 'next/router';
 const intial ={email:'',password:''};
 
 const  Signin=() =>{
-  const err = useSelector(ErrorMessageSelector)
-  const [firebaseError,setFirebaseError]=useState("")
+  const err = useSelector(ErrorMessageSelector);
+  const user = useSelector(userSelectMemo);
+const router = useRouter()
+    const [firebaseError,setFirebaseError]=useState("")
   const dispatch = useDispatch()
   const [data,setFormData]=useState(intial);
   const{email,password}=data
@@ -56,7 +59,14 @@ return setFirebaseError('')
     
 
  
-},[err.error ])
+},[err.error ]);
+useLayoutEffect(()=>{
+  console.log(user)
+
+  if(user){
+    router.push('/')
+  }
+},[user])
   return (
     <div className='container mt-5'>
 

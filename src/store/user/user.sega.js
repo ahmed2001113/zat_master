@@ -61,14 +61,20 @@ function* CheckuserSession(){
 
 function* SignUPWithEmailANdPasswordProgress({payload}){
 const {email,password,displayName} = payload;
+ const userName = displayName.join(' ')
+if(!displayName){
+     yield put(userAction.signInFaild('you must set your first name'))
+return
+
+}
 try{
-        console.log(payload)
-        const {user } = yield call(CreateUser,email,password);
+         const {user } = yield call(CreateUser,email,password);
         console.log(user)
-         yield call(GetUserSnapShotData,user,{displayName});
-         location.href = '/'
+         yield call(GetUserSnapShotData,user,{displayName:userName});
+        //  location.href = '/'
 
 }catch(err){
+        console.log(err)
          yield put(userAction.signInFaild(err.response.data))
 }
 }
@@ -88,7 +94,7 @@ const{email,password} = payload;
 try{
    const {user}=     yield  call(signIn,email,password);
         
-location.href = '/'
+// location.href = '/'
    yield call(GetUserSnapShotData,user)
    yield put(userAction.signInSuccess(user))
  

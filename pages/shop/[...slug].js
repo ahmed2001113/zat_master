@@ -42,7 +42,7 @@ const loadMore = async()=>{
     variables:{
       first:10,
       after:pageInferomation.endCursor,
-      slug:slug[0]
+      slug:slug
     }
   });
   const {productCategories:{nodes:productsCat}} =NewData;
@@ -61,7 +61,7 @@ const loadLess = async()=>{
     variables:{
       last:10,
       before:pageInferomation.startCursor,
-      slug:slug[0]
+      slug:slug
     }
   });
   const {productCategories:{nodes:productsCat}} =NewData;
