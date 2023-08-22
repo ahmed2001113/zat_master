@@ -1,10 +1,17 @@
 import gql from "graphql-tag";
 
 export const ProductsInfinteScroll= gql`
-query getProducts($first: Int, $after: String, $before:
-  String, $last: Int, $minPrice: Float, $maxPrice: Float,
-  $stockStatues: [StockStatusEnum], $onSale: Boolean, 
-  $category: [String], $orderby: [ProductsOrderbyInput]) {
+query getProducts(
+  $first: Int,
+   $after: String, 
+  $before:
+  String, $last: Int,
+   $minPrice: Float, 
+   $maxPrice: Float,
+  $stockStatues: [StockStatusEnum],
+   $onSale: Boolean, 
+  $category: [String],
+   $orderby: [ProductsOrderbyInput]) {
   products(
     first: $first
     after: $after

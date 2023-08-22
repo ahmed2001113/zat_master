@@ -3,7 +3,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-const useStyles = makeStyles({
+export const useStyles = makeStyles({
   root: {
     '&$checked': {
       color: '#000',

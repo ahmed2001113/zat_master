@@ -13,21 +13,34 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
  import { ProductsInfinteScroll } from '../lib/queries/fetchcategoriesproductsinfinte';
 import { useQuery } from '@apollo/client';
+import { Chip, ListItem } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { FilterSelector } from '../store/filters/filtersSelectores';
+import { FiltersAction } from '../store/filters/filter.slice';
+import { isArray } from 'lodash';
+import filterObjectValues from '../utls/functions/FilterObjectsWithTypes';
  export default function Store({products=[],category='',...others}) {
-  const router = useRouter();
-  const {query}=router;
-  console.log(query.filter)
-  console.log(products)
+  const {Filters ,Filtered,sort:SORT } = useSelector(FilterSelector)
+ const dispatch = useDispatch()
   const [scroll, setScroll] = useState(false);
-  const [isSorted,setIsortedValue]=useState('name');
- 
+
   function Scroll() {
     const scrolls = document.body.scrollTop > 50 || 
     document.documentElement.scrollTop > 50;
     
     setScroll(scrolls)
   }
-  
+
+
+
+ 
+
+  const handleDelete = (chipToDelete) => () => {
+ console.log(chipToDelete);
+ dispatch(FiltersAction.DeleteKey(chipToDelete))
+  };
+
+
   useEffect(() => {
     function handleScroll() { return Scroll() };
     document.body.addEventListener("scroll", handleScroll);
@@ -41,12 +54,7 @@ import { useQuery } from '@apollo/client';
   const [sort,SetSort]= useState('')
    const onChange = (e)=>{
    }
-useEffect(()=>{
-  if(query.filter==='new_arrival'){
-    SetSort('new_arrival')
-  }
-  ()=>setproducts(products)
- },[query.filter])
+ 
  const onChangeSort =(e)=>{
   const {value} = e.target;
   SetSort(value) 
@@ -54,46 +62,72 @@ useEffect(()=>{
  const showFilter  = ()=>{
    setShow(true);
   }
-  useEffect(()=>{
-    setproducts(products)
-  },[products])
+ 
  useEffect(()=>{
  
   switch(sort){
     case  'priceAsc':
-       const priceAsc = productData.sort((a,b)=>a.price-b.price);
-      return setproducts(priceAsc.slice());
+      //  const priceAsc = productData.sort((a,b)=>a.price-b.price);
+
+     
+      return   dispatch(FiltersAction.SORTING({orderby:[{
+        field:"PRICE",
+        order:'ASC'
+        }]
+      
+      })) 
        
   
         case  'priceDESC':
-          const priceDESC = productData.sort((a,b)=>b.price -a.price
-          );
-          return setproducts(priceDESC.slice())
+            
+      return   dispatch(FiltersAction.addFilter({orderby:[{
+        field:"PRICE",
+        order:'DESC'
+        }]
+      
+      })) 
   
         ;
         case  'name':
-          const name = productData.sort(function(a, b) {
-            return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-          });
-          return setproducts(name.slice()) ;
+          return   dispatch(FiltersAction.addFilter({orderby:[{
+            field:"NAME",
+            order:'DESC'
+            }]
+          
+          })) 
           case 'most':
-            const productDataRating= productData.sort((a,b)=>{
-               return b.rating - a.rating;
-            })
-            return setproducts(productDataRating.slice());
+            return   dispatch(FiltersAction.addFilter({orderby:[{
+              field:"RATING",
+              order:'DESC'
+              }]
+            }));
+
+
             case'new_arrival':
-            return setproducts(products.slice())
+          
+            return   dispatch(FiltersAction.addFilter({orderby:[{
+              field:"MODIFIED",
+              order:'DESC'
+              }]
+            }));
 
 
      default :   setproducts([...products])
    }
 
  },[sort])
+
+ useEffect(()=>{
+  setproducts(products)
+},[products])
+
   return (
    
    <div {...others}>
    <div className={`${styles.Top_Bar}`} >
-    <h4 className={`${styles.title}`}>
+  <div className={`${styles.flex}`}>
+
+  <h4 className={`${styles.title}`}>
       {category}
     </h4>
 
@@ -110,8 +144,36 @@ useEffect(()=>{
 
     </div>
 
-   </div>
+  </div>
+    <div className="tags">
+ <ul className={`${styles.chip}`}  >
+
+  {
+      filterObjectValues(Filters,(filters)=>{
+ 
+       return Object.keys(filters).map((key) => {
+          let icon;
+  
+      console.log(key)
+          return (
+            <ListItem key={key}>
+              <Chip
+              className={`${styles.chipItem}`}
+                icon={icon}
+                label={`${key} ${filters[key]}`}
+                onDelete={ handleDelete(key)}
+              />
+            </ListItem>
+          );
+        })
+          })
+  }
    
+   
+    </ul>
+</div>
+   </div>
+
 
    <div className="products_container container m-auto row">
    <FilterDrawer 
@@ -126,7 +188,7 @@ show={show} setShow={setShow}/>
   productData.map(
     product=>{
   return<>
-   <ProdutItemMain product={product}/>
+   <ProdutItemMain  key={product.id} product={product}/>
   
    
   </>
@@ -136,10 +198,14 @@ show={show} setShow={setShow}/>
 }
 </>
 :<>
-<div className="no_products">
+<div className={`${styles.no_products}`}>
   <h1>
-    There's no products here 
+  We're sorry, no products were found that match your filter selection.
   </h1>
+
+  <button className='black'>
+    clear Filters
+  </button>
 </div>
 
 </>

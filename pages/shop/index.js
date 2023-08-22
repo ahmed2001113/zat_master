@@ -21,26 +21,31 @@ import InfiniteScroll from  "react-infinite-scroller"
 import { useDispatch, useSelector } from "react-redux";
 const AllCategoriesProducts = ({products,footer_header,seo,price,...others})=>{
  const dispatch = useDispatch()
-  dispatch(FiltersAction.addPrices(price))
- const {Filters} = useSelector(FilterSelector)
+
+ const {Filters,sort} = useSelector(FilterSelector)
 console.log(Filters)
-// this function it's worked correctly as i want 
- const {pageInfo,nodes}= products;
+  const {pageInfo,nodes}= products;
 const [loadings,setLoading]=useState(false);
 const [pageInferomation,setPageInfo]=useState(pageInfo)
 const [productsData,setProductsData]=useState(ModifyObjectOrArray(nodes));
 
 
 const FilterFunction = async()=>{
-  console.log({...Filters});
 
+  console.log(
+    {
+      first:10,
+      ...Filters,
+      ...sort
+    }
+  )
 try{
   const {data,loading,error}= await client.query({
     query:ProductsInfinteScroll,
     variables:{
       first:10,
-      ...Filters
-    }
+      ...Filters,
+     }
   });
   console.log(data,error)
   setLoading(loading)
@@ -53,9 +58,9 @@ catch(err){
 }
 useEffect(()=>{
 
-  FilterFunction()
-},[Filters])
-
+  FilterFunction();
+},[Filters,sort])
+dispatch(FiltersAction.addPrices(price ))
  console.log(pageInferomation)
 const loadMore = async()=>{
   const {data,loading}= await client.query({
@@ -90,7 +95,7 @@ console.log(loadings);
         <>
           <RootLayout headerFooter={footer_header} seo={seo}>
  
- <Store  
+ <Store category="Shop"
            products={productsData}/>
  
  

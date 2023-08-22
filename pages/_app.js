@@ -11,8 +11,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { PersistGate } from 'redux-persist/integration/react';
 import { checkUserSession } from '@/src/store/user/user.actions';
-import { WishListProvider } from '@/src/context/wishlist';
-import { ApolloProvider } from '@apollo/client';
+ import { ApolloProvider } from '@apollo/client';
 import client from '@/src/utls/apolloConfigrations/apolloClient';
  config.autoAddCss = false;
  export default function App({ Component, pageProps }) {
@@ -23,14 +22,12 @@ import client from '@/src/utls/apolloConfigrations/apolloClient';
   <Provider store={store}>
   <ApolloProvider client={client}>
 
-    <WishListProvider>
-    <PersistGate  persistor={persistor}>
+     <PersistGate  persistor={persistor}>
 
   <Component {...pageProps} />
 
   </PersistGate>
-    </WishListProvider>
-    </ApolloProvider>
+     </ApolloProvider>
   </Provider>
 
   </>

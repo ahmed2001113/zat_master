@@ -9,21 +9,24 @@ import { Checkbox, FormControlLabel } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { FiltersAction } from "../store/filters/filter.slice";
 import { FilterSelector } from "../store/filters/filtersSelectores";
+const initial=[
+  { id: 1, checked: false, label: 'in stock' ,value:'IN_STOCK'},
+  { id: 2, checked: false, label: 'Out of stock' ,value:'OUT_OF_STOCK'},
+]
 export default function FilterDrawer({
   show,
   setShow,
   products,
   setProducts
 }){
-  const [Stock, SetStock] = useState([
-  { id: 1, checked: false, label: 'in stock' ,value:'IN_STOCK'},
-  { id: 2, checked: false, label: 'Out of stock' ,value:'OUT_OF_STOCK'},
- 
-]);
-const [onSale, setOnSale] = useState(true);
-const {prices:price}=useSelector(FilterSelector) ;
+  const [Stock, SetStock] = useState(initial);
+const {prices:price,Filtered:FilterStatues}=useSelector(FilterSelector) ;
+
 const {minPrice,maxPrice}=price
- 
+
+const [onSale, setOnSale] = useState(true);
+const {Filters,Filtered}=useSelector(FilterSelector) ;
+  
 const [prices,setPrice]=useState([minPrice,maxPrice]);
 const dispatch = useDispatch();
 
@@ -31,11 +34,12 @@ const dispatch = useDispatch();
 
 const handleChangeOnSale = (e)=>{
   setOnSale(e.target.checked);
-
+SetStock
 }
  const handleChangePrice = (event, value) => {
    setPrice(value);
 };
+
 
       const handleChangeChecked = (id) => {
         const StockStateList = Stock;
@@ -44,7 +48,11 @@ const handleChangeOnSale = (e)=>{
         );
         SetStock(changeCheckedCuisines);
        };
-
+useEffect(()=>{
+if(!Filtered){
+  SetStock(initial)
+}
+},[Filtered])
 // Define a function to apply filters
 const applyFilters = () => {
   // let updatedList = [...products]; 
@@ -64,10 +72,7 @@ const applyFilters = () => {
 
   }));
  
-console.log(
-  filters 
-)
-
+ 
  
 };
 
@@ -152,6 +157,10 @@ control={
 
    </div>
       <div className="bottom mt-auto">
+        {
+          Filtered&&
+<button className="white black mb-3" onClick={()=>dispatch(FiltersAction.resetFilters())}> Reset Filters</button>
+        }
 <button className="black" onClick={()=>applyFilters()}> Apply Filters</button>
       </div>
       

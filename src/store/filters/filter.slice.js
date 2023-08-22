@@ -2,11 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const Initial = {
     isShop:false,
-    Filters:{},
+    Filtered:false,
+    Filters:{ } ,
     prices:{
         minPrice:0,
         maxPrice:0
-    }
+    },
+    sort:{}
 
 }
 
@@ -21,15 +23,24 @@ reducers:{
         state.prices.minPrice=min
     },
     addFilter :(state,action)=>{
-    
+    state.Filtered=true
     state.Filters = Object.assign( state.Filters ,action.payload)
     },
+
+    SORTING:(state,action)=>{
+        console.log('object')
+state.sort=Object.assign({},action.payload)
+    },
     resetFilters:(state,action)=>{
-        state.Filters=Object.assign(state.Filters,{})
+        state.Filtered=false
+
+        state.Filters={}
     },
     DeleteKey :(state,action)=>{
-       delete state.Filters[key]
-
+       delete state.Filters[action.payload]
+        if(!Object.keys(state.Filters).length){
+            state.Filtered=false
+        }
     }
 
 }

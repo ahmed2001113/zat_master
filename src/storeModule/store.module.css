@@ -8,10 +8,11 @@
     z-index: 5;
     background: transparent;
     padding: 20px 0px;
-
+    flex-direction: column;
+    align-items: flex-start;
+ 
 }
 .Top_Bar_scroll:before{
-
     position: absolute;
     content: "";
     width: 100%;
@@ -67,4 +68,42 @@
 }
 .button:hover{
     background: #ddd;
+}
+.chip{
+    display: flex;
+width: 90%;
+margin: auto;
+
+}
+.flex{
+    width: 90%;
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+}
+
+.chipItem{
+    border-radius: 0px !important;
+    background: #f4f4f4 !important;
+    font-size: smaller !IMPORTANT;
+    padding: 0px !IMPORTANT;
+    height: 26px !IMPORTANT;
+    border: 1px solid #623d6914 !IMPORTANT;
+    text-transform: capitalize;
+}
+
+.no_products{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.no_products button {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 50px;
+    text-transform: uppercase;
+    text-align: center;
 }
