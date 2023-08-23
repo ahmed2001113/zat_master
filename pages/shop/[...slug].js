@@ -1,5 +1,6 @@
 import { HEADER_FOOTER_ENDPOINT } from "@/src/EndPoints";
 import RootLayout from "@/src/components/layout";
+import Big from "@/src/components/skelton/skeltonswippe";
 import { productCategoriesBySlug } from "@/src/lib/queries/productsBySlug";
 import { FiltersAction } from "@/src/store/filters/filter.slice";
 import { FilterSelector } from "@/src/store/filters/filtersSelectores";
@@ -15,15 +16,14 @@ import Image from "next/image";
 import { useRouter } from "next/router"
 import { useEffect, useLayoutEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+ import { useDispatch, useSelector } from "react-redux";
 
-const Cat = ({data,footer_header,price,slug})=>{
+const Cat = ({data,footer_header,price,slug,loadingApi})=>{
   const {Filters,sort} = useSelector(FilterSelector)
-
+  const [loadings,setLoading]=useState(loadingApi)
   const dispatch = useDispatch()
   const {description,  image, name } =data
-   const [loadings,setLoading]=useState(false);
-const [pageInferomation,setPageInfo]=useState(data?.products?.pageInfo)
+ const [pageInferomation,setPageInfo]=useState(data?.products?.pageInfo)
 const [productsData,setProductsData]=useState(ModifyObjectOrArray(data?.products?.nodes));
 dispatch(FiltersAction.addPrices(price))
     const router = useRouter();
@@ -37,6 +37,7 @@ dispatch(FiltersAction.addPrices(price))
  // const lastparam = slug.pop();
 //return array of params
 const loadMore = async()=>{
+  setLoading(true)
   const {data:NewData,loading}= await client.query({
     query:productCategoriesBySlug,
     variables:{
@@ -56,6 +57,8 @@ const loadMore = async()=>{
 
 }
 const loadLess = async()=>{
+  setLoading(true)
+
   const {data:NewData,loading}= await client.query({
     query:productCategoriesBySlug,
     variables:{
@@ -76,12 +79,9 @@ const loadLess = async()=>{
 }
 
 const FilterFunction = async()=>{
+  setLoading(true)
 
-  console.log({
-    first:10,
-    ...Filters,
-    slug
-    })
+ 
 try{
   const {data:NewData,loading,error}= await client.query({
     query:productCategoriesBySlug,
@@ -91,11 +91,7 @@ try{
       slug
       }
   });
-console.log({
-  first:10,
-  ...Filters,
-  slug
-  })
+ 
   const {productCategories:{nodes:productsCat}} =NewData;
   const {products} =productsCat[0]
   const {pageInfo,nodes}=products;
@@ -115,37 +111,38 @@ useEffect(()=>{
 
   FilterFunction();
  },[Filters]);
-//  useLayoutEffect(()=>{
-//   document.body.scrollTop = 0;
-//   document.documentElement.scrollTop = 0;
-//  },[])
-// //  useEffect(() => {
-//   // Define your function here
-//   const handlePageLeave = () => {
-//     // Do something when the user leaves the page
-//     dispatch(FiltersAction.resetFilters())
+ useLayoutEffect(()=>{
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+ },[])
+ useEffect(() => {
+  // Define your function here
+  const handlePageLeave = () => {
+    // Do something when the user leaves the page
+    dispatch(FiltersAction.resetFilters())
 
-//   };
+  };
 
-//   // Add event listeners for both events
-//   window.addEventListener("beforeunload", handlePageLeave);
-//   router.events.on("routeChangeStart", handlePageLeave);
+  // Add event listeners for both events
+  window.addEventListener("beforeunload", handlePageLeave);
+  router.events.on("routeChangeStart", handlePageLeave);
 
-//   // Remove event listeners when the component unmounts
-//   return () => {
-//     window.removeEventListener("beforeunload", handlePageLeave);
-//     router.events.off("routeChangeStart", handlePageLeave);
-//   };
-// }, []);
+   return () => {
+    window.removeEventListener("beforeunload", handlePageLeave);
+    router.events.off("routeChangeStart", handlePageLeave);
+  };
+}, []);
      return(
 
         <>
   <RootLayout headerFooter={footer_header}>
     <div className="image_handler" > 
 
- {
-  image && image.sourceUrl?
-  <Image src={image?.sourceUrl||''}  srcSet={image?.srcSet} fill/>:
+ {loadings?<Big/>:
+   image&&image.sourceUrl?
+  <Image src={image?.sourceUrl||''} 
+  alt={image?.altText}
+   srcSet={image?.srcSet} fill/>:
 <>
   
 </>
@@ -155,7 +152,7 @@ useEffect(()=>{
 
     </div>
      {productsData&&
-     <Store  
+     <Store  loading={loadings}
      products={productsData}/>
      } 
        <div className="end_nav">
@@ -163,13 +160,7 @@ useEffect(()=>{
     
         Previous Page
     {
-      loadings&&      <Spinner
-          as="span"
-          animation="border"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-        />
+      loadings&&      <>loading</>
     }   
       </Button> 
 <Button 
@@ -177,13 +168,7 @@ variant="dark" onClick={loadMore}   disabled={!pageInferomation.hasNextPage}>
     
         Next Page
     {
-      loadings&& <Spinner
-          as="span"
-          animation="border"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-        />
+      loadings&&   <>loading</>
     }   
       </Button> 
  
@@ -201,7 +186,8 @@ export default Cat
 export async function getStaticProps ({params}) {
   const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
   let MaxPrice = 0;
-  let MinPrice= 0
+  let MinPrice= 0;
+  let loadingApi = true;
 	const { slug } = params || {};
   // this will return the last params in slug like women/dress will return dress
   const LastParam = slug.pop()
@@ -210,10 +196,11 @@ let data = {}
   // productCategoriesBySlug
   try {
 
-   const  {data:{productCategories:{nodes}}}  = await client.query({
+   const  {data:{productCategories:{nodes}},loading,error}  = await client.query({
     query:productCategoriesBySlug ,
     variables:{slug:LastParam,first:10}
   });
+  loadingApi=loading
  data =nodes[0]
   
 
@@ -236,7 +223,8 @@ let data = {}
           data,
           footer_header:footer_header?.data,
           price:[MinPrice,MaxPrice],
-          slug:LastParam
+          slug:LastParam,
+          loadingApi
 
         },
         revalidate:10

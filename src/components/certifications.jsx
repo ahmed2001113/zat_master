@@ -10,14 +10,14 @@ export default function Certifications() {
 <>
 <div className='cert'>
 
-<Image src={c_4} width={90} height={90}/>
-      <Image src={c_5} width={90} height={90}/>
+<Image src={c_4} width={90}  alt={'cert'} height={90}/>
+      <Image src={c_5} alt={'cert'}  width={90} height={90}/>
 </div>
     <div className='cert'>
-      <Image src={c_1} width={90} height={90}/>
-      <Image src={c_2} width={90} height={90}/>
-      <Image src={c_3} width={90} height={90}/>
-    </div>
+      <Image src={c_1}  alt={'cert'} width={90} height={90}/>
+      <Image src={c_2}  alt={'cert'} width={90} height={90}/>
+      <Image src={c_3} alt={'cert'}  width={90} height={90}/>
+    </div> alt={'cert'} 
 
 </>
 

@@ -13,17 +13,17 @@ name:'user',
 initialState:initializingState,
 reducers:{
 checkUserSession(state,action){
-state.loading=true
-},
+ },
 signInSuccess(state,action){
     state.currentUser=action.payload;
-    state.loading=true;
-    state.error=''
+     state.error=''
+},
+SetLoading:(state,action)=>{
+    state.loading=action.payload
 },
 signInFaild(state,action){
     state.error=action.payload;
-    state.loading=false;
-
+ 
 },signOutUser(state,action){
     state.currentUser=null
 },UploadUserImageSuccess(state,action){ state.currentUser=action.payload },

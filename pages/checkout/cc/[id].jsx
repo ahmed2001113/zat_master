@@ -72,7 +72,8 @@ export default function CheckOut({product}) {
             <Badge badgeContent={'1'} color="secondary">
 
               <Image className={`${styles.image}`}
-               src={`${product.image.sourceUrl}`} width={70}
+               src={`${product?.image?.sourceUrl}`} width={70}
+               alt={product?.image?.altText}
                 height={70}/>
               </Badge>
             </div>

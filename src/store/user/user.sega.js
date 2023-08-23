@@ -60,22 +60,28 @@ function* CheckuserSession(){
  //signingUSerUp
 
 function* SignUPWithEmailANdPasswordProgress({payload}){
-const {email,password,displayName} = payload;
- const userName = displayName.join(' ')
-if(!displayName){
-     yield put(userAction.signInFaild('you must set your first name'))
-return
+        yield put(userAction.SetLoading(true))
 
-}
+ const {email,password,displayName} = payload;
+
+ const userName = displayName.join(' ')
+ 
 try{
+        yield put(userAction.SetLoading(false))
+
          const {user } = yield call(CreateUser,email,password);
-        console.log(user)
-         yield call(GetUserSnapShotData,user,{displayName:userName});
+ 
+
+        yield call(GetUserSnapShotData,user,{displayName:userName});
+        yield put(userAction.SetLoading(true))
+
+ 
         //  location.href = '/'
 
 }catch(err){
         console.log(err)
-         yield put(userAction.signInFaild(err.response.data))
+         yield put(userAction.signInFaild(err));
+
 }
 }
 
@@ -90,7 +96,9 @@ yield takeLatest(USERTYPES.EMAIL_SIGN_UP_START,SignUPWithEmailANdPasswordProgres
 
  //signingIn WIth EMail&password;
 function* SignInWithEmailANdPasswordProgress({payload}){
-const{email,password} = payload;
+        const{email,password} = payload;
+        yield put(userAction.SetLoading(true))
+
 try{
    const {user}=     yield  call(signIn,email,password);
         
@@ -99,7 +107,7 @@ try{
    yield put(userAction.signInSuccess(user))
  
 }catch(err){
-
+ 
         yield put(userAction.signInFaild(err))
 
 }
@@ -107,7 +115,7 @@ try{
  //signingIn WIth EMail&password Pointer
 function* OnSignInStart (){
         
-        yield takeLatest(USERTYPES.EMAIL_SIGN_IN_START,SignInWithEmailANdPasswordProgress)
+        yield takeLatest(USERTYPES.EMAIL_SIGN_IN_START,SignInWithEmailANdPasswordProgress);
 }
 
 
@@ -118,8 +126,7 @@ function* GoogleSignIn(){
         
         yield call(GetUserSnapShotData,user)
 
-        location.href = '/'
-
+ 
 }
         catch(err){
 

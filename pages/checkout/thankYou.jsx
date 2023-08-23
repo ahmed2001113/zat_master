@@ -76,7 +76,10 @@ import { useRouter } from 'next/router';
             <div className="col-md-3" style={{position:'relative'}}>
             <Badge badgeContent={el.quantity} color="secondary">
 
-              <Image className={`${styles.image}`} src={`${el.images[0].sourceUrl}`} width={70} height={70}/>
+              <Image className={`${styles.image}`} 
+              src={`${el.images[0].sourceUrl}`} width={70}
+              alt={el.images[0]?.altText}
+              height={70}/>
               </Badge>
             </div>
 <div className={`${styles.right} col`}>

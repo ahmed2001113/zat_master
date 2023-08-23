@@ -17,16 +17,18 @@ export default function FilterDrawer({
   show,
   setShow,
   products,
-  setProducts
+  setProducts,
+  loading
+   
 }){
+  console.log(loading)
   const [Stock, SetStock] = useState(initial);
-const {prices:price,Filtered:FilterStatues}=useSelector(FilterSelector) ;
-
+const {prices:price,Filtered,Filters}=useSelector(FilterSelector) ;
+console.log(Filters)
 const {minPrice,maxPrice}=price
 
 const [onSale, setOnSale] = useState(true);
-const {Filters,Filtered}=useSelector(FilterSelector) ;
-  
+   
 const [prices,setPrice]=useState([minPrice,maxPrice]);
 const dispatch = useDispatch();
 
@@ -57,11 +59,7 @@ if(!Filtered){
 const applyFilters = () => {
   // let updatedList = [...products]; 
 
-  const filters  ={
-    minPrice:prices[0],
-    maxPrice:prices[1],
-    stockStatues:Stock.filter(item=>item.checked).map(({value})=>value)
-  }
+  
   dispatch(FiltersAction.addFilter({
     
       minPrice:prices[0],
@@ -159,9 +157,19 @@ control={
       <div className="bottom mt-auto">
         {
           Filtered&&
-<button className="white black mb-3" onClick={()=>dispatch(FiltersAction.resetFilters())}> Reset Filters</button>
+<button className="  submit mb-3" 
+disabled={loading}
+
+onClick={()=>dispatch(FiltersAction.resetFilters())}> 
+{loading?<>loading</>:<>Reset Filters</>}
+
+</button>
         }
-<button className="black" onClick={()=>applyFilters()}> Apply Filters</button>
+<button className="submit" onClick={()=>applyFilters()}
+disabled={loading}
+> 
+{loading?<>loading</>:<>Apply Filters</>}
+</button>
       </div>
       
           </Drawer>

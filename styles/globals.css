@@ -256,12 +256,10 @@ body {
 }
 button.submit {
   width: 100%;
-  background: #333;
-  padding: 10px;
+  background: #190101;
   color: #fff;
-  padding: 15px;
+  padding: 5px;
   font-size: 19px;
-  font-weight: bolder;
 }button.submit:hover{
   color:#333;
 background-color:#fff;
@@ -390,9 +388,12 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-11zohuh-MuiSvgIcon-root {
   font-weight: bold;
 }
 .carousel-caption button {
-  width: 30%;
-  font-size: 20px;
-  height: 69px;
+  width: 224px;
+  padding: 5px 16px;
+  height: auto;
+  font-size: 24px;
+  background: #fff;
+  color: #333;
 }
 .carousel-control-prev, .carousel-control-next{
   height: fit-content;
@@ -463,4 +464,17 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-11zohuh-MuiSvgIcon-root {
 }
 .MuiCheckbox-colorPrimary.Mui-checked {
   color: #000000 !IMPORTANT;
+}
+
+button.submit:disabled {
+  background: #ddd;
+  border: 1px solid #ddd;
+  color: #333;
+}
+p.errorMessage {
+  color: #ffffff;
+  padding: 6px;
+  margin-top: 10px;
+  background: #5d4963;
+  text-align: center;
 }

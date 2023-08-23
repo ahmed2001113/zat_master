@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react'
 import Carousel from 'react-bootstrap/Carousel';
- 
+ import styles from './carousel.module.css'
 export default function Swipecarousel() {
     const slides =[
         {
@@ -30,8 +30,8 @@ export default function Swipecarousel() {
     ]
     return (
         <Carousel>
-      <Carousel.Item>
-      <Image src={slides[0].image}   width='4000' height={600}  />
+      <Carousel.Item className={`${styles.carousel_item}`}>
+      <Image src={slides[0].image}  alt={slides[0].title} width='4000' height={600}  />
          <Carousel.Caption>
           <h1>First slide label</h1>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
@@ -39,8 +39,8 @@ export default function Swipecarousel() {
 
         </Carousel.Caption>
       </Carousel.Item>
-      <Carousel.Item>
-      <Image src={slides[1].image}   width='4000' height={600}  />
+      <Carousel.Item className={`${styles.carousel_item}`}>
+      <Image src={slides[1].image}  alt={slides[0].title} width='4000' height={600}  />
 
          <Carousel.Caption>
           <h1>Second slide label</h1>
@@ -49,8 +49,8 @@ export default function Swipecarousel() {
 
         </Carousel.Caption>
       </Carousel.Item>
-      <Carousel.Item style={{position:'relative'}}>
-      <Image src={slides[2].image}   width='4000' height={600}  />
+      <Carousel.Item className={`${styles.carousel_item}`} style={{position:'relative'}}>
+      <Image src={slides[2].image} alt={slides[0].title}  width='4000' height={600}  />
  
          <Carousel.Caption>
           <h1>Third slide label</h1>

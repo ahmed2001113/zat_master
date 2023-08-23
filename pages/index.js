@@ -6,8 +6,8 @@ import axios from 'axios'
 import { HEADER_FOOTER_ENDPOINT } from '../src/EndPoints'
  const inter = Inter({ subsets: ['latin'] })
   import client from '../src/utls/apolloConfigrations/apolloClient'
- import { useEffect } from 'react'
-import { Categories_query, Categories_query_all, GETCATEGORIES_WITH_NO_PARENT, PRODUCTS_QUERY } from '../src/utls/queries'
+ import { useEffect, useState } from 'react'
+import { Categories_query, Categories_query_all, PRODUCTS_QUERY } from '../src/utls/queries'
 import MainSlider from '@/src/components/Sliders/MainSlider'
 import Title from '@/src/components/title'
 import groupObjects from '@/src/utls/functions/GroupSubCategoriesByparentName'
@@ -19,35 +19,36 @@ import Swipecarousel from '@/src/components/customsComponents/swipe_carousel/swi
 import { isEmpty } from 'lodash'
 import WithNoParentCategories from '@/src/components/productWithNoCategories/WithNoParentCategories'
  import { getPage } from '@/src/utls/functions/get-page-seo'
+import dynamic from 'next/dynamic'
+import Skelton1 from '@/src/components/skelton/skeltonswippe'
+import SwippedCenteredSkelton from '@/src/components/skelton/centered'
+import Big from '@/src/components/skelton/skeltonswippe'
+import { useRouter } from 'next/dist/client/router'
+import { GETCATEGORIES_WITH_NO_PARENT } from '@/src/lib/queries/categoriesWithPictures'
  
-export default function Home({footer_header,products,categoriesWithNoParent,seo}) {
- 
-
-  useEffect(()=>{
-    // const get = (async()=>{
-    //   // const footer_header_2 = await client.query( {
-    //   //   query: GET_PAGE,
-    //   //   variables: {
-    //   //     uri: '/shop/men',
-    //   //   },
-    //   // } );
-    //   // console.log(footer_header_2.data.page)
-    //   const data = await getPage('/product-category/hoodies');
-    //   console.log(da)
-    // })()
-  },[])
+export default function Home({footer_header,products,categoriesWithNoParent,load,seo}) {
+ const [loading,setLoading]=useState(load);
+ const router= useRouter()
+useEffect(()=>{
+  setLoading(router.isFallback
+    )
+},[])
   if ( isEmpty( products ) ) {
 		return null;
 	}
      return (
     <>
    <RootLayout headerFooter={footer_header} seo={seo}>
+{loading?<Big/>:
     <Swipecarousel />
-    
 
-     <SwippeCentered products={products}/>
+}    
 
-{/* <WithNoParentCategories categories={categoriesWithNoParent}/> */}
+   {loading?
+<SwippedCenteredSkelton/>:   
+  <SwippeCentered products={products}/>
+} 
+<WithNoParentCategories categories={categoriesWithNoParent}/>
       </RootLayout>
     </>
   )
@@ -58,7 +59,8 @@ export default function Home({footer_header,products,categoriesWithNoParent,seo}
 export const   getStaticProps = async( )=>{
  const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
  let  productResults = [];
-let categoriesWithNoParent = []
+let categoriesWithNoParent = [];
+let load=false;
  const SpecifiedCategories = ["Shirts","Unisex Hoodes"];
  let seo = []
 try{
@@ -79,20 +81,21 @@ price:product.price,
 regularPrice:product.regularPrice
      }
   }) ||[]
-
+load=false
  }catch(error){
-  console.log(error)
+  console.log(error);
+  load=false
 }
 
-// try{
-//   const {data:{productCategories:{nodes}}} =await client.query({
-//     query:GETCATEGORIES_WITH_NO_PARENT });
+try{
+  const {data:{productCategories:{nodes}}} =await client.query({
+    query:GETCATEGORIES_WITH_NO_PARENT });
 
-//     categoriesWithNoParent = nodes
-// console.warn(categoriesWithNoParent)
-//  }catch(err){
+    categoriesWithNoParent = nodes
+console.warn(categoriesWithNoParent)
+ }catch(err){
 
-// }
+}
 try {
   seo = await getPage('home');
 
@@ -103,8 +106,9 @@ try {
   props:{
     footer_header:footer_header?.data,
     products:productResults,
-    // categoriesWithNoParent:categoriesWithNoParent,
-    seo:seo[0]
+    categoriesWithNoParent:categoriesWithNoParent,
+    seo:seo[0],
+    load
    },
   revalidate:10
 }

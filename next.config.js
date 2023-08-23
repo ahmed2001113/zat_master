@@ -4,6 +4,7 @@ const allowedImageWordPressDomainz = new URL('https://images.canadagoose.com' ).
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+ 
   images:{
     loader:'default',
     domains: [ allowedImageWordPressDomain,allowedImageWordPressDomainz ],

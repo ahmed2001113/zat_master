@@ -8,3 +8,6 @@ const ErorMessage = (state)=>{
      export const ErrorMessageSelector = createSelector([selectUSer],(user)=>user)
      export const userSelectMemo = createSelector([selectUSer],(user)=>user.currentUser);
      export const selectImageUser =  createSelector([userSelectMemo],(user)=>user.imageUrl);
+     export const loadingUser = createSelector([selectUSer],({loading})=>{
+       return loading
+     })

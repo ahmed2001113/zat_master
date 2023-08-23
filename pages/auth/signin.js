@@ -5,13 +5,19 @@ import Form from 'react-bootstrap/Form';
 import styles from './sign.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { EmailSignInStart } from '@/src/store/user/user.actions';
-import { ErrorMessageSelector, userSelectMemo } from '@/src/store/user/user.selector';
+import { ErrorMessageSelector, loadingUser, userSelectMemo } from '@/src/store/user/user.selector';
 import { useRouter } from 'next/router';
-const intial ={email:'',password:''};
+import RootLayout from '@/src/components/layout';
+import axios from 'axios';
+import { HEADER_FOOTER_ENDPOINT } from '@/src/EndPoints';
+ const intial ={email:'',password:''};
 
-const  Signin=() =>{
+const  Signin=({footer_header}) =>{
+
   const err = useSelector(ErrorMessageSelector);
   const user = useSelector(userSelectMemo);
+  const loading = useSelector(loadingUser)
+console.log(loading)
 const router = useRouter()
     const [firebaseError,setFirebaseError]=useState("")
   const dispatch = useDispatch()
@@ -48,6 +54,11 @@ case 'auth/invalid-email':
     return setFirebaseError('please check your email or password')
     case'auth/wrong-password':
 return setFirebaseError('check up your Passwords  ');
+    case'auth/too-many-requests':
+return setFirebaseError(`Access to this account has been temporarily 
+disabled due to many failed login attempts. You can immediately restore 
+it by calling Support Team or you can try again later
+`);
 
 default:
 
@@ -68,7 +79,9 @@ useLayoutEffect(()=>{
   }
 },[user])
   return (
-    <div className='container mt-5'>
+<RootLayout headerFooter={footer_header}>
+
+<div className='container mt-5'>
 
 <div className='row main'>
 <div className={`col-md-6 ${styles.left}`}>
@@ -94,9 +107,15 @@ useLayoutEffect(()=>{
       <FloatingLabel controlId="floatingPassword" label="Password">
         <Form.Control required onChange={onChange} name='password' type="password" placeholder="Password" />
       </FloatingLabel>
-      <button className='submit mt-3'  type='submit'> 
+      <button className='submit mt-3'  disabled={loading}
+       type='submit'> 
      
-  sign in
+     {
+      loading? <>loading...</>:<>
+      
+  sign in</>
+
+     }
 </button>
 {firebaseError&&
         <p className='errorMessage'>
@@ -110,7 +129,8 @@ useLayoutEffect(()=>{
 <div className={`col-md-6 ${styles.right}`}>
   <h1>Sign Up</h1>
   <h3>
-  Sign up now to get exclusive access to ROBINSON EGYPT 
+  Sign up now to get exclusive access to <br/>
+  Zat98
 
 
   </h3>
@@ -125,7 +145,22 @@ useLayoutEffect(()=>{
 </div>
     </div>
 </div>
+
+</RootLayout>
   )
 }
 
 export default Signin
+
+
+
+
+export const getStaticProps =async ()=>{
+  const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
+  return{
+    props:{
+      footer_header:footer_header?.data,
+
+    }
+  }
+}

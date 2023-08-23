@@ -19,7 +19,9 @@ import { FilterSelector } from '../store/filters/filtersSelectores';
 import { FiltersAction } from '../store/filters/filter.slice';
 import { isArray } from 'lodash';
 import filterObjectValues from '../utls/functions/FilterObjectsWithTypes';
- export default function Store({products=[],category='',...others}) {
+import Skelton3 from '../components/skelton/skelton3';
+import Skelton2 from '../components/skelton/skeltonswipecenterd';
+ export default function Store({products=[],category='',loading,setLoading,...others}) {
   const {Filters ,Filtered,sort:SORT } = useSelector(FilterSelector)
  const dispatch = useDispatch()
   const [scroll, setScroll] = useState(false);
@@ -70,7 +72,7 @@ import filterObjectValues from '../utls/functions/FilterObjectsWithTypes';
       //  const priceAsc = productData.sort((a,b)=>a.price-b.price);
 
      
-      return   dispatch(FiltersAction.SORTING({orderby:[{
+      return   dispatch(FiltersAction.addFilter({orderby:[{
         field:"PRICE",
         order:'ASC'
         }]
@@ -140,7 +142,9 @@ import filterObjectValues from '../utls/functions/FilterObjectsWithTypes';
       onChange={onChangeSort}
         label={Sortoptions.label} name={Sortoptions.name} options={Sortoptions.innerOptions}/>
             <button className={`${styles.button}`} onClick={()=> showFilter()}>fliter 
-            <Image src={filter} width={25} height={25} /> </button>
+            <Image 
+            alt={'filter'}
+            src={filter} width={25} height={25} /> </button>
 
     </div>
 
@@ -179,7 +183,9 @@ import filterObjectValues from '../utls/functions/FilterObjectsWithTypes';
    <FilterDrawer 
 products={products}
 setProducts={setproducts}
-show={show} setShow={setShow}/>
+show={show} setShow={setShow}
+loading={loading}
+/>
 {productData?.length ?
 <>
 
@@ -188,7 +194,11 @@ show={show} setShow={setShow}/>
   productData.map(
     product=>{
   return<>
-   <ProdutItemMain  key={product.id} product={product}/>
+  {
+    loading?<Skelton2 key={product.id}/>:
+
+   <ProdutItemMain  key={product.id}  product={product}/>
+  }
   
    
   </>
@@ -203,7 +213,7 @@ show={show} setShow={setShow}/>
   We're sorry, no products were found that match your filter selection.
   </h1>
 
-  <button className='black'>
+  <button className='black' onClick={()=>dispatch(FiltersAction.resetFilters())}>
     clear Filters
   </button>
 </div>

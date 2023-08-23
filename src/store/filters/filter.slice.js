@@ -8,6 +8,7 @@ const Initial = {
         minPrice:0,
         maxPrice:0
     },
+    loading:true,
     sort:{}
 
 }
@@ -23,9 +24,9 @@ reducers:{
         state.prices.minPrice=min
     },
     addFilter :(state,action)=>{
-    state.Filtered=true
-    state.Filters = Object.assign( state.Filters ,action.payload)
-    },
+     state.Filtered=true
+    state.Filters = Object.assign( state.Filters ,action.payload);
+     },
 
     SORTING:(state,action)=>{
         console.log('object')
@@ -36,9 +37,13 @@ state.sort=Object.assign({},action.payload)
 
         state.Filters={}
     },
+    setLoading:(state,action)=>{
+        state.loading = action.payload
+    }
+    ,
     DeleteKey :(state,action)=>{
-       delete state.Filters[action.payload]
-        if(!Object.keys(state.Filters).length){
+        delete state.Filters[action.payload];
+         if(!Object.keys(state.Filters).length){
             state.Filtered=false
         }
     }

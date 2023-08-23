@@ -13,12 +13,38 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { checkUserSession } from '@/src/store/user/user.actions';
  import { ApolloProvider } from '@apollo/client';
 import client from '@/src/utls/apolloConfigrations/apolloClient';
+import { useRouter } from 'next/router';
+import LoadingImage from '@/src/components/customsComponents/image';
+import { useEffect, useState } from 'react';
  config.autoAddCss = false;
  export default function App({ Component, pageProps }) {
+const router = useRouter()
+
+   const [loading,setLoading]=useState();
+
+ 
+  
+useEffect(()=>{
+
+   router.events.on("routeChangeStart",(url)=>{
+      console.log("routerChangeStart");
+      setLoading(true)
+   })
+   router.events.on("routeChangeComplete",(url)=>{
+      console.log("routerChangeComplete");
+      setLoading(false)
+   })
+
+},[])
+
    store.dispatch(FetchCategoriesStart())
  store.dispatch(checkUserSession())
   return <>
   
+
+{
+   loading?<LoadingImage/>:null
+}
   <Provider store={store}>
   <ApolloProvider client={client}>
 

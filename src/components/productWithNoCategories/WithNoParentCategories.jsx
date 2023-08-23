@@ -7,60 +7,42 @@ import Product_show from '../products/productMain/product_show';
 import right from '../../../public/svgs/rightarrow.svg'
 import simpleLightbox from 'simplelightbox'
 export default function WithNoParentCategories({categories}) {
+  console.log(categories)
   return (
 <>
+<div className="container_fluid pt-10 bg-white">
+<div className={styles.main_grid}>
 {categories&&categories?.map(cat=>{
-var lightbox = new simpleLightbox('.gallery a', { /* options */ });
-
-return <div className="container-fluid">
-<div className="row">
-
-        <div className={`col-md-5 relative ${styles.left}`} style={{padding:'0px'}}>
+ 
+ 
+ return   <div className={` col-12 col-md-6 m-auto relative mt-5 ${styles.left} `} >
         {/* <h1> Descover</h1>
 <h1>
                 Our New Arraivals <br/>
                 Of    {cat.name.toUpperCase()}
             </h1> */}
         <div className={`${styles.description}`}>
-        <h1>
+        <h2>
+          Shop <br/>
                 {cat.name.toUpperCase()}
-            </h1>
+            </h2>
           
 
             {  <Link className={`${styles.button} black`} href={`shop/${cat.slug}`}>
                 Shop Now
             </Link>  }
         </div>
-            <Image style={{objectFit:'cover'}} src={cat?.image?.sourceUrl}  alt={cat?.image?.altText} srcSet={cat?.image?.srcSet} fill/>
+            <Image style={{objectFit:'cover'}} className={styles.image_cat}
+             src={cat?.image?.sourceUrl} 
+             alt={cat?.image?.altText} srcSet={cat?.image?.srcSet} 
+             height={600} width={700} 
+              />
         </div>
-        <div className="col-md-7" style={{padding:'0px'}}>
-        <div className={`${styles.top_bar}`}>
-        <h1>
-            {cat?.name}
-
-        </h1>
-
-
-<Image src={right} width={50} height={50}/>
-    </div>
-<div className="row">
-  
-  {cat?.products?.nodes?.map(product=>{
-    const {image,galleryImages,...rest}=product
-    const productAfter = {
-        images:[...galleryImages.nodes,image],
-        ...rest
-    }
-return<>
- <Product_show product={productAfter}  className={'col-md-6 mb-2'}/>
-</>
-  })}
+        
+        
+      })}
+      </div>
 </div>
-        </div>
-        </div>
-</div>
-
-})}
 
 </>
  

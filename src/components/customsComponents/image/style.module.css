@@ -1,0 +1,63 @@
+.imgdiv{
+    height: 100vh;
+    width: 100%;
+    background-color:white;
+display: flex;
+flex-wrap: wrap;
+position: fixed;
+z-index: 30;
+top: 0px;
+bottom: 0px;
+height: 100%;
+width: 100%;
+}
+.left{
+    width: 50%;
+    height: 100%;
+}
+.right{
+    width: 50%;
+    height: 100%;
+}
+.topleft{
+    width: 70%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bottomleft{
+    width: 100%;
+    height: 50%;
+}
+.blimg{
+    width: 70%;
+    height: 100%;
+    margin: auto;
+}
+.tlimg{
+    width: 90%;
+    height: 90%;    
+}
+.topright{
+    width: 100%;
+    height: 70%;
+}
+.trimg{
+    width: 100%;
+    height: 100%;
+}
+.bottomright{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.prog{
+    width: 80%;
+border-radius: 5px;
+}
+.prog span{
+background-color: black !important;
+}

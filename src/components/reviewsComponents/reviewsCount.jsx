@@ -23,7 +23,7 @@ progressDone.forEach(progress => {
 
 
   
-      },[reviews])
+      },[reviews,count])
   return (
     <div>
  

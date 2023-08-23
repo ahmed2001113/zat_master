@@ -1,6 +1,6 @@
 import client from '@/src/utls/apolloConfigrations/apolloClient'
 import { All_PRODUCTS_QUERY, PRODUCTS_QUERY, PRODUCT_BY_ID } from '@/src/utls/queries'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './product.module.css'
 import Image from 'next/image'
 import Certifications from '@/src/components/certifications'
@@ -15,27 +15,12 @@ import ModifyObjectOrArray from '@/src/utls/functions/ObjectArrayChange'
 import { ProductPage } from '@/src/lib/queries/productPage'
 import ReviewContainer from '@/src/components/reviewsComponents/productreviewContainter';
 import InfoSharpIcon from '@mui/icons-material/InfoSharp';
+import ImagePreview from '@/src/components/Image_preview/images_preview'
   export default function Product({product,footer_header}) {
 const router = useRouter();
-// const {product:id}=router.queryiapi
-
-// useEffect(()=>{
-//     const get=(()=>{
-//    try{
-// const products =axios.get('/api/product-preview',{
-//     params:{
-//         product_id:1753
-//     }
-// })
-// console.log(products.data)
-//    }catch(err){1234
-//     console.log(err)
-//    }
- 
-//     })()
-// },[])
-console.log(product)
-
+ const [show ,setShow]=useState(false)
+const [imagePrev,setImage] = useState({});
+const [imageArray,setImageArray] =useState([])
 const {
     price,
     seo
@@ -82,7 +67,11 @@ const [first,...otherImages]=images
 
         })()
     },[])
-
+const handleShow = (imag)=>{
+    setImage(imag)
+    setImageArray(images);
+    setShow(true)
+}
 //  const [ ,second,,...restImages] = productAfterValidate?.images;
    return (
 <>
@@ -93,17 +82,30 @@ const [first,...otherImages]=images
      <div className={`${styles.left} col-md-7`}>
      <div className="row" style={{padding:'0px'}}>
      <div className='col-md-12 image_holder'>
-     <Image style={{objectFit:'cover'}} className={`${styles.image_holder}`} src={image?.sourceUrl}
+     <Image style={{objectFit:'cover'}} 
+     className={`${styles.image_holder}`}
+     alt={image?.altText}
+     src={image?.sourceUrl}
        srcSet={image?.srcSet}  fill/>
+
+       <button className={`${styles.previewImage} `} onClick={()=>handleShow(image)}>
+    + 
+       </button>
      
      </div>
      {
      
     images?.length >2&& otherImages.map(image=>{
-         return<div key={image.id} className='col-md-6 col-6 image_holder' style={{padding:'0px'}}>
+         return<div key={image.id} className='col-md-6 col-6 image_holder position-relative' style={{padding:'0px'}}>
  
- {image !==null&&<Image src={image?.sourceUrl} srcSet={image?.srcSet} width={600} height={800}/>}
+ {image !==null&&<Image src={image?.sourceUrl}
+ alt={image?.altText}
+  srcSet={image?.srcSet} width={600} height={800}/>}
+      <button className={`${styles.previewImage} `} onClick={()=>handleShow(image)}>
+               + 
+                  </button>
              </div>
+           
      })
  }
     
@@ -175,6 +177,7 @@ Review Details
      </div>
 </div>
 </div>
+<ImagePreview show={show} setShow={setShow} image={imagePrev} array={imageArray}/>
 </RootLayout>
 </>
   )

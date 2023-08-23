@@ -59,7 +59,7 @@ const {open,product}= useSelector(previewData);
             </h2>
           </Modal.Title>
         </Modal.Header>
-        <div className={styles.price} dangerouslySetInnerHTML={{__html:product?.price}} />
+        <div className={styles.price} dangerouslySetInnerHTML={{__html:product?.price+'lE'}} />
          
         
 

@@ -169,7 +169,7 @@ useEffect(() => {
   return () => {
     document.body.removeEventListener("scroll", handleScroll);
   }
-}, []);
+});
    return (
     <>
 {domLoaded && ( <>
@@ -354,8 +354,11 @@ useEffect(() => {
     </div>
         {/* Logo */}
         <div className={`${styles.ml_auto}`}>
-          <Link href="/" className='flex ' style={{flexDirection:'column-reverse',alignItems:'center'}}>
-<Image  width={215} height={215} src={siteLogoUrl} alt='siteTitle'/>
+          <Link href="/" className='flex '
+           style={{flexDirection:'column-reverse',alignItems:'center'}}>
+<Image  width={215} height={215}
+alt='siteTitle'
+src={siteLogoUrl} />
            
            {/* logo */}
           </Link>
@@ -478,14 +481,14 @@ useEffect(() => {
           {/* Cart */}
           <div className={`ml-4 flow-root lg:ml-6 flex  ${styles.cart}`} onClick={handleShowClose}>
             
-             <Image src={Love} alt='cart' width={'20px' } height={'20px'}/>
+             <Image src={Love} alt='wishlist' width={'20px' } height={'20px'}/>
 
                <span className="sr-only">items in cart, view bag</span>
               WishList
            </div>
           <div className={`ml-4 flow-root lg:ml-6 flex  ${styles.cart}`} onClick={openCart}>
             
-             <Image src={searchIcon} alt='cart' width={'20px' } height={'20px'}/>
+             <Image src={searchIcon} alt='search' width={'20px' } height={'20px'}/>
 
                <span className="sr-only">items in cart, view bag</span>
               Seach
@@ -493,7 +496,7 @@ useEffect(() => {
           <div className={`ml-4 flow-root lg:ml-6 flex  ${styles.cart}`} onClick={openCart}>
             
               <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{quentity}</span>
-             <Image src={cartSvg} alt='cart' width={'30px' } height={'30px'}/>
+             <Image src={cartSvg} alt='cart' width={'30px' }   height={'30px'}/>
 
               <span className="sr-only">items in cart, view bag</span>
               Bag

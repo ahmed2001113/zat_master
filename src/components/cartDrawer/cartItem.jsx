@@ -27,7 +27,7 @@ if(!item){
         <>
                 <div className={`row ${styles.cartitem}`}>
           <div className='col-md-3'>
-           <Image src={item?.images[0]?.sourceUrl} priority width={100} height={100}/>
+           <Image src={item?.images[0]?.sourceUrl} alt={item?.images[0]?.altText} priority width={100} height={100}/>
             </div>
             <div className="col-md-8">
               <h6>{item.name}</h6>

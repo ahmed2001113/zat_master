@@ -40,7 +40,9 @@ return (
       height={500}
        width={557} 
        objectFit='cover'
-      sizes='100vw'/>
+      sizes='100vw'
+      alt={product?.images[0]?.altText}
+      />
 </Link>
       
       
