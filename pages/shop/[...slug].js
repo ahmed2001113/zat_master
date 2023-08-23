@@ -1,6 +1,7 @@
 import { HEADER_FOOTER_ENDPOINT } from "@/src/EndPoints";
 import RootLayout from "@/src/components/layout";
 import Big from "@/src/components/skelton/skeltonswippe";
+import { ProductsDataQuery } from "@/src/lib/queries/GET_PRODUCTSDATA";
 import { productCategoriesBySlug } from "@/src/lib/queries/productsBySlug";
 import { FiltersAction } from "@/src/store/filters/filter.slice";
 import { FilterSelector } from "@/src/store/filters/filtersSelectores";

@@ -39,10 +39,10 @@ useEffect(()=>{
      return (
     <>
    <RootLayout headerFooter={footer_header} seo={seo}>
-{loading?<Big/>:
+{/* {loading?<Big/>:
     <Swipecarousel />
 
-}    
+}     */}
 
    {loading?
 <SwippedCenteredSkelton/>:   
