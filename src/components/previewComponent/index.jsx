@@ -8,6 +8,7 @@ import { PreviewActions } from '@/src/store/preview/preview.slice';
 import Image from 'next/image';
 import SwipperSingleLoopAuto from '../customsComponents/swiperSingleLoopsAutoPlay';
 import Link from 'next/link';
+import Certifications from '../certifications';
  function PreviewComponent() {
   const dispatch= useDispatch()
 const {open,product}= useSelector(previewData);
@@ -82,38 +83,12 @@ out of stock
 
 
   </div>
-  {/* <div className={`${styles.qu} ${styles.holder}`}>
-<h6>
-  select Quentity
-</h6>
-<div className={`${styles.qe}`}>
-<div className="qtySelector text-center">
-      <i className="fa fa-minus decreaseQty" onClick={decreaseValue}></i>
-      <input type="text" className="qtyValue" value={value} readOnly />
-      <i className="fa fa-plus increaseQty" onClick={increaseValue}></i>
-    </div>
-
-</div>
-  </div> */}
-    <div class="proCard_size">
-                                        <h4>Size</h4>
-                                        <ul>
-                                            <li class="proCard_active"><span>S</span></li>
-                                            <li><span>M</span></li>
-                                            <li><span>L</span></li>
-                                            <li><span>XL</span></li>
-                                            <li><span>XXL</span></li>
-                                        </ul>
-                                    </div>
-  <p className='mt-auto'>
-    <h6>Description</h6>
-  Men's Basic Sweatpants Slim Fit Casual Trousers in Gray tone with Side Pockets and Elastic Waist Made of 100% Cotton Both comfortable and fashionable.
-
-• More Info
-• Elastic waist - Medium Stretch - Long length- High Waist Fitted fit for all-day comfort
-• Machine wash at 30°C
-• high quality soft cotton
-  </p>
+  <h6 className={`${styles.chec}`}>
+         Checkout securely with
+     
+         </h6>
+         <Certifications/>
+ 
 <div className={`${styles.button_c} mt-auto`}>
 <button className=" ">
       Add To Wish List

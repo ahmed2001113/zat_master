@@ -32,7 +32,7 @@ const CheckoutCard = ()=>{
    <div className={`${styles.cartitems}`}>
     {
       CartIems.map(item=>{
-        return <CartItem item={item}/>
+        return <CartItem  key={item.id} item={item}/>
 
       })
     }

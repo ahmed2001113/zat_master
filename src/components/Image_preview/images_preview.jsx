@@ -4,7 +4,7 @@ import styles from './image.module.css'
 import Image from "next/image";
  export default function ImagePreview({image:main_image,array,title,show,setShow}){
 console.log(main_image,array)
-if(!!main_image) return;
+if(!Object.keys(main_image).length) return;
 const [previewVisible, setPreviewVisible] = useState(main_image);
  const [imageArray,setImageArray]= useState(array)
 const changeImage=(image)=>{
@@ -13,7 +13,8 @@ const changeImage=(image)=>{
 useEffect(()=>{
  setPreviewVisible(main_image);
  
-},[main_image])
+},[main_image]);
+console.log(show)
 return(
     <>
     

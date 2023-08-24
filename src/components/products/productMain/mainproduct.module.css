@@ -72,14 +72,9 @@ width: fit-content;
  
 }
 .Add{
-     padding-bottom: 1px;
-    width: 41%;
-    display: flex;
-    justify-content: space-between;
-    display: flex;
-    align-items: center;
-    border: 0px;
-     padding: 0px 10px;
+    font-size: 14px !IMPORTANT;
+    padding: 8px 20px !IMPORTANT;
+    margin: 0px;
  }
  .Title{
     display: flex;

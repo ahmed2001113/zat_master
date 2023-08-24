@@ -24,8 +24,9 @@ import Skelton1 from '@/src/components/skelton/skeltonswippe'
 import SwippedCenteredSkelton from '@/src/components/skelton/centered'
 import Big from '@/src/components/skelton/skeltonswippe'
 import { useRouter } from 'next/dist/client/router'
-import { GETCATEGORIES_WITH_NO_PARENT } from '@/src/lib/queries/categoriesWithPictures'
- 
+import { GETCATEGORIES_WITH_NO_PARENT } from '@/src/lib/queries/categoriesWithPictures';
+import handleRedirectsAndReturnData from '../src/utls/functions/HandleRedirect.js'
+import ModifyObjectOrArray from '@/src/utls/functions/ObjectArrayChange'
 export default function Home({footer_header,products,categoriesWithNoParent,load,seo}) {
  const [loading,setLoading]=useState(load);
  const router= useRouter()
@@ -66,21 +67,8 @@ let load=false;
 try{
   const products =  await client.query({query:PRODUCTS_QUERY});
   console.warn(products)
-  productResults = products?.data?.products?.nodes?.map(product=>{
-    return {
-description:product.description,
-name:product.name,
-onSale:product.onSale,
-shortDescription:product.shortDescription,
-stockQuantity:product?.stockQuantity,
-stockStatus:product?.stockStatus,
-images:[...product.galleryImages?.nodes,product?.image],
-id:product?.id,
-product_id:product?.productId,
-price:product.price,
-regularPrice:product.regularPrice
-     }
-  }) ||[]
+  productResults =ModifyObjectOrArray( products?.data?.products?.nodes)
+ ||[]
 load=false
  }catch(error){
   console.log(error);
@@ -102,7 +90,7 @@ try {
 } catch (error) {
   
 }
- return{
+const defaultProps  ={
   props:{
     footer_header:footer_header?.data,
     products:productResults,
@@ -110,7 +98,10 @@ try {
     seo:seo[0],
     load
    },
-  revalidate:10
+   revalidate:10
+
 }
+ return   handleRedirectsAndReturnData(defaultProps,productResults)
+
 
 }

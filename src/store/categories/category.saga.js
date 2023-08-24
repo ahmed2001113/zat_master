@@ -8,10 +8,10 @@ import { FetchCategories } from "@/src/lib/FeatchCategories";
  
 function* FetchCategorySagaAsync(){
  
+    
+    try{
         const catogries = yield  call(FetchCategories);
-  
-try{
-
+        
     yield put(categoryActions.FetchCategoriesSuccess(catogries))
 }
     

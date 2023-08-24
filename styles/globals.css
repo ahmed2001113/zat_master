@@ -478,3 +478,13 @@ p.errorMessage {
   background: #5d4963;
   text-align: center;
 }
+
+@media (max-width:768px){
+  .only_big{
+    display: none;
+  }
+}
+h1.searchNotFound {
+  padding: 20px;
+  text-align: center;
+}

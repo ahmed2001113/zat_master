@@ -16,7 +16,7 @@ export const getCreateOrderLineItems = ( products ,total=0) => {
  			return {
 				quantity,
 				product_id,
- 				// variation_id: '', // @TODO to be added.
+ 			  variation_id: v4(), // @TODO to be added.
 			};
 		},
 	);
@@ -43,17 +43,20 @@ const getCreateOrderData = ( order, products ) => {
 			company: order?.shipping?.company||'',
 		},
 		billing: {
-			first_name: billingData?.firstName,
-			last_name: billingData?.lastName,
-			address_1: billingData?.address1,
-			address_2: billingData?.address2,
+			first_name: billingData?.firstname,
+			last_name: billingData?.lastname,
+			address_1: billingData?.address1||'',
+			address_2: billingData?.address2||'',
 			city: billingData?.city,
-			country: billingData?.country,
+			country: billingData?.country||'',
 			state: billingData?.state,
 			postcode: billingData?.postcode,
 			email: billingData?.email,
 			phone: billingData?.phone,
-			company: billingData?.company,
+			company: billingData?.company||'',
+			postcode: order?.billingData?.zip,
+			state: order?.billingData?.state||'',
+
 		},
 		payment_method: order?.paymentMethod,
 		payment_method_title: order?.paymentMethod,
@@ -87,8 +90,13 @@ const createTheOrder = async ( orderData, setOrderFailedError, previousRequestEr
 		
 		const result = await request.json();
 		if ( result.error ) {
+			
 			response.error = result.error;
-			setOrderFailedError( 'Something went wrong. Order creation failed. Please try again' );
+			setOrderFailedError( `
+			Something went wrong. 
+			Order creation failed.
+			 Please try again
+			`);
 		}
 		response.orderId = result?.orderId ?? '';
 		response.total = result.total ?? '';
@@ -97,7 +105,7 @@ const createTheOrder = async ( orderData, setOrderFailedError, previousRequestEr
 		
 	} catch ( error ) {
 		// @TODO to be handled later.
-		console.warn( 'Handle create order error', error?.message );
+		console.warn( 'Handle create order error', error );
 	}
 	
 	return response;
@@ -107,7 +115,7 @@ export const handleOtherPaymentMethodCheckout = async ( input, products, setRequ
 	setIsOrderProcessing( true );
 	const orderData = getCreateOrderData( input, products,total);
 	const customerOrderData = await createTheOrder( orderData, setRequestError, '' );
-  
+  console.log(orderData)
 	setIsOrderProcessing( false );
 	
 	if ( isEmpty( customerOrderData?.orderId ) ) {

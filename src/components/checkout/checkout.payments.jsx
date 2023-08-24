@@ -22,9 +22,10 @@ import { CartActions } from "@/src/store/cart/cart.reducer";
     ,apartment:'',
     city:''
     ,government:''
-    ,zip:''
+    ,postcode:''
     ,address2:''
-    ,errors:null
+    ,errors:null,
+    company:''
 
 }
 
@@ -67,18 +68,12 @@ console.log(carts,TotalCart)
 
     const HandleFormSubmit  =async(e)=>{
       e.preventDefault();
-      const billingValidationResult = input?.billingDifferentThanShipping ?
-       validateAndSanitizeCheckoutForm( input?.billing) : {
-        errors: null,
-        isValid: true,
-      };
+       
       setInput( {
         ...input,
-        billing: { ...input.billing, errors: billingValidationResult.errors },
+        billing: { ...input.billing  },
        } );
-      if (!billingValidationResult.isValid ) {
-        return null;
-      }
+       
       if ( 'visa' === input.paymentMethod ) {
         return null
       }
@@ -94,7 +89,10 @@ const HandleOnChange = (event,isBillingOrShipping=false,isShipping=false)=>{
 console.log(name,value)
       if(name ==='billingDifferentThanShipping'){
         // handleBillingDifferentThanShipping(input,setInput,target);
-      const newState = { ...input, [name ]: ! input.billingDifferentThanShipping };
+
+
+        console.log(name,value)
+        const newState = { ...input, [name ]: ! input.billingDifferentThanShipping };
       setInput( newState );}
       else if(isBillingOrShipping){
         if(isShipping){
@@ -265,7 +263,7 @@ if(Object.keys(createdOrderData).length!==0){
 	{/* Checkout Loading*/ }
     { isOrderProcessing && <p>Processing Order...</p> }
 							{ requestError && <p>
-         
+         There is an error while Processing Your Order Please Try Again
                 </p> }
 </form>
     </>:null}

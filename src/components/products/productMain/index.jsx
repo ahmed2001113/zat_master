@@ -9,6 +9,8 @@ import { wishlistActions } from '@/src/store/wishlist/wishlistslice';
 import { Checkbox } from '@mui/material';
 import { Favorite, FavoriteBorderOutlined } from '@mui/icons-material';
 import { wishlistSelector } from '@/src/store/wishlist/wishlistSelector';
+import CustomButton from '../../customsComponents/buttons/button';
+import CustomButton_2 from '../../customsComponents/buttons/CustomButton_2';
 function  ProdutItemMain({product,isLove=false}) {
  const dispatch= useDispatch();
 
@@ -77,14 +79,12 @@ return (
          <div  dangerouslySetInnerHTML={{__html:product?.shortDescription}} className={`${styles.Desc}`}/> 
          <div className='centered'>
 
-           <button onClick={openCart} className={`${styles.Add}`}>
+           <CustomButton_2  bk={'#fff'}  onClick={openCart} className={`${styles.Add}`}>
             Add To Cart 
-            <i className="fa-solid fa-arrow-right-long"></i>
-           </button>
-           <button className={`${styles.Add}`}>
+            </CustomButton_2>
+           <CustomButton_2   bk={'#fff'} className={`${styles.Add}`}>
             Buy Now
-            <i className="fa-solid fa-arrow-right-long"></i>
-           </button>
+            </CustomButton_2>
          </div>
       </div>
       </div>

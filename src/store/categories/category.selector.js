@@ -8,8 +8,10 @@ import { createSelector } from "reselect";
 
 
 
+// export const SelectCategoriesLinks = createSelector([categoriesSelectorReducer],
+//     ({categories})=>groupObjects(categories.filter(item=>item?.parent?.node?.name)) );
 export const SelectCategoriesLinks = createSelector([categoriesSelectorReducer],
-    ({categories})=>groupObjects(categories.filter(item=>item?.parent?.node?.name)) );
+    ({categories})=> categories);
 
 export const SpecifiedCategories = createSelector([categoriesSelectorReducer],
     ({categories})=>{

@@ -150,7 +150,7 @@ return(
 
 	{/* Checkout Loading*/ }
     { isOrderProcessing && <p>Processing Order...</p> }
-							{/* { requestError && <p>Error : { requestError } ? Please try again</p> } */}
+							{ requestError && <p>Error : { requestError } ? Please try again</p> }
 </form>
     </>:null}
 

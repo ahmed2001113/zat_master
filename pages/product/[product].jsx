@@ -88,7 +88,7 @@ const handleShow = (imag)=>{
      src={image?.sourceUrl}
        srcSet={image?.srcSet}  fill/>
 
-       <button className={`${styles.previewImage} `} onClick={()=>handleShow(image)}>
+       <button className={`${styles.previewImage}`} onClick={()=>handleShow(image)}>
     + 
        </button>
      
@@ -177,6 +177,7 @@ Review Details
      </div>
 </div>
 </div>
+{console.log(show)}
 <ImagePreview show={show} setShow={setShow} image={imagePrev} array={imageArray}/>
 </RootLayout>
 </>

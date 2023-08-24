@@ -1,8 +1,11 @@
 import   client from"../utls/apolloConfigrations/apolloClient";
 import { Categories_query_all } from "../utls/queries";
+import { CategoryName } from "./queries/getcategoriesNames";
 export async function FetchCategories(){
 
-    const AllCategories= await client.query({query:Categories_query_all});
+    const AllCategories= await client.query({query:CategoryName});
+
+    console.log(AllCategories)
      return AllCategories?.data?.productCategories?.nodes
 
 

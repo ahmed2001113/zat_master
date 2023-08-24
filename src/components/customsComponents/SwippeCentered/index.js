@@ -7,6 +7,7 @@ import { isEmpty } from 'lodash';
 import { useRouter } from 'next/router';
 import { wishlistSelector } from '@/src/store/wishlist/wishlistSelector';
 import { useSelector } from 'react-redux';
+import CustomButton from '../buttons/button';
 
 function SwippeCentered({products}) {
   const {wishlistItems} = useSelector(wishlistSelector);
@@ -30,11 +31,11 @@ function SwippeCentered({products}) {
   <br/>
    Arrivalls</h1>
 
-<div className={`${styles.buttons_wrapper}`}>
-  <button onClick={ToShop} >
+<div >
+  <CustomButton color={'#fff'} bk={'#000'}   onClick={ToShop} >
    
    New Arrivals
-  </button>
+  </CustomButton>
    
 </div>
   </div>

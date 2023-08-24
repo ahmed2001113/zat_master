@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Product_show from '../products/productMain/product_show';
 import right from '../../../public/svgs/rightarrow.svg'
 import simpleLightbox from 'simplelightbox'
+import CustomButton from '../customsComponents/buttons/button'
 export default function WithNoParentCategories({categories}) {
   console.log(categories)
   return (
@@ -15,7 +16,7 @@ export default function WithNoParentCategories({categories}) {
 {categories&&categories?.map(cat=>{
  
  
- return   <div className={` col-12 col-md-6 m-auto relative mt-5 ${styles.left} `} >
+ return   <div key={cat?.name} className={` col-12 col-md-6 m-auto relative mt-5 ${styles.left} `} >
         {/* <h1> Descover</h1>
 <h1>
                 Our New Arraivals <br/>
@@ -28,8 +29,11 @@ export default function WithNoParentCategories({categories}) {
             </h2>
           
 
-            {  <Link className={`${styles.button} black`} href={`shop/${cat.slug}`}>
-                Shop Now
+            {  <Link   href={`shop/${cat.slug}`}>
+             <CustomButton bk={'#fff'} color={'#000'} >
+              Shop Now
+             </CustomButton>
+             
             </Link>  }
         </div>
             <Image style={{objectFit:'cover'}} className={styles.image_cat}
