@@ -1,4 +1,5 @@
 import { HEADER_FOOTER_ENDPOINT } from "@/src/EndPoints";
+import LoadingImage from "@/src/components/customsComponents/image";
 import RootLayout from "@/src/components/layout";
 import Big from "@/src/components/skelton/skeltonswippe";
 import { ProductsDataQuery } from "@/src/lib/queries/GET_PRODUCTSDATA";
@@ -8,8 +9,10 @@ import { FilterSelector } from "@/src/store/filters/filtersSelectores";
 import Store from "@/src/storeModule/store";
 import client from "@/src/utls/apolloConfigrations/apolloClient";
 import { FormattingProductsArray } from "@/src/utls/functions/GroupSubCategoriesByparentName";
+import handleRedirectsAndReturnData from "@/src/utls/functions/HandleRedirect";
 import ModifyObjectOrArray from "@/src/utls/functions/ObjectArrayChange";
  import { GET_CATEGORIES } from "@/src/utls/queries";
+import { useLazyQuery } from "@apollo/client";
 import axios from "axios";
 // import { getProductsData } from "@/src/utls/productCategories";
 import gql from "graphql-tag";
@@ -19,99 +22,86 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { Button } from "react-bootstrap";
  import { useDispatch, useSelector } from "react-redux";
 
-const Cat = ({data,footer_header,price,slug,loadingApi})=>{
+const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi})=>{
   const {Filters,sort} = useSelector(FilterSelector)
   const [loadings,setLoading]=useState(loadingApi)
   const dispatch = useDispatch()
-  const {description,  image, name } =data
- const [pageInferomation,setPageInfo]=useState(data?.products?.pageInfo)
-const [productsData,setProductsData]=useState(ModifyObjectOrArray(data?.products?.nodes));
-dispatch(FiltersAction.addPrices(price))
-    const router = useRouter();
-    ;
+  const {description,  image, name } =DefaultData
+  const [pageInferomation,setPageInfo]=useState(DefaultData?.products?.pageInfo)
+  const [productsData,setProductsData]
+  =useState(ModifyObjectOrArray(DefaultData?.products?.nodes));
+  const router = useRouter();
+  useEffect(()=>{
+    dispatch(FiltersAction.addPrices(price))
 
+  },[])  ;
+  const [getData, { loading, error, data,refetch  }] =
+   useLazyQuery(productCategoriesBySlug,
+    {
+      onCompleted:(data)=>{
+        const {productCategories:{nodes:productsCat}} =data;
+        const {products} =productsCat[0]
+        const {pageInfo,nodes}=products;
+        
+        setProductsData(ModifyObjectOrArray(nodes));
+        setPageInfo(pageInfo);
+        console.log(loading)
+        setLoading(loading)
+       }
+    }
+    );
+  
 
-//  const {query:{slug} ,asPath } = router;
+    const FilterFunction = async()=>{
+      setLoading(true)
+    
+     
+    try{
+    const {data:NewData}=await  getData({
+        variables:{
+          first:10,
+          ...Filters,
+          slug
+          }
+      })
+   
  
-// const path = asPath.split('/')
- 
- // const lastparam = slug.pop();
-//return array of params
+    } 
+    catch(err){
+      console.log(err)
+    }
+    }
+    useEffect(()=>{
+    
+      FilterFunction();
+     },[Filters]);
+  
 const loadMore = async()=>{
   setLoading(true)
-  const {data:NewData,loading}= await client.query({
-    query:productCategoriesBySlug,
-    variables:{
-      first:10,
-      after:pageInferomation.endCursor,
-      slug:slug
-    }
-  });
-  const {productCategories:{nodes:productsCat}} =NewData;
-  const {products} =productsCat[0]
-  const {pageInfo,nodes}=products;
+    getData({
+      variables:{
+        first:10,
+        after:pageInferomation.endCursor,
+        slug:slug
+      }
+  })
+   
+   
  
-  
-  setLoading(loading)
-  setProductsData(ModifyObjectOrArray(nodes));
-  setPageInfo(pageInfo)
-
 }
 const loadLess = async()=>{
   setLoading(true)
-
-  const {data:NewData,loading}= await client.query({
-    query:productCategoriesBySlug,
+  getData({
     variables:{
       last:10,
       before:pageInferomation.startCursor,
       slug:slug
     }
-  });
-  const {productCategories:{nodes:productsCat}} =NewData;
-  const {products} =productsCat[0]
-  const {pageInfo,nodes}=products;
+  })
+   
  
-  
-  setLoading(loading)
-  setProductsData(ModifyObjectOrArray(nodes));
-  setPageInfo(pageInfo)
-
+ 
 }
-
-const FilterFunction = async()=>{
-  setLoading(true)
-
- 
-try{
-  const {data:NewData,loading,error}= await client.query({
-    query:productCategoriesBySlug,
-    variables:{
-      first:10,
-      ...Filters,
-      slug
-      }
-  });
- 
-  const {productCategories:{nodes:productsCat}} =NewData;
-  const {products} =productsCat[0]
-  const {pageInfo,nodes}=products;
- 
-  
-  setLoading(loading)
-  setProductsData(ModifyObjectOrArray(nodes));
-  setPageInfo(pageInfo);
-  
-
-} 
-catch(err){
-  
-}
-}
-useEffect(()=>{
-
-  FilterFunction();
- },[Filters]);
 
  
  useEffect(() => {
@@ -131,11 +121,16 @@ useEffect(()=>{
     router.events.off("routeChangeStart", handlePageLeave);
   };
 }, []);
+
+console.log(loadings)
      return(
 
         <>
+      {
+        loadings? <LoadingImage/>:null
+      } 
   <RootLayout headerFooter={footer_header}>
-    <div className="image_handler" > 
+    {/* <div className="image_handler" > 
 
  {loadings?<Big/>:
    image&&image.sourceUrl?
@@ -145,17 +140,18 @@ useEffect(()=>{
 <>
   
 </>
- }
+ } */}
 
 
 
-    </div>
+    {/* </div> */}
      {productsData&&
      <Store  loading={loadings}
      products={productsData}/>
      } 
        <div className="end_nav">
-<Button  variant="dark" onClick={loadLess} disabled={!pageInferomation.hasPreviousPage}>
+<Button  variant="dark" onClick={loadLess} 
+disabled={!pageInferomation.hasPreviousPage&&!loading}>
     
         Previous Page
     {
@@ -163,7 +159,7 @@ useEffect(()=>{
     }   
       </Button> 
 <Button 
-variant="dark" onClick={loadMore}   disabled={!pageInferomation.hasNextPage}>
+variant="dark" onClick={loadMore}   disabled={!pageInferomation.hasNextPage&&!loading}>
     
         Next Page
     {
@@ -204,34 +200,35 @@ let data = {}
   
 
   } catch (error) {
-    
+    console.log(error)
  }
  try{
   const {data:{products:{nodes}}, error,loading}
   =await client.query({query:ProductsDataQuery});
-  ;
+  console.log(nodes);
   
    MaxPrice = Math.max(...nodes.map(({price})=>price));
    MinPrice = Math.min(...nodes.map(({price})=>price));
      }catch(err){
-      
+      console.log(err)
     }
+const defaultProps={
+  props:{
+    data:data||{},
+    footer_header:footer_header?.data,
+    price:[MinPrice,MaxPrice]||[],
+    slug:LastParam,
+    loadingApi
 
-    return{
-        props:{
-          data:data||{},
-          footer_header:footer_header?.data||{},
-          price:[MinPrice,MaxPrice]|[],
-          slug:LastParam||'',
-          loadingApi
+  },
+  revalidate:10
+}
 
-        },
-        revalidate:10
 
-        // revalidate:1
+    return  handleRedirectsAndReturnData(defaultProps,data)
+
          
-    }
-
+     
 
 }
  

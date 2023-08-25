@@ -11,11 +11,13 @@ import { getPage } from "@/src/utls/functions/get-page-seo";
   import { useLazyQuery, useQuery } from "@apollo/client";
 import axios from "axios";
 import {   useRouter } from "next/router";
- 
+import handleRedirectsAndReturnData from '../../src/utls/functions/HandleRedirect.js'
+
  
  import { useEffect, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
  import { useDispatch, useSelector } from "react-redux";
+import LoadingImage from "@/src/components/customsComponents/image/index.jsx";
 const AllCategoriesProducts = ({products,footer_header,seo,price,load,...others})=>{
   const dispatch = useDispatch ()
  const {Filters,sort} = useSelector(FilterSelector)
@@ -34,6 +36,7 @@ const [getData, { loading, error, data,refetch  }] = useLazyQuery(ProductsInfint
     onCompleted:(data)=>{
        setProductsData(ModifyObjectOrArray(data?.products?.nodes));
       setPageInfo(data?.products?.pageInfo)
+   setLoading(loading)
 
 
     }
@@ -42,8 +45,7 @@ const [getData, { loading, error, data,refetch  }] = useLazyQuery(ProductsInfint
 
 const FilterFunction = async()=>{
 
-  setLoading(true)
-dispatch(FiltersAction.setLoading(false))
+   setLoading(true)
 try{
   getData({  variables:{
     first:10,
@@ -52,8 +54,7 @@ try{
   
    
 
- setLoading(false)
-
+ 
 }
 catch(err){
   dispatch(FiltersAction.setLoading(true))
@@ -94,8 +95,7 @@ try {
     first:10,
     after:pageInferomation.endCursor
   }});
-    setLoading(false)
-
+ 
 
 } catch (error) {
   setLoading(false)
@@ -104,6 +104,8 @@ try {
 
 }
 const loadLess = async()=>{
+    setLoading(true)
+
  try {
   getData({   variables:{
     last:10,
@@ -114,8 +116,7 @@ const loadLess = async()=>{
   setPageInfo(data?.products?.pageInfo);
    setLoading(false)
 } catch (error) {
-  setLoading(false)
-}
+ }
 
 
 }
@@ -123,6 +124,9 @@ const loadLess = async()=>{
 
      return(
         <>
+         {
+        loadings? <LoadingImage/>:null
+      } 
           <RootLayout headerFooter={footer_header} seo={seo}>
  
 
@@ -198,16 +202,20 @@ try{
      }catch(err){
       
     }
-    return{
-        props:{
-            products:categoryInferomation||[],
-            footer_header:footer_header?.data||{},
-            seo:seo[0]||{},
-            price:[MinPrice,MaxPrice]||[],
-            load
-           },
-          revalidate:10
+
+    const defaultProps ={
+      props:{
+        products:categoryInferomation||[],
+        footer_header:footer_header?.data||{},
+        seo:seo[0]||{},
+        price:[MinPrice,MaxPrice]||[],
+        load
+       },
+      revalidate:10
     }
+     return handleRedirectsAndReturnData(defaultProps,categoryInferomation)
+     
+    
 
 
 }

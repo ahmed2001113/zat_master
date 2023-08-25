@@ -16,6 +16,7 @@ import { ProductPage } from '@/src/lib/queries/productPage'
 import ReviewContainer from '@/src/components/reviewsComponents/productreviewContainter';
 import InfoSharpIcon from '@mui/icons-material/InfoSharp';
 import ImagePreview from '@/src/components/Image_preview/images_preview'
+import handleRedirectsAndReturnData from '@/src/utls/functions/HandleRedirect'
   export default function Product({product,footer_header}) {
 const router = useRouter();
  const [show ,setShow]=useState(false)
@@ -165,7 +166,7 @@ Review Details
 
 <div className="containe">
 <div data-bs-spy="scroll" data-bs-target="#review" data-bs-root-margin="0px 0px -40%"
- data-bs-smooth-scroll="true" className="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+ data-bs-smooth-scroll="true" className="scrollspy-example bg-body-tertiary p-3 rounded-2" tabIndex="0">
 
      <ReviewContainer reviews={reviews_} id={'review'} image={image} i_name={name} />
      </div>
@@ -200,14 +201,16 @@ export async function getStaticProps({params}){
     } catch (error) {
         
     }
-     
-     return{
-    props:{
-        product:productData||{},
-        footer_header:footer_header?.data||{},
-     } ,
-    revalidate:10
-}
+
+    const defaultProps={
+        props:{
+            product:productData||{},
+            footer_header:footer_header?.data||{},
+         } ,
+        revalidate:10
+    }
+      return    handleRedirectsAndReturnData(defaultProps,productData)
+
 
 }
 

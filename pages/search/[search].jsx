@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { SearchPriceuery } from "@/src/lib/queries/searchPrice";
+import handleRedirectsAndReturnData from "@/src/utls/functions/HandleRedirect";
  const Search =({search,SearchData,footer_header,seo,price })=>{
     const dispatch = useDispatch()
     const {Filters,sort} = useSelector(FilterSelector)
@@ -208,14 +209,16 @@ variables:{
      }catch(err){
       
     }
-    return{
-        props:{
-            search,
-            SearchData:SearchData||[],
-            footer_header:footer_header?.data||{},
-            seo:seo[0]||{},
-            price:[MinPrice,MaxPrice]||[],
-        }
+    const defaultProps= {
+      props:{
+        search,
+        SearchData:SearchData||[],
+        footer_header:footer_header?.data||{},
+        seo:seo[0]||{},
+        price:[MinPrice,MaxPrice]||[],
     }
+    }
+   
+    return  handleRedirectsAndReturnData(defaultProps,SearchData)
 
  }
