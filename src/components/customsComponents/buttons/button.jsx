@@ -7,7 +7,7 @@ export default function CustomButton({children,bk,color,className,...others}) {
       <span  style={{color:`${color}`}} className={`${styles.c_btn__text}`}>
       {children}
    </span>
-   <span className={styles.c_btn__arrow} aria-role="presentation"></span>
+   <span className={styles.c_btn__arrow}  ></span>
 
     </button>
   )

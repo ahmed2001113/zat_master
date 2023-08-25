@@ -125,7 +125,7 @@ console.warn(error)
 
 return{
   props:{
-    product:productItem
+    product:productItem||{}
   }
 }
 }
@@ -141,7 +141,7 @@ export async function  getStaticPaths(){
   const paths = products.map(product=>{
 
       return{
-          params:{id:product.id}
+          params:{id:product.id}||[]
       }
   })
 

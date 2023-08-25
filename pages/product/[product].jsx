@@ -204,7 +204,7 @@ export async function getStaticProps({params}){
      return{
     props:{
         product:productData||{},
-        footer_header:footer_header?.data,
+        footer_header:footer_header?.data||{},
      } ,
     revalidate:10
 }

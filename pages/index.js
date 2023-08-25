@@ -81,10 +81,10 @@ try {
 }
 const defaultProps  ={
   props:{
-    footer_header:footer_header?.data,
-    products:productResults,
-    categoriesWithNoParent:categoriesWithNoParent,
-    seo:seo[0],
+    footer_header:footer_header?.data||{},
+    products:productResults||[],
+    categoriesWithNoParent:categoriesWithNoParent||[],
+    seo:seo[0]||[],
     load
    },
    revalidate:10

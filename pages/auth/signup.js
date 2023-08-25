@@ -175,7 +175,7 @@ export const getStaticProps =async ()=>{
   const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
   return{
     props:{
-      footer_header:footer_header?.data,
+      footer_header:footer_header?.data||{},
 
     }
   }

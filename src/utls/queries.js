@@ -191,19 +191,19 @@ export const Categories_query= qql`query{
 
 }`
 export const GET_CATEGORIES = gql`
-{
-    productCategories(last: 100) {
+ 
+  {
+    productCategories(last: 10, where: {hideEmpty: true}) {
       nodes {
         slug
-        
-       children{
-        nodes{
-          slug
-        }
-      }
+        children {
+          nodes {
+            slug
+          }
         }
       }
     }
+  }
     
 `;
 

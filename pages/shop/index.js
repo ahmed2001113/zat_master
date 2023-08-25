@@ -200,10 +200,10 @@ try{
     }
     return{
         props:{
-            products:categoryInferomation,
-            footer_header:footer_header?.data,
-            seo:seo[0],
-            price:[MinPrice,MaxPrice],
+            products:categoryInferomation||[],
+            footer_header:footer_header?.data||{},
+            seo:seo[0]||{},
+            price:[MinPrice,MaxPrice]||[],
             load
            },
           revalidate:10

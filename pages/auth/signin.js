@@ -13,13 +13,12 @@ import { HEADER_FOOTER_ENDPOINT } from '@/src/EndPoints';
  const intial ={email:'',password:''};
 
 const  Signin=({footer_header}) =>{
-
-  const dispatch = useDispatch()
+   const dispatch = useDispatch()
   const err = useSelector(ErrorMessageSelector);
   const user = useSelector(userSelectMemo);
   const loading = useSelector(loadingUser)
+  const router = useRouter()
 
-const router = useRouter()
     const [firebaseError,setFirebaseError]=useState("")
   const [data,setFormData]=useState(intial);
   const{email,password}=data
@@ -71,7 +70,7 @@ return setFirebaseError('')
 
  
 },[err.error ]);
-useLayoutEffect(()=>{
+useEffect(()=>{
   
 
   if(user){
@@ -159,7 +158,7 @@ export const getStaticProps =async ()=>{
   const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
   return{
     props:{
-      footer_header:footer_header?.data,
+      footer_header:footer_header?.data||{},
 
     }
   }

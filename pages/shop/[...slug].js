@@ -219,10 +219,10 @@ let data = {}
 
     return{
         props:{
-          data,
-          footer_header:footer_header?.data,
-          price:[MinPrice,MaxPrice],
-          slug:LastParam,
+          data:data||{},
+          footer_header:footer_header?.data||{},
+          price:[MinPrice,MaxPrice]|[],
+          slug:LastParam||'',
           loadingApi
 
         },
