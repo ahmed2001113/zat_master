@@ -41,8 +41,7 @@ function SwippeCentered({products}) {
   </div>
   <Swiper
     slidesPerView={3.3}
-    spaceBetween={30}
-       className={`${styles.sw} mySwiper sw_2`}
+        className={`${styles.sw} mySwiper sw_2`}
  
   >
     {
@@ -52,7 +51,8 @@ function SwippeCentered({products}) {
 
           <SwiperSlide key={product.id}>
 
-          <ProdutItemMain  product={product} isLove={isWishlist(product.id)}/>
+          <ProdutItemMain  product={product} 
+          isLove={isWishlist(product.id)}/>
           </SwiperSlide>
 
         )

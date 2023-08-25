@@ -197,7 +197,7 @@ loading={loading}
   {
     loading?<Skelton2 key={product.id}/>:
 
-   <ProdutItemMain  key={product.id}  product={product}/>
+   <ProdutItemMain  className={"col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 pb-3 pb-md-6 pb-xl-8"} key={product.id}  product={product}/>
   }
   
    

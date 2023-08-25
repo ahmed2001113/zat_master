@@ -1,6 +1,5 @@
 .imageWrapper{
-    width: 383px;
-    position: relative;
+     position: relative;
 }
 .imageWrapper img {
     height: 500px;

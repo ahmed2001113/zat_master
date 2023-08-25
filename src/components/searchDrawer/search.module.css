@@ -36,3 +36,12 @@ justify-content: center;
         height: 80% !important;
     }
 }
+
+.er{
+    color: #5e4068;
+    background: #eee;
+    margin: auto;
+    text-align: left;
+    width: fit-content;
+    padding: 10px;
+}

@@ -4,7 +4,7 @@ import { All_PRODUCTS_QUERY } from '@/src/utls/queries';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-  import styles from '../checkout.module.css'
+  import styles from './checkout.module.css'
 import { Badge, Divider, StepButton } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { cartItems, totalCart, totalPaid } from '@/src/store/cart/cart.selector';

@@ -34,7 +34,12 @@ useEffect(()=>{
       console.log("routerChangeComplete");
       setLoading(false)
    })
-
+   router.events.on("routeChangeError",(url)=>{
+      console.log("routerChangeComplete");
+      setLoading(false)
+   })
+   document.body.scrollTop = 0;
+   document.documentElement.scrollTop = 0;
 },[])
 
    store.dispatch(FetchCategoriesStart())

@@ -3,14 +3,23 @@ import React, { useState } from 'react'
 import { Offcanvas } from 'react-bootstrap'
 import CustomButton from '../customsComponents/buttons/button'
 import styles from './search.module.css'
+import { useRouter } from 'next/router'
 function SearchDrrawer({show,setShow,categories,}) {
 const [inputValue,setInputValue] = useState('');
-
+const [error,setErro]=useState('')
+const router = useRouter()
 const onchange=(e)=>{
 setInputValue(e.target.value)
 }
 const onSubmit = (e)=>{
-e.preventDefault()
+e.preventDefault();
+if(inputValue.trim()==="") {
+    setErro('Enter something To Search');
+    return
+};
+router.push( `/search/${inputValue.trim()}` )
+setShow(false)
+
 }
   return (
  
@@ -31,6 +40,10 @@ e.preventDefault()
 search
     </CustomButton>
        </form>
+
+       {error&&<p className={`${styles.er}`}>
+        {error}
+        </p>}
        </div>
     <div className={`${styles.categ}`}>
     <h6>

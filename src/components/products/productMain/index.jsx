@@ -11,7 +11,7 @@ import { Favorite, FavoriteBorderOutlined } from '@mui/icons-material';
 import { wishlistSelector } from '@/src/store/wishlist/wishlistSelector';
 import CustomButton from '../../customsComponents/buttons/button';
 import CustomButton_2 from '../../customsComponents/buttons/CustomButton_2';
-function  ProdutItemMain({product,isLove=false}) {
+function  ProdutItemMain({product,isLove=false,className}) {
  const dispatch= useDispatch();
 
  const OpenPreview =()=> dispatch(PreviewActions.OPENPREVIEW(product));
@@ -31,7 +31,7 @@ return (
  
  
     <>
-<div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 pb-3 pb-md-6 pb-xl-8">
+<div className={className}>
 <div className={`${styles.product}`}>
       
       <div className={`${styles.imageWrapper}`}>
@@ -83,7 +83,9 @@ return (
             Add To Cart 
             </CustomButton_2>
            <CustomButton_2   bk={'#fff'} className={`${styles.Add}`}>
+           <Link href={`/checkout/${product?.id}`}>
             Buy Now
+           </Link>
             </CustomButton_2>
          </div>
       </div>
