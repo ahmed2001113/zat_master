@@ -12,7 +12,7 @@ import Certifications from '../certifications';
  function PreviewComponent() {
   const dispatch= useDispatch()
 const {open,product}= useSelector(previewData);
- console.log(open,product)
+ 
  const handleClose = () => dispatch(PreviewActions.closepreview()) ;
  const minVal = 1;
  const maxVal=20

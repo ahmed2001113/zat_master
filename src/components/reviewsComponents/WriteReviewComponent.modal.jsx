@@ -23,9 +23,9 @@ const initialData = {
 
 }
 const ReviewComponent =({setShow,show,name,image,id})=>{
-  console.log(id)
+  
   const currentUser = useSelector(userSelectMemo);
-  console.log(currentUser)
+  
   const [value,setValue]=useState('Recommended');
     const [reviewData,setData]=useState({});
   const [Loading,setLoading]=useState(false)
@@ -52,7 +52,7 @@ const ReviewComponent =({setShow,show,name,image,id})=>{
     authorEmail:currentUser?.email??email,
     clientMutationId: v4()
   }
-  console.log(input)
+  
   const [addrev,{
     data:resp,
     loading:load,
@@ -64,7 +64,7 @@ onCompleted:(data)=>{
 
   setMessage(`Thank You ${userName}
        for submitting a Review we will review it as soon as possible` );
-     console.log(data)
+     
     setNotify(true)
     setReview(initialData);
     setShow(false)
@@ -72,7 +72,7 @@ onCompleted:(data)=>{
 ,
 onError:(error)=>{
   setMessage("there is error on your comment please try again");
-    console.log(error )
+    
     setNotify(true)
 }
 
@@ -90,9 +90,9 @@ onError:(error)=>{
     try{
 
       const data_apollo = await addrev();
-      console.log(data_apollo)
+      
     }catch(err){
-console.log(err)
+
     }
   }
 

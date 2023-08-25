@@ -32,9 +32,8 @@ function classNames(...classes) {
 
 export default function MainHeader({header}) {
   const currentUser = useSelector(userSelectMemo);
-console.log(currentUser)
-  const quentity = useSelector(totalCart);
   const dispatch= useDispatch()
+   const quentity = useSelector(totalCart);
   const openCart = ()=>dispatch(CartActions.setCartOpen(true))
    const [open, setOpen] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
@@ -43,8 +42,7 @@ console.log(currentUser)
   const [scroll, setScroll] = useState(false);
    const {headerMenuItems,siteDescription,siteLogoUrl,siteTitle} = header
 const categoriesLinks = useSelector(SelectCategoriesLinks);
-console.log(categoriesLinks)
-function Scroll() {
+ function Scroll() {
   const scrolls = document.body.scrollTop > 50 || document.documentElement.scrollTop > 50;
   
   setScroll(scrolls)
@@ -58,7 +56,7 @@ useEffect(() => {
   return () => {
     document.body.removeEventListener("scroll", handleScroll);
   }
-});
+},[]);
    return (
     <>
 {domLoaded && ( <>

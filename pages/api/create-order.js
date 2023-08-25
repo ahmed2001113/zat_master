@@ -52,7 +52,7 @@ export default async function handler( req, res ) {
 		res.json( responseData );
 		
 	} catch ( error ) {
-		console.log( 'error', error );
+		;
 		/**
 		 * Request usually fails if the data in req.body is not sent in the format required.
 		 *

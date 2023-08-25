@@ -17,7 +17,7 @@ function SwippeCentered({products}) {
 
   const router = useRouter();
   const ToShop = ()=>{
-    console.log('clicked')
+    
     router.push('/shop?filter=new_arrival')
   }
   if ( isEmpty( products ) ) {

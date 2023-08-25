@@ -4,12 +4,12 @@ import React, { useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Quantity({item}) {
+  const dispatch = useDispatch()
     const [value, setValue] = useState(item.quantity||1);
   const {id,quantity} = item;
     const minVal = 1;
     const maxVal=20;
     const items = useSelector(cartItems)
-    const dispatch = useDispatch()
   
 const increaseValue = () => {
 

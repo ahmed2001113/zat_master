@@ -11,23 +11,23 @@ import OrderSuccess from "./orderSuccess"
 import CHECKOUT_MUTATION from "@/src/lib/mutations/checkout"
 import { createCheckoutData, handleOtherPaymentMethodCheckout } from "./functions"
 const  CheckoutF = ()=>{
-
+	const initial = {
+		billing:{
+	...inintializeUserInferomation
+	 },
+	 shipping:{
+	   ...inintializeUserInferomation
+	
+	 },
+	  ordernotes:'',
+	 billingDifferentThanShipping :false,
+	 paymentMethod:'cod'
+	}
 const cartElements = useSelector(cartItems)
 
 const dispatch = useDispatch()
 const inintializeUserInferomation = useSelector(UserInferomationCheckoutSelector);
-const initial = {
-    billing:{
-...inintializeUserInferomation
- },
- shipping:{
-   ...inintializeUserInferomation
 
- },
-  ordernotes:'',
- billingDifferentThanShipping :false,
- paymentMethod:'cod'
-}
  
 const [input,setInput]= useState(initial) ;
 const [requestError,setRequestError]=useState(initial)
@@ -37,7 +37,7 @@ const [orderData,submitOrderData]=useState({});
 const [ createdOrderData, setCreatedOrderData ] = useState( {} );
 const carts = useSelector(cartItems);;
 const totalCart = useSelector(totalPaid)
-console.log(carts)
+
  
  
 const HandleFormSubmit  = async(e)=>{
@@ -63,7 +63,7 @@ if ( ! shippingValidationResult.isValid || ! billingValidationResult.isValid ) {
 // // const createdOrderData = await handleOtherPaymentMethodCheckout( input, carts, setRequestError, setIsOrderProcessing, setCreatedOrderData ,totalCart);
 
 
-//  console.log(createdOrderData,createdOrderData,requestError)
+//  
 
  
 
@@ -91,7 +91,7 @@ else{
     const newState ={...input,[name]:value}
     setInput(newState)
  }
- console.log(input)
+ 
 }
 useEffect(()=>{
  

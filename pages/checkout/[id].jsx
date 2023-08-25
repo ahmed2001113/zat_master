@@ -19,16 +19,17 @@ import { useEffect } from 'react';
 import { CheckOutProduct } from '@/src/lib/queries/checkoutProduct';
 
 export default function CheckOut({product}) {
-  if(!product)return;
+  const {current,steps} = useSelector(currentStepSelector)
    const CartElments =  product
   const CheckoutComponents = [CheckOutForm,CheckOutPayments];
   const router = useRouter();
   const {id}=router.query;
-   const CartTotal = product.price
-  
-  const {current,steps} = useSelector(currentStepSelector)
+  const CartTotal = product.price;
   const Component = CheckoutComponents[current]
  
+  
+ 
+
   
    return (
     <div className="row container-fluid " style={{height:'100vh'}}>

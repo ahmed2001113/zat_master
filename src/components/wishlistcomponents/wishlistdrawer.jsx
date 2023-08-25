@@ -9,8 +9,8 @@ import WishlistItem from './wishlistitem';
 import styles from './wishlist.module.css'
 
 function WishListDrawer() {
+  const dispatch= useDispatch()
      const {open,wishlistItems} = useSelector(wishlistSelector);
-const dispatch= useDispatch()
     const handleShowClose = () => dispatch(wishlistActions.setWishlistOpen());
  
   return (

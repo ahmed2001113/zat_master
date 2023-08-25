@@ -12,8 +12,7 @@ export default function Document() {
 
         </Head>
       <body>
-      <script src="https://app.fawaterk.com/fawaterkPlugin/fawaterkPlugin.min.js"></script>
-
+ 
         <Main />
         <NextScript />
         

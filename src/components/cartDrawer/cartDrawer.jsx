@@ -19,7 +19,7 @@ const CheckoutCard = ()=>{
       const handleClose = () => dispatch(CartActions.setCartOpen(false));
 
 }
-  console.log(CartIems)
+  
     const handleClose = () => dispatch(CartActions.setCartOpen(false));
    return (
     < >

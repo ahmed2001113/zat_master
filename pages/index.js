@@ -60,7 +60,7 @@ try{
  ||[]
 load=false
  }catch(error){
-  console.log(error);
+  ;
   load=false
 }
 

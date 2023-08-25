@@ -16,7 +16,7 @@ function* FetchCategorySagaAsync(){
 }
     
     catch(err){
-        console.log(err.response.data)
+        
          yield put(categoryActions.FETCH_CATEGORIES_FAILD(err))
 
     }

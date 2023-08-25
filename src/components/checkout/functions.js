@@ -115,7 +115,7 @@ export const handleOtherPaymentMethodCheckout = async ( input, products, setRequ
 	setIsOrderProcessing( true );
 	const orderData = getCreateOrderData( input, products,total);
 	const customerOrderData = await createTheOrder( orderData, setRequestError, '' );
-  console.log(orderData)
+  
 	setIsOrderProcessing( false );
 	
 	if ( isEmpty( customerOrderData?.orderId ) ) {

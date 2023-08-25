@@ -32,7 +32,7 @@ dispatch(FiltersAction.addPrices(price))
 
 
 //  const {query:{slug} ,asPath } = router;
- console.log(slug)
+ 
 // const path = asPath.split('/')
  
  // const lastparam = slug.pop();
@@ -51,7 +51,7 @@ const loadMore = async()=>{
   const {products} =productsCat[0]
   const {pageInfo,nodes}=products;
  
-  console.log( products)
+  
   setLoading(loading)
   setProductsData(ModifyObjectOrArray(nodes));
   setPageInfo(pageInfo)
@@ -72,7 +72,7 @@ const loadLess = async()=>{
   const {products} =productsCat[0]
   const {pageInfo,nodes}=products;
  
-  console.log( products)
+  
   setLoading(loading)
   setProductsData(ModifyObjectOrArray(nodes));
   setPageInfo(pageInfo)
@@ -97,25 +97,23 @@ try{
   const {products} =productsCat[0]
   const {pageInfo,nodes}=products;
  
-  console.log( products,NewData)
+  
   setLoading(loading)
   setProductsData(ModifyObjectOrArray(nodes));
   setPageInfo(pageInfo);
-  console.log( products)
+  
 
 } 
 catch(err){
-  console.log(err)
+  
 }
 }
 useEffect(()=>{
 
   FilterFunction();
  },[Filters]);
- useLayoutEffect(()=>{
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
- },[])
+
+ 
  useEffect(() => {
   // Define your function here
   const handlePageLeave = () => {
@@ -206,17 +204,17 @@ let data = {}
   
 
   } catch (error) {
-    console.log(error)
+    
  }
  try{
   const {data:{products:{nodes}}, error,loading}
   =await client.query({query:ProductsDataQuery});
-  console.log(nodes);
+  ;
   
    MaxPrice = Math.max(...nodes.map(({price})=>price));
    MinPrice = Math.min(...nodes.map(({price})=>price));
      }catch(err){
-      console.log(err)
+      
     }
 
     return{

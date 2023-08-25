@@ -34,14 +34,15 @@ export const CheckOutPayments = ({item})=>{
     const [value, setSelectedValue] =  useState('option1');
     let carts = [];
     let TotalCart = 0;
+    carts= useSelector(cartItems);
+    TotalCart = useSelector(totalPaid)
 if(item){
  carts = [item]
 TotalCart = item.price
-}else{
+} 
  
- carts= useSelector(cartItems);
- TotalCart = useSelector(totalPaid)
-}
+
+ 
 
 console.log(carts,TotalCart)
     const inintializeUserInferomation = useSelector(UserInferomationCheckoutSelector);

@@ -19,7 +19,7 @@ import { SearchPriceuery } from "@/src/lib/queries/searchPrice";
  const Search =({search,SearchData,footer_header,seo,price })=>{
     const dispatch = useDispatch()
     const {Filters,sort} = useSelector(FilterSelector)
-   console.log(Filters)
+   
      const {pageInfo,nodes}= SearchData;
    const [loadings,setLoading]=useState(false);
    const [pageInferomation,setPageInfo]=useState(pageInfo)
@@ -43,7 +43,7 @@ import { SearchPriceuery } from "@/src/lib/queries/searchPrice";
          search
         }
      });
-     console.log(data,error)
+     
       setProductsData(ModifyObjectOrArray(data?.products?.nodes));
      setPageInfo(data?.products?.pageInfo);
      setLoading(false)
@@ -52,7 +52,7 @@ import { SearchPriceuery } from "@/src/lib/queries/searchPrice";
    catch(err){
      dispatch(FiltersAction.setLoading(true))
    
-     console.log(err);
+     ;
      setLoading(false)
    
    }
@@ -79,7 +79,7 @@ import { SearchPriceuery } from "@/src/lib/queries/searchPrice";
        router.events.off("routeChangeStart", handlePageLeave);
      };
    }, []);
-    console.log(pageInferomation)
+    
    const loadMore = async()=>{
    try {
      setLoading(true)
@@ -180,7 +180,7 @@ try {
     SearchData=products
     
   } catch (error) {
-      console.log(error)
+      
       
   }
 
@@ -188,7 +188,7 @@ try {
     footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
 
 } catch (error) {
-  console.log(error)
+  
 
 }try {
   seo = await getPage('search');
@@ -206,7 +206,7 @@ variables:{
    MaxPrice = Math.max(...nodes.map(({price})=>price));
    MinPrice = Math.min(...nodes.map(({price})=>price));
      }catch(err){
-      console.log(err)
+      
     }
     return{
         props:{

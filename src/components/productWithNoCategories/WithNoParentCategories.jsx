@@ -8,7 +8,7 @@ import right from '../../../public/svgs/rightarrow.svg'
 import simpleLightbox from 'simplelightbox'
 import CustomButton from '../customsComponents/buttons/button'
 export default function WithNoParentCategories({categories}) {
-  console.log(categories)
+  
   return (
 <>
 <div className="container_fluid pt-10 bg-white">

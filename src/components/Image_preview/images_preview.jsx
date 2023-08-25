@@ -3,18 +3,19 @@ import { Offcanvas } from "react-bootstrap";
 import styles from './image.module.css'
 import Image from "next/image";
  export default function ImagePreview({image:main_image,array,title,show,setShow}){
-console.log(main_image,array)
+    const [previewVisible, setPreviewVisible] = useState(main_image);
+    const [imageArray,setImageArray]= useState(array);
+    useEffect(()=>{
+        setPreviewVisible(main_image);
+        
+       },[main_image]);
+       
 if(!Object.keys(main_image).length) return;
-const [previewVisible, setPreviewVisible] = useState(main_image);
- const [imageArray,setImageArray]= useState(array)
+
 const changeImage=(image)=>{
     setPreviewVisible(image)
 }
-useEffect(()=>{
- setPreviewVisible(main_image);
- 
-},[main_image]);
-console.log(show)
+
 return(
     <>
     
@@ -33,7 +34,8 @@ return(
         <div className={`${styles.image_preview}`}>
 
         {  array.map((ima)=>{
-      return  <div          
+      return  <div     
+      key={ima?.id}     
             onClick={()=>changeImage(ima)}
         >
             <Image src={ima?.sourceUrl} height={100} width={100}

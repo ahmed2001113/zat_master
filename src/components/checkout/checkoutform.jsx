@@ -10,9 +10,9 @@ import Address from "./NewAddress";
 import validateAndSanitizeCheckoutForm from "@/src/validator/checkout";
 
  export const CheckOutForm = ({item})=>{
+   const dispatch = useDispatch()
    const inintializeUserInferomation = useSelector(UserInferomationCheckoutSelector);
    const [input,setInput] = useState(inintializeUserInferomation)
- const dispatch = useDispatch()
   const [data,setData] = useState([]);
  const [isFormValid, setIsFormValid] = useState(false);
  
@@ -22,11 +22,11 @@ const OnSubmit=(e)=>{
   dispatch(checkoutActions.SetUserInferomation(input));
   dispatch(checkoutActions.next())
 
-console.log(input)
+
 }
 const HandleOnChange = (event,isShipping,isBilling)=>{
   const {target:{name,value}} = event || {};
-console.log(name)
+
   const newState ={ ...input, [ name ]: value } ;
   setInput( newState );
 
@@ -43,7 +43,7 @@ console.log(name)
            
           })
           .catch(error => {
-            console.log(error);
+            ;
           });
       }, []);
       

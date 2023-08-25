@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Address =({input,handleOnChange,isShipping,isbilling})=>{
 
 const {errors} = input||{};
-console.log(errors,input)
+
 
     return(<>
 	<InputFeild

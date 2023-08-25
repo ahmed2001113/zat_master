@@ -5,7 +5,7 @@ import Checkbox from '@mui/material/Checkbox';
 
 export default function CheckboxLabels() {
     const onChange =(e)=>{
-        console.log(e.target.name,e.target.value,e.target)
+        
     }
   return (
     <FormGroup 

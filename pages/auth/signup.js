@@ -1,7 +1,6 @@
+ 
  import Link from 'next/link';
- import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
-import styles from './sign.module.css'
+ import styles from './sign.module.css'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EMAILSIGNUPSTART } from '@/src/store/user/user.actions';
@@ -19,12 +18,12 @@ password:''
 
 }
 
-function signup({footer_header}) {
+function Signup({footer_header}) {
   const dispatch = useDispatch();
   const loading = useSelector(loadingUser);
-  console.log(loading)
   const user = useSelector(userSelectMemo);
-  console.log(user)
+  
+  
   const router=useRouter()
  
   const [firebaseError,setFirebaseError]=useState("")
@@ -32,7 +31,7 @@ function signup({footer_header}) {
   const {firstName,lastName,email,password} = data;
 
   const err = useSelector(ErrorMessageSelector)
-  console.log(err)
+  
   const setForm = ()=>{
     setData(initialData)
 }
@@ -43,7 +42,7 @@ if(!data.firstName||data.firstName===''&&!data.lastName&&!data.email&&!data.pass
 dispatch(EMAILSIGNUPSTART({email,password,displayName:[firstName,lastName]}));
 
 
-console.log(firebaseError)
+
 
 
   }
@@ -78,7 +77,7 @@ return setFirebaseError('')
 },[err.error])
 
 useEffect(()=>{
-  console.log(user)
+  
 
   if(user){
     router.push('/')
@@ -170,7 +169,7 @@ Sign In
   )
 }
 
-export default signup
+export default Signup
 
 export const getStaticProps =async ()=>{
   const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);

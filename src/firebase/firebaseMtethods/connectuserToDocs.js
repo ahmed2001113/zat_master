@@ -15,7 +15,7 @@ export  const GetUserFromDocs = async (user,otherProps={})=>{
     const gettingUserDocSnapSot  = await getDoc(userDocRef);
 
     // check if whether user exist or not  in database and accessing the user data 
-    // console.log(gettingUserDoc.exist())
+    // )
 //if user doesnot exist create new doc to him/er
 if(!gettingUserDocSnapSot.exists()){
     const {displayName,email} = user;
@@ -38,11 +38,11 @@ if(!gettingUserDocSnapSot.exists()){
     }
 
     catch(err){
-console.log(err.response.data)
+
     }
 
 }
-console.log(gettingUserDocSnapSot)
+
 return gettingUserDocSnapSot;
 
 }

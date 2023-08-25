@@ -11,7 +11,7 @@ export const getPage = async ( pageSlug = '' ) => {
 			}
 		} )
 		.catch( err => {
-			console.log( err.response.data.message )
+			
 			return [];
 		} );
 };

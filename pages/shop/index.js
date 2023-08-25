@@ -19,7 +19,7 @@ import { Button } from "react-bootstrap";
 const AllCategoriesProducts = ({products,footer_header,seo,price,load,...others})=>{
   const dispatch = useDispatch ()
  const {Filters,sort} = useSelector(FilterSelector)
-console.log(Filters)
+
   const {pageInfo,nodes}= products;
 const [loadings,setLoading]=useState(load);
 const [pageInferomation,setPageInfo]=useState(pageInfo)
@@ -58,7 +58,7 @@ try{
 catch(err){
   dispatch(FiltersAction.setLoading(true))
 
-  console.log(err);
+  ;
   setLoading(false)
 
 }
@@ -85,7 +85,7 @@ useEffect(() => {
     router.events.off("routeChangeStart", handlePageLeave);
   };
 }, []);
- console.log(pageInferomation)
+ 
 const loadMore = async()=>{
   setLoading(true)
 try {
@@ -119,7 +119,7 @@ const loadLess = async()=>{
 
 
 }
-console.log(loadings);
+;
 
      return(
         <>
@@ -174,14 +174,14 @@ let load =false;
   categoryInferomation=products
   
 } catch (error) {
-    console.log(error)
+    
     
 }
 try {
     footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
 
 } catch (error) {
-  console.log(error)
+  
 
 }try {
   seo = await getPage('shop');
@@ -191,12 +191,12 @@ try {
 }
 try{
   const {data:{products:{nodes}}, error,loading}=await client.query({query:ProductsDataQuery});
-  console.log(nodes);
+  ;
   
    MaxPrice = Math.max(...nodes.map(({price})=>price));
    MinPrice = Math.min(...nodes.map(({price})=>price));
      }catch(err){
-      console.log(err)
+      
     }
     return{
         props:{

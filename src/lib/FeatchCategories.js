@@ -5,7 +5,7 @@ export async function FetchCategories(){
 
     const AllCategories= await client.query({query:CategoryName});
 
-    console.log(AllCategories)
+    
      return AllCategories?.data?.productCategories?.nodes
 
 

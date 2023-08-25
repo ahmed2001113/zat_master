@@ -26,7 +26,7 @@ export default function RelatedProducts({products,id}) {
             productsAfter.filter((i,idx)=>idx<4).map(product=>{
 
 
-              return  <Product_show className={'col-md-3'} product={product}/>
+              return  <Product_show key={product.id} className={'col-md-3'} product={product}/>
             })
         }
     </div>

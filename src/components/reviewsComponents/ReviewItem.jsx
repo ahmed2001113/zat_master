@@ -6,9 +6,9 @@ import Rating from '@mui/material/Rating';
 import { Avatar, Chip } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
  const ReviewItem =({content,name,email,replies,date,rating})=>{
-  console.log(replies)
+  
     const [value, setValue] = React.useState(5);
-    console.log(name)
+    
     return(
             <div>
                  <div className={`row`}>
@@ -33,7 +33,7 @@ import { deepPurple } from "@mui/material/colors";
 </div>  
 {
   replies?.edges?.length&&replies?.edges?.map(reply=>{
-     return   <div className={`col-md-12 col-sm-8 ${styles.replys} ${styles.re}`}  >
+     return   <div key={reply?.node?.id} className={`col-md-12 col-sm-8 ${styles.replys} ${styles.re}`}  >
 
     <div className={`${styles.chip}`}
      style={{margin:'10px',textTransform:'capitalize',marginLeft:'0px',justifyContent:'space-between'}}>

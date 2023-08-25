@@ -6,8 +6,8 @@ import { useDispatch } from 'react-redux';
 import { SIGNUSEROUT_Start } from '@/src/store/user/user.actions';
 
 export function DropDownUser({user}) {
+  const dispatch = useDispatch();
     if(!user)return;
-    const dispatch = useDispatch();
     const signoutUser = ()=>{
  
         dispatch(SIGNUSEROUT_Start())

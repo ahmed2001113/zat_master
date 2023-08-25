@@ -3,7 +3,7 @@ const CartOpenReducer = (state)=>state.cart.open;
 const cartItemsReducer = (state)=>state.cart;
 const currentstate = (state)=>state
 export const cartItems = createSelector([cartItemsReducer],(cart)=> {
-console.log(cart)
+
  return   cart.items
 
 }

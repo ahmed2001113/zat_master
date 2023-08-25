@@ -1,7 +1,7 @@
 export default function ModifyObjectOrArray(products) {
      if (Array.isArray(products)){
        if(products.length){
-        console.log(products)
+        
     return  products.map(products=>{
         return  {
            description:products.description,

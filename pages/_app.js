@@ -27,15 +27,15 @@ const router = useRouter()
 useEffect(()=>{
 
    router.events.on("routeChangeStart",(url)=>{
-      console.log("routerChangeStart");
+      ;
       setLoading(true)
    })
    router.events.on("routeChangeComplete",(url)=>{
-      console.log("routerChangeComplete");
+      ;
       setLoading(false)
    })
    router.events.on("routeChangeError",(url)=>{
-      console.log("routerChangeComplete");
+      ;
       setLoading(false)
    })
    document.body.scrollTop = 0;

@@ -26,9 +26,8 @@ return<>
 
 { reviews.reviews.edges.length?
     reviews.reviews.edges.map(review=>{
-        console.log(review);
-        console.log(review)
-        return<ReviewItem content={review?.node?.content}
+  
+        return<ReviewItem  content={review?.node?.content}
          key={review?.node?.id} 
         name={review?.node?.author?.node?.name} 
          email={review?.node?.author?.node?.email}
@@ -40,7 +39,7 @@ return<>
     }):
     <>
     <h5 style={{textAlign:'center', textTransform:'capitalizeh5'}} className={`${styles.th}`}>
-        There's no review on this Product
+  {`      There's no review on this Product`}
     </h5>
     </>
 }

@@ -1,6 +1,6 @@
 import client from '@/src/utls/apolloConfigrations/apolloClient'
 import { All_PRODUCTS_QUERY, PRODUCTS_QUERY, PRODUCT_BY_ID } from '@/src/utls/queries'
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import styles from './product.module.css'
 import Image from 'next/image'
 import Certifications from '@/src/components/certifications'
@@ -47,7 +47,7 @@ const {
 
 }=product
 if(status!=="publish")return
-console.log(product)
+
 const reviews_={
     reviewCount,
     reviews,
@@ -57,16 +57,10 @@ const reviews_={
 
 }
 const similarProducts = productCategories?.nodes[0]?.products?.nodes;
-console.log(similarProducts)
+
 const images  = [image,...galleryImages?.nodes];
 const [first,...otherImages]=images
-        useEffect(()=>{
-         const get = (async()=>{
       
-
-
-        })()
-    },[])
 const handleShow = (imag)=>{
     setImage(imag)
     setImageArray(images);
@@ -177,7 +171,7 @@ Review Details
      </div>
 </div>
 </div>
-{console.log(show)}
+{}
 <ImagePreview show={show} setShow={setShow} image={imagePrev} array={imageArray}/>
 </RootLayout>
 </>

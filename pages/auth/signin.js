@@ -14,13 +14,13 @@ import { HEADER_FOOTER_ENDPOINT } from '@/src/EndPoints';
 
 const  Signin=({footer_header}) =>{
 
+  const dispatch = useDispatch()
   const err = useSelector(ErrorMessageSelector);
   const user = useSelector(userSelectMemo);
   const loading = useSelector(loadingUser)
-console.log(loading)
+
 const router = useRouter()
     const [firebaseError,setFirebaseError]=useState("")
-  const dispatch = useDispatch()
   const [data,setFormData]=useState(intial);
   const{email,password}=data
   const resetForm = ()=>{
@@ -46,7 +46,7 @@ setFormData({
   useEffect(  ()=>{
  
     if(err &&err.error !==null && err.error.message !=='' ){
-        console.log(err.error.code)
+        
 switch(err.error.code){
 case 'auth/invalid-email':
    return setFirebaseError('please check your email')
@@ -72,7 +72,7 @@ return setFirebaseError('')
  
 },[err.error ]);
 useLayoutEffect(()=>{
-  console.log(user)
+  
 
   if(user){
     router.push('/')
@@ -134,7 +134,7 @@ useLayoutEffect(()=>{
 
 
   </h3>
-<h5 className='mb-3'>Don't Have An Account !</h5>
+<h5 className='mb-3'>{`Don't Have An Account !`}</h5>
 <button className='submit'>
   <Link href='/auth/signup'>
 

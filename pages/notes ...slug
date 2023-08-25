@@ -9,7 +9,7 @@ const router = useRouter();
 const {slug =[] } = router.query;
 //return array of params
 
-console.log(slug)
+
     return(
 
         <>

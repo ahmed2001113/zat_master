@@ -30,7 +30,7 @@ function ProductSliderGrid({products}) {
             products.map(item=>{
 
                 return(
-                    <SwiperSlide className='col-md-3'>
+                    <SwiperSlide key={item.id} className='col-md-3'>
          <div className={`${styles.item}`}>
          <img src={item?.image?.sourceUrl}/>
                         {item.name}

@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react'
 import styles from './product.module.css'
 export default function RevCount({rev:{reviews},count}) {
-console.log(count)
+
     const rev =  reviews.edges;
     let ratings = [0, 0, 0, 0, 0];
   
     rev.forEach(function(review) {
-        console.log(review)
+        
      let rating = review.rating;
        return ratings[rating - 1]++;
       });
-      console.log(ratings)
+      
       let percentages = ratings.map(function(rating) {
         return (rating / count) * 100;
       });

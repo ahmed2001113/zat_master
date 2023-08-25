@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
  function ThankYou() {
   const orders = useSelector(order);
   const cart = useSelector(cartItems)
-  console.log(orders,cart);
+  ;
   const router = useRouter()
   return (
  

@@ -29,7 +29,7 @@ reducers:{
      },
 
     SORTING:(state,action)=>{
-        console.log('object')
+        
 state.sort=Object.assign({},action.payload)
     },
     resetFilters:(state,action)=>{

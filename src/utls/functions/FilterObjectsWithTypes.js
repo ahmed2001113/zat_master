@@ -17,7 +17,7 @@ export default function filterObjectValues(obj,callback) {
         // Destructure the nested property and assign it to a new variable with the same name as the outer property
 
         const { [key]: { [key]: value } } = obj;
-        console.log(key,value)
+        
         // Assign the value to the accumulator with the same key
         acc[key] = value;
       } else {
@@ -32,5 +32,5 @@ export default function filterObjectValues(obj,callback) {
   
   // Test the function with an example object
 //   const myObject = { arr: [], str: "", number: 42, bool: true };
-//   console.log(filterObjectValues(myObject)); // {number: 42, bool: true}
+//   ); // {number: 42, bool: true}
   

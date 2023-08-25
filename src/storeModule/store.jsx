@@ -22,8 +22,8 @@ import filterObjectValues from '../utls/functions/FilterObjectsWithTypes';
 import Skelton3 from '../components/skelton/skelton3';
 import Skelton2 from '../components/skelton/skeltonswipecenterd';
  export default function Store({products=[],category='',loading,setLoading,...others}) {
+   const dispatch = useDispatch()
   const {Filters ,Filtered,sort:SORT } = useSelector(FilterSelector)
- const dispatch = useDispatch()
   const [scroll, setScroll] = useState(false);
 
   function Scroll() {
@@ -38,7 +38,7 @@ import Skelton2 from '../components/skelton/skeltonswipecenterd';
  
 
   const handleDelete = (chipToDelete) => () => {
- console.log(chipToDelete);
+ ;
  dispatch(FiltersAction.DeleteKey(chipToDelete))
   };
 
@@ -52,7 +52,7 @@ import Skelton2 from '../components/skelton/skeltonswipecenterd';
   }, []);
  const [show,setShow]= useState(false)
   const [productData,setproducts] =useState(products||[]);
-  console.log(productData)
+  
   const [sort,SetSort]= useState('')
    const onChange = (e)=>{
    }
@@ -158,7 +158,7 @@ import Skelton2 from '../components/skelton/skeltonswipecenterd';
        return Object.keys(filters).map((key) => {
           let icon;
   
-      console.log(key)
+ 
           return (
             <ListItem key={key}>
               <Chip
@@ -210,7 +210,7 @@ loading={loading}
 :<>
 <div className={`${styles.no_products}`}>
   <h1>
-  We're sorry, no products were found that match your filter selection.
+ {` We're sorry, no products were found that match your filter selection.`}
   </h1>
 
   <button className='black' onClick={()=>dispatch(FiltersAction.resetFilters())}>

@@ -20,14 +20,14 @@ function* GetUserSnapShotData (userAuth, additionalDetails ){
          try{
 
                 const snapShot = yield call(GetUserFromDocs,userAuth, additionalDetails );
-                console.log(snapShot)
+                
                 const {id} =snapShot;
                      yield put( userAction.signInSuccess({id,...snapShot.data()}))
                  if(snapShot.data()){
 
 
                         const {cart,wishlist}=snapShot.data()
-                        console.log(snapShot.data(),cart)
+                      
                                //once user sign in 
            yield put(CartActions.setCartItems(cart));  
             yield put(wishlistActions.setWishListItems(wishlist));  
@@ -35,7 +35,7 @@ function* GetUserSnapShotData (userAuth, additionalDetails ){
                    
 }
          catch(err){
- console.log(err.response.data)
+ 
                 yield put(userAction.signInFaild(err.response.data))
 
          }  
@@ -79,7 +79,7 @@ try{
         //  location.href = '/'
 
 }catch(err){
-        console.log(err)
+        
          yield put(userAction.signInFaild(err));
 
 }
@@ -160,14 +160,14 @@ function* userSignOut (){
 function* uploadUserImageProgress({payload:{image,user}}){
         if (!user)return
         try{
-                //  console.log(snapShot)
+                //  
                const userImageObject= yield call(adduserImageToStorage,image,user);
                const addToDataBase = yield call(
                 addUserDataBase,
                 {imageUrl:userImageObject.imageDownloadUrl},
                 userImageObject.user)
 
-               console.log(userImageObject,addToDataBase);
+               ;
                const {currentUser} = yield call(OnAuthChangesAsync);
                const snapShot = yield call(GetUserFromDocs,currentUser);
                 const {id} =snapShot
@@ -178,7 +178,7 @@ function* uploadUserImageProgress({payload:{image,user}}){
 
 
 
-// console.log(image,user)
+// 
         // image call(
 
 }

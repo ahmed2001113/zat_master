@@ -21,16 +21,16 @@ export default function FilterDrawer({
   loading
    
 }){
-  console.log(loading)
-  const [Stock, SetStock] = useState(initial);
+  const dispatch = useDispatch();
+
+   const [Stock, SetStock] = useState(initial);
 const {prices:price,Filtered,Filters}=useSelector(FilterSelector) ;
-console.log(Filters)
+
 const {minPrice,maxPrice}=price
 
 const [onSale, setOnSale] = useState(true);
    
 const [prices,setPrice]=useState([minPrice,maxPrice]);
-const dispatch = useDispatch();
 
 
 
@@ -91,6 +91,7 @@ const applyFilters = () => {
           Stock.map(item=>{
 
             return  <CheckboxButtons
+            key={item.id}
             changeChecked={handleChangeChecked}
            stock={item}
         />

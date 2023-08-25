@@ -43,10 +43,10 @@ export const getProductBySlug = async ( productSlug = '' ) => {
 // export const getCategoryById = async(id='')=>{
 //     api.get(`products/categories/${id}`)
 //     .then((response) => {
-//         console.log(response.data);
+//         ;
 //       })
 //       .catch((error) => {
-//         console.log(error.response.data);
+//         ;
 //       });
 // }
  
