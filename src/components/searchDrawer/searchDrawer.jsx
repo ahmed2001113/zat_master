@@ -25,7 +25,8 @@ setShow(false)
  
  <>
  
- <Offcanvas backdrop={false} style={{top:'120px'}} className={`${styles.off}`}  show={show} placement='top' onHide={()=>setShow(false)}>
+ <Offcanvas backdrop={false} style={{top:'120px'}} className={`${styles.off}`}
+   show={show} placement='top' onHide={()=>setShow(false)}>
      
         <Offcanvas.Body>
         <Offcanvas.Header closeButton>

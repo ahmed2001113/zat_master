@@ -18,10 +18,11 @@ import handleRedirectsAndReturnData from '../src/utls/functions/HandleRedirect.j
 import ModifyObjectOrArray from '@/src/utls/functions/ObjectArrayChange'
 export default function Home({footer_header,products,categoriesWithNoParent,load,seo}) {
  const [loading,setLoading]=useState(load);
- const router= useRouter()
+ const router= useRouter();
+ console.log("mount")
 useEffect(()=>{
   setLoading(router.isFallback )
-},[])
+},[]) 
   if ( isEmpty( products ) ) {
 		return null;
 	}

@@ -17,22 +17,48 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { SearchPriceuery } from "@/src/lib/queries/searchPrice";
 import handleRedirectsAndReturnData from "@/src/utls/functions/HandleRedirect";
+import { isEqual } from "lodash";
  const Search =({search,SearchData,footer_header,seo,price })=>{
     const dispatch = useDispatch()
-    const {Filters,sort} = useSelector(FilterSelector)
+    const {Filters,sort,Filtered} = useSelector(FilterSelector)
    
      const {pageInfo,nodes}= SearchData;
    const [loadings,setLoading]=useState(false);
    const [pageInferomation,setPageInfo]=useState(pageInfo)
    const [productsData,setProductsData]=useState(ModifyObjectOrArray(nodes));
-   const router = useRouter()
+   const router = useRouter();
+   useEffect(() => {
+    // Compare the previous and current DefaultData objects
+    if (!isEqual(SearchData, productsData)) {
+      dispatch(FiltersAction.addPrices(price))
+
+      // If they are different, update the state and save the current DefaultData as prevDefaultData
+      setProductsData(ModifyObjectOrArray(nodes));
+      // productsData = DefaultData;
+    }
+  }, [SearchData]);
    useEffect(()=>{
      dispatch(FiltersAction.addPrices(price ))
+    //  / Define your function here
+     const handlePageLeave = () => {
+       // Do something when the user leaves the page
+       dispatch(FiltersAction.resetFilters())
    
-   })
+     };
+   
+     // Add event listeners for both events
+     window.addEventListener("beforeunload", handlePageLeave);
+     router.events.on("routeChangeStart", handlePageLeave);
+   
+      return () => {
+       window.removeEventListener("beforeunload", handlePageLeave);
+       router.events.off("routeChangeStart", handlePageLeave);
+     };
+   },[])
    const FilterFunction = async()=>{
    
      setLoading(true)
+
    dispatch(FiltersAction.setLoading(false))
    try{
     
@@ -59,28 +85,10 @@ import handleRedirectsAndReturnData from "@/src/utls/functions/HandleRedirect";
    }
    }
    useEffect(()=>{
-   
-     FilterFunction();
-   },[Filters,sort]);
-   
-   useEffect(() => {
-     // Define your function here
-     const handlePageLeave = () => {
-       // Do something when the user leaves the page
-       dispatch(FiltersAction.resetFilters())
-   
-     };
-   
-     // Add event listeners for both events
-     window.addEventListener("beforeunload", handlePageLeave);
-     router.events.on("routeChangeStart", handlePageLeave);
-   
-      return () => {
-       window.removeEventListener("beforeunload", handlePageLeave);
-       router.events.off("routeChangeStart", handlePageLeave);
-     };
-   }, []);
+   if(Filtered) FilterFunction();
     
+   },[Filters]);
+ 
    const loadMore = async()=>{
    try {
      setLoading(true)
