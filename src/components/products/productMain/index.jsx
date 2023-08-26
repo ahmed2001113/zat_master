@@ -79,7 +79,8 @@ return (
          <div  dangerouslySetInnerHTML={{__html:product?.shortDescription}} className={`${styles.Desc}`}/> 
          <div className='centered'>
 
-           <CustomButton_2  bk={'#fff'}  onClick={openCart} className={`${styles.Add}`}>
+           <CustomButton_2  bk={'#fff'}  onClick={openCart} 
+           className={`${styles.Add}`}>
             Add To Cart 
             </CustomButton_2>
            <CustomButton_2   bk={'#fff'} className={`${styles.Add}`}>

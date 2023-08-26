@@ -40,7 +40,7 @@ function SwippeCentered({products}) {
 </div>
   </div>
   <Swiper
-    slidesPerView={3.3}
+    slidesPerView={3.1}
         className={`${styles.sw} mySwiper sw_2`}
  
   >

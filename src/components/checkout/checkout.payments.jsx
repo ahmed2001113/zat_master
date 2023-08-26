@@ -10,9 +10,11 @@ import Address from "./NewAddress"
 import CheckboxField from "./form-elements/checkbox"
 import validateAndSanitizeCheckoutForm from "@/src/validator/checkout"
 import cx from 'classnames';
-import { handleOtherPaymentMethodCheckout } from "./functions";
+import { getCreateOrderData, handleOtherPaymentMethodCheckout, handleOtherPaymentMethodCheckoutGraphed } from "./functions";
 import { Router, useRouter } from "next/router";
 import { CartActions } from "@/src/store/cart/cart.reducer";
+import CHECKOUT_MUTATION from "@/src/lib/mutations/checkout";
+import { useMutation } from "@apollo/client";
  const defaultUser = {
     firstname:'', 
     lastname:'',
@@ -30,21 +32,12 @@ import { CartActions } from "@/src/store/cart/cart.reducer";
 }
 
 export const CheckOutPayments = ({item})=>{
-  const router = useRouter()
+    const router = useRouter()
     const [value, setSelectedValue] =  useState('option1');
     let carts = [];
     let TotalCart = 0;
     carts= useSelector(cartItems);
-    TotalCart = useSelector(totalPaid)
-if(item){
- carts = [item]
-TotalCart = item.price
-} 
- 
-
- 
-
-console.log(carts,TotalCart)
+    TotalCart = useSelector(totalPaid);
     const inintializeUserInferomation = useSelector(UserInferomationCheckoutSelector);
     const initial = {
         billing:{
@@ -64,8 +57,36 @@ console.log(carts,TotalCart)
     const [createOrderData,setCreateOrderData] = useState(initial);
     const [orderData,submitOrderData]=useState({});
     const [ createdOrderData, setCreatedOrderData ] = useState( {} );
- 
     const [paymentMethods, setPaymentMethods] = useState([]);
+    const [checkout, {
+      data: checkoutResponse,
+      loading: checkoutLoading,
+  }] = useMutation(CHECKOUT_MUTATION, {
+     
+      onCompleted:(data)=>{
+        console.log(data);
+        setIsOrderProcessing(false)
+ 
+      },
+      onError: (error) => {
+          if (error) {
+            console.log(error)
+              setRequestError(error?.graphQLErrors?.[0]?.message ?? '');
+              console.log(error?.graphQLErrors?.[0]?.message);
+              setIsOrderProcessing(false)
+
+          }
+      }
+  });
+if(item){
+ carts = [item]
+TotalCart = item.price
+} 
+ 
+
+ 
+
+
 
     const HandleFormSubmit  =async(e)=>{
       e.preventDefault();
@@ -78,17 +99,30 @@ console.log(carts,TotalCart)
       if ( 'visa' === input.paymentMethod ) {
         return null
       }
-const createdOrderData = await handleOtherPaymentMethodCheckout( input, carts, setRequestError, setIsOrderProcessing, setCreatedOrderData );
+// const createdOrderData = getCreateOrderData( input, carts );
+const createdOrderData
+ = await handleOtherPaymentMethodCheckout(
+  input, 
+  carts, 
+  setRequestError,
+   setIsOrderProcessing, 
+   setCreatedOrderData );
 
  console.log(createdOrderData,createdOrderData,requestError)
+
+//  setIsOrderProcessing(true)
+// checkout({
+//   variables: {
+//     input: createdOrderData
+// }
+// })
 
     }
 
 const dispatch = useDispatch()
 const HandleOnChange = (event,isBillingOrShipping=false,isShipping=false)=>{    
     const {target:{name,value}} = event || {};
-console.log(name,value)
-      if(name ==='billingDifferentThanShipping'){
+       if(name ==='billingDifferentThanShipping'){
         // handleBillingDifferentThanShipping(input,setInput,target);
 
 
@@ -125,15 +159,15 @@ console.log(name,value)
 
 if(Object.keys(createdOrderData).length!==0){
   // const {cartItems,orderCreation,TotalCart,orderInferomation}=action.payload
-  dispatch(checkoutActions.SetUserOrder({
-    cartItems:carts,
-    orderCreation:createdOrderData,
-    TotalCart,
-    orderInferomation:input.billingDifferentThanShipping?input.billing:input.shipping
+  // dispatch(checkoutActions.SetUserOrder({
+  //   cartItems:carts,
+  //   orderCreation:createdOrderData,
+  //   TotalCart,
+  //   orderInferomation:input.billingDifferentThanShipping?input.billing:input.shipping
 
-  }));
-  dispatch(CartActions.EmptyCartItems())
-  router.push('/checkout/thankYou')
+  // }));
+  // dispatch(CartActions.EmptyCartItems())
+  // router.push('/checkout/thankYou')
 }
 
  },[createdOrderData]);

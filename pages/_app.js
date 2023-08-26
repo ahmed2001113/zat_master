@@ -40,10 +40,11 @@ useEffect(()=>{
    })
    document.body.scrollTop = 0;
    document.documentElement.scrollTop = 0;
-},[])
-
    store.dispatch(FetchCategoriesStart())
  store.dispatch(checkUserSession())
+},[])
+
+   
   return <>
   
 

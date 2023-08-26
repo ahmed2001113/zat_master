@@ -6,17 +6,19 @@ import { isArray } from '@apollo/client/utilities';
 const { v4 } = require('uuid');
 
 export const getCreateOrderLineItems = ( products ,total=0) => {
- 	const totalPrice = products.reduce((total, item) => total + item.price, 0);
+	console.log(products);
+	const totalPrice = products.reduce((total, item) => total + item.price, 0);
 
 	if ( isEmpty( products ) || ! isArray( products ) ) {
 		return [];
 	}
  	return products?.map(
 		( { product_id, quantity } ) => {
- 			return {
+			console.log(product_id)
+			return {
 				quantity,
 				product_id,
- 			  variation_id: v4(), // @TODO to be added.
+ 				// variation_id: '', // @TODO to be added.
 			};
 		},
 	);
@@ -43,20 +45,17 @@ const getCreateOrderData = ( order, products ) => {
 			company: order?.shipping?.company||'',
 		},
 		billing: {
-			first_name: billingData?.firstname,
-			last_name: billingData?.lastname,
-			address_1: billingData?.address1||'',
-			address_2: billingData?.address2||'',
+			first_name: billingData?.firstName,
+			last_name: billingData?.lastName,
+			address_1: billingData?.address1,
+			address_2: billingData?.address2,
 			city: billingData?.city,
-			country: billingData?.country||'',
+			country: billingData?.country,
 			state: billingData?.state,
 			postcode: billingData?.postcode,
 			email: billingData?.email,
 			phone: billingData?.phone,
-			company: billingData?.company||'',
-			postcode: order?.billingData?.zip,
-			state: order?.billingData?.state||'',
-
+			company: billingData?.company,
 		},
 		payment_method: order?.paymentMethod,
 		payment_method_title: order?.paymentMethod,
@@ -90,13 +89,8 @@ const createTheOrder = async ( orderData, setOrderFailedError, previousRequestEr
 		
 		const result = await request.json();
 		if ( result.error ) {
-			
 			response.error = result.error;
-			setOrderFailedError( `
-			Something went wrong. 
-			Order creation failed.
-			 Please try again
-			`);
+			setOrderFailedError( 'Something went wrong. Order creation failed. Please try again' );
 		}
 		response.orderId = result?.orderId ?? '';
 		response.total = result.total ?? '';
@@ -105,7 +99,7 @@ const createTheOrder = async ( orderData, setOrderFailedError, previousRequestEr
 		
 	} catch ( error ) {
 		// @TODO to be handled later.
-		console.warn( 'Handle create order error', error );
+		console.warn( 'Handle create order error', error?.message );
 	}
 	
 	return response;

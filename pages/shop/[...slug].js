@@ -16,6 +16,7 @@ import { useLazyQuery } from "@apollo/client";
 import axios from "axios";
 // import { getProductsData } from "@/src/utls/productCategories";
 import gql from "graphql-tag";
+import { isEqual } from "lodash";
 import Image from "next/image";
 import { useRouter } from "next/router"
 import { useEffect, useLayoutEffect, useState } from "react";
@@ -23,18 +24,26 @@ import { Button } from "react-bootstrap";
  import { useDispatch, useSelector } from "react-redux";
 
 const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi})=>{
-  const {Filters,sort} = useSelector(FilterSelector)
+  console.log(DefaultData)
+  const [productsData,setProductsData] =useState(ModifyObjectOrArray(DefaultData?.products?.nodes));
+  const {Filters,sort,Filtered} = useSelector(FilterSelector)
   const [loadings,setLoading]=useState(loadingApi)
   const dispatch = useDispatch()
   const {description,  image, name } =DefaultData
   const [pageInferomation,setPageInfo]=useState(DefaultData?.products?.pageInfo)
-  const [productsData,setProductsData]
-  =useState(ModifyObjectOrArray(DefaultData?.products?.nodes));
   const router = useRouter();
-  useEffect(()=>{
-    dispatch(FiltersAction.addPrices(price))
+  console.log(productsData)
+   
+   useEffect(() => {
+    // Compare the previous and current DefaultData objects
+    if (!isEqual(DefaultData, productsData)) {
+      dispatch(FiltersAction.addPrices(price))
 
-  },[])  ;
+      // If they are different, update the state and save the current DefaultData as prevDefaultData
+      setProductsData(ModifyObjectOrArray(DefaultData?.products?.nodes));
+      // productsData = DefaultData;
+    }
+  }, [DefaultData]); // Pass DefaultData as a dependency
   const [getData, { loading, error, data,refetch  }] =
    useLazyQuery(productCategoriesBySlug,
     {
@@ -46,12 +55,17 @@ const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi})=>{
         setProductsData(ModifyObjectOrArray(nodes));
         setPageInfo(pageInfo);
         console.log(loading)
-        setLoading(loading)
+        setLoading(loading);
+        console.log(productsData)
+
+       },
+       onError:(err)=>{
+        console.log(err)
        }
     }
     );
   
-
+console.log("run")
     const FilterFunction = async()=>{
       setLoading(true)
     
@@ -72,12 +86,15 @@ const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi})=>{
     }
     }
     useEffect(()=>{
-    
-      FilterFunction();
+      if(Filtered){
+
+        FilterFunction();
+
+      }
      },[Filters]);
   
-const loadMore = async()=>{
-  setLoading(true)
+  const loadMore = async()=>{
+    setLoading(true)
     getData({
       variables:{
         first:10,
@@ -88,7 +105,7 @@ const loadMore = async()=>{
    
    
  
-}
+  }
 const loadLess = async()=>{
   setLoading(true)
   getData({
@@ -104,23 +121,10 @@ const loadLess = async()=>{
 }
 
  
- useEffect(() => {
-  // Define your function here
-  const handlePageLeave = () => {
-    // Do something when the user leaves the page
-    dispatch(FiltersAction.resetFilters())
+//  useEffect(() => {
+//   // Define your function here
 
-  };
-
-  // Add event listeners for both events
-  window.addEventListener("beforeunload", handlePageLeave);
-  router.events.on("routeChangeStart", handlePageLeave);
-
-   return () => {
-    window.removeEventListener("beforeunload", handlePageLeave);
-    router.events.off("routeChangeStart", handlePageLeave);
-  };
-}, []);
+// }, []);
 
 console.log(loadings)
      return(
@@ -185,8 +189,8 @@ export async function getStaticProps ({params}) {
   let loadingApi = true;
 	const { slug } = params || {};
   // this will return the last params in slug like women/dress will return dress
-  const LastParam = slug.pop()
-  // let slug = 'men'
+  const LastParam = slug.pop();
+   // let slug = 'men'
 let data = {}
   // productCategoriesBySlug
   try {

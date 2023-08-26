@@ -20,8 +20,7 @@ export default function Home({footer_header,products,categoriesWithNoParent,load
  const [loading,setLoading]=useState(load);
  const router= useRouter()
 useEffect(()=>{
-  setLoading(router.isFallback
-    )
+  setLoading(router.isFallback )
 },[])
   if ( isEmpty( products ) ) {
 		return null;

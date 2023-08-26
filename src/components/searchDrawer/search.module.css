@@ -30,7 +30,9 @@ justify-content: center;
     text-decoration: none;
     color: #333;
 }
-
+.off{
+    height: 50% !important;
+}
 @media(max-width:768px){
     .off{
         height: 80% !important;
