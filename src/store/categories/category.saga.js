@@ -1,6 +1,4 @@
- import { GETCollection } from "../../firebase/firebaseMtethods/addCollectionAndDocuments";
-  import { FETCHCATEGORIESFAILD, FetchCategoriesSuccess } from "./category.action";
-import{categoriesTypes} from './category.action.types'
+  import{categoriesTypes} from './category.action.types'
 import{all,call,put,takeLatest} from 'redux-saga/effects'
 import { categoryActions } from "./category.reducer";
 import { FetchCategories } from "@/src/lib/FeatchCategories";

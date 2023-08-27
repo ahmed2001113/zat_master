@@ -1,6 +1,5 @@
 import { TextField } from "@mui/material";
-import InputFeild from "./form-elements/input-feild"
-import PropTypes from 'prop-types';
+ 
 import styles from './checkout.module.css'
 const Address =({input,handleOnChange,isShipping,isbilling})=>{
 

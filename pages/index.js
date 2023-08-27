@@ -2,37 +2,40 @@
  import RootLayout from '@/src/components/layout'
 import axios from 'axios'
 import { HEADER_FOOTER_ENDPOINT } from '../src/EndPoints'
- const inter = Inter({ subsets: ['latin'] })
   import client from '../src/utls/apolloConfigrations/apolloClient'
- import { useEffect, useState } from 'react'
+ import {  useRef, useState } from 'react'
      import SwippeCentered from '@/src/components/customsComponents/SwippeCentered'
-   import { isEmpty } from 'lodash'
-import WithNoParentCategories from '@/src/components/productWithNoCategories/WithNoParentCategories'
+ import WithNoParentCategories from '@/src/components/productWithNoCategories/WithNoParentCategories'
  import { getPage } from '@/src/utls/functions/get-page-seo'
  
 import SwippedCenteredSkelton from '@/src/components/skelton/centered'
- import { useRouter } from 'next/dist/client/router'
 import { GETCATEGORIES_WITH_NO_PARENT } from '@/src/lib/queries/categoriesWithPictures';
 import handleRedirectsAndReturnData from '../src/utls/functions/HandleRedirect.js'
 import ModifyObjectOrArray from '@/src/utls/functions/ObjectArrayChange'
 import { PRODUCTS_QUERY } from '@/src/lib/queries/Product_query'
+import Swipecarousel from '@/src/components/customsComponents/swipe_carousel/swipe.carousel'
+import { useInView } from 'framer-motion'
 export default function Home({footer_header,products,categoriesWithNoParent,load,seo}) {
  const [loading,setLoading]=useState(load);
   console.log("mount")
- 
+  let ref2=useRef();
+  let isInView2 = useInView(ref2 , {once: true});
      return (
     <>
    <RootLayout headerFooter={footer_header} seo={seo}>
 {/* {loading?<Big/>:
-    <Swipecarousel />
+
 
 }     */}
-
+    <Swipecarousel />
    {loading?
 <SwippedCenteredSkelton/>:   
   <SwippeCentered products={products}/>
 } 
-<WithNoParentCategories categories={categoriesWithNoParent}/>
+
+<div ref={ref2} style={{width:'1px',height:'1px'}}></div>
+
+{isInView2 && <WithNoParentCategories categories={categoriesWithNoParent} />}
       </RootLayout>
     </>
   )

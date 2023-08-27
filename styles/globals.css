@@ -1,12 +1,14 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @import './store.css';
 @import url(https://fast.fonts.net/t/1.css?apiType=css&projectid=455b21e6-1c48-4884-a4c1-d20842d98eaf);.mCustomScrollbar {
   -ms-touch-action: pinch-zoom;
   touch-action: pinch-zoom
 };
+@import './footer.css';
+
 html {
   scroll-behavior: smooth;
 }
@@ -489,4 +491,14 @@ p.errorMessage {
 h1.searchNotFound {
   padding: 20px;
   text-align: center;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+ 
+  background: #333 !Important;
+  border-radius: 0px;
+}.nav-pills .nav-link {
+   color: #333;
+}
+.tab-content {
+  margin-left: 20px;
 }

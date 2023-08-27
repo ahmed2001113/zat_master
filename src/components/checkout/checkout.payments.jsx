@@ -2,7 +2,7 @@ import { CheckOutSelector, UserInferomationCheckoutSelector } from "@/src/store/
 import { checkoutActions } from "@/src/store/checkoutSteps/checkoutSteps"
 import { useDispatch, useSelector } from "react-redux"
 import styles from './checkout.module.css'
-import { Button, Radio, RadioGroup, FormControlLabel, FormControl,FormLabel, AccordionSummary, Typography, AccordionDetails, TextField  } from '@mui/material';
+import { TextField  } from '@mui/material';
 import { useEffect, useState } from "react"
 import { Accordion } from "react-bootstrap";
 import { cartItems, totalPaid } from "@/src/store/cart/cart.selector";
@@ -11,9 +11,7 @@ import CheckboxField from "./form-elements/checkbox"
 import cx from 'classnames';
 import {  handleOtherPaymentMethodCheckout, handleOtherPaymentMethodCheckoutGraphed } from "./functions";
 import { useRouter } from "next/router";
- import CHECKOUT_MUTATION from "@/src/lib/mutations/checkout";
-import { useMutation } from "@apollo/client";
-import PaypalButtonCheckout from "../paypalButton/paypalButton";
+ 
 import { CartActions } from "@/src/store/cart/cart.reducer";
  const defaultUser = {
     firstname:'', 
@@ -83,7 +81,7 @@ TotalCart = item.price
   
   
       }else{
- 
+     
         const createdOrderData= await handleOtherPaymentMethodCheckout(  input, carts, setRequestError,setIsOrderProcessing,setCreatedOrderData );
 
  console.log(createdOrderData,createdOrderData,requestError)

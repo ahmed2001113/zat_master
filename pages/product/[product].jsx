@@ -8,15 +8,13 @@ import Quantity from '@/src/components/customsComponents/quantity/Quantity';
 import { HEADER_FOOTER_ENDPOINT } from '@/src/EndPoints'
 import axios from 'axios'
 import RelatedProducts from '@/src/components/relatedproducts/RelatedProducts'
-import { useRouter } from 'next/router'
- import { ProductPage } from '@/src/lib/queries/productPage'
+  import { ProductPage } from '@/src/lib/queries/productPage'
 import ReviewContainer from '@/src/components/reviewsComponents/productreviewContainter';
 import InfoSharpIcon from '@mui/icons-material/InfoSharp';
 import ImagePreview from '@/src/components/Image_preview/images_preview'
  import { ProductPathsQuery } from '@/src/lib/queries/productsPaths'
   export default function Product({product,footer_header}) {
-const router = useRouter();
- const [show ,setShow]=useState(false)
+  const [show ,setShow]=useState(false)
 const [imagePrev,setImage] = useState({});
 const [imageArray,setImageArray] =useState([])
 const {

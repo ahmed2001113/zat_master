@@ -2,9 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+ 
 import styles from './checkout.module.css'
 import { Badge, Divider, StepButton } from '@mui/material';
 import { useSelector } from 'react-redux';
@@ -13,10 +11,8 @@ import Image from 'next/image';
 import { CheckOutForm } from '@/src/components/checkout/checkoutform';
 import { CheckOutPayments } from '@/src/components/checkout/checkout.payments';
 import { currentStepSelector } from '@/src/store/checkoutSteps/checkout.selector';
-import CheckoutF from '@/src/components/checkout/newCheckoutform';
-import { ApolloProvider } from '@apollo/client';
-import client from '@/src/utls/apolloConfigrations/apolloClient';
-import PaypalButtonCheckout from '@/src/components/paypalButton/paypalButton';
+ import { ApolloProvider } from '@apollo/client';
+ import PaypalButtonCheckout from '@/src/components/paypalButton/paypalButton';
  
 export default function CheckOut() {
   const CartElments = useSelector(cartItems)

@@ -70,13 +70,12 @@ function* SignUPWithEmailANdPasswordProgress({payload}){
  const userName = displayName.join(' ')
  
 try{
-        yield put(userAction.SetLoading(false))
 
          const {user } = yield call(CreateUser,email,password);
  
 
         yield call(GetUserSnapShotData,user,{displayName:userName});
-        yield put(userAction.SetLoading(true))
+        yield put(userAction.SetLoading(false))
 
  
         //  location.href = '/'
@@ -84,6 +83,7 @@ try{
 }catch(err){
         
          yield put(userAction.signInFaild(err));
+         yield put(userAction.SetLoading(false))
 
 }
 }
@@ -108,10 +108,12 @@ try{
 // location.href = '/'
    yield call(GetUserSnapShotData,user)
    yield put(userAction.signInSuccess(user))
- 
+   yield put(userAction.SetLoading(false))
+
 }catch(err){
  
         yield put(userAction.signInFaild(err))
+        yield put(userAction.SetLoading(false))
 
 }
 }

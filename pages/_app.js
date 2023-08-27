@@ -56,7 +56,7 @@ useEffect(()=>{
 
   <Provider store={store}>
 <PayPalScriptProvider options={{
-   "clientId":`${process.env.PAYPAL_CLIENT_ID}`
+   "clientId":`Ae_63-g9AhOXT0ukqZYdnJV1VMvFtrWJlZHEPKD5y3MAlrdnRCpKGsgU51H4mqC6yPKg41d7isYp5gwl`
     
 }}>
   <ApolloProvider client={client}>
@@ -72,4 +72,3 @@ useEffect(()=>{
 
   </>
 }
-// Ae_63-g9AhOXT0ukqZYdnJV1VMvFtrWJlZHEPKD5y3MAlrdnRCpKGsgU51H4mqC6yPKg41d7isYp5gwl

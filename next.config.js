@@ -1,5 +1,6 @@
 const allowedImageWordPressDomain = new URL( process.env.PUBLIC_WEBSITE_URL ).hostname;
 const allowedImageWordPressDomainz = new URL('https://images.canadagoose.com' ).hostname;
+const Colourdany = new URL('https://res.cloudinary.com' ).hostname;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -7,7 +8,9 @@ const nextConfig = {
  
   images:{
     loader:'default',
-    domains: [ allowedImageWordPressDomain,allowedImageWordPressDomainz ],
+    domains: [ allowedImageWordPressDomain,
+      allowedImageWordPressDomainz,
+      Colourdany ],
 
   },
   async rewrites() {

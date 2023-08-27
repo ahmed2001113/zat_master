@@ -67,6 +67,7 @@ const createTheOrder = async ( orderData, setOrderFailedError, previousRequestEr
 		total: '',
 		currency: '',
 		error: '',
+		date_created:Date
 	};
 	
 	// Don't proceed if previous request has error.

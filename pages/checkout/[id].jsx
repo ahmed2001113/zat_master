@@ -15,8 +15,7 @@ import { currentStepSelector } from '@/src/store/checkoutSteps/checkout.selector
  import { ApolloProvider } from '@apollo/client';
  import * as React from 'react';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { CheckOutProduct } from '@/src/lib/queries/checkoutProduct';
+ import { CheckOutProduct } from '@/src/lib/queries/checkoutProduct';
 import PaypalButtonCheckout from '@/src/components/paypalButton/paypalButton';
 
 export default function CheckOut({product}) {

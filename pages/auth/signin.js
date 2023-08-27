@@ -1,8 +1,6 @@
  import Link from 'next/link';
 import React, { useState ,useEffect, useLayoutEffect} from 'react'
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
-import styles from './sign.module.css';
+ import styles from './sign.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { EmailSignInStart } from '@/src/store/user/user.actions';
 import { ErrorMessageSelector, loadingUser, userSelectMemo } from '@/src/store/user/user.selector';
@@ -10,6 +8,7 @@ import { useRouter } from 'next/router';
 import RootLayout from '@/src/components/layout';
 import axios from 'axios';
 import { HEADER_FOOTER_ENDPOINT } from '@/src/EndPoints';
+import FormInputComponent from '@/src/components/customsComponents/FormLayouts/FormControl';
  const intial ={email:'',password:''};
 
 const  Signin=({footer_header}) =>{
@@ -96,16 +95,26 @@ useEffect(()=>{
 <form onSubmit={onsubmit}>
  
 <>
-      <FloatingLabel
-        controlId="floatingInput"
-        label="Email address"
-        className="mb-3"
-      >
-        <Form.Control required name='email' onChange={onChange} type="email" placeholder="name@example.com" />
-      </FloatingLabel>
-      <FloatingLabel controlId="floatingPassword" label="Password">
-        <Form.Control required onChange={onChange} name='password' type="password" placeholder="Password" />
-      </FloatingLabel>
+    <FormInputComponent
+        label='Email Address'
+        required 
+        HandleChange={onChange}
+         name='email' type="email"  
+          placeholder="name@example.com" 
+            errormessage="
+           Please Enter Valid Email"
+
+          />
+       <FormInputComponent
+        label='Email Address'
+        required 
+        HandleChange={onChange}
+         name='password'type="password"  
+             errormessage="
+           Please Enter  Your Password Key"
+
+          />
+ 
       <button className='submit mt-3'  disabled={loading}
        type='submit'> 
      

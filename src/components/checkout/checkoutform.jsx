@@ -7,8 +7,7 @@ import Link from "next/link";
 import { Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Address from "./NewAddress";
-import validateAndSanitizeCheckoutForm from "@/src/validator/checkout";
-
+ 
  export const CheckOutForm = ({item})=>{
    const dispatch = useDispatch()
    const inintializeUserInferomation = useSelector(UserInferomationCheckoutSelector);

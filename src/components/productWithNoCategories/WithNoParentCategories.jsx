@@ -1,12 +1,10 @@
 import Image from 'next/image'
 import React from 'react'
-import ProdutItemMain from '../products/productMain'
-import styles from './styles.module.css'
+ import styles from './styles.module.css'
 import Link from 'next/link'
-import Product_show from '../products/productMain/product_show';
-import right from '../../../public/svgs/rightarrow.svg'
-import simpleLightbox from 'simplelightbox'
-import CustomButton from '../customsComponents/buttons/button'
+   import CustomButton from '../customsComponents/buttons/button'
+import {motion} from 'framer-motion';
+
 export default function WithNoParentCategories({categories}) {
   
   return (
@@ -17,11 +15,17 @@ export default function WithNoParentCategories({categories}) {
  
  
  return   <div key={cat?.name} className={` col-12 col-md-6 m-auto relative mt-5 ${styles.left} `} >
-        {/* <h1> Descover</h1>
-<h1>
-                Our New Arraivals <br/>
-                Of    {cat.name.toUpperCase()}
-            </h1> */}
+        
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once:false }}
+      transition={{ duration: 1 }}
+      variants={{
+        visible: { opacity: 1, scale: 1, y:0 },
+        hidden: { opacity: 0, scale: 1 , y:40}
+      }}
+    > 
         <div className={`${styles.description}`}>
         <h2>
           Shop <br/>
@@ -41,6 +45,7 @@ export default function WithNoParentCategories({categories}) {
              alt={cat?.image?.altText} srcSet={cat?.image?.srcSet} 
              height={600} width={700} 
               />
+              </motion.div>
         </div>
         
         

@@ -1,0 +1,12 @@
+.track_b{
+    background: #100d0d47;
+    border: 1px solid;
+    padding: 4px;
+    border-radius: 10px;
+    color: #000;
+    border-color: aliceblue;
+}
+.track_b:hover{
+    background: #fff;
+    color: #333;
+}

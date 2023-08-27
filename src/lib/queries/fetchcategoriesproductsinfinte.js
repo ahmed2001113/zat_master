@@ -1,27 +1,13 @@
 import gql from "graphql-tag";
 
 export const ProductsInfinteScroll= gql`
-query getProducts(
-  $first: Int,
-   $after: String, 
-  $before:
-  String, $last: Int,
-   $minPrice: Float, 
-   $maxPrice: Float,
-  $stockStatues: [StockStatusEnum],
-   $onSale: Boolean, 
-  $category: [String],
-   $orderby: [ProductsOrderbyInput]) {
+query getProducts($first: Int, $after: String, $before: String, $last: Int, $minPrice: Float, $maxPrice: Float, $stockStatues: [StockStatusEnum], $onSale: Boolean, $category: [String], $orderby: [ProductsOrderbyInput]) {
   products(
     first: $first
     after: $after
     before: $before
     last: $last
-    where: {minPrice: $minPrice, maxPrice: 
-      $maxPrice, onSale: $onSale, stockStatus: 
-      $stockStatues, categoryIn: $category,
-    	orderby:$orderby
-    	}
+    where: {minPrice: $minPrice, maxPrice: $maxPrice, onSale: $onSale, stockStatus: $stockStatues, categoryIn: $category, orderby: $orderby, type: SIMPLE}
   ) {
     pageInfo {
       hasNextPage
@@ -32,8 +18,9 @@ query getProducts(
     nodes {
       id
       slug
-      name 
+      name
       shortDescription
+      productId
       productCategories {
         nodes {
           name
@@ -47,15 +34,12 @@ query getProducts(
         uri
         id
       }
-    
       ... on SimpleProduct {
         price(format: RAW)
         regularPrice(format: RAW)
         stockStatus
-         
         stockQuantity
         onSale
-         
         galleryImages {
           nodes {
             sourceUrl

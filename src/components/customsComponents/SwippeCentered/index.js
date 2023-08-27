@@ -34,7 +34,7 @@ function SwippeCentered({products}) {
 <div >
   <CustomButton color={'#fff'} bk={'#000'}   onClick={ToShop} >
    
-   New Arrivals
+   Shop Now
   </CustomButton>
    
 </div>

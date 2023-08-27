@@ -9,7 +9,7 @@ export default function WishlistItem({item}){
      const openCart = ()=>{
   dispatch( CartActions.setCartOpen(true))
  dispatch(CartActions.addItemToCart(item))
- dispatch(wishlistActions.setWishlistOpen())
+//  dispatch(wishlistActions.setWishlistOpen())
   
 }
 const removeFromCart  =()=>{

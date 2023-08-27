@@ -1,16 +1,13 @@
 import { HEADER_FOOTER_ENDPOINT } from "@/src/EndPoints";
 import LoadingImage from "@/src/components/customsComponents/image";
 import RootLayout from "@/src/components/layout";
-import Big from "@/src/components/skelton/skeltonswippe";
-import { ProductsDataQuery } from "@/src/lib/queries/GET_PRODUCTSDATA";
+ import { ProductsDataQuery } from "@/src/lib/queries/GET_PRODUCTSDATA";
 import { productCategoriesBySlug } from "@/src/lib/queries/productsBySlug";
 import { FiltersAction } from "@/src/store/filters/filter.slice";
 import { FilterSelector } from "@/src/store/filters/filtersSelectores";
 import Store from "@/src/storeModule/store";
 import client from "@/src/utls/apolloConfigrations/apolloClient";
-import { FormattingProductsArray } from "@/src/utls/functions/GroupSubCategoriesByparentName";
-import handleRedirectsAndReturnData from "@/src/utls/functions/HandleRedirect";
-import ModifyObjectOrArray from "@/src/utls/functions/ObjectArrayChange";
+  import ModifyObjectOrArray from "@/src/utls/functions/ObjectArrayChange";
  import { GET_CATEGORIES } from "@/src/utls/queries";
 import { useLazyQuery } from "@apollo/client";
 import axios from "axios";

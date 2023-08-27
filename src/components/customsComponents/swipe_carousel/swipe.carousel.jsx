@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import React from 'react'
-import Carousel from 'react-bootstrap/Carousel';
- import styles from './carousel.module.css'
+import {Carousel} from "react-bootstrap";
+ import styles from './carousel.module.css';
+ import {motion} from 'framer-motion';
+
 export default function Swipecarousel() {
     const slides =[
         {
@@ -29,38 +31,39 @@ export default function Swipecarousel() {
 
     ]
     return (
+    
+        <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once:false }}
+        transition={{ duration: 1 }}
+        variants={{
+          visible: { opacity: 1, scale: 1, y:0 },
+          hidden: { opacity: 0, scale: 1 , y:40}
+        }}
+        >
         <Carousel>
-      <Carousel.Item className={`${styles.carousel_item}`}>
-      <Image src={slides[0].image}  alt={slides[0].title} width='4000' height={600}  />
-         <Carousel.Caption>
-          <h1>First slide label</h1>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          <button className='black'>Shop Now </button>
+          {
+            slides.map(slide=>{
+              return(
+                <Carousel.Item  >
+                <Image src={slide.image}  alt={slide.title} width='4000' height={600}  />
+                   <Carousel.Caption>
+                    <h1>First slide label</h1>
+                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <button className='black'>Shop Now </button>
+          
+                  </Carousel.Caption>
 
-        </Carousel.Caption>
       </Carousel.Item>
-      <Carousel.Item className={`${styles.carousel_item}`}>
-      <Image src={slides[1].image}  alt={slides[0].title} width='4000' height={600}  />
 
-         <Carousel.Caption>
-          <h1>Second slide label</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <button className='black'>Shop Now </button>
-
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item className={`${styles.carousel_item}`} style={{position:'relative'}}>
-      <Image src={slides[2].image} alt={slides[0].title}  width='4000' height={600}  />
- 
-         <Carousel.Caption>
-          <h1>Third slide label</h1>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-          <button className='black'>Shop Now </button>
-        </Carousel.Caption>
-      </Carousel.Item>
+              )
+            })
+          }
+   
+   
     </Carousel>
+    </motion.div>
       )
 
     }

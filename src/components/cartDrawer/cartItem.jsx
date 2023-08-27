@@ -1,9 +1,7 @@
 import { CartActions } from "@/src/store/cart/cart.reducer";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+ import { useDispatch } from "react-redux";
 import Image from "next/image";
-import { cartItems } from "@/src/store/cart/cart.selector";
-import styles  from './cart.module.css'
+ import styles  from './cart.module.css'
 import Quantity from "../customsComponents/quantity/Quantity";
 
 const  CartItem  = ({item})=>{

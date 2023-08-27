@@ -1,7 +1,6 @@
 import { CartActions } from '@/src/store/cart/cart.reducer';
 import { CartOpen, cartItems, totalCart, totalPaid } from '@/src/store/cart/cart.selector';
-import Image from 'next/image';
-import React, { useState } from 'react'
+ import React, { useState } from 'react'
 import { Offcanvas } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import styles  from './cart.module.css'

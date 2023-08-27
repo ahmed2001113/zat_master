@@ -43,6 +43,7 @@ if(action.type==='checkout/next'){
         console.log(currentUser)
     }
 }
+console.log(type)
 if(action.type==='checkout/SetUserOrder'){
     const {user:{currentUser},checkout:{orders} } = state.getState();
     if(currentUser){

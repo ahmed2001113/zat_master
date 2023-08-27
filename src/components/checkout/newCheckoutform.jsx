@@ -6,10 +6,7 @@ import Address from "./address"
 import CheckboxField from "./form-elements/checkbox"
 import validateAndSanitizeCheckoutForm from "@/src/validator/checkout"
 import cx from 'classnames';
-import { useQuery,useMutation } from "@apollo/client"
-import OrderSuccess from "./orderSuccess"
-import CHECKOUT_MUTATION from "@/src/lib/mutations/checkout"
-import { createCheckoutData, handleOtherPaymentMethodCheckout } from "./functions"
+ 
 const  CheckoutF = ()=>{
 	const initial = {
 		billing:{
