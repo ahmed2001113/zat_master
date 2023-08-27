@@ -16,6 +16,7 @@ import { currentStepSelector } from '@/src/store/checkoutSteps/checkout.selector
 import CheckoutF from '@/src/components/checkout/newCheckoutform';
 import { ApolloProvider } from '@apollo/client';
 import client from '@/src/utls/apolloConfigrations/apolloClient';
+import PaypalButtonCheckout from '@/src/components/paypalButton/paypalButton';
  
 export default function CheckOut() {
   const CartElments = useSelector(cartItems)
@@ -63,8 +64,7 @@ export default function CheckOut() {
   <div className="CheckoutCart">
     {
       CartElments.map(el=>{
-        return <>
-        <div className={`${styles.cartItem}`}>
+        return    <div  key={el.id} className={`${styles.cartItem}`}>
           <div className="row">
             <div className="col-md-3" style={{position:'relative'}}>
             <Badge badgeContent={el.quantity} color="secondary">
@@ -85,7 +85,7 @@ export default function CheckOut() {
           <Divider light />
 
         </div>
-        </>
+       
       })
     }
     
@@ -97,8 +97,9 @@ export default function CheckOut() {
 LE  {CartTotal}
 </p>
    </div>
-</div>
+   <PaypalButtonCheckout/>
 
+</div>
     </div>
 
 );

@@ -1,22 +1,19 @@
 import client from '@/src/utls/apolloConfigrations/apolloClient'
-import { All_PRODUCTS_QUERY, PRODUCTS_QUERY, PRODUCT_BY_ID } from '@/src/utls/queries'
-import React, {  useState } from 'react'
+ import React, {  useState } from 'react'
 import styles from './product.module.css'
 import Image from 'next/image'
 import Certifications from '@/src/components/certifications'
 import Quantity from '@/src/components/customsComponents/quantity/Quantity';
-import love from '../../public/svgs/love.svg'
-import RootLayout from '@/src/components/layout'
+ import RootLayout from '@/src/components/layout'
 import { HEADER_FOOTER_ENDPOINT } from '@/src/EndPoints'
 import axios from 'axios'
 import RelatedProducts from '@/src/components/relatedproducts/RelatedProducts'
 import { useRouter } from 'next/router'
-import ModifyObjectOrArray from '@/src/utls/functions/ObjectArrayChange'
-import { ProductPage } from '@/src/lib/queries/productPage'
+ import { ProductPage } from '@/src/lib/queries/productPage'
 import ReviewContainer from '@/src/components/reviewsComponents/productreviewContainter';
 import InfoSharpIcon from '@mui/icons-material/InfoSharp';
 import ImagePreview from '@/src/components/Image_preview/images_preview'
-import handleRedirectsAndReturnData from '@/src/utls/functions/HandleRedirect'
+ import { ProductPathsQuery } from '@/src/lib/queries/productsPaths'
   export default function Product({product,footer_header}) {
 const router = useRouter();
  const [show ,setShow]=useState(false)
@@ -47,8 +44,7 @@ const {
 
 
 }=product
-if(status!=="publish")return
-
+ 
 const reviews_={
     reviewCount,
     reviews,
@@ -202,22 +198,20 @@ export async function getStaticProps({params}){
         
     }
 
-    const defaultProps={
+    
+      return    {
         props:{
             product:productData||{},
             footer_header:footer_header?.data||{},
          } ,
         revalidate:10
-    }
-      return    handleRedirectsAndReturnData(defaultProps,productData)
-
-
+      }
 }
 
 export async function  getStaticPaths(){
 
     const {data} = await client.query({
-        query:All_PRODUCTS_QUERY
+        query:ProductPathsQuery
      });
      const products = data?.products?.nodes;
 

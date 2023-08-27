@@ -67,7 +67,7 @@ const FilterFunction = async()=>{
    setLoading(true)
 try{
   getData({  variables:{
-    first:10,
+    first:6,
     ...Filters,
    }})
   
@@ -100,8 +100,10 @@ const loadMore = async()=>{
 try {
   
   const data =getData({   variables:{
-    first:10,
-    after:pageInferomation.endCursor
+    first:6,
+    after:pageInferomation.endCursor,
+    ...Filters 
+
   }});
  
 console.log(data)
@@ -116,8 +118,10 @@ const loadLess = async()=>{
 
  try {
   getData({   variables:{
-    last:10,
-    before:pageInferomation.startCursor
+    last:6,
+    before:pageInferomation.startCursor,
+          ...Filters 
+
   }})
  
   setProductsData(ModifyObjectOrArray(data?.products?.nodes));
@@ -180,7 +184,7 @@ let load =false;
  try {
   const { data: {products},loading } = await client.query({
     query:ProductsInfinteScroll,
-    variables:{ first: 10, after: null }
+    variables:{ first: 6, after: null }
   });
   load=true
   categoryInferomation=products

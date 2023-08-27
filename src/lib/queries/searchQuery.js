@@ -37,6 +37,7 @@ export const SearchQuery= gql`query getProducts(
         slug
         name 
         shortDescription
+        productId
         productCategories {
           nodes {
             name

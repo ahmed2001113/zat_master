@@ -16,7 +16,9 @@ import client from '@/src/utls/apolloConfigrations/apolloClient';
 import { useRouter } from 'next/router';
 import LoadingImage from '@/src/components/customsComponents/image';
 import { useEffect, useState } from 'react';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
  config.autoAddCss = false;
+
  export default function App({ Component, pageProps }) {
 const router = useRouter()
 
@@ -51,7 +53,12 @@ useEffect(()=>{
 {
    loading?<LoadingImage/>:null
 }
+
   <Provider store={store}>
+<PayPalScriptProvider options={{
+   "clientId":`${process.env.PAYPAL_CLIENT_ID}`
+    
+}}>
   <ApolloProvider client={client}>
 
      <PersistGate  persistor={persistor}>
@@ -60,7 +67,9 @@ useEffect(()=>{
 
   </PersistGate>
      </ApolloProvider>
+  </PayPalScriptProvider>
   </Provider>
 
   </>
 }
+// Ae_63-g9AhOXT0ukqZYdnJV1VMvFtrWJlZHEPKD5y3MAlrdnRCpKGsgU51H4mqC6yPKg41d7isYp5gwl

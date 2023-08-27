@@ -13,11 +13,10 @@ export const getCreateOrderLineItems = ( products ,total=0) => {
 		return [];
 	}
  	return products?.map(
-		( { product_id, quantity } ) => {
-			console.log(product_id)
+		( item ) => {
 			return {
-				quantity,
-				product_id,
+				quantity:item?.quantity,
+				product_id:item?.productId||item?.product_id				,
  				// variation_id: '', // @TODO to be added.
 			};
 		},

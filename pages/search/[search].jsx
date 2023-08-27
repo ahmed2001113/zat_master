@@ -18,6 +18,7 @@ import axios from "axios";
 import { SearchPriceuery } from "@/src/lib/queries/searchPrice";
 import handleRedirectsAndReturnData from "@/src/utls/functions/HandleRedirect";
 import { isEqual } from "lodash";
+import { useLazyQuery } from "@apollo/client";
  const Search =({search,SearchData,footer_header,seo,price })=>{
     const dispatch = useDispatch()
     const {Filters,sort,Filtered} = useSelector(FilterSelector)
@@ -54,28 +55,34 @@ import { isEqual } from "lodash";
        window.removeEventListener("beforeunload", handlePageLeave);
        router.events.off("routeChangeStart", handlePageLeave);
      };
-   },[])
+   },[]);
+   const [getData, { loading, error, data,refetch  }] = 
+   useLazyQuery(SearchQuery,
+    {
+      onCompleted:(data)=>{
+        
+        setProductsData(ModifyObjectOrArray(data?.products?.nodes));
+        setPageInfo(data?.products?.pageInfo);
+        setLoading(loading)
+  
+  
+      }
+    }
+    );
    const FilterFunction = async()=>{
    
      setLoading(true)
 
    dispatch(FiltersAction.setLoading(false))
    try{
-    
-     const {data,loading,error}= await client.query({
-       query:SearchQuery,
-       variables:{
-         first:10,
-         ...Filters,
-         search
-        }
-     });
-     
-      setProductsData(ModifyObjectOrArray(data?.products?.nodes));
-     setPageInfo(data?.products?.pageInfo);
-     setLoading(false)
-    
-   }
+    getData({
+      variables:{
+        first:10,
+        ...Filters,
+
+        search
+       }
+    })  }
    catch(err){
      dispatch(FiltersAction.setLoading(true))
    
@@ -92,16 +99,15 @@ import { isEqual } from "lodash";
    const loadMore = async()=>{
    try {
      setLoading(true)
-     const {data,loading}= await client.query({
-       query:ProductsInfinteScroll,
-       variables:{
-         first:10,
-         after:pageInferomation.endCursor
+     getData({
+      variables:{
+        first:10,
+        after:pageInferomation.endCursor,
+        ...Filters||{},
+        search
        }
-     });
-     setLoading(loading)
-     setProductsData(ModifyObjectOrArray(data?.products?.nodes));
-     setPageInfo(data?.products?.pageInfo)
+    }) 
+    
    } catch (error) {
      setLoading(false)
    
@@ -111,16 +117,16 @@ import { isEqual } from "lodash";
    const loadLess = async()=>{
      setLoading(true)
    try {
-     const {data,loading}= await client.query({
-       query:ProductsInfinteScroll,
-       variables:{
-         last:10,
-         before:pageInferomation.startCursor
+    getData({
+      variables:{
+        last:10,
+        before:pageInferomation.startCursor,
+        ...Filters||{},
+        search
        }
-     });
-     setProductsData(ModifyObjectOrArray(data?.products?.nodes));
-     setPageInfo(data?.products?.pageInfo);
-      setLoading(loading)
+    }) 
+    
+    
    } catch (error) {
      setLoading(false)
    }
@@ -143,19 +149,23 @@ import { isEqual } from "lodash";
    
 
     
-    
+    {
+      console.log(pageInferomation.hasPreviousPage)
+    }
    
    <div className="end_nav">
-   <Button  variant="dark" onClick={loadLess} disabled={!pageInferomation.hasPreviousPage}>
+   <Button  variant="dark" onClick={loadLess}
+    disabled={!pageInferomation.hasPreviousPage}>
        
            Previous Page
        {
          loadings&&    <>loading</>
        }   
          </Button> 
-   <Button variant="dark" onClick={loadMore}   disabled={!pageInferomation.hasNextPage}>
+   <Button variant="dark" onClick={loadMore}  
+    disabled={!pageInferomation.hasNextPage}>
        
-           Next Page
+           Load More
        {
          loadings&&   <>loading</>
        }   
@@ -182,9 +192,9 @@ let seo = []
 let MinPrice= 0;
 let load =false;
 try {
-    const { data: {products},loading } = await client.query({
+     const { data: {products},loading } = await client.query({
       query:SearchQuery,
-      variables:{ first: 10, after: null , search}
+      variables:{ first: 30, after: null , search}
     });
     SearchData=products
     

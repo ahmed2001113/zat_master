@@ -5,8 +5,7 @@ import { HEADER_FOOTER_ENDPOINT } from '../src/EndPoints'
  const inter = Inter({ subsets: ['latin'] })
   import client from '../src/utls/apolloConfigrations/apolloClient'
  import { useEffect, useState } from 'react'
-import {  PRODUCTS_QUERY } from '../src/utls/queries'
-    import SwippeCentered from '@/src/components/customsComponents/SwippeCentered'
+     import SwippeCentered from '@/src/components/customsComponents/SwippeCentered'
    import { isEmpty } from 'lodash'
 import WithNoParentCategories from '@/src/components/productWithNoCategories/WithNoParentCategories'
  import { getPage } from '@/src/utls/functions/get-page-seo'
@@ -16,16 +15,11 @@ import SwippedCenteredSkelton from '@/src/components/skelton/centered'
 import { GETCATEGORIES_WITH_NO_PARENT } from '@/src/lib/queries/categoriesWithPictures';
 import handleRedirectsAndReturnData from '../src/utls/functions/HandleRedirect.js'
 import ModifyObjectOrArray from '@/src/utls/functions/ObjectArrayChange'
+import { PRODUCTS_QUERY } from '@/src/lib/queries/Product_query'
 export default function Home({footer_header,products,categoriesWithNoParent,load,seo}) {
  const [loading,setLoading]=useState(load);
- const router= useRouter();
- console.log("mount")
-useEffect(()=>{
-  setLoading(router.isFallback )
-},[]) 
-  if ( isEmpty( products ) ) {
-		return null;
-	}
+  console.log("mount")
+ 
      return (
     <>
    <RootLayout headerFooter={footer_header} seo={seo}>

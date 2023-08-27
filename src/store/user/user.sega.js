@@ -12,6 +12,7 @@ import { addUserDataBase } from '../../firebase/firebaseMtethods/adduserData';
  import { CartActions   } from '../cart/cart.reducer';
 import { userAction } from './user.reducer';
 import { wishlistActions } from '../wishlist/wishlistslice';
+import { checkoutActions } from '../checkoutSteps/checkoutSteps';
  //signing user and connect him||her to docs
 
 function* GetUserSnapShotData (userAuth, additionalDetails ){
@@ -26,11 +27,13 @@ function* GetUserSnapShotData (userAuth, additionalDetails ){
                  if(snapShot.data()){
 
 
-                        const {cart,wishlist}=snapShot.data()
+                        const {cart,wishlist,personalInferomation,orders}=snapShot.data()
                       
-                               //once user sign in 
-           yield put(CartActions.setCartItems(cart));  
-            yield put(wishlistActions.setWishListItems(wishlist));  
+               console.log(personalInferomation)                //once user sign in 
+               yield put(CartActions.setCartItems(cart));  
+               yield put(wishlistActions.setWishListItems(wishlist));  
+               yield put(checkoutActions.SetUserInferomation(personalInferomation));  
+               yield put(checkoutActions.SetUserOrders(orders));  
                  }
                    
 }

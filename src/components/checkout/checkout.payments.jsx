@@ -1,4 +1,4 @@
-import { UserInferomationCheckoutSelector } from "@/src/store/checkoutSteps/checkout.selector"
+import { CheckOutSelector, UserInferomationCheckoutSelector } from "@/src/store/checkoutSteps/checkout.selector"
 import { checkoutActions } from "@/src/store/checkoutSteps/checkoutSteps"
 import { useDispatch, useSelector } from "react-redux"
 import styles from './checkout.module.css'
@@ -8,13 +8,13 @@ import { Accordion } from "react-bootstrap";
 import { cartItems, totalPaid } from "@/src/store/cart/cart.selector";
 import Address from "./NewAddress"
 import CheckboxField from "./form-elements/checkbox"
-import validateAndSanitizeCheckoutForm from "@/src/validator/checkout"
 import cx from 'classnames';
-import { getCreateOrderData, handleOtherPaymentMethodCheckout, handleOtherPaymentMethodCheckoutGraphed } from "./functions";
-import { Router, useRouter } from "next/router";
-import { CartActions } from "@/src/store/cart/cart.reducer";
-import CHECKOUT_MUTATION from "@/src/lib/mutations/checkout";
+import {  handleOtherPaymentMethodCheckout, handleOtherPaymentMethodCheckoutGraphed } from "./functions";
+import { useRouter } from "next/router";
+ import CHECKOUT_MUTATION from "@/src/lib/mutations/checkout";
 import { useMutation } from "@apollo/client";
+import PaypalButtonCheckout from "../paypalButton/paypalButton";
+import { CartActions } from "@/src/store/cart/cart.reducer";
  const defaultUser = {
     firstname:'', 
     lastname:'',
@@ -34,6 +34,8 @@ import { useMutation } from "@apollo/client";
 export const CheckOutPayments = ({item})=>{
     const router = useRouter()
     const [value, setSelectedValue] =  useState('option1');
+    const {IsPaypal,current,total}= useSelector(CheckOutSelector);
+
     let carts = [];
     let TotalCart = 0;
     carts= useSelector(cartItems);
@@ -52,32 +54,13 @@ export const CheckOutPayments = ({item})=>{
      paymentMethod:'cod'
     }
     const [input,setInput]= useState(initial) ;
-    const [requestError,setRequestError]=useState(initial)
+    const [requestError,setRequestError]=useState(null)
     const [isOrderProcessing,setIsOrderProcessing] =useState(false);
     const [createOrderData,setCreateOrderData] = useState(initial);
     const [orderData,submitOrderData]=useState({});
     const [ createdOrderData, setCreatedOrderData ] = useState( {} );
     const [paymentMethods, setPaymentMethods] = useState([]);
-    const [checkout, {
-      data: checkoutResponse,
-      loading: checkoutLoading,
-  }] = useMutation(CHECKOUT_MUTATION, {
-     
-      onCompleted:(data)=>{
-        console.log(data);
-        setIsOrderProcessing(false)
  
-      },
-      onError: (error) => {
-          if (error) {
-            console.log(error)
-              setRequestError(error?.graphQLErrors?.[0]?.message ?? '');
-              console.log(error?.graphQLErrors?.[0]?.message);
-              setIsOrderProcessing(false)
-
-          }
-      }
-  });
 if(item){
  carts = [item]
 TotalCart = item.price
@@ -97,25 +80,15 @@ TotalCart = item.price
        } );
        
       if ( 'visa' === input.paymentMethod ) {
-        return null
-      }
-// const createdOrderData = getCreateOrderData( input, carts );
-const createdOrderData
- = await handleOtherPaymentMethodCheckout(
-  input, 
-  carts, 
-  setRequestError,
-   setIsOrderProcessing, 
-   setCreatedOrderData );
+  
+  
+      }else{
+ 
+        const createdOrderData= await handleOtherPaymentMethodCheckout(  input, carts, setRequestError,setIsOrderProcessing,setCreatedOrderData );
 
  console.log(createdOrderData,createdOrderData,requestError)
-
-//  setIsOrderProcessing(true)
-// checkout({
-//   variables: {
-//     input: createdOrderData
-// }
-// })
+      }
+ 
 
     }
 
@@ -140,12 +113,20 @@ const HandleOnChange = (event,isBillingOrShipping=false,isShipping=false)=>{
             const newState = { ...input, billing: { ...input?.billing, [ name ]: value } };
         setInput( newState );
         }
-    } else if(name==='paymentmethod'){
+    } else if(name==='paymentMethod'){
       const newState ={...input,[name]:value}
-      setInput(newState)
+      setInput(newState);
+      console.log(value)
+ if(value==="visa"){
+  dispatch(checkoutActions.SetPaymentMethod([true,TotalCart]))
+
+ }else{
+  dispatch(checkoutActions.SetPaymentMethod([false,TotalCart]))
+
+ }
+      
     }else{
-      console.log(name)
-        const newState ={...input,[name]:value}
+         const newState ={...input,[name]:value}
         setInput(newState)
      } 
 
@@ -158,34 +139,33 @@ const HandleOnChange = (event,isBillingOrShipping=false,isShipping=false)=>{
  useEffect(()=>{
 
 if(Object.keys(createdOrderData).length!==0){
-  // const {cartItems,orderCreation,TotalCart,orderInferomation}=action.payload
-  // dispatch(checkoutActions.SetUserOrder({
-  //   cartItems:carts,
-  //   orderCreation:createdOrderData,
-  //   TotalCart,
-  //   orderInferomation:input.billingDifferentThanShipping?input.billing:input.shipping
 
-  // }));
-  // dispatch(CartActions.EmptyCartItems())
-  // router.push('/checkout/thankYou')
+  if(item){
+    dispatch(checkoutActions.SetUserOrder({
+      cartItems:carts,
+      orderCreation:createdOrderData,
+      TotalCart,
+      orderInferomation:input.billingDifferentThanShipping?input.billing:input.shipping
+  
+    }));
+  }else{
+      //  checkout/SetUserOrder
+   dispatch(checkoutActions.SetUserOrder({
+    cartItems:carts,
+    orderCreation:createdOrderData,
+    TotalCart,
+    orderInferomation:input.billingDifferentThanShipping?input.billing:input.shipping
+
+  }));
+    dispatch(CartActions.EmptyCartItems())
+
+  }
+
+  router.push('/checkout/thankYou')
 }
 
  },[createdOrderData]);
- useEffect( ()=>{
-
-      const    fetchPaymentMethods=async()=> {
-    try {
-      const response = await fetch('/api/getPaymentMethods');
-      const data = await response.json();
-      console.warn(data)
-      setPaymentMethods(data);
-    } catch (error) {
-      console.error(error);
-    }
-    fetchPaymentMethods()
-    console.log(paymentMethods)
-  }
- },[])
+ 
     const addressString = `${inintializeUserInferomation?.firstname} 
     ${inintializeUserInferomation?.lastname}, ${inintializeUserInferomation?.streetaddress}/${inintializeUserInferomation?.apartment}/${inintializeUserInferomation?.city},
      ${inintializeUserInferomation?.government}, ${inintializeUserInferomation?.zip}, Egypt`;
@@ -249,15 +229,16 @@ if(Object.keys(createdOrderData).length!==0){
 			{/*Check Payments*/}
 			<div className="form-check woo-next-payment-input-container mt-2">
 				<label className="form-check-label">
-					<input onChange={ HandleOnChange } value="visa" disabled
+					<input onChange={ HandleOnChange } value="visa"  
            className="form-check-input mr-3 ra" name="paymentMethod" 
            type="radio" checked={'visa' === input.paymentMethod}/>
 					<span className="woo-next-payment-content">Pay with Visa</span>
 				</label>
 			</div>
-      <div id="fawaterkDivId"></div>
 
 </div>
+
+ 
 <TextField fullWidth  name="ordernotes" label="ORDER NOTE " className="notes mt-5" onChange={HandleOnChange} id="fullWidth" />
 <CheckboxField  
 									name="billingDifferentThanShipping"
@@ -281,23 +262,25 @@ if(Object.keys(createdOrderData).length!==0){
 									/>
 								</div>
 							) : null }
+{
+  !IsPaypal&&<div className="woo-next-place-order-btn-wrap mt-5">
+  <button
+    disabled={ isOrderProcessing }
+    className={ cx(
+      'bg-black-600 black centered ml-auto p-5 text-white px-5 py-3 rounded-sm w-auto xl:w-full',
+      { 'opacity-50': isOrderProcessing },
+    ) }
+    type="submit"
+  >
+    Complete the order
+  </button>
+</div>
+}
 
-<div className="woo-next-place-order-btn-wrap mt-5">
-								<button
-									disabled={ isOrderProcessing }
-									className={ cx(
-										'bg-black-600 black centered ml-auto p-5 text-white px-5 py-3 rounded-sm w-auto xl:w-full',
-										{ 'opacity-50': isOrderProcessing },
-									) }
-									type="submit"
-								>
-									Complete the order
-								</button>
-							</div>
 
 	{/* Checkout Loading*/ }
-    { isOrderProcessing && <p>Processing Order...</p> }
-							{ requestError && <p>
+    { isOrderProcessing && <p>Processing The Order...</p> }
+							{ requestError&& <p>
          There is an error while Processing Your Order Please Try Again
                 </p> }
 </form>

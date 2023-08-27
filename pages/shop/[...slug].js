@@ -25,6 +25,7 @@ import { Button } from "react-bootstrap";
 
 const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi})=>{
   console.log(DefaultData)
+  console.log(DefaultData)
   const [productsData,setProductsData] =useState(ModifyObjectOrArray(DefaultData?.products?.nodes));
   const {Filters,sort,Filtered} = useSelector(FilterSelector)
   const [loadings,setLoading]=useState(loadingApi)
@@ -44,7 +45,7 @@ const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi})=>{
       // productsData = DefaultData;
     }
   }, [DefaultData]); // Pass DefaultData as a dependency
-  const [getData, { loading, error, data,refetch  }] =
+  const [getData, { loading, error, data,refetch,fetchMore  }] =
    useLazyQuery(productCategoriesBySlug,
     {
       onCompleted:(data)=>{
@@ -73,7 +74,7 @@ console.log("run")
     try{
     const {data:NewData}=await  getData({
         variables:{
-          first:10,
+          first:6,
           ...Filters,
           slug
           }
@@ -97,7 +98,8 @@ console.log("run")
     setLoading(true)
     getData({
       variables:{
-        first:10,
+        first:6,
+        ...Filters,
         after:pageInferomation.endCursor,
         slug:slug
       }
@@ -110,9 +112,11 @@ const loadLess = async()=>{
   setLoading(true)
   getData({
     variables:{
-      last:10,
+      last:6,
       before:pageInferomation.startCursor,
+      ...Filters,
       slug:slug
+
     }
   })
    
@@ -197,7 +201,7 @@ let data = {}
 
    const  {data:{productCategories:{nodes}},loading,error}  = await client.query({
     query:productCategoriesBySlug ,
-    variables:{slug:LastParam,first:10}
+    variables:{slug:LastParam,first:6}
   });
   loadingApi=loading
  data =nodes[0]
@@ -216,22 +220,19 @@ let data = {}
      }catch(err){
       console.log(err)
     }
-const defaultProps={
-  props:{
-    data:data||{},
-    footer_header:footer_header?.data,
-    price:[MinPrice,MaxPrice]||[],
-    slug:LastParam,
-    loadingApi
+ 
 
-  },
-  revalidate:10
-}
-
-
-    return  handleRedirectsAndReturnData(defaultProps,data)
-
-         
+    return  {
+      props:{
+        data:data||{},
+        footer_header:footer_header?.data,
+        price:[MinPrice,MaxPrice]||[],
+        slug:LastParam,
+        loadingApi
+    
+      },
+      revalidate:10
+    }
      
 
 }

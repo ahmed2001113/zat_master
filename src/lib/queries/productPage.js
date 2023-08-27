@@ -12,6 +12,7 @@ query Product($id: ID!) {
     productCurrency
     shortDescription
     reviewCount
+    productId
     image {
       id
       sourceUrl(size: LARGE)

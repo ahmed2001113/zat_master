@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const InitialiZing ={
     current:0,
     steps:['Inferomation', 'Payment'],
+
     userInferomations:{
     firstname:'', 
     lastname:'',
@@ -21,7 +22,13 @@ const InitialiZing ={
         TotalCart:0,
         orderInferomation:{}
      },
-     orders:[]
+     orders:[],
+      
+        paymentMethod:false,
+        total:0 
+
+
+
  }
 
 
@@ -49,6 +56,15 @@ export const CheckOutSlice = createSlice({
         state.order.orderCreator=orderCreation;
         state.order.orderInferomation=orderInferomation;
         state.orders.push(action.payload)
+        },
+        SetUserOrders:(action,state)=>{
+action.orders=state.payload
+        },
+        SetPaymentMethod:(state,action)=>{
+            console.log('dispatched')
+            const [isPaypal,amount]=action.payload
+            state.IsPaypal =  isPaypal,
+            state.total=amount
         }
     }
 })

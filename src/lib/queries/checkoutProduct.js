@@ -7,6 +7,7 @@ query Product($id: ID!) {
     name
     slug
     averageRating
+    productId
 ...on SimpleProduct{
   price(format:RAW)
 }
@@ -17,7 +18,7 @@ query Product($id: ID!) {
       srcSet(size: MEDIUM)
       sourceUrl(size: MEDIUM)
     }
-    content(format: RAW)
+
   }
 }
 `
