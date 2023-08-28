@@ -2,6 +2,7 @@ import React from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import '../../../../public/imagewitherased/slide1.png'
 import styles from './carousel.module.css'
+import Image from 'next/image';
 function CustomCarouselComponent() {
     const slides =[
         {
@@ -37,7 +38,9 @@ function CustomCarouselComponent() {
                 <Carousel.Item 
                 className={`${styles.custom}  `}
                  key={item.id}> 
-                <img
+                <Image
+                height={500}
+                width={1000}
                   className="d-block w-100  "
                   src={`${item.image}`}
                   alt={item.title}
