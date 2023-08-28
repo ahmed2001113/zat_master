@@ -1,8 +1,4 @@
-.divrow{
-    border: 1px solid black !important;
- height: 50vh;
-display: flex;
-}
+ 
 .left{
     width: 70%;
 display: flex;

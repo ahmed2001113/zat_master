@@ -11,27 +11,23 @@ import client from "@/src/utls/apolloConfigrations/apolloClient";
  import { GET_CATEGORIES } from "@/src/utls/queries";
 import { useLazyQuery } from "@apollo/client";
 import axios from "axios";
-// import { getProductsData } from "@/src/utls/productCategories";
-import gql from "graphql-tag";
 import { isEqual } from "lodash";
-import Image from "next/image";
+// import { getProductsData } from "@/src/utls/productCategories";
+ import Image from "next/image";
 import { useRouter } from "next/router"
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect,  useState } from "react";
 import { Button } from "react-bootstrap";
  import { useDispatch, useSelector } from "react-redux";
 
 const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi})=>{
-  console.log(DefaultData)
-  console.log(DefaultData)
+  
   const [productsData,setProductsData] =useState(ModifyObjectOrArray(DefaultData?.products?.nodes));
   const {Filters,sort,Filtered} = useSelector(FilterSelector)
   const [loadings,setLoading]=useState(loadingApi)
   const dispatch = useDispatch()
   const {description,  image, name } =DefaultData
   const [pageInferomation,setPageInfo]=useState(DefaultData?.products?.pageInfo)
-  const router = useRouter();
-  console.log(productsData)
-   
+     
    useEffect(() => {
     // Compare the previous and current DefaultData objects
     if (!isEqual(DefaultData, productsData)) {
@@ -42,6 +38,8 @@ const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi})=>{
       // productsData = DefaultData;
     }
   }, [DefaultData]); // Pass DefaultData as a dependency
+
+ 
   const [getData, { loading, error, data,refetch,fetchMore  }] =
    useLazyQuery(productCategoriesBySlug,
     {
@@ -63,13 +61,12 @@ const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi})=>{
     }
     );
   
-console.log("run")
-    const FilterFunction = async()=>{
+     const FilterFunction = async()=>{
       setLoading(true)
     
      
     try{
-    const {data:NewData}=await  getData({
+  getData({
         variables:{
           first:6,
           ...Filters,
@@ -122,13 +119,9 @@ const loadLess = async()=>{
 }
 
  
-//  useEffect(() => {
-//   // Define your function here
+ 
 
-// }, []);
-
-console.log(loadings)
-     return(
+      return(
 
         <>
       {
@@ -189,16 +182,12 @@ export async function getStaticProps ({params}) {
   let MinPrice= 0;
   let loadingApi = true;
 	const { slug } = params || {};
-  // this will return the last params in slug like women/dress will return dress
-  const LastParam = slug.pop();
-   // let slug = 'men'
-let data = {}
-  // productCategoriesBySlug
-  try {
+  let data = {}
+   try {
 
    const  {data:{productCategories:{nodes}},loading,error}  = await client.query({
     query:productCategoriesBySlug ,
-    variables:{slug:LastParam,first:6}
+    variables:{slug:slug,first:6}
   });
   loadingApi=loading
  data =nodes[0]
@@ -224,7 +213,7 @@ let data = {}
         data:data||{},
         footer_header:footer_header?.data,
         price:[MinPrice,MaxPrice]||[],
-        slug:LastParam,
+        slug:slug,
         loadingApi
     
       },
@@ -240,21 +229,12 @@ export async function getStaticPaths() {
     const { data } = await client.query({
       query: GET_CATEGORIES
     });
+    console.log(data)
    const categories = data?.productCategories?.nodes;
-      let paths = [];
-    for (const category of categories) {
-      // Add the top-level category path
-      paths.push({ params: { slug: [category.slug] } });
-  
-    //   Check if the category has any children
-      // if (category.children?.nodes.length > 0) {
-      //   // Add the child category paths
-      //   for (const childCategory of category.children?.nodes) {
-      //     paths.push({ params: { slug: [category.slug, childCategory.slug] } });
-      //   }
-      // }
-    }
-  
+    const paths=   categories.map(item=>{
+          console.log(item)
+          return {params:{slug:item.slug}}
+        })
     // We'll pre-render only these paths at build time.
     // { fallback: false } means other routes should 404.
     return { paths, fallback: false };

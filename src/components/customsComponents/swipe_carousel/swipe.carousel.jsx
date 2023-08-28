@@ -46,7 +46,7 @@ export default function Swipecarousel() {
           {
             slides.map(slide=>{
               return(
-                <Carousel.Item  >
+                <Carousel.Item key={slide.id} >
                 <Image src={slide.image}  alt={slide.title} width='4000' height={600}  />
                    <Carousel.Caption>
                     <h1>First slide label</h1>

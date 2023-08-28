@@ -70,11 +70,11 @@ const {open,product}= useSelector(previewData);
  
   {product.stockStatus ==="IN_STOCK"?
   <p divlassName={`${styles.stock}`}>
-<i  class="fa-solid fa-circle fa-beat  s me-2" style={{color:'#54c63a',fontSize:'10px'}}></i>
+<i  className="fa-solid fa-circle fa-beat  s me-2" style={{color:'#54c63a',fontSize:'10px'}}></i>
   inStock Ready To Ship
 </p>:
 <p className={`${styles.stock} `}>
-<i  class="fa-solid fa-circle text-danger me-2"></i>
+<i  className="fa-solid fa-circle text-danger me-2"></i>
 
 out of stock
 </p>

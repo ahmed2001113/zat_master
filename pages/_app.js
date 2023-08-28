@@ -18,8 +18,11 @@ import LoadingImage from '@/src/components/customsComponents/image';
 import { useEffect, useState } from 'react';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
  config.autoAddCss = false;
+ import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
 
- export default function App({ Component, pageProps }) {
+    loadDevMessages();
+   loadErrorMessages();
+  export default function App({ Component, pageProps }) {
 const router = useRouter()
 
    const [loading,setLoading]=useState();

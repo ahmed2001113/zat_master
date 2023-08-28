@@ -32,7 +32,7 @@ const removeFromCart  =()=>{
         }</h6>
 <Tooltip placement="right" title="Remove Form WishList">
 <button className={`${styles.button}`} onClick={removeFromCart}>
-            saved <i class="fa-solid fa-heart"></i>
+            saved <i className="fa-solid fa-heart"></i>
         </button>
 
 </Tooltip>
