@@ -74,11 +74,11 @@ import { useRouter } from 'next/router';
         <div className={`${styles.cartItem}`}>
           <div className="row">
             <div className="col-md-3" style={{position:'relative'}}>
-            <Badge badgeContent={el.quantity} color="secondary">
+            <Badge badgeContent={el?.quantity} color="secondary">
 
               <Image className={`${styles.image}`} 
-              src={`${el.images[0].sourceUrl}`} width={70}
-              alt={el.images[0]?.altText}
+              src={`${el?.images?el?.images[0].sourceUrl:el.image?.sourceUrl}`} width={70}
+              alt={el?.images?el.images[0].sourceUrl:el.image?.altText}
               height={70}/>
               </Badge>
             </div>

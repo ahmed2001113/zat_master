@@ -7,13 +7,11 @@ import StepLabel from '@mui/material/StepLabel';
   import styles from './checkout.module.css'
 import { Badge, Divider, StepButton } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { cartItems, totalCart, totalPaid } from '@/src/store/cart/cart.selector';
-import Image from 'next/image';
+ import Image from 'next/image';
 import { CheckOutForm } from '@/src/components/checkout/checkoutform';
 import { CheckOutPayments } from '@/src/components/checkout/checkout.payments';
 import { currentStepSelector } from '@/src/store/checkoutSteps/checkout.selector';
- import { ApolloProvider } from '@apollo/client';
- import * as React from 'react';
+  import * as React from 'react';
 import { useRouter } from 'next/router';
  import { CheckOutProduct } from '@/src/lib/queries/checkoutProduct';
 import PaypalButtonCheckout from '@/src/components/paypalButton/paypalButton';
@@ -50,11 +48,9 @@ export default function CheckOut({product}) {
           <React.Fragment>
             
             <div className={`${styles.checkContent}`}>
-              <ApolloProvider client={client}>
-
+ 
            <Component item={product}/>
-              </ApolloProvider>
-
+ 
          
          </div>
         
@@ -84,19 +80,31 @@ export default function CheckOut({product}) {
  LE {product.price} 
 </p>
 </div>
+
           </div>
           <Divider light />
-
-    
-    
-   </div>
- 
-   <div className="total centered">
-<h6>Total</h6>
+          <div className="total centered">
+<h6>SubTotal Total</h6>
 <p>
 LE  {CartTotal}
 </p>
    </div>
+          <div className="total centered">
+<h6>Shipping </h6>
+<p>
+65   LE   
+</p>
+   </div>
+    
+   <div className="total centered">
+<h6>Total</h6>
+<p>
+LE  {(+CartTotal+65)}
+</p>
+   </div>
+   </div>
+ 
+   
    <PaypalButtonCheckout
    
    />

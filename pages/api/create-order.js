@@ -27,7 +27,7 @@ export default async function handler( req, res ) {
 		currency: '',
 		error: '',
 		status:'',
-		date_created:Date
+		date_created:''
 	};
 	
 	if ( isEmpty( req.body ) ) {
@@ -49,7 +49,7 @@ export default async function handler( req, res ) {
 		responseData.total = data.total;
 		responseData.currency = data.currency;
 		responseData.paymentUrl = data.payment_url;
-		responseData.date_created=date_created;
+		responseData.date_created=data.date_created;
 		
 
  		console.log(data)

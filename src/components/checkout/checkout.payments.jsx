@@ -2,10 +2,9 @@ import { CheckOutSelector, UserInferomationCheckoutSelector } from "@/src/store/
 import { checkoutActions } from "@/src/store/checkoutSteps/checkoutSteps"
 import { useDispatch, useSelector } from "react-redux"
 import styles from './checkout.module.css'
-import { TextField  } from '@mui/material';
+import { Breadcrumbs, TextField, Typography  } from '@mui/material';
 import { useEffect, useState } from "react"
-import { Accordion } from "react-bootstrap";
-import { cartItems, totalPaid } from "@/src/store/cart/cart.selector";
+ import { cartItems, totalPaid } from "@/src/store/cart/cart.selector";
 import Address from "./NewAddress"
 import CheckboxField from "./form-elements/checkbox"
 import cx from 'classnames';
@@ -13,7 +12,8 @@ import {  handleOtherPaymentMethodCheckout, handleOtherPaymentMethodCheckoutGrap
 import { useRouter } from "next/router";
  
 import { CartActions } from "@/src/store/cart/cart.reducer";
- const defaultUser = {
+import Link from "next/link";
+  const defaultUser = {
     firstname:'', 
     lastname:'',
     phone:'',
@@ -163,14 +163,30 @@ if(Object.keys(createdOrderData).length!==0){
 }
 
  },[createdOrderData]);
- 
+ const breadcrumbs = [
+  <Link underline="hover" key="1" color="inherit" href="/" 
+  className="link" >
+    Home
+  </Link>,
+  ,
+  <button key="3" color="text.primary" onClick={HandlePrev} className="link">
+Shoping Information
+
+  </button>,
+  <Typography key="3" color="text.primary" className="link">
+Billing  Information
+
+  </Typography>,
+];
     const addressString = `${inintializeUserInferomation?.firstname} 
     ${inintializeUserInferomation?.lastname}, ${inintializeUserInferomation?.streetaddress}/${inintializeUserInferomation?.apartment}/${inintializeUserInferomation?.city},
      ${inintializeUserInferomation?.government}, ${inintializeUserInferomation?.zip}, Egypt`;
     return(
     
     <>
-    
+     <Breadcrumbs separator="›" aria-label="breadcrumb">
+        {breadcrumbs}
+      </Breadcrumbs>
     <div className={`${styles.container} mt-5`}>
         <div className={`${styles.element}`}>
             <p>contact</p>
@@ -278,8 +294,11 @@ if(Object.keys(createdOrderData).length!==0){
 
 	{/* Checkout Loading*/ }
     { isOrderProcessing && <p>Processing The Order...</p> }
-							{ requestError&& <p>
-         There is an error while Processing Your Order Please Try Again
+							{ requestError&& <p className="error_Order mt-2" >
+         There is an error while Processing Your Order Please
+         check Your clock 
+         and Try Again 
+         OR Contact Us
                 </p> }
 </form>
     </>:null}
@@ -290,21 +309,7 @@ if(Object.keys(createdOrderData).length!==0){
 </>
  </div>
  
- {/* <FormControl>
-  <FormLabel id="demo-controlled-radio-buttons-group">     
- </FormLabel>
-  <RadioGroup
-    aria-labelledby="demo-controlled-radio-buttons-group"
-    name="controlled-radio-buttons-group"
-    value={value}
-    onChange={handleChange}
-  >
-    <FormControlLabel   className="radio"
- value="option1" control={<Radio />} label=" Same as shipping address" />
-    <FormControlLabel   className="radio"
-value="option2" control={<Radio />} label="Use a different billing address" />
-  </RadioGroup>
-</FormControl> */}
+ 
     </div>
  
       </>

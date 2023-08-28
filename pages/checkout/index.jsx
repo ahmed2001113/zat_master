@@ -11,8 +11,7 @@ import Image from 'next/image';
 import { CheckOutForm } from '@/src/components/checkout/checkoutform';
 import { CheckOutPayments } from '@/src/components/checkout/checkout.payments';
 import { currentStepSelector } from '@/src/store/checkoutSteps/checkout.selector';
- import { ApolloProvider } from '@apollo/client';
- import PaypalButtonCheckout from '@/src/components/paypalButton/paypalButton';
+  import PaypalButtonCheckout from '@/src/components/paypalButton/paypalButton';
  
 export default function CheckOut() {
   const CartElments = useSelector(cartItems)
@@ -42,11 +41,9 @@ export default function CheckOut() {
           <React.Fragment>
             
             <div className={`${styles.checkContent}`}>
-              <ApolloProvider client={client}>
-
+ 
            <Component />
-              </ApolloProvider>
-
+ 
          
          </div>
         
@@ -86,11 +83,22 @@ export default function CheckOut() {
     }
     
    </div>
- 
+   <div className="total centered">
+<h6>Sub Total </h6>
+<p>
+  {CartTotal} LE
+</p>
+   </div>
+   <div className="total centered">
+<h6>Shipping </h6>
+<p>
+65,00  LE   
+</p>
+   </div>
    <div className="total centered">
 <h6>Total</h6>
 <p>
-LE  {CartTotal}
+LE  {(+CartTotal+65)}
 </p>
    </div>
    <PaypalButtonCheckout/>

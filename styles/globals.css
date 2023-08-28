@@ -308,6 +308,12 @@ text-decoration: none;
 .MuiFormControl-root.css-1nrlq1o-MuiFormControl-root{
   width: 100%;
 }
+p.error_Order {
+  background: #6b4d71;
+  color: #fff;
+  width: fit-content;
+  padding: 10px;
+}
 svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-11zohuh-MuiSvgIcon-root {
   border-color: #333 !IMPORTANT;
   background: #000;

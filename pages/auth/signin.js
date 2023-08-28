@@ -81,7 +81,7 @@ useEffect(()=>{
 
 <div className='container mt-5'>
 
-<div className='row main'>
+<div className='row  ' style={{height:'100vh'}}>
 <div className={`col-md-6 ${styles.left}`}>
 <div className={`${styles.g}`}>
     

@@ -3,8 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 
 function OrderStatuesModal({show,setShow,statues}) {
-  console.log(statues)
-const {data}= statues;
+
+  const {data}= statues;
    return (
     <>
    

@@ -1,10 +1,21 @@
-import { TextField } from "@mui/material";
+import { InputLabel, MenuItem, Select, TextField,FormControl } from "@mui/material";
  
 import styles from './checkout.module.css'
-const Address =({input,handleOnChange,isShipping,isbilling})=>{
-
- 
-
+import { useEffect, useState } from "react";
+import client from "@/src/utls/apolloConfigrations/apolloClient";
+import { EgyptStateQuery } from "@/src/lib/queries/EgyptStatesQuery";
+ const Address =({input,handleOnChange,isShipping,isbilling,gov})=>{
+const [states,setStates]=useState([])
+ useEffect(()=>{
+(async()=>{
+  const {data}  =await client.query({
+    query:EgyptStateQuery
+  });
+  setStates(data.allowedCountryStates)
+})();
+console.log(states)
+ },[])
+console.log(gov)
     return(<>
    <div className={`${styles.wrapper}`}>
 		<TextField
@@ -40,6 +51,15 @@ const Address =({input,handleOnChange,isShipping,isbilling})=>{
          className={`${styles.input}`}
 
         />
+    
+    <TextField
+					name="phone"
+					defaultValue={input?.phone}
+					required
+					onChange={handleOnChange}
+					label="Phone"
+          className={`${styles.input}`}
+				/>
     </div>
     
  
@@ -56,6 +76,7 @@ const Address =({input,handleOnChange,isShipping,isbilling})=>{
 
 
         />
+      
     </div>
  
 <div className={`${styles.wrapper}`}>
@@ -85,14 +106,30 @@ const Address =({input,handleOnChange,isShipping,isbilling})=>{
  
         />
  
-				<TextField
-					name="phone"
-					defaultValue={input?.phone}
-					required
-					onChange={handleOnChange}
-					label="Phone"
-          className={`${styles.input}`}
-				/>
+               <FormControl   style={{marginLeft:'auto'}}>
+      <InputLabel  >government</InputLabel>
+      <Select
+         label="government"
+        onChange={handleOnChange}
+        required
+        name="state"
+      >
+        <MenuItem value="">
+         </MenuItem>
+        {states.map(state=>{
+          return(
+            <MenuItem key={state.name} value={state.code}>
+              
+              {
+                state.name
+              }
+            </MenuItem>
+
+          )
+        })}
+ 
+      </Select>
+    </FormControl>
 </div>
     
 		 

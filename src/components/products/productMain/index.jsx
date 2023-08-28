@@ -10,19 +10,28 @@ import { wishlistActions } from '@/src/store/wishlist/wishlistslice';
 import {motion, useInView} from 'framer-motion';
 
 import CustomButton_2 from '../../customsComponents/buttons/CustomButton_2';
+import { wishlistSelector } from '@/src/store/wishlist/wishlistSelector';
+import AddToWishLIst from '@/src/utls/GlobalFunctions/AddToWishList';
+import { userSelectMemo } from '@/src/store/user/user.selector';
+import { UploadUserDataStart } from '@/src/store/user/user.actions';
 function  ProdutItemMain({product,isLove=false,className}) {
  const dispatch= useDispatch();
 
  const OpenPreview =()=> dispatch(PreviewActions.OPENPREVIEW(product));
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-  const openCart = ()=>{
+const {wishlistItems}=useSelector(wishlistSelector);
+const user = useSelector(userSelectMemo);
+   const openCart = ()=>{
   dispatch( CartActions.setCartOpen(true))
  dispatch(CartActions.addItemToCart(product))
   
 }
  const addToWishlist =()=>{
-      dispatch(wishlistActions.setWishListItem(product))
- }
+  dispatch(wishlistActions.setWishListItem(product))
+
+// AddToWishLIst(wishlistItems,dispatch,product,user)
+// dispatch(UploadUserDataStart({'wishlist':wishlistItems},{...user}))
+}
   
  
 return (

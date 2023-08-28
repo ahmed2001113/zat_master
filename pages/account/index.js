@@ -12,13 +12,14 @@ import { HEADER_FOOTER_ENDPOINT } from '@/src/EndPoints';
 import { useSelector } from 'react-redux';
 import { userSelectMemo } from '@/src/store/user/user.selector';
 import { useRouter } from 'next/router';
+import LoadingImage from '@/src/components/customsComponents/image';
 function User({seo,footer_header}) {
 
   const user = useSelector(userSelectMemo);
     const router =useRouter()
-    // if(!user){
-    //   router.push('/')
-    // }
+    if(!user){
+      router.push('/')
+    }
   return (
    <>
    
@@ -26,7 +27,7 @@ function User({seo,footer_header}) {
 
    <RootLayout headerFooter={footer_header} seo={seo}>
 {
-  user&&<div className={`${styles.center} container-fluid`}>
+  user?<div className={`${styles.center} container-fluid`}>
   <Tab.Container id="left-tabs-example" defaultActiveKey="Orders"  >
   <Row style={{width:'100%'}}>
     <Col sm={3}>
@@ -54,7 +55,8 @@ function User({seo,footer_header}) {
     </Col>
   </Row>
 </Tab.Container>
-</div>
+</div>:
+<LoadingImage/>
 
 }
 

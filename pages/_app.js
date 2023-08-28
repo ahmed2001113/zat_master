@@ -1,3 +1,4 @@
+import client from '@/src/utls/apolloConfigrations/apolloClient';
  import { FetchCategoriesStart } from '@/src/store/categories/category.action';
 import { persistor, store } from '@/src/store/store';
 import '@/styles/globals.css'
@@ -12,8 +13,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import { PersistGate } from 'redux-persist/integration/react';
 import { checkUserSession } from '@/src/store/user/user.actions';
  import { ApolloProvider } from '@apollo/client';
-import client from '@/src/utls/apolloConfigrations/apolloClient';
-import { useRouter } from 'next/router';
+ import { useRouter } from 'next/router';
 import LoadingImage from '@/src/components/customsComponents/image';
 import { useEffect, useState } from 'react';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';

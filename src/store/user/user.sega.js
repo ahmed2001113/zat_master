@@ -195,11 +195,13 @@ function* UploadUserImageStart(){
 // upload user start 
 function* UploadUserDataProgress({payload:{data,user}}){
 
-        
+        console.log(data,user)
         yield call(addUserDataBase,data,user);
         const {currentUser} = yield call(OnAuthChangesAsync);
         const snapShot = yield call(GetUserFromDocs,currentUser);
         const {id} =snapShot
+
+        console.log(currentUser,id,snapShot)
          yield put(userAction.UploadUserDataSuccess({id,...snapShot.data()}))
 }
 

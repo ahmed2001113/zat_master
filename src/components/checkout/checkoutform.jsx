@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Address from "./NewAddress";
+import { userSelectMemo } from "@/src/store/user/user.selector";
  
  export const CheckOutForm = ({item})=>{
    const dispatch = useDispatch()
@@ -14,7 +15,7 @@ import Address from "./NewAddress";
    const [input,setInput] = useState(inintializeUserInferomation)
   const [data,setData] = useState([]);
  const [isFormValid, setIsFormValid] = useState(false);
- 
+ const user = useSelector(userSelectMemo)
 const OnSubmit=(e)=>{
   e.preventDefault();
  
@@ -48,17 +49,11 @@ const HandleOnChange = (event,isShipping,isBilling)=>{
       
  
       const breadcrumbs = [
-        <Link underline="hover" key="1" color="inherit" href="/" className="link" >
+        <Link underline="hover" key="1" color="inherit" href="/" 
+        className="link" >
           Home
         </Link>,
-        <Link
-           key="2"
-          color="inherit"
-          href="/cart"
-           className="link"
-        >
-          cart
-        </Link>,
+        ,
         <Typography key="3" color="text.primary" className="link">
      Shoping Information
 
@@ -78,16 +73,19 @@ const HandleOnChange = (event,isShipping,isBilling)=>{
        <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 mt-4 text-gray-900">SHoping  Information</h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
-      <div className="si" style={{textTransform:'uppercase'}}>
+            
+{
+  !user&& <div className="si" style={{textTransform:'uppercase'}}>
         sign Up for Best Experince
-       
 
       <Link href="/auth/signup" className="mt-1 ms-2 text-sm leading-6 text-gray-600">
           sign up
           </Link>
 
       </div>
-      
+ 
+    
+}
       <p   className="mb-1">
      Contacts    </p>
 
@@ -95,7 +93,7 @@ const HandleOnChange = (event,isShipping,isBilling)=>{
     input={input}
     handleOnChange={(event)=>HandleOnChange(event,true,true)}
     isShipping
-    
+    gov={data}
     />
 
      

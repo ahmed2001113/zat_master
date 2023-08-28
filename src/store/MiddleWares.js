@@ -14,7 +14,7 @@ next(action)
 console.log('NextState:',state.getState());
 
 
-if(action.type.slice(0,4) ==='cart'){
+if(action.type.slice(0,4) ==='cart' &&action.type!=='cart/setCartItems'){
     const {user:{currentUser},cart:{items} } = state.getState()
 if(currentUser){
 
@@ -24,7 +24,8 @@ if(currentUser){
 }
 
 if(action.type==='wishlist/setWishListItem'){
-    const {user:{currentUser},wishlist:{wishlistItems} } = state.getState()
+    const {user:{currentUser},wishlist:{wishlistItems} } = state.getState();
+    console.log(currentUser)
 if(currentUser){
  state.dispatch(UploadUserDataStart({'wishlist':wishlistItems},currentUser))
 }
@@ -44,8 +45,10 @@ if(action.type==='checkout/next'){
     }
 }
 console.log(type)
-if(action.type==='checkout/SetUserOrder'){
+if(type==='checkout/SetUserOrder'||type==='cart/EmptyCartItems'){
+    console.log(type)
     const {user:{currentUser},checkout:{orders} } = state.getState();
+    console.log(orders,currentUser)
     if(currentUser){
     state.dispatch(UploadUserDataStart({'orders':orders},currentUser))
 }

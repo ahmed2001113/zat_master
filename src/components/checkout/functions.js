@@ -59,6 +59,13 @@ const getCreateOrderData = ( order, products ) => {
 		payment_method: order?.paymentMethod,
 		payment_method_title: order?.paymentMethod,
 		line_items: getCreateOrderLineItems( products ),
+		shipping_lines: [
+			{
+			  method_id: "flat_rate",
+			  method_title: "Flat Rate",
+			  total: "65.00"
+			}
+		  ]
 	};
 };
 const createTheOrder = async ( orderData, setOrderFailedError, previousRequestError ) => {
@@ -67,7 +74,7 @@ const createTheOrder = async ( orderData, setOrderFailedError, previousRequestEr
 		total: '',
 		currency: '',
 		error: '',
-		date_created:Date
+		date_created:''
 	};
 	
 	// Don't proceed if previous request has error.
@@ -96,7 +103,7 @@ const createTheOrder = async ( orderData, setOrderFailedError, previousRequestEr
 		response.total = result.total ?? '';
 		response.currency = result.currency ?? '';
 		response.paymentUrl = result.paymentUrl ?? '';
-		
+		response.date_created=result.date_created??Date.now()
 	} catch ( error ) {
 		// @TODO to be handled later.
 		console.warn( 'Handle create order error', error?.message );

@@ -9,6 +9,9 @@ export const UserInferomationCheckoutSelector = createSelector([StepsSelector],(
 export const order = createSelector([StepsSelector],(({order})=>{
     return order
 }))
+export const ordersSelector = createSelector([StepsSelector],(({orders})=>{
+    return orders
+}))
  export const CheckOutSelector = createSelector([StepsSelector],(state)=>state)
 export const currentStepSelector = createSelector([StepsSelector],(({current,steps})=>{
     return {current,steps}
