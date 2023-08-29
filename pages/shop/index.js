@@ -220,19 +220,16 @@ try{
      }catch(err){
       
     }
-
-    const defaultProps ={
-      props:{
-        products:categoryInferomation||[],
-        footer_header:footer_header?.data||{},
-        seo:seo[0]||{},
-        price:[MinPrice,MaxPrice]||[],
-        load
-       },
-      revalidate:10
-    }
-     return handleRedirectsAndReturnData(defaultProps,categoryInferomation)
-     
+ 
+     return{  props:{
+      products:categoryInferomation||[],
+      footer_header:footer_header?.data||{},
+      seo:seo[0]||{},
+      price:[MinPrice,MaxPrice]||[],
+      load
+     },
+    revalidate:10
+     }
     
 
 
