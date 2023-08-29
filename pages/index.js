@@ -76,7 +76,8 @@ try {
 } catch (error) {
   
 }
-const defaultProps  ={
+ 
+ return   {
   props:{
     footer_header:footer_header?.data||{},
     products:productResults||[],
@@ -87,7 +88,5 @@ const defaultProps  ={
    revalidate:10
 
 }
- return   handleRedirectsAndReturnData(defaultProps,productResults)
-
 
 }
