@@ -84,7 +84,7 @@ TotalCart = item.price
      
         const createdOrderData= await handleOtherPaymentMethodCheckout(  input, carts, setRequestError,setIsOrderProcessing,setCreatedOrderData );
 
- console.log(createdOrderData,createdOrderData,requestError)
+  
       }
  
 
@@ -97,7 +97,7 @@ const HandleOnChange = (event,isBillingOrShipping=false,isShipping=false)=>{
         // handleBillingDifferentThanShipping(input,setInput,target);
 
 
-        console.log(name,value)
+         
         const newState = { ...input, [name ]: ! input.billingDifferentThanShipping };
       setInput( newState );}
       else if(isBillingOrShipping){
@@ -114,7 +114,7 @@ const HandleOnChange = (event,isBillingOrShipping=false,isShipping=false)=>{
     } else if(name==='paymentMethod'){
       const newState ={...input,[name]:value}
       setInput(newState);
-      console.log(value)
+       
  if(value==="visa"){
   dispatch(checkoutActions.SetPaymentMethod([true,TotalCart]))
 

@@ -17,7 +17,7 @@ import Swipecarousel from '@/src/components/customsComponents/swipe_carousel/swi
 import { useInView } from 'framer-motion'
 export default function Home({footer_header,products,categoriesWithNoParent,load,seo}) {
  const [loading,setLoading]=useState(load);
-  console.log("mount")
+   
   let ref2=useRef();
   let isInView2 = useInView(ref2 , {once: true});
      return (

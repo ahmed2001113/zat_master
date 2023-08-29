@@ -13,9 +13,9 @@ const [states,setStates]=useState([])
   });
   setStates(data.allowedCountryStates)
 })();
-console.log(states)
+ 
  },[])
-console.log(gov)
+ 
     return(<>
    <div className={`${styles.wrapper}`}>
 		<TextField

@@ -17,6 +17,7 @@
     padding: 20px;
  
 }
+
 .buttons_wrapper{
     padding: 19ox;
     display: flex;
@@ -36,4 +37,11 @@
     font-family: auto;
     text-transform: uppercase;
     margin: 10px 0px;
+}
+
+
+@media(max-width:992px){
+    .fixed{
+        display: none;
+    }
 }

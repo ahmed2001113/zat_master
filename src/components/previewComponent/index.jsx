@@ -9,15 +9,21 @@ import Image from 'next/image';
 import SwipperSingleLoopAuto from '../customsComponents/swiperSingleLoopsAutoPlay';
 import Link from 'next/link';
 import Certifications from '../certifications';
+import ActionButtons from '../buttons3';
+import { Rating } from '@mui/material';
+import { useRouter } from 'next/router';
  function PreviewComponent() {
   const dispatch= useDispatch()
 const {open,product}= useSelector(previewData);
- 
+ const route = useRouter()
  const handleClose = () => dispatch(PreviewActions.closepreview()) ;
  const minVal = 1;
  const maxVal=20
     const [value, setValue] = useState(minVal);
-
+const goProduct = ()=>{
+  dispatch(PreviewActions.closepreview()) 
+  route.push(`/product/${product.id}`);
+}
     const increaseValue = () => {
       if (value < maxVal) {
         setValue(value + 1);
@@ -33,7 +39,7 @@ const {open,product}= useSelector(previewData);
     <div>
       {Object.keys(product).length !==0&&
         <Modal
-        size='lg'
+        size="sm"
         centered={true}
         contentClassName={`${styles.content}`}
         show={open} onHide={handleClose} 
@@ -41,26 +47,24 @@ const {open,product}= useSelector(previewData);
         dialogClassName="modal-90w"
         >
       
-        <Modal.Body className={`${styles.bo}`}>
+        <Modal.Body   >
          
-            <div className={`${styles.content}`}>
+            <div  >
                 <div className='row'>
 
-<div className={`${styles.le} col-md-6`}>
+<div className={` col-md-6`}>
 
 
 <SwipperSingleLoopAuto products={product?.images}/>
 </div>
 <div className={`${styles.ri} col-md-6`}>
-<Modal.Header className={`${styles.modal_header}`} closeButton>
-          <Modal.Title className={`${styles.modal_title}`}>
-            <h2>
+<h4>
 
-            {product?.name}
-            </h2>
-          </Modal.Title>
-        </Modal.Header>
+{product?.name}
+</h4>
+
         <div className={styles.price} dangerouslySetInnerHTML={{__html:product?.price+'lE'}} />
+<p className={`${styles.desc}`} dangerouslySetInnerHTML={{__html:product?.shortDescription}}/> 
          
         
 
@@ -83,26 +87,44 @@ out of stock
 
 
   </div>
-  <h6 className={`${styles.chec}`}>
+
+         <div className={`new`}>
+            new
+        </div>
+        <div className={`${styles.rating}`}>
+{product?.averageRating}
+ 
+
+</div>
+<div className="">
+ 
+  <div id="container">
+  <button className="learn-more" 
+   onClick={goProduct}
+  >
+    <span className="circle" aria-hidden="true">
+      <span className="icon arrow"></span>
+    </span>
+    <span className="button-text">   more Details</span>
+  </button>
+</div>
+</div>
+<div className={`${styles.button_c} mt-auto`}>
+{
+        product?.stockStatus==="OUT_OF_STOCK"?
+        <p className={`${styles.avalability}`}>This Product Is Not Avalible right Now</p>:
+        <div className={`${styles.buttons}`}>
+        <ActionButtons item={product}/>
+            </div>
+     }
+   <h6 className={`${styles.chec}`}>
          Checkout securely with
      
          </h6>
          <Certifications/>
- 
-<div className={`${styles.button_c} mt-auto`}>
-<button className=" ">
-      Add To Wish List
-   <i className="fa fa-heart"></i>
-  </button>
-  <button className="outline">
-    Buy Now
-  </button>
-  <button className="black">
-    Add To Cart 
-  </button>
-
 </div>
 </div>
+         
             </div>
             </div>
 

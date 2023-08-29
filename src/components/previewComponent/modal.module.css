@@ -26,9 +26,7 @@
         display: flex;
     flex-direction: column;
     padding: 10px;
-    background: #eee;
-    backdrop-filter: blur(10px);
-}
+ }
 .bo{
         padding: 0px;
 }
@@ -82,8 +80,7 @@
         color: #311e34;
 }
 .qe button:hover{
-        background: #ddd;
-}
+ }
 .stock{
         display: flex;
         align-items: center;
@@ -94,10 +91,23 @@
 }
 
 .button_c{
+       
+        width: 90%;
+        margin-left: auto;
+        margin-right: 10px;
+}
+.content{
+        background: #f8f8f8;
+}
+.chec{
+        margin-top: auto;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        height: 25%;
-        width: 100%;
+        justify-content: center;
+        padding: 20px;
+        font-size: larger;
+    
+}
+.desc{
+        height: fit-content;
+        margin: 0px;
 }

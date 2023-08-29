@@ -1,8 +1,11 @@
 import React from 'react'
 import ProdutItemMain from '../products/productMain';
 import Product_show from '../products/productMain/product_show';
+import { useSelector } from 'react-redux';
+import { wishlistSelector } from '@/src/store/wishlist/wishlistSelector';
 
 export default function RelatedProducts({products,id}) {
+  const {wishlistItems} =useSelector(wishlistSelector)
     const productsAfter = products.filter(product=>product.id!==id.trim()).map(product=>{
         return {
     description:product.description,
@@ -18,6 +21,10 @@ export default function RelatedProducts({products,id}) {
     regularPrice:product.regularPrice
          }
       }) ||[];
+
+      const isWishlist=(id)=>{
+        return wishlistItems.some(item=>item.id===id)
+       };
    return (
     
     
@@ -26,7 +33,7 @@ export default function RelatedProducts({products,id}) {
             productsAfter.filter((i,idx)=>idx<4).map(product=>{
 
 
-              return  <Product_show key={product.id} className={'col-md-3'} product={product}/>
+              return  <ProdutItemMain isLove={isWishlist(product.id)} key={product.id} className={'col-md-3'} product={product}/>
             })
         }
     </div>

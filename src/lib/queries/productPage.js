@@ -13,6 +13,7 @@ query Product($id: ID!) {
     shortDescription
     reviewCount
     productId
+    description
     image {
       id
       sourceUrl(size: LARGE)
@@ -90,8 +91,10 @@ query Product($id: ID!) {
         }
       }
       productCategories {
+        
         nodes {
-          products(first: 6) {
+          name
+          products(first: 6 where:{type:SIMPLE }) {
             nodes {
               id
               slug

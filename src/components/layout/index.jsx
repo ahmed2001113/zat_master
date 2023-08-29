@@ -6,9 +6,11 @@ import { useEffect } from "react";
 import Seo from "../seo";
 import Head from "next/head";
 import WishListDrawer from "../wishlistcomponents/wishlistdrawer";
+import Message from "../message/message";
  
  
 function RootLayout({children, headerFooter,seo,uri}) {
+   
  	const { header, footer } = headerFooter?.data || {};
  
   return (
@@ -23,6 +25,7 @@ function RootLayout({children, headerFooter,seo,uri}) {
     <main className="  mx-auto  ">
 					{children}
 				</main>
+
  <PreviewComponent/>
       <CartDrawer/>
 <Mainfooter footer={footer}/>

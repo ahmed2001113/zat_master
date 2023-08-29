@@ -15,7 +15,7 @@ export default async function handler( req, res ) {
   		status:''
 	};
 	const {id} = req.query;
-	console.log(id)
+	 
 	try {
 		const { data } = await api.get(`orders/${id}`);
 		
@@ -26,7 +26,7 @@ export default async function handler( req, res ) {
  		res.json( responseData );
 		
 	} catch ( error ) {
-		console.log( 'error', error );
+		 ;
 		/**
 		 * Request usually fails if the data in req.body is not sent in the format required.
 		 *

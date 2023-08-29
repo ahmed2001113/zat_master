@@ -6,7 +6,7 @@ import { isArray } from '@apollo/client/utilities';
 const { v4 } = require('uuid');
 
 export const getCreateOrderLineItems = ( products ,total=0) => {
-	console.log(products);
+	 ;
 	const totalPrice = products.reduce((total, item) => total + item.price, 0);
 
 	if ( isEmpty( products ) || ! isArray( products ) ) {

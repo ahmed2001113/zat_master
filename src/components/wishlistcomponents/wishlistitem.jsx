@@ -22,7 +22,7 @@ const removeFromCart  =()=>{
 
 <div className="col-md-3">
 
-    <Image alt={item?.images[0]?.altText} src={item?.images[0].sourceUrl} width={250} height={250}/> 
+    <Image alt={item?.images?item?.images[0]?.altText:item?.image?.sourceUrl} src={item?.images?item?.images[0].sourceUrl:item?.image?.sourceUrl} width={250} height={250}/> 
 </div>
 
 <div className="col-md-9">

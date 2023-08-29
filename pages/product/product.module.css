@@ -3,18 +3,26 @@
     height: 919px;
 }
 .right{
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 800px;
+    height: 100%;
     position: sticky;
-     background: #fff;
-    top: 135px;
+    top: 115px;
+    background: #fff;
+    padding: 20px;
+    padding: 56px 64px 60px;
+}
+@media(min-width:992px){
+    .right{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+     
+        height: 600px;
+    }
 }
 .name{
-    font-size: 19px;
-text-transform: capitalize;
+    font-size: 24px;
+    text-transform: capitalize;
+    margin: 10px 0px;
 }
 .price{
     font-size: 23px;
@@ -30,20 +38,33 @@ text-transform: capitalize;
     text-transform: uppercase;
 
 }
+.rating{
+    display: flex;
+}
+.rating p{
+    text-decoration: underline;
+}
 .love{
     width: 10%;
     margin-left: 2px;
 }
 .buttons{
-    width: 80%;
-    margin: auto;
-    display: flex;
+ margin: 20px 0px;
 
 }
 .think{
    
  
     padding: 29px; 
+}
+.desc img{
+    display: none;
+
+}
+.avalibility{
+    padding: 10px;
+    text-align: center;
+    font-size: 19px;
 }
 .previewImage{
     position: absolute;
@@ -64,3 +85,16 @@ text-transform: capitalize;
     background: #fff !important;
     color: #333 !important;
 }
+
+.d{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.d div:first-child{
+    padding: 20px;
+    border-right: 1px solid #ddd;
+ }

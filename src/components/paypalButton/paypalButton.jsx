@@ -58,13 +58,13 @@ alert('thank you for')
 onApprove={async(data,actions)=>{
 
 const order = await actions.order.capture();
-console.log(order,"order");
+ ;
 HandleApproved(order.id)
 
 }}
 onError={(err)=>{
     setError(err);
-    console.log("paypal Erro",err)
+     
 }}
 onCancel={()=>{
     alert('canceled')

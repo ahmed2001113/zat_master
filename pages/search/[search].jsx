@@ -19,6 +19,7 @@ import { SearchPriceuery } from "@/src/lib/queries/searchPrice";
 import handleRedirectsAndReturnData from "@/src/utls/functions/HandleRedirect";
 import { isEqual } from "lodash";
 import { useLazyQuery } from "@apollo/client";
+import LoadingImage from "@/src/components/customsComponents/image";
  const Search =({search,SearchData,footer_header,seo,price })=>{
     const dispatch = useDispatch()
     const {Filters,sort,Filtered} = useSelector(FilterSelector)
@@ -56,16 +57,20 @@ import { useLazyQuery } from "@apollo/client";
        router.events.off("routeChangeStart", handlePageLeave);
      };
    },[]);
+   const initialRender = useRef(true);
+
    const [getData, { loading, error, data,refetch  }] = 
    useLazyQuery(SearchQuery,
     {
       onCompleted:(data)=>{
-        
+         
+
         setProductsData(ModifyObjectOrArray(data?.products?.nodes));
         setPageInfo(data?.products?.pageInfo);
         setLoading(loading)
   
-  
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
       }
     }
     );
@@ -77,8 +82,9 @@ import { useLazyQuery } from "@apollo/client";
    try{
     getData({
       variables:{
-        first:10,
-        ...Filters,
+        first:100,
+
+         ...Filters,
 
         search
        }
@@ -92,9 +98,13 @@ import { useLazyQuery } from "@apollo/client";
    }
    }
    useEffect(()=>{
-   if(Filtered) FilterFunction();
-    
-   },[Filters]);
+    if (!initialRender.current) {
+
+      FilterFunction();
+    }
+    initialRender.current = false;
+
+   },[Filters ,Filtered]);
  
    const loadMore = async()=>{
    try {
@@ -103,7 +113,7 @@ import { useLazyQuery } from "@apollo/client";
       variables:{
         first:10,
         after:pageInferomation.endCursor,
-        ...Filters||{},
+        ...Filters,
         search
        }
     }) 
@@ -121,7 +131,7 @@ import { useLazyQuery } from "@apollo/client";
       variables:{
         last:10,
         before:pageInferomation.startCursor,
-        ...Filters||{},
+        ...Filters,
         search
        }
     }) 
@@ -133,14 +143,17 @@ import { useLazyQuery } from "@apollo/client";
    
    
    }
-    
+     
         return(
            <>
+           {
+            loadings&&<LoadingImage/>
+           }
              <RootLayout headerFooter={footer_header} seo={seo}>
     {
         nodes.length?
  
-        <Store setLoading={setLoading} loading={loadings} category="Shop"
+        <Store  setLoading={setLoading} loading={loadings} category="Search"
         products={productsData}/>
         :<h1 className="searchNotFound">
             THere is no Search Found Please Try different Words
@@ -150,18 +163,18 @@ import { useLazyQuery } from "@apollo/client";
 
     
     {
-      console.log(pageInferomation.hasPreviousPage)
+       
     }
    
-   <div className="end_nav">
-   <Button  variant="dark" onClick={loadLess}
+   {/* <div className="end_nav"> */}
+   {/* <Button  variant="dark" onClick={loadLess}
     disabled={!pageInferomation.hasPreviousPage}>
        
            Previous Page
        {
          loadings&&    <>loading</>
-       }   
-         </Button> 
+       }    */}
+         {/* </Button> 
    <Button variant="dark" onClick={loadMore}  
     disabled={!pageInferomation.hasNextPage}>
        
@@ -173,7 +186,7 @@ import { useLazyQuery } from "@apollo/client";
     
    
    </div>
-   {   loadings&&   <>loading</>}
+   {   loadings&&   <>loading</>} */}
             </RootLayout>
            </>
        )
@@ -194,7 +207,7 @@ let load =false;
 try {
      const { data: {products},loading } = await client.query({
       query:SearchQuery,
-      variables:{ first: 30, after: null , search}
+      variables:{ first:100, search}
     });
     SearchData=products
     
@@ -219,6 +232,7 @@ try{
   const {data:{products:{nodes}}, error,loading}=await
    client.query({query:SearchPriceuery,
 variables:{
+  first:100,
     search
 }});
    

@@ -7,16 +7,14 @@ import { CartActions } from '@/src/store/cart/cart.reducer';
 import Link from 'next/link';
 import { wishlistActions } from '@/src/store/wishlist/wishlistslice';
 
-import {motion, useInView} from 'framer-motion';
+import {motion} from 'framer-motion';
 
 import CustomButton_2 from '../../customsComponents/buttons/CustomButton_2';
 import { wishlistSelector } from '@/src/store/wishlist/wishlistSelector';
-import AddToWishLIst from '@/src/utls/GlobalFunctions/AddToWishList';
-import { userSelectMemo } from '@/src/store/user/user.selector';
-import { UploadUserDataStart } from '@/src/store/user/user.actions';
-function  ProdutItemMain({product,isLove=false,className}) {
+ import { userSelectMemo } from '@/src/store/user/user.selector';
+ function  ProdutItemMain({product,isLove=false,className}) {
  const dispatch= useDispatch();
-
+ 
  const OpenPreview =()=> dispatch(PreviewActions.OPENPREVIEW(product));
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const {wishlistItems}=useSelector(wishlistSelector);
@@ -67,11 +65,11 @@ return (
       
   <div className={`${styles.flex_v}`}>
   <button className={`${styles.heart}`} onClick={addToWishlist}>
-      <i className="fa-solid fa-heart"></i>
+      <i className="fa-solid fa-heart" style={{color:isLove?'#623d67':'#333'}}></i>
       </button>
       
       <button onClick={OpenPreview} className={`${styles.heart}`}>
-      <i className="fa-regular fa-eye"></i>     
+      <i className="fa-regular fa-eye" ></i>     
        </button>
   </div>
   {product?.onSale&&
@@ -91,18 +89,23 @@ On Sale
 
          </div>
          <div  dangerouslySetInnerHTML={{__html:product?.shortDescription}} className={`${styles.Desc}`}/> 
-         <div className='centered'>
+         {
+          product?.stockStatus==="IN_STOCK"?
+          <div className='centered'>
 
-           <CustomButton_2  bk={'#fff'}  onClick={openCart} 
-           className={`${styles.Add}`}>
-            Add To Cart 
-            </CustomButton_2>
-           <CustomButton_2   bk={'#fff'} className={`${styles.Add}`}>
-           <Link href={`/checkout/${product?.id}`}>
-            Buy Now
-           </Link>
-            </CustomButton_2>
-         </div>
+          <CustomButton_2  bk={'#fff'}  onClick={openCart} 
+          className={`${styles.Add}`}>
+           Add To Cart 
+           </CustomButton_2>
+          <CustomButton_2   bk={'#fff'} className={`${styles.Add}`}>
+          <Link href={`/checkout/${product?.id}`} style={{color:"#000" , textDecoration:'none'}}>
+           Buy Now
+          </Link>
+           </CustomButton_2>
+        </div>:
+        <p className='out_s'>Out Of Stock</p>
+         }
+        
       </div>
       </div>
 
@@ -110,7 +113,7 @@ On Sale
 </div>
  </>
   )
-  // 383∶575
+   
 }
 
 export default  ProdutItemMain

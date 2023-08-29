@@ -21,11 +21,15 @@ import { isArray } from 'lodash';
 import filterObjectValues from '../utls/functions/FilterObjectsWithTypes';
 import Skelton3 from '../components/skelton/skelton3';
 import Skelton2 from '../components/skelton/skeltonswipecenterd';
+import { wishlistSelector } from '../store/wishlist/wishlistSelector';
  export default function Store({products=[],category='',loading,setLoading,...others}) {
    const dispatch = useDispatch()
   const {Filters ,Filtered,sort:SORT } = useSelector(FilterSelector)
   const [scroll, setScroll] = useState(false);
-
+  const {wishlistItems} = useSelector(wishlistSelector)
+  const isWishlist=(id)=>{
+    return wishlistItems.some(item=>item.id===id)
+   };
   function Scroll() {
     const scrolls = document.body.scrollTop > 50 || 
     document.documentElement.scrollTop > 50;
@@ -36,11 +40,7 @@ import Skelton2 from '../components/skelton/skeltonswipecenterd';
 
 
  
-
-  const handleDelete = (chipToDelete) => () => {
- ;
- dispatch(FiltersAction.DeleteKey(chipToDelete))
-  };
+ 
 
 
   useEffect(() => {
@@ -149,33 +149,7 @@ import Skelton2 from '../components/skelton/skeltonswipecenterd';
     </div>
 
   </div>
-    <div className="tags">
- <ul className={`${styles.chip}`}  >
 
-  {
-      filterObjectValues(Filters,(filters)=>{
- 
-       return Object.keys(filters).map((key) => {
-          let icon;
-  
- 
-          return (
-            <ListItem key={key}>
-              <Chip
-              className={`${styles.chipItem}`}
-                icon={icon}
-                label={`${key} ${filters[key]}`}
-                onDelete={ handleDelete(key)}
-              />
-            </ListItem>
-          );
-        })
-          })
-  }
-   
-   
-    </ul>
-</div>
    </div>
 
 
@@ -195,7 +169,7 @@ loading={loading}
     product=>{
   return  loading?<Skelton2 key={product.id}/>:
 
-   <ProdutItemMain 
+   <ProdutItemMain  isLove={isWishlist(product.id)}
     className={`col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 pb-3
      pb-md-6 pb-xl-8`} key={product.id} 
       product={product}/>

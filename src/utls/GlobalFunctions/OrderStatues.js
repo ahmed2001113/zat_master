@@ -9,7 +9,7 @@ const OrderStatuesFunction = async(id,setError)=>{
       } );
 return request
     }catch(err){
-console.log(err)
+ 
  }
 }
 

@@ -29,7 +29,7 @@ function* GetUserSnapShotData (userAuth, additionalDetails ){
 
                         const {cart,wishlist,personalInferomation,orders}=snapShot.data()
                       
-               console.log(personalInferomation)                //once user sign in 
+                                //once user sign in 
                yield put(CartActions.setCartItems(cart));  
                yield put(wishlistActions.setWishListItems(wishlist));  
                yield put(checkoutActions.SetUserInferomation(personalInferomation));  
@@ -195,13 +195,13 @@ function* UploadUserImageStart(){
 // upload user start 
 function* UploadUserDataProgress({payload:{data,user}}){
 
-        console.log(data,user)
+         
         yield call(addUserDataBase,data,user);
         const {currentUser} = yield call(OnAuthChangesAsync);
         const snapShot = yield call(GetUserFromDocs,currentUser);
         const {id} =snapShot
 
-        console.log(currentUser,id,snapShot)
+         
          yield put(userAction.UploadUserDataSuccess({id,...snapShot.data()}))
 }
 

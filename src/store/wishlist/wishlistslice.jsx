@@ -2,8 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initial  ={
     open:false,
     wishlistItems:[],
-    message:''
-
+    message:'',
+    openMessage:false
+    
 }
 
 export const WishListSlice = createSlice({
@@ -18,15 +19,21 @@ state.wishlistItems=action.payload
 state.open = !state.open
     }
     ,
+    setMessageOf:(state,action)=>{
+state.openMessage = false
+    }
+    ,
+
     setWishListItem:(state,action)=>{
         const product=action.payload;
         const existingItem = state.wishlistItems.find(item=>item.id===product.id);
         if(existingItem){
             state.wishlistItems=  state.wishlistItems.filter(item=>item.id!==product.id)
             state.message='Removed from wishlist'
-
+            state.openMessage=true
         }else{
             state.message=`Added success ${product?.name}`
+            state. openMessage=true
 
             state.wishlistItems.push(product)
 

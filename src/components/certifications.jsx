@@ -17,7 +17,7 @@ export default function Certifications() {
       <Image src={c_1}  alt={'cert'} width={90} height={90}/>
       <Image src={c_2}  alt={'cert'} width={90} height={90}/>
       <Image src={c_3} alt={'cert'}  width={90} height={90}/>
-    </div> alt={'cert'} 
+    </div>  
 
 </>
 

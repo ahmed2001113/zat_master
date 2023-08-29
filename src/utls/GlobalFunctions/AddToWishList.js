@@ -6,7 +6,7 @@ export default function AddToWishLIst(
     dispatch ,
     wishlistItem,
     currentUser){
-        console.log(wishlistItems)
+         
         //dispatch addTo wishlist
         
         if(currentUser){
@@ -16,7 +16,7 @@ export default function AddToWishLIst(
             dispatch(UploadUserDataStart({'wishlist':wishlistItems},currentUser))
             
             // dispatch(UploadUserDataStart({'wishlist':wishlistItems},currentUseruser))
-            console.log(currentUser)
+             
             
         }  else{
 

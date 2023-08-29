@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
  
 function Mainfooter({footer}) {
   const categories = useSelector(SelectCategoriesLinks)
-  console.log(categories);
+   ;
   return (
  
  <>

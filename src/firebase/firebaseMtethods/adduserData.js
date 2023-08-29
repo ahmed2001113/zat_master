@@ -5,7 +5,7 @@ import { doc, setDoc } from "firebase/firestore"
 
 export const addUserDataBase=async(data={},user)=>{
      //get doc referrancess
-    console.log(data,user)
+     
       const {id ,...otherData}  = user;
      const regf =  doc(db,'users',id);
     await setDoc(regf, {

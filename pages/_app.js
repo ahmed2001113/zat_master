@@ -19,9 +19,12 @@ import { useEffect, useState } from 'react';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
  config.autoAddCss = false;
  import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
-
-    loadDevMessages();
-   loadErrorMessages();
+import Message from '@/src/components/message/message';
+ if (process.env.NODE_ENV === 'development') {
+ 
+ }
+ loadDevMessages();
+ loadErrorMessages();
   export default function App({ Component, pageProps }) {
 const router = useRouter()
 
@@ -33,6 +36,8 @@ useEffect(()=>{
 
    router.events.on("routeChangeStart",(url)=>{
       ;
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
       setLoading(true)
    })
    router.events.on("routeChangeComplete",(url)=>{
@@ -67,11 +72,20 @@ useEffect(()=>{
      <PersistGate  persistor={persistor}>
 
   <Component {...pageProps} />
+  <Message/>
 
   </PersistGate>
      </ApolloProvider>
   </PayPalScriptProvider>
+
   </Provider>
+  <div className={`follow_us`}>
+<p className={`text_ver`}>Follow Us On </p>
+<div className="icons">
+<i className="fa-brands fa-instagram"></i>
+</div>
+<div className="icons"><i className="fa-brands fa-facebook-f"></i></div>
+  </div>
 
   </>
 }

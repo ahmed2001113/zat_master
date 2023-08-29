@@ -40,9 +40,11 @@ function SwippeCentered({products}) {
 </div>
   </div>
   <Swiper
-    slidesPerView={3.1}
+    slidesPerView={2.7}
+    spaceBetween={50}
         className={`${styles.sw} mySwiper sw_2`}
- 
+    
+       
   >
     {
       products.filter((item,idx)=>idx<9)

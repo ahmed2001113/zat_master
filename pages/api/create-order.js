@@ -52,11 +52,11 @@ export default async function handler( req, res ) {
 		responseData.date_created=data.date_created;
 		
 
- 		console.log(data)
+ 		 
 		res.json( responseData );
 		
 	} catch ( error ) {
-		console.log( 'error', error );
+		 ;
 		/**
 		 * Request usually fails if the data in req.body is not sent in the format required.
 		 *

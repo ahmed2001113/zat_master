@@ -5,14 +5,17 @@ import Drawer from "../components/customsComponents/drawers/CustmDrawer";
 import CheckboxButtons from "../components/customsComponents/checkbox/materilChec";
 import SliderPrice from "../components/customsComponents/sliders/priceRange";
 import { isNullableType } from "graphql";
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox, Chip, FormControlLabel, ListItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { FiltersAction } from "../store/filters/filter.slice";
 import { FilterSelector } from "../store/filters/filtersSelectores";
+ import filterObjectValues from "../utls/functions/FilterObjectsWithTypes";
+import { SelectCategoriesLinks } from "../store/categories/category.selector";
 const initial=[
   { id: 1, checked: false, label: 'in stock' ,value:'IN_STOCK'},
   { id: 2, checked: false, label: 'Out of stock' ,value:'OUT_OF_STOCK'},
 ]
+ 
 export default function FilterDrawer({
   show,
   setShow,
@@ -21,17 +24,22 @@ export default function FilterDrawer({
   loading
    
 }){
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
 
    const [Stock, SetStock] = useState(initial);
 const {prices:price,Filtered,Filters}=useSelector(FilterSelector) ;
-
+const categoriesLink=useSelector(SelectCategoriesLinks);
+ 
 const {minPrice,maxPrice}=price
 
 const [onSale, setOnSale] = useState(true);
    
 const [prices,setPrice]=useState([minPrice,maxPrice]);
 
+const handleDelete = (chipToDelete) => () => {
+  ;
+  dispatch(FiltersAction.DeleteKey(chipToDelete))
+   };
 
 
 const handleChangeOnSale = (e)=>{
@@ -77,10 +85,37 @@ const applyFilters = () => {
  
 
     return(
-      <Drawer  show={show} title={'Filter'} 
+      <Drawer   show={show} title={'Filter'} 
       setShow={setShow} placement={'start '} 
       className={`${styles.Drawer}` } >
-   <div className="body mb-auto">
+            <div className="tags">
+ 
+
+   
+ {
+      filterObjectValues(Filters,(filters)=>{
+        let icon;
+
+
+       return Object.keys(filters).map((key) => {
+   
+  
+ 
+          return (
+               <Chip
+               key={key}
+              className={`${styles.chipItem} col-md-6`}
+                icon={icon}
+                label={`${key} ${filters[key]}`}
+                onDelete={ handleDelete(key)}
+              />
+           );
+        })
+          })
+  }
+ </div>
+          
+    <div className="body mb-auto">
    <h5>
         Avalibility
       </h5>
@@ -151,8 +186,7 @@ control={
         max={maxPrice} changePrice={handleChangePrice}/>
 </div>
       }
-   
-      
+ 
 
    </div>
       <div className="bottom mt-auto">

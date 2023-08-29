@@ -20,7 +20,7 @@ reducers:{
 
     addPrices:(state,action)=>{
         const [min,max]=action.payload;
-        console.log(action.payload)
+         
         state.prices.maxPrice=max,
         state.prices.minPrice=min
     },

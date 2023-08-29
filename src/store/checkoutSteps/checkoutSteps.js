@@ -61,7 +61,7 @@ export const CheckOutSlice = createSlice({
 action.orders=state.payload
         },
         SetPaymentMethod:(state,action)=>{
-            console.log('dispatched')
+             
             const [isPaypal,amount]=action.payload
             state.IsPaypal =  isPaypal,
             state.total=amount

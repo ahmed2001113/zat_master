@@ -7,7 +7,10 @@ query getProducts($first: Int, $after: String, $before: String, $last: Int, $min
     after: $after
     before: $before
     last: $last
-    where: {minPrice: $minPrice, maxPrice: $maxPrice, onSale: $onSale, stockStatus: $stockStatues, categoryIn: $category, orderby: $orderby, type: SIMPLE}
+    where: {minPrice: $minPrice, maxPrice: $maxPrice, 
+      onSale: $onSale, stockStatus: $stockStatues, 
+      categoryIn: $category, orderby: $orderby,
+      type: SIMPLE}
   ) {
     pageInfo {
       hasNextPage
@@ -21,6 +24,9 @@ query getProducts($first: Int, $after: String, $before: String, $last: Int, $min
       name
       shortDescription
       productId
+      description
+      averageRating
+      reviewCount
       productCategories {
         nodes {
           name

@@ -69,13 +69,7 @@ function MainSlider() {
     </h1>
   </div> */}
 
- <div className={`${styles.follow_us}`}>
-<p className={`${styles.text_ver}`}>Follow Us On </p>
-<div className="icons">
-<i className="fa-brands fa-instagram"></i>
-</div>
-<div className="icons"><i className="fa-brands fa-facebook-f"></i></div>
-  </div>
+
 </div>
 
 

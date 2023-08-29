@@ -4,7 +4,7 @@ import { ProductsDataQuery } from "@/src/lib/queries/GET_PRODUCTSDATA";
  import { ProductsInfinteScroll } from "@/src/lib/queries/fetchcategoriesproductsinfinte";
 import { FiltersAction } from "@/src/store/filters/filter.slice";
 import { FilterSelector } from "@/src/store/filters/filtersSelectores";
-import Store from "@/src/storeModule/store";
+import Store from "@/src/storeModule/store.jsx";
 import client from "@/src/utls/apolloConfigrations/apolloClient";
 import ModifyObjectOrArray from "@/src/utls/functions/ObjectArrayChange";
 import { getPage } from "@/src/utls/functions/get-page-seo";
@@ -21,15 +21,16 @@ import LoadingImage from "@/src/components/customsComponents/image/index.jsx";
 const AllCategoriesProducts = ({products,footer_header,seo,price,load,...others})=>{
   const dispatch = useDispatch ()
  const {Filters,sort,Filtered} = useSelector(FilterSelector)
-
+ 
   const {pageInfo,nodes}= products;
 const [loadings,setLoading]=useState(load);
 const [pageInferomation,setPageInfo]=useState(pageInfo)
 const [productsData,setProductsData]=useState(ModifyObjectOrArray(nodes));
 const router = useRouter();
-console.log('amount');
+ ;
 
-
+ 
+const initialRender = useRef(true);
 
 useEffect(()=>{
   dispatch(FiltersAction.addPrices(price ))
@@ -56,7 +57,8 @@ const [getData, { loading, error, data,refetch  }] = useLazyQuery(ProductsInfint
        setProductsData(ModifyObjectOrArray(data?.products?.nodes));
       setPageInfo(data?.products?.pageInfo)
    setLoading(loading)
-
+   document.body.scrollTop = 0;
+   document.documentElement.scrollTop = 0;
 
     }
   }
@@ -66,7 +68,8 @@ const FilterFunction = async()=>{
 
    setLoading(true)
 try{
-  getData({  variables:{
+  getData({  
+    variables:{
     first:6,
     ...Filters,
    }})
@@ -84,12 +87,14 @@ catch(err){
 }
 }
   useEffect(()=>{
-if(Filtered){
+    if (!initialRender.current) {
 
-  FilterFunction();
-}
+      FilterFunction();
+    }
+    initialRender.current = false;
+ 
 
-  },[Filters,sort]);
+  },[Filters,Filtered]);
 
   // useEffect(() => {
  
@@ -99,14 +104,14 @@ const loadMore = async()=>{
   setLoading(true)
 try {
   
-  const data =getData({   variables:{
+   getData({   variables:{
     first:6,
     after:pageInferomation.endCursor,
-    ...Filters 
+    ...Filters,
 
   }});
  
-console.log(data)
+ 
 } catch (error) {
   setLoading(false)
 
@@ -117,10 +122,11 @@ const loadLess = async()=>{
     setLoading(true)
 
  try {
+   
   getData({   variables:{
     last:6,
     before:pageInferomation.startCursor,
-          ...Filters 
+    ...Filters,
 
   }})
  

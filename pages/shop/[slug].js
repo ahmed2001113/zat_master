@@ -15,19 +15,20 @@ import { isEqual } from "lodash";
 // import { getProductsData } from "@/src/utls/productCategories";
  import Image from "next/image";
 import { useRouter } from "next/router"
-import { useEffect,  useState } from "react";
+import { useEffect,  useRef,  useState } from "react";
 import { Button } from "react-bootstrap";
  import { useDispatch, useSelector } from "react-redux";
 
 const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi})=>{
-  
+   
   const [productsData,setProductsData] =useState(ModifyObjectOrArray(DefaultData?.products?.nodes));
   const {Filters,sort,Filtered} = useSelector(FilterSelector)
   const [loadings,setLoading]=useState(loadingApi)
   const dispatch = useDispatch()
   const {description,  image, name } =DefaultData
   const [pageInferomation,setPageInfo]=useState(DefaultData?.products?.pageInfo)
-     
+  const initialRender = useRef(true);
+console.log(name)
    useEffect(() => {
     // Compare the previous and current DefaultData objects
     if (!isEqual(DefaultData, productsData)) {
@@ -50,13 +51,14 @@ const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi})=>{
         
         setProductsData(ModifyObjectOrArray(nodes));
         setPageInfo(pageInfo);
-        console.log(loading)
+         
         setLoading(loading);
-        console.log(productsData)
-
+         
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
        },
        onError:(err)=>{
-        console.log(err)
+         
        }
     }
     );
@@ -77,16 +79,18 @@ const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi})=>{
  
     } 
     catch(err){
-      console.log(err)
+       
     }
     }
     useEffect(()=>{
-      if(Filtered){
-
+      if (!initialRender.current) {
+  
         FilterFunction();
-
       }
-     },[Filters]);
+      initialRender.current = false;
+   
+  
+    },[Filters,Filtered]);
   
   const loadMore = async()=>{
     setLoading(true)
@@ -144,9 +148,11 @@ const loadLess = async()=>{
 
     {/* </div> */}
      {productsData&&
-     <Store  loading={loadings}
+     <Store category={name}  loading={loadings}
      products={productsData}/>
-     } 
+     
+
+} 
        <div className="end_nav">
 <Button  variant="dark" onClick={loadLess} 
 disabled={!pageInferomation.hasPreviousPage&&!loading}>
@@ -194,17 +200,17 @@ export async function getStaticProps ({params}) {
   
 
   } catch (error) {
-    console.log(error)
+     
  }
  try{
   const {data:{products:{nodes}}, error,loading}
   =await client.query({query:ProductsDataQuery});
-  console.log(nodes);
+   ;
   
    MaxPrice = Math.max(...nodes.map(({price})=>price));
    MinPrice = Math.min(...nodes.map(({price})=>price));
      }catch(err){
-      console.log(err)
+       
     }
  
 
@@ -229,10 +235,10 @@ export async function getStaticPaths() {
     const { data } = await client.query({
       query: GET_CATEGORIES
     });
-    console.log(data)
+     
    const categories = data?.productCategories?.nodes;
     const paths=   categories.map(item=>{
-          console.log(item)
+           
           return {params:{slug:item.slug}}
         })
     // We'll pre-render only these paths at build time.

@@ -1,5 +1,5 @@
 import client from '@/src/utls/apolloConfigrations/apolloClient'
- import React, {  useState } from 'react'
+ import React, {  useEffect, useRef, useState } from 'react'
 import styles from './product.module.css'
 import Image from 'next/image'
 import Certifications from '@/src/components/certifications'
@@ -13,10 +13,47 @@ import ReviewContainer from '@/src/components/reviewsComponents/productreviewCon
 import InfoSharpIcon from '@mui/icons-material/InfoSharp';
 import ImagePreview from '@/src/components/Image_preview/images_preview'
  import { ProductPathsQuery } from '@/src/lib/queries/productsPaths'
+import ActionButtons, { TwoButtons } from '@/src/components/buttons3'
+import { Breadcrumbs, Rating, Typography } from '@mui/material'
+import Link from 'next/link'
   export default function Product({product,footer_header}) {
   const [show ,setShow]=useState(false)
 const [imagePrev,setImage] = useState({});
-const [imageArray,setImageArray] =useState([])
+const [imageArray,setImageArray] =useState([]);
+const divRef = useRef(null);
+  const isScrolledDownMoreThanDiv = () => {
+    // check if the ref is not null
+    if (divRef.current) {
+      // get the scroll position of the window
+      const scrollPosition = window.scrollY;
+      // get the offsetHeight of the div element
+      const divHeight = divRef.current.offsetHeight;
+      // compare the scroll position and the div height and return true or false
+      return scrollPosition > divHeight;
+    }
+     
+    // return false if the ref is null
+    return false;
+  };
+  useEffect(() => {
+    // define a function that handles the scroll event
+    const handleScroll = () => {
+      // call your function and store the result in a variable
+      const result = isScrolledDownMoreThanDiv();
+      // do something with the result, such as logging it to the console
+       ; // true or false
+    };
+ 
+    // check if the ref is not null
+    if (divRef.current) {
+      // add the event listener to the window object
+      window.addEventListener('scroll', handleScroll);
+      // return a cleanup function that removes the event listener
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, []);
 const {
     price,
     seo
@@ -42,7 +79,7 @@ const {
 
 
 }=product
- 
+   
 const reviews_={
     reviewCount,
     reviews,
@@ -66,7 +103,7 @@ const handleShow = (imag)=>{
 <>
 <RootLayout headerFooter={footer_header}>
     
-<div className="row" style={{background:'#fff',margin:'0px' ,padding:'0px' ,width:'100%'}}>
+<div ref={divRef}  className="row" style={{background:'#fff',margin:'0px' ,padding:'0px' ,width:'100%'}}>
      
      <div className={`${styles.left} col-md-7`}>
      <div className="row" style={{padding:'0px'}}>
@@ -100,18 +137,41 @@ const handleShow = (imag)=>{
     
      </div>
      </div>
-     <div className={`${styles.right   } container col-md-5`}>
-        <h6 className={`${styles.name}`}>{name}</h6>
-        <p  className={`${styles.desc}`} dangerouslySetInnerHTML={{__html:product?.shortDescription}}/>
+     <div className={`${styles.right} container col-md-5`}>
+     <Breadcrumbs aria-label="breadcrumb">
+
+     <Link  style={{color:'#333'}} color="inherit" href="/">
+    Home
+  </Link>
+  <Typography  style={{color:'#333'}} color="inherit"  
+  >
+        {productCategories?.nodes[0]?.name}
+
+  </Typography>
+   <Typography color="text.primary">{name}</Typography>
+</Breadcrumbs>
+        <div className={`new`}>
+            new
+        </div>
+        <h4 className={`${styles.name}`}>{name}</h4>
+<div className={`${styles.rating}`}>
+{averageRating}
+<Rating name="disabled" value={averageRating} disabled />
+<p>
+    {reviewCount} Reviews
+</p>
+
+</div>
+        <p  className={`${styles.desc}`} dangerouslySetInnerHTML={{__html:product?.description??product?.shortDescription}}/>
         <p className={`${styles.price}`}>
          {price} LE
       
         </p>
      
-     <p>
+     {/* <p>
          Select Quentity
      </p>
-        <Quantity item={product}/>
+        <Quantity item={product}/> */}
      
      
      
@@ -120,23 +180,23 @@ const handleShow = (imag)=>{
      
          </h6>
          <Certifications/>
-     
-         <div className={`${styles.buttons}`}>
-     <button className="black">
-         Add To Cart </button>
-         <button className={`black ${styles.love}`}>
-         Buy Now
-             </button>
-     </div>
+     {
+        stockStatus==="OUT_OF_STOCK"?
+        <p className={`${styles.avalability}`}>This Product Is Not Avalible right Now</p>:
+        <div className={`${styles.buttons}`}>
+        <ActionButtons item={product}/>
+            </div>
+     }
+       
      
 
      <div className={`${styles.d} row`}>
         <div className="col-6 text-center">
 
-<a href="#review" color='default' style={{color:'#000',textDecoration:'none'}} >
+<Link href="#review" color='default' style={{color:'#000',textDecoration:'none'}} >
     <InfoSharpIcon/>
 Review Details
-</a>
+</Link>
         </div>
         <div className="col-6 text-center">
  Made In Egypt
@@ -168,6 +228,8 @@ Review Details
 </div>
 {}
 <ImagePreview show={show} setShow={setShow} image={imagePrev} array={imageArray}/>
+
+{/* <TwoButtons/> */}
 </RootLayout>
 </>
   )

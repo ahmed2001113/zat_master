@@ -132,14 +132,14 @@ Track Order
 
 
 export default function OrderDetails({order}) {
-  console.log(order)
+   
 const rows = order.map(order=>{
   const obj={ email:order.orderInferomation.email,
     orderId:order.orderCreation.orderId,
     total:order.orderCreation.total,
     items:order.cartItems,
     address:order.orderInferomation.streetaddress}
-    console.log(obj)
+     
   return createData( obj )
  
 }) 

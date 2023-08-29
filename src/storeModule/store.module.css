@@ -81,7 +81,10 @@ margin: auto;
     margin: auto;
     justify-content: space-between;
 }
-
+.Drawer{
+    display: flex;
+    flex-direction: column;
+}
 .chipItem{
     border-radius: 0px !important;
     background: #f4f4f4 !important;
@@ -90,6 +93,7 @@ margin: auto;
     height: 26px !IMPORTANT;
     border: 1px solid #623d6914 !IMPORTANT;
     text-transform: capitalize;
+    margin-bottom: 10px !important;
 }
 
 .no_products{
