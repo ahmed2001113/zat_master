@@ -106,7 +106,7 @@ const [states,setStates]=useState([])
  
         />
  
-               <FormControl   style={{marginLeft:'auto'}}>
+               <FormControl   style={{marginLeft:'auto',width:'100%'}}>
       <InputLabel  >government</InputLabel>
       <Select
          label="government"
