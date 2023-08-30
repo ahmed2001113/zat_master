@@ -9,7 +9,7 @@ export default function WithNoParentCategories({categories}) {
   
   return (
 <>
-<div className="container_fluid pt-10 bg-white">
+<div className="container_fluid mt-2  bg-white">
 <div className={styles.main_grid}>
 {categories&&categories?.map(cat=>{
  
@@ -34,7 +34,7 @@ export default function WithNoParentCategories({categories}) {
           
 
             {  <Link   href={`shop/${cat.slug}`}>
-             <CustomButton bk={'#fff'} color={'#000'} >
+             <CustomButton className={`${styles.button}`} bk={'#fff'} color={'#000'} >
               Shop Now
              </CustomButton>
              

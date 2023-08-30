@@ -25,7 +25,10 @@ function SwippeCentered({products}) {
 	}
     return (
 <div className={`${styles.wrapper}`}>
-  <div className={`${styles.fixed}`}>
+  <h3 className={`${styles.new}`}>
+    New Arrivals
+  </h3>
+   <div className={`${styles.fixed}`}>
 
 <h1>New 
   <br/>
@@ -39,10 +42,31 @@ function SwippeCentered({products}) {
    
 </div>
   </div>
+
+
   <Swiper
-    slidesPerView={2.7}
-    spaceBetween={50}
+
         className={`${styles.sw} mySwiper sw_2`}
+  breakpoints={{
+    // when window width is >= 640px
+    640: {
+       slidesPerView: 1.3,
+      spaceBetween:50
+    }
+    ,
+    // when window width is >= 768px
+    768: {
+       slidesPerView: 1.3,
+      spaceBetween:50
+
+    },
+    992:{
+      slidesPerView:2.7,
+      spaceBetween:50
+      
+    }
+  }}
+  
     
        
   >

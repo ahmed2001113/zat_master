@@ -8,3 +8,12 @@
     height: 747px;
     background: #fff;
 }
+@media (max-width:786px) {
+    .black{
+        width: fit-content   !important;
+        padding: 5px 16px;
+        height: auto;
+        font-size: 15px  !important;
+    }
+    
+}

@@ -1,5 +1,6 @@
 .wrapper{
     position: relative;margin-top: 100PX;
+    padding-left: 10px;
 }
 .fixed{
     position: absolute;
@@ -38,10 +39,21 @@
     text-transform: uppercase;
     margin: 10px 0px;
 }
-
+.new{
+    display: none;
+}
 
 @media(max-width:992px){
     .fixed{
         display: none;
+    }
+    .wrapper{
+         position: relative;
+        margin-top: 10px;
+        margin-left: 15px;
+    }
+    .new{
+        display: block;
+        text-align: center;
     }
 }

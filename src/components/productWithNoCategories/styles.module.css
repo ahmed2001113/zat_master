@@ -48,18 +48,7 @@ text-transform: uppercase;
  .top_bar i{
     font-size: 57px;
  }
- .button{
-    text-transform: lowercase;
-    text-decoration: none;
-    background: #fff;
-    transition: 0.5s all ease-in-out;
-    padding: 7px 25px;
-    color: #333;
- }
- .button:hover{
-    background: #eee;
-    color: #333;
- }
+ 
 
 .image_cat{
     object-position: top center;
@@ -82,5 +71,21 @@ text-transform: uppercase;
         display: flex  ;
         flex-direction: column;
     }
-   
+    .image_cat{
+        height: auto ;
+    }
+    .description h2{
+        font-size: inherit   !important;
+
+    }
+    .button{
+        all: unset;
+        cursor: pointer;
+        font-size: 17px  !important;
+        line-height: 1;
+        padding: 9px 12px  !important;
+        position: relative;
+        transition: color 0.35s ease  !important;
+        border-radius: 14px  !important; 
+    }
 }

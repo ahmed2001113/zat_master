@@ -1,7 +1,13 @@
 export const Sortoptions ={
     label:"sort By",
     name:'sort',
+ 
     innerOptions:[
+     
+      {
+        label:'sort By',
+        value:'Sort Bu'
+      },
       {
         label:'Name',
         value:'name'

@@ -35,7 +35,8 @@ justify-content: center;
 }
 @media(max-width:768px){
     .off{
-        height: 80% !important;
+        height: 100% !important;
+        top: 0px   !important;
     }
 }
 

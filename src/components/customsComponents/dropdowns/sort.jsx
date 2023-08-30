@@ -1,3 +1,4 @@
+import { MenuItem, Select } from '@mui/material';
 import { Form } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 
@@ -5,27 +6,27 @@ export default function SortDropDown({
     name,
     label,
     options=[],
-    defaultValue='',
+    defaultValue='sort',
     onChange,
     ...others
 }) {
    return (
-    <Form.Select
+    <Select
     name={name}
     onChange={onChange}
-    defaultValue={defaultValue} {...others}>
-
-        
-  
-      <option>{label}</option>
+    defaultValue={defaultValue} {...others}
+     
+    >
+ 
+ 
   {
    options.length&& options.map((option,key)=>{
-    return <option key={key} value={option.value}>
+    return <MenuItem  key={key} value={option.value}>
     {option.label}
-</option>
+</MenuItem>
     
    })
   }
-  </Form.Select>
+  </Select>
   );
 }

@@ -1,26 +1,17 @@
 import React,{useState} from 'react'
  import filter from '../../public/svgs/filter.svg'
-import DropDownMenu from '../components/customsComponents/dropdowns/filter';
-import styles from './store.module.css'
+ import styles from './store.module.css'
 import SortDropDown from '../components/customsComponents/dropdowns/sort';
 import { Sortoptions } from '../components/customsComponents/dropdowns/options';
 import ProdutItemMain from '../components/products/productMain';
-import Drawer from '../components/customsComponents/drawers/CustmDrawer';
-import CheckboxLabels from '../components/customsComponents/checkbox/checkBox';
-import { useEffect } from 'react';
+  import { useEffect } from 'react';
 import FilterDrawer from './filterDrawer';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
- import { ProductsInfinteScroll } from '../lib/queries/fetchcategoriesproductsinfinte';
-import { useQuery } from '@apollo/client';
-import { Chip, ListItem } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+    import { useDispatch, useSelector } from 'react-redux';
 import { FilterSelector } from '../store/filters/filtersSelectores';
 import { FiltersAction } from '../store/filters/filter.slice';
 import { isArray } from 'lodash';
-import filterObjectValues from '../utls/functions/FilterObjectsWithTypes';
-import Skelton3 from '../components/skelton/skelton3';
-import Skelton2 from '../components/skelton/skeltonswipecenterd';
+  import Skelton2 from '../components/skelton/skeltonswipecenterd';
 import { wishlistSelector } from '../store/wishlist/wishlistSelector';
  export default function Store({products=[],category='',loading,setLoading,...others}) {
    const dispatch = useDispatch()
@@ -140,7 +131,9 @@ import { wishlistSelector } from '../store/wishlist/wishlistSelector';
       <SortDropDown  
       className={`${styles.sorting}`}
       onChange={onChangeSort}
-        label={Sortoptions.label} name={Sortoptions.name} options={Sortoptions.innerOptions}/>
+        label={Sortoptions.label}
+        defaultValue='sort'
+        name={Sortoptions.name} options={Sortoptions.innerOptions}/>
             <button className={`${styles.button}`} onClick={()=> showFilter()}>fliter 
             <Image 
             alt={'filter'}

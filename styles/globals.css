@@ -97,8 +97,7 @@ html, body {
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
-  height: 593px !IMPORTANT;
-  object-position: top center;
+   object-position: top center;
 }
  
 .swiper-slide:nth-child(2n) {
@@ -370,12 +369,7 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-11zohuh-MuiSvgIcon-root {
     justify-content: flex-start;
 
 }
-@media(min-width:768px){
-  .les{
 
-    height: 100vh;
-  }
-}
 .th {
   display: flex;
   flex-direction: column;
@@ -384,30 +378,14 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-11zohuh-MuiSvgIcon-root {
   text-align: center;
   padding: 13px;
 }
-.carousel-caption {
-  position: absolute;
-  right: 15%;
-  bottom: 1.25rem;
-  left: 15%;
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
-  color: #fff;
-  text-align: center;
-  top: 58%;
-  left: 81px;
-  right: unset;
-  text-align: revert;
-  font-size: 27px !IMPORTANT;
-  color: #333;
-  font-weight: bold;
-}
+
 .carousel-caption button {
-  width: 224px;
-  padding: 5px 16px;
+  width: 160px;
+  padding: 3px 3px;
   height: auto;
-  font-size: 24px;
-  background: #fff;
-  color: #333;
+  font-size: 22px;
+  background: #000;
+  color: #fff;
 }
 .carousel-control-prev, .carousel-control-next{
   height: fit-content;
@@ -450,10 +428,9 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-11zohuh-MuiSvgIcon-root {
   left: 15%;
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
-  color: #fff;
-  text-align: left !important;
   color: #000 !important;
-  font-family: sans-serif;
+  text-align: left !important;
+
 }
 .col-md-12.image_holder {
   position: relative;
@@ -565,10 +542,24 @@ p.out_s {
 
 /* media */
 
+ 
+/* media */
+
 @media(max-width:768px){
   img.ic {
-    width: 44px !IMPORTANT;
-    height: 45px !IMPORTANT;
+    width: 30px !IMPORTANT;
+    height: 30px !IMPORTANT;
 }
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    height: 300px !IMPORTANT;
+    -o-object-position: top center;
+    object-position: top center;
+    object-fit: cover;
+    border-radius: 13px !IMPORTANT;
+  }
 }
-/* media */

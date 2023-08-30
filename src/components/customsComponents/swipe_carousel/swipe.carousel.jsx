@@ -51,7 +51,7 @@ export default function Swipecarousel() {
                    <Carousel.Caption>
                     <h1>First slide label</h1>
                     <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    <button className='black'>Shop Now </button>
+                    <button className={`${styles.black} black`}>Shop Now </button>
           
                   </Carousel.Caption>
 

@@ -175,7 +175,7 @@ useEffect(() => {
       <div className="flex h-16 items-center">
         <button
           type="button"
-          className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
+          className="rounded-md  p-2 text-gray-400 lg:hidden"
           onClick={() => setOpen(true)}
         >
           <Image src={MenuSvg} width={80} alt='menu' height={80}/>
