@@ -270,7 +270,7 @@ src={siteLogoUrl}
           {/* Cart */}
           <div className={`ml-4 flow-root lg:ml-6 flex  ${styles.cart}`} onClick={handleShowClose}>
             
-             <Image src={Love} alt='wishlist' width={30 }  className='mr-2 '
+             <Image src={Love} alt='wishlist' width={30 }  className='mr-2  ic '
        height={30}/>
 
                 <span className='only_big'>

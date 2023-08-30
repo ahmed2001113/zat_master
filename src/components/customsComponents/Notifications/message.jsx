@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { ToastContainer } from 'react-bootstrap';
  
@@ -12,7 +13,9 @@ export default function MessageToast({setShow,show,message}) {
 
 <Toast onClose={() => setShow(false)} show={show} delay={3000} >
   <Toast.Header>
-    <img
+    <Image
+    height={100}
+    width={100}
       src="holder.js/20x20?text=%20"
       className="rounded me-2"
       alt=""

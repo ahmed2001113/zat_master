@@ -16,8 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { SearchPriceuery } from "@/src/lib/queries/searchPrice";
-import handleRedirectsAndReturnData from "@/src/utls/functions/HandleRedirect";
-import { isEqual } from "lodash";
+ import { isEqual } from "lodash";
 import { useLazyQuery } from "@apollo/client";
 import LoadingImage from "@/src/components/customsComponents/image";
  const Search =({search,SearchData,footer_header,seo,price })=>{
@@ -241,7 +240,9 @@ variables:{
      }catch(err){
       
     }
-    const defaultProps= {
+
+   
+    return   {
       props:{
         search,
         SearchData:SearchData||[],
@@ -250,7 +251,5 @@ variables:{
         price:[MinPrice,MaxPrice]||[],
     }
     }
-   
-    return  handleRedirectsAndReturnData(defaultProps,SearchData)
 
  }

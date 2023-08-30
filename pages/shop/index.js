@@ -11,8 +11,7 @@ import { getPage } from "@/src/utls/functions/get-page-seo";
   import { useLazyQuery, useQuery } from "@apollo/client";
 import axios from "axios";
 import {   useRouter } from "next/router";
-import handleRedirectsAndReturnData from '../../src/utls/functions/HandleRedirect.js'
-
+ 
  
  import { useEffect, useRef, useState } from "react";
 import { Button } from "react-bootstrap";

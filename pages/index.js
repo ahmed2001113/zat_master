@@ -10,8 +10,7 @@ import { HEADER_FOOTER_ENDPOINT } from '../src/EndPoints'
  
 import SwippedCenteredSkelton from '@/src/components/skelton/centered'
 import { GETCATEGORIES_WITH_NO_PARENT } from '@/src/lib/queries/categoriesWithPictures';
-import handleRedirectsAndReturnData from '../src/utls/functions/HandleRedirect.js'
-import ModifyObjectOrArray from '@/src/utls/functions/ObjectArrayChange'
+ import ModifyObjectOrArray from '@/src/utls/functions/ObjectArrayChange'
 import { PRODUCTS_QUERY } from '@/src/lib/queries/Product_query'
 import Swipecarousel from '@/src/components/customsComponents/swipe_carousel/swipe.carousel'
 import { useInView } from 'framer-motion'

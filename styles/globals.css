@@ -561,3 +561,14 @@ p.out_s {
   width: fit-content;
   padding: 1px 10px;
 }
+
+
+/* media */
+
+@media(max-width:768px){
+  img.ic {
+    width: 44px !IMPORTANT;
+    height: 45px !IMPORTANT;
+}
+}
+/* media */
