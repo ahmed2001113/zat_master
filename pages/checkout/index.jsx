@@ -12,6 +12,7 @@ import { CheckOutForm } from '@/src/components/checkout/checkoutform';
 import { CheckOutPayments } from '@/src/components/checkout/checkout.payments';
 import { currentStepSelector } from '@/src/store/checkoutSteps/checkout.selector';
   import PaypalButtonCheckout from '@/src/components/paypalButton/paypalButton';
+import Head from 'next/head';
  
 export default function CheckOut() {
   const CartElments = useSelector(cartItems)
@@ -23,6 +24,12 @@ export default function CheckOut() {
  
   
    return (
+<>
+<Head>
+    <title>
+     {` Checkout - zat98`}
+    </title>
+  </Head>
     <div className="row container-fluid " style={{height:'100vh'}}>
 <div className={`${styles.left} col-md-7`}>
 <div className={`${styles.wrapper} container `}>
@@ -105,7 +112,7 @@ LE  {(+CartTotal+65)}
 
 </div>
     </div>
-
+</>
 );
 
 }

@@ -10,8 +10,7 @@ import Image from 'next/image';
     import { useDispatch, useSelector } from 'react-redux';
 import { FilterSelector } from '../store/filters/filtersSelectores';
 import { FiltersAction } from '../store/filters/filter.slice';
-import { isArray } from 'lodash';
-  import Skelton2 from '../components/skelton/skeltonswipecenterd';
+   import Skelton2 from '../components/skelton/skeltonswipecenterd';
 import { wishlistSelector } from '../store/wishlist/wishlistSelector';
  export default function Store({products=[],category='',loading,setLoading,...others}) {
    const dispatch = useDispatch()
@@ -117,6 +116,9 @@ import { wishlistSelector } from '../store/wishlist/wishlistSelector';
   return (
    
    <div {...others}>
+      <h4 className={`${styles.title} ${styles.mob}`}>
+      {category}
+    </h4>
    <div className={`${styles.Top_Bar}`} >
   <div className={`${styles.flex}`}>
 
@@ -146,7 +148,7 @@ import { wishlistSelector } from '../store/wishlist/wishlistSelector';
    </div>
 
 
-   <div className="products_container container m-auto row">
+   <div style={{paddingLeft:'5px'}} className="products_container container m-auto row">
    <FilterDrawer 
 products={products}
 setProducts={setproducts}
@@ -163,7 +165,7 @@ loading={loading}
   return  loading?<Skelton2 key={product.id}/>:
 
    <ProdutItemMain  isLove={isWishlist(product.id)}
-    className={`col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 pb-3
+    className={`col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 pb-3
      pb-md-6 pb-xl-8`} key={product.id} 
       product={product}/>
   }

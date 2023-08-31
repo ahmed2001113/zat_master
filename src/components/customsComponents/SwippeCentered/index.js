@@ -49,20 +49,28 @@ function SwippeCentered({products}) {
         className={`${styles.sw} mySwiper sw_2`}
   breakpoints={{
     // when window width is >= 640px
+    0:{
+      slidesPerView: 1.1,
+
+    },
     640: {
-       slidesPerView: 1.3,
-      spaceBetween:50
-    }
+       slidesPerView: 2,
+     }
     ,
     // when window width is >= 768px
     768: {
-       slidesPerView: 1.3,
-      spaceBetween:50
+       slidesPerView: 2,
+      spaceBetween:10
 
     },
     992:{
-      slidesPerView:2.7,
-      spaceBetween:50
+      slidesPerView:3.2,
+      spaceBetween:10
+      
+    },
+    1024:{
+      slidesPerView:3.2,
+      spaceBetween:10
       
     }
   }}

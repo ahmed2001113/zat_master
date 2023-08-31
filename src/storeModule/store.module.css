@@ -107,17 +107,28 @@ margin: auto;
     text-transform: uppercase;
     text-align: center;
 }
-
+.mob{
+    display: none ;
+}
 @media(max-width:768px){
+    .mob{
+        display: block ;
+    }
     .Top_Bar{
-        top: 67px;
+        top: 71px;
         flex-direction: column;
         padding-top: 19px;
+        height: 29px;
     }
    
     .filterOptions{
-        width: 81%;
+        width: 100%;
         align-items: flex-end;
         height: 26px;
+        justify-content: space-between;
+    }
+    .title{
+        display: none;
     }
 }
+

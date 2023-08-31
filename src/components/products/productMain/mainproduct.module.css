@@ -87,3 +87,37 @@
     justify-content: space-around;
 
  }
+
+ @media (max-width:768px) {
+    .Add{
+        font-size: 10px !IMPORTANT;
+    padding: 3px 6px !IMPORTANT;
+    margin: 0px;
+    text-align: left;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: flex;
+    }
+    .Title p{
+        font-size: 11px;
+    }
+    .Title h6{
+        font-size: 12px !important;
+    }
+    .product img{
+        height: 228px;
+        object-fit: cover;
+    }
+    .heart{
+        font-size: 15px;
+        width: 24px;
+        padding: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15%;
+        height: 23px;
+        background-color: #ffffff;
+        border: 1px solid #fff !important;
+    }
+ }

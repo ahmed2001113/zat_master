@@ -19,6 +19,7 @@ import { SearchPriceuery } from "@/src/lib/queries/searchPrice";
  import { isEqual } from "lodash";
 import { useLazyQuery } from "@apollo/client";
 import LoadingImage from "@/src/components/customsComponents/image";
+import Head from "next/head";
  const Search =({search,SearchData,footer_header,seo,price })=>{
     const dispatch = useDispatch()
     const {Filters,sort,Filtered} = useSelector(FilterSelector)
@@ -145,6 +146,11 @@ import LoadingImage from "@/src/components/customsComponents/image";
      
         return(
            <>
+           <Head>
+    <title>
+ {`    Search - zat98`}
+    </title>
+  </Head>
            {
             loadings&&<LoadingImage/>
            }

@@ -25,7 +25,7 @@ export default function Home({footer_header,products,categoriesWithNoParent,load
    <RootLayout headerFooter={footer_header} seo={seo}>
    <Head>
         <title>
-          Home - zat98
+          {`Home - zat98`}
         </title>
       </Head>
  {/* {loading?<Big/>:

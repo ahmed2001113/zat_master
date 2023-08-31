@@ -36,7 +36,7 @@ console.log(seo)
    
    <Head>
         <title>
-          Account - zat98
+          {`Account - zat98`}
         </title>
       </Head>
 

@@ -34,7 +34,7 @@ export default function CheckOut({product}) {
       
       <Head>
         <title>
-          Checkout - zat98
+      {`    Checkout - zat98`}
         </title>
       </Head>
 

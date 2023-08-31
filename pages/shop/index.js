@@ -17,6 +17,7 @@ import {   useRouter } from "next/router";
 import { Button } from "react-bootstrap";
  import { useDispatch, useSelector } from "react-redux";
 import LoadingImage from "@/src/components/customsComponents/image/index.jsx";
+import Head from "next/head";
 const AllCategoriesProducts = ({products,footer_header,seo,price,load,...others})=>{
   const dispatch = useDispatch ()
  const {Filters,sort,Filtered} = useSelector(FilterSelector)
@@ -109,7 +110,8 @@ try {
     ...Filters,
 
   }});
- 
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
  
 } catch (error) {
   setLoading(false)
@@ -128,10 +130,10 @@ const loadLess = async()=>{
     ...Filters,
 
   }})
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
  
-  setProductsData(ModifyObjectOrArray(data?.products?.nodes));
-  setPageInfo(data?.products?.pageInfo);
-   setLoading(false)
+   
 } catch (error) {
  }
 
@@ -141,6 +143,11 @@ const loadLess = async()=>{
 
      return(
         <>
+              <Head>
+    <title>
+     {`shop -zat98`}
+    </title>
+  </Head>
          {
         loadings? <LoadingImage/>:null
       } 

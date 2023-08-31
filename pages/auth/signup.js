@@ -10,6 +10,7 @@ import { HEADER_FOOTER_ENDPOINT } from '@/src/EndPoints';
 import axios from 'axios';
 import RootLayout from '@/src/components/layout';
 import FormInputComponent from '@/src/components/customsComponents/FormLayouts/FormControl';
+import Head from 'next/head';
 const initialData = {
 firstName:'',
 lastName:'',
@@ -85,6 +86,11 @@ useEffect(()=>{
 },[user])
    return (
 <RootLayout  headerFooter={footer_header}>
+<Head>
+        <title>
+          {`Sign Up - zat98`}
+        </title>
+      </Head>
 <div className={`container ${styles.cooo}`}>
 
 <h1>create account</h1>

@@ -12,6 +12,7 @@ import client from "@/src/utls/apolloConfigrations/apolloClient";
 import { useLazyQuery } from "@apollo/client";
 import axios from "axios";
 import { isEqual } from "lodash";
+import Head from "next/head";
 // import { getProductsData } from "@/src/utls/productCategories";
  import Image from "next/image";
 import { useRouter } from "next/router"
@@ -54,8 +55,7 @@ console.log(name)
          
         setLoading(loading);
          
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+   
        },
        onError:(err)=>{
          
@@ -76,7 +76,8 @@ console.log(name)
           }
       })
    
- 
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
     } 
     catch(err){
        
@@ -103,7 +104,8 @@ console.log(name)
       }
   })
    
-   
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
  
   }
 const loadLess = async()=>{
@@ -118,7 +120,8 @@ const loadLess = async()=>{
     }
   })
    
- 
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
  
 }
 
@@ -128,6 +131,11 @@ const loadLess = async()=>{
       return(
 
         <>
+          <Head>
+    <title>
+     {name} - zat98
+    </title>
+  </Head>
       {
         loadings? <LoadingImage/>:null
       } 
