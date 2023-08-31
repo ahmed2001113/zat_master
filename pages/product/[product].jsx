@@ -16,6 +16,7 @@ import ImagePreview from '@/src/components/Image_preview/images_preview'
 import ActionButtons, { TwoButtons } from '@/src/components/buttons3'
 import { Breadcrumbs, Rating, Typography } from '@mui/material'
 import Link from 'next/link'
+import Head from 'next/head'
   export default function Product({product,footer_header}) {
   const [show ,setShow]=useState(false)
 const [imagePrev,setImage] = useState({});
@@ -102,7 +103,11 @@ const handleShow = (imag)=>{
    return (
 <>
 <RootLayout headerFooter={footer_header}>
-    
+<Head>
+    <title>
+     { `${name} - zat98`}
+    </title>
+  </Head>
 <div ref={divRef}  className="row" style={{background:'#fff',margin:'0px' ,padding:'0px' ,width:'100%'}}>
      
      <div className={`${styles.left} col-md-7`}>

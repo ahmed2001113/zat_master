@@ -15,6 +15,7 @@ import { currentStepSelector } from '@/src/store/checkoutSteps/checkout.selector
 import { useRouter } from 'next/router';
  import { CheckOutProduct } from '@/src/lib/queries/checkoutProduct';
 import PaypalButtonCheckout from '@/src/components/paypalButton/paypalButton';
+import Head from 'next/head';
 
 export default function CheckOut({product}) {
   const {current,steps} = useSelector(currentStepSelector)
@@ -29,7 +30,14 @@ export default function CheckOut({product}) {
  
 
   
-   return (
+   return (<>
+      
+      <Head>
+        <title>
+          Checkout - zat98
+        </title>
+      </Head>
+
     <div className="row container-fluid " style={{height:'100vh'}}>
 <div className={`${styles.left} col-md-7`}>
 <div className={`${styles.wrapper} container `}>
@@ -112,7 +120,7 @@ LE  {(+CartTotal+65)}
 </div>
 
     </div>
-
+    </>
 );
 
 }

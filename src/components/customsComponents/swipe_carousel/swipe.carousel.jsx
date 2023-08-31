@@ -21,7 +21,7 @@ import {Carousel} from "react-bootstrap";
     },
     {
 
-      image:'/slides/slide(2).jpg',
+      image:'/slides/slide(5).jpg',
         title:'UNLEASH THE POWER',
         description:'WELCOME TO THE FAMILY'
         ,

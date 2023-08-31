@@ -14,6 +14,7 @@ import { userSelectMemo } from '@/src/store/user/user.selector';
 import { useRouter } from 'next/router';
 import LoadingImage from '@/src/components/customsComponents/image';
 import { useEffect } from 'react';
+import Head from 'next/head';
 function User({seo,footer_header}) {
 console.log(seo)
   const user = useSelector(userSelectMemo);
@@ -33,7 +34,11 @@ console.log(seo)
   return (
    <>
    
-
+   <Head>
+        <title>
+          Account - zat98
+        </title>
+      </Head>
 
    <RootLayout headerFooter={footer_header}  >
 {

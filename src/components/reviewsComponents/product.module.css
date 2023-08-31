@@ -113,8 +113,7 @@ padding: 20px;
     width: 20%;
     background: none;
     color: #333;
-    border: 1px solid #333;
-    padding: 15px
+     padding: 15px
     ;
     align-items: center;
     display: flex;
@@ -191,4 +190,13 @@ background: #ddd;
     .re{
         padding: 10px;
         color: #603d6b;
+    }
+
+
+    @media (max-width:768px) {
+        .review_header button{
+            width: 50%;
+            border: 0px;
+        }
+        
     }

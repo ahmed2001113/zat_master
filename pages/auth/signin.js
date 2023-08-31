@@ -78,7 +78,11 @@ useEffect(()=>{
 },[user])
   return (
 <RootLayout headerFooter={footer_header}>
-
+<Head>
+        <title>
+          {`Sign In - zat98`}
+        </title>
+      </Head>
 <div className='container mt-5'>
 
 <div className='row  ' style={{height:'100vh'}}>

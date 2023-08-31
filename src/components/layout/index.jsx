@@ -18,7 +18,7 @@ function RootLayout({children, headerFooter,seo,uri}) {
     <>
     				<Seo seo={ seo || {} } uri={ uri || '' }/>
 <Head>
-  Home
+ 
 </Head>
     <MainHeader header={header}/>
 
