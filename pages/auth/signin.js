@@ -9,6 +9,7 @@ import RootLayout from '@/src/components/layout';
 import axios from 'axios';
 import { HEADER_FOOTER_ENDPOINT } from '@/src/EndPoints';
 import FormInputComponent from '@/src/components/customsComponents/FormLayouts/FormControl';
+import Head from 'next/head';
  const intial ={email:'',password:''};
 
 const  Signin=({footer_header}) =>{
