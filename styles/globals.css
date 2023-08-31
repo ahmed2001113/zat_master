@@ -384,8 +384,25 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-11zohuh-MuiSvgIcon-root {
   padding: 3px 3px;
   height: auto;
   font-size: 22px;
-  background: #000;
+  background: #623c6b;
   color: #fff;
+  padding: 8px 20px;
+}
+.carousel-caption h1{
+  color: #FCFCF7;
+  font-size: 80px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.63);
+
+}
+.carousel-caption p{
+  padding: 8px 0px 8px 0px;
+    border-style: double;
+    border-width: 3px 0px 3px 0px;
+    border-color: #ffffff;
+    width: fit-content;
 }
 .carousel-control-prev, .carousel-control-next{
   height: fit-content;
@@ -561,5 +578,8 @@ p.out_s {
     object-position: top center;
     object-fit: cover;
     border-radius: 13px !IMPORTANT;
+  }
+  .carousel-caption h1{
+    font-size: 40px;
   }
 }

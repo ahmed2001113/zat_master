@@ -1,4 +1,5 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+ import { Html, Head, Main, NextScript } from 'next/document'
+import Script from 'next/script'
 
 export default function Document() {
   return (
@@ -16,8 +17,13 @@ export default function Document() {
  
         <Main />
         <NextScript />
-        
+        <Script
+          src="https://embed.tawk.to/64ee2285a91e863a5c10801c/1h913dnjt"
+          strategy="beforeInteractive"
+        />
+ 
       </body>
     </Html>
   )
 }
+ 

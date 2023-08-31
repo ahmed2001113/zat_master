@@ -3,33 +3,32 @@ import React from 'react'
 import {Carousel} from "react-bootstrap";
  import styles from './carousel.module.css';
  import {motion} from 'framer-motion';
-
-export default function Swipecarousel() {
-    const slides =[
-        {
-            image:'https://images.canadagoose.com/image/upload/w_1920,c_scale,f_auto,q_auto:best/v1687292015/product-image/7403M2H_99_fsph.jpg',
-            title:'Elevated Exploration',
-            description:'Discover your new head-to-toe essentials for the season.',
-            id:1
-        }
+ export default function Swipecarousel() {
+  const slides =[
+    {
+      image:'/slides/slide(1).jpg',
+      title:'UNLEASH THE POWER',
+        description:'WELCOME TO THE FAMILY',
+        id:1
+    }
+    ,
+    {
+      image:'/slides/slide(3).jpg',
+      title:'UNLEASH THE POWER',
+        description:'WELCOME TO THE FAMILY'
         ,
-        {
-            image:'https://images.canadagoose.com/image/upload/w_1920,c_scale,f_auto,q_auto:best/v1663329451/product-image/6829MB_699_fsph.jpg',
-            title:'Elevated Exploration',
-            description:'Discover your new head-to-toe essentials for the season.'
-            ,
-            id:2
-        },
-        {
+        id:2
+    },
+    {
 
-            image:'https://images.canadagoose.com/image/upload/w_1920,c_scale,f_auto,q_auto:best/v1679591292/product-image/2062M_433_fsph.jpg',
-            title:'Elevated Exploration',
-            description:'Discover your new head-to-toe essentials for the season.'
-            ,
-            id:3
-        }
+      image:'/slides/slide(2).jpg',
+        title:'UNLEASH THE POWER',
+        description:'WELCOME TO THE FAMILY'
+        ,
+        id:3
+    }
 
-    ]
+]
     return (
     
         <motion.div
@@ -46,11 +45,11 @@ export default function Swipecarousel() {
           {
             slides.map(slide=>{
               return(
-                <Carousel.Item key={slide.id} >
-                <Image src={slide.image}  alt={slide.title} width='4000' height={600}  />
-                   <Carousel.Caption>
-                    <h1>First slide label</h1>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                <Carousel.Item key={slide.id} className={`${styles.car_item}`}  >
+                <Image src={slide.image}  alt={slide.title}  fill />
+                    <Carousel.Caption>
+                    <h1>{slide.title}</h1>
+                    <p>{slide.description}</p>
                     <button className={`${styles.black} black`}>Shop Now </button>
           
                   </Carousel.Caption>

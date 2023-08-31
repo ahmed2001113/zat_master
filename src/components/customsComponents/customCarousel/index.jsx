@@ -6,24 +6,24 @@ import Image from 'next/image';
 function CustomCarouselComponent() {
     const slides =[
         {
-            image:'https://images.canadagoose.com/image/upload/w_1920,c_scale,f_auto,q_auto:best/v1687292015/product-image/7403M2H_99_fsph.jpg',
-            title:'Elevated Exploration',
-            description:'Discover your new head-to-toe essentials for the season.',
+          image:'http://zat98.com/wp-content/uploads/2022/10/Final-1-scaled.jpg',
+          title:'UNLEASH THE POWER',
+            description:'WELCOME TO THE FAMILY',
             id:1
         }
         ,
         {
-            image:'https://images.canadagoose.com/image/upload/w_1920,c_scale,f_auto,q_auto:best/v1663329451/product-image/6829MB_699_fsph.jpg',
-            title:'Elevated Exploration',
-            description:'Discover your new head-to-toe essentials for the season.'
+          image:'http://zat98.com/wp-content/uploads/2022/10/Final-1-scaled.jpg',
+          title:'UNLEASH THE POWER',
+            description:'WELCOME TO THE FAMILY'
             ,
             id:2
         },
         {
 
-            image:'https://images.canadagoose.com/image/upload/w_1920,c_scale,f_auto,q_auto:best/v1679591292/product-image/2062M_433_fsph.jpg',
-            title:'Elevated Exploration',
-            description:'Discover your new head-to-toe essentials for the season.'
+            image:'http://zat98.com/wp-content/uploads/2022/10/Final-1-scaled.jpg',
+            title:'UNLEASH THE POWER',
+            description:'WELCOME TO THE FAMILY'
             ,
             id:3
         }

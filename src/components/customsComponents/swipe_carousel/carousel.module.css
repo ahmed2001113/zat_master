@@ -17,3 +17,12 @@
     }
     
 }
+
+.car_item{
+    height: 800px;
+    width: 100%;
+    position: relative;
+}
+.car_item img{
+    object-fit: cover;
+}
