@@ -10,7 +10,7 @@ export default function Document() {
        crossOrigin="anonymous" referrerPolicy="no-referrer" />
   <link href="https://db.onlinewebfonts.com/c/a8bec9b307151fc9d8916065c279f9e3?family=NeueHaasGroteskText+W01" 
   rel="stylesheet"/>
-
+<link href="../public/favicon/favicon.ico" rel="sortcut icon"/>
         </Head>
       <body>
  

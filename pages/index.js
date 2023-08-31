@@ -14,6 +14,7 @@ import { GETCATEGORIES_WITH_NO_PARENT } from '@/src/lib/queries/categoriesWithPi
 import { PRODUCTS_QUERY } from '@/src/lib/queries/Product_query'
 import Swipecarousel from '@/src/components/customsComponents/swipe_carousel/swipe.carousel'
 import { useInView } from 'framer-motion'
+import Head from 'next/head'
 export default function Home({footer_header,products,categoriesWithNoParent,load,seo}) {
  const [loading,setLoading]=useState(load);
    
@@ -22,7 +23,7 @@ export default function Home({footer_header,products,categoriesWithNoParent,load
      return (
     <>
    <RootLayout headerFooter={footer_header} seo={seo}>
-{/* {loading?<Big/>:
+ {/* {loading?<Big/>:
 
 
 }     */}

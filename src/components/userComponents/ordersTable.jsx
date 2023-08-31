@@ -146,7 +146,7 @@ const rows = order.map(order=>{
  
   return (
     
-    <TableContainer component={Paper}>
+    <TableContainer  >
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
