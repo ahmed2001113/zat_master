@@ -44,18 +44,13 @@
     text-transform: capitalize;
 }
 .sorting{
-    background: none;
-    text-align: justify;
-    width: fit-content;
-    height: fit-content !IMPORTANT;
-    border: 0px !IMPORTANT;
-    padding: 11px;
-    height: 30px !IMPORTANT;
-    background: #e3e3e3;
-    border: 0px !IMPORTANT;
+   
     }
 .title{
 
+}
+.sorting label {
+    padding: 4PX !important;
 }
 .button{
     display: flex;
@@ -79,6 +74,8 @@ margin: auto;
     display: flex;
     margin: auto;
     justify-content: space-between;
+    height: 30px;
+
 }
 .Drawer{
     display: flex;
@@ -109,4 +106,18 @@ margin: auto;
     height: 50px;
     text-transform: uppercase;
     text-align: center;
+}
+
+@media(max-width:768px){
+    .Top_Bar{
+        top: 67px;
+        flex-direction: column;
+        padding-top: 19px;
+    }
+   
+    .filterOptions{
+        width: 81%;
+        align-items: flex-end;
+        height: 26px;
+    }
 }

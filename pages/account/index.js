@@ -13,19 +13,29 @@ import { useSelector } from 'react-redux';
 import { userSelectMemo } from '@/src/store/user/user.selector';
 import { useRouter } from 'next/router';
 import LoadingImage from '@/src/components/customsComponents/image';
+import { useEffect } from 'react';
 function User({seo,footer_header}) {
-
+console.log(seo)
   const user = useSelector(userSelectMemo);
-    const router =useRouter()
-    if(!user){
-      router.push('/')
-    }
+    const router =useRouter();
+    // useEffect(()=>{
+
+    //   // const timing = setTimeout(()=>{
+    //   //   if(!!user){
+
+    //   //     router.push('/')
+    //   //   }
+    //   },3000);
+    //   return ()=> clearTimeout(timing)
+    // },[])
+  
+    
   return (
    <>
    
 
 
-   <RootLayout headerFooter={footer_header} seo={seo}>
+   <RootLayout headerFooter={footer_header}  >
 {
   user?<div className={`${styles.center} container-fluid`}>
   <Tab.Container id="left-tabs-example" defaultActiveKey="Orders"  >
@@ -55,8 +65,7 @@ function User({seo,footer_header}) {
     </Col>
   </Row>
 </Tab.Container>
-</div>:
-<LoadingImage/>
+</div>:null
 
 }
 

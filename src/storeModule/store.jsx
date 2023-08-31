@@ -44,7 +44,7 @@ import { wishlistSelector } from '../store/wishlist/wishlistSelector';
  const [show,setShow]= useState(false)
   const [productData,setproducts] =useState(products||[]);
   
-  const [sort,SetSort]= useState('')
+  const [sort,SetSort]= useState('sort By')
    const onChange = (e)=>{
    }
  
@@ -125,14 +125,14 @@ import { wishlistSelector } from '../store/wishlist/wishlistSelector';
     </h4>
 
     <div className={`${scroll&&styles.Top_Bar_scroll} ${styles.filterOptions}`}>
-      <p className={`${styles.res}`}>{productData?.length} results</p>
-      {/* <DropDownMenu onChange={onChange} backgroundOrNot={false}  t
+       {/* <DropDownMenu onChange={onChange} backgroundOrNot={false}  t
       ext={'filter'} icon={filter}/> */}
       <SortDropDown  
-      className={`${styles.sorting}`}
+      className={`${styles.sorting} sor`}
       onChange={onChangeSort}
         label={Sortoptions.label}
         defaultValue='sort'
+        valueOpt={sort}
         name={Sortoptions.name} options={Sortoptions.innerOptions}/>
             <button className={`${styles.button}`} onClick={()=> showFilter()}>fliter 
             <Image 

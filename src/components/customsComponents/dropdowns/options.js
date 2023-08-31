@@ -4,10 +4,7 @@ export const Sortoptions ={
  
     innerOptions:[
      
-      {
-        label:'sort By',
-        value:'Sort Bu'
-      },
+  
       {
         label:'Name',
         value:'name'

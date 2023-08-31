@@ -1,32 +1,39 @@
-import { MenuItem, Select } from '@mui/material';
-import { Form } from 'react-bootstrap';
-import Dropdown from 'react-bootstrap/Dropdown';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+ import Dropdown from 'react-bootstrap/Dropdown';
 
 export default function SortDropDown({
     name,
     label,
     options=[],
-    defaultValue='sort',
+    defaultValue='',
     onChange,
     ...others
 }) {
-   return (
+  console.log(options)
+  return (
+    <FormControl  variant="standard" sx={{ width:150 ,marginTop:0}} size="small">
+    <InputLabel className='sortLabel' >Sort By</InputLabel>
     <Select
-    name={name}
-    onChange={onChange}
-    defaultValue={defaultValue} {...others}
-     
+       label="sort"
+      onChange={onChange}
+      required
+      name="sort"
+      {...others}
     >
- 
- 
-  {
-   options.length&& options.map((option,key)=>{
-    return <MenuItem  key={key} value={option.value}>
-    {option.label}
-</MenuItem>
-    
-   })
-  }
-  </Select>
+      
+      {options.map(option=>{
+        return(
+          <MenuItem key={option.key} value={option.value}>
+            
+            {
+              option.label
+            }
+          </MenuItem>
+
+        )
+      })}
+
+    </Select>
+  </FormControl>
   );
 }

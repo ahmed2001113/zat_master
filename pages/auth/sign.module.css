@@ -79,3 +79,20 @@ border-radius: 0px;
     text-transform: uppercase
     ;
 }
+
+@media(max-width:768px){
+    .left{
+        display: block;
+        flex-direction: column;
+        height: auto;
+        justify-content: space-between;
+        margin: 10px;
+        width: 90%;
+        margin: auto;
+    }
+    .right{
+        
+          width: 90%;
+         margin:20px auto;
+    }
+}
