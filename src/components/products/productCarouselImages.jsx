@@ -12,10 +12,10 @@ import styles from './productMain/mainproduct.module.css'
                 return(
                     <Carousel.Item  
                      
-                     
+                    key={image.sourceUrl}
+
                      >
                         <Image     
-                        key={image.sourceUrl}
                         className={styles.image_carousel} 
                          height={500}
                         width={557} 

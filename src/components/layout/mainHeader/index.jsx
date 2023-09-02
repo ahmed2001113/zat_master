@@ -131,7 +131,8 @@ useEffect(() => {
           
 {
   currentUser?<>
-  <Link className="space-y-6 border-t border-gray-200 px-4 py-6" href={'/account'} style={{color:'black'}} >
+  <Link className="space-y-6 border-t border-gray-200 px-4 py-6"
+   href={'/account'} style={{color:'black'}} >
 account
     </Link>
   </>:
