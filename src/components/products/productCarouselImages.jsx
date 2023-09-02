@@ -3,7 +3,7 @@ import React from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import styles from './productMain/mainproduct.module.css'
 import Link from 'next/link';
-  export default function ProductCarouselImages({images}) {
+  export default function ProductCarouselImages({images,id}) {
     console.log(images)
   return (
     <Carousel defaultActiveIndex={0} interval={null} className={'product_carousel'} data-bs-theme="dark">
