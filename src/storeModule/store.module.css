@@ -130,5 +130,8 @@ margin: auto;
     .title{
         display: none;
     }
+    .product  img{
+        height: 284px !important;
+        width: 198px !important;
+    }
 }
-

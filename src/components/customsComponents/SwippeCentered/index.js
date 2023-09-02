@@ -50,7 +50,8 @@ function SwippeCentered({products}) {
   breakpoints={{
     // when window width is >= 640px
     0:{
-      slidesPerView: 1.1,
+      slidesPerView: 1.2,
+      spaceBetween:10
 
     },
     640: {

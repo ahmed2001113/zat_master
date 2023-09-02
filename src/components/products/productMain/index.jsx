@@ -38,7 +38,7 @@ return (
  
  
     <>
-    <div className={className}>
+    <div className={className} style={{padding:'1px'}}>
 
     <motion.div
       initial="hidden"

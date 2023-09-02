@@ -93,7 +93,7 @@
  
  @media (max-width:768px) {
     .Add{
-        font-size: 10px !IMPORTANT;
+        font-size: 14px !IMPORTANT;
     padding: 3px 6px !IMPORTANT;
     margin: 0px;
     text-align: left;
@@ -108,7 +108,7 @@
         font-size: 12px !important;
     }
     .product img{
-        height: 228px;
+        height: 500px !important;
         object-fit: cover;
     }
     .heart{

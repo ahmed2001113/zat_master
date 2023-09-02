@@ -108,12 +108,13 @@ html, body {
   width: 20%;
 }
 button.black {
-  background: #000;
+  background: #623c6b;
   color: #fff;
   padding: 4px;
    transition: 0.3s all ease-in-out;
   width: 100%;
   height: 40px;
+  margin:10px  auto;
 
 }
 span.priceBefore {
@@ -551,11 +552,13 @@ h1.searchNotFound {
   flex-direction: column;
 }
 p.out_s {
-  color: #ffffff;
-  text-transform: capitalize;
-  background: #623c6b;
-  width: fit-content;
-  padding: 1px 10px;
+  color: #623c6b;
+    text-transform: capitalize;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 1px 10px;
+    font-size: 14px;
+ 
 }
 
 
@@ -611,4 +614,15 @@ button.showMoreBtn:disabled{
   .carousel-caption h1{
     font-size: 40px;
   }
+  .form-check.woo-next-payment-input-container.mt-2 {
+    border: 1px solid #333;
+    display: flex;
+    margin: 0px 10px;
+    width: 90%;
+    font-size: 12px;
+    text-align: left;
+    align-items: flex-start;
+    padding: 5px;
+    justify-content: center;
+}
 }

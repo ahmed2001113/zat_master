@@ -15,7 +15,11 @@
         height: auto;
         font-size: 15px  !important;
     }
-    
+    .car_item{
+        height: 600px;
+        width: 100%;
+        position: relative;
+    }
 }
 
 .car_item{

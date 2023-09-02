@@ -16,12 +16,20 @@
     justify-self: flex-start;
     margin-bottom: auto;
     padding: 34px;
-     display: flex;
-}
-@media (min-width:992px) {
-   
+ }
+
+.thankWrapper{
     
 }
-.thankWrapper{
+@media (max-width:992px) {
+    .left{
+        padding: 0% !important;
+        padding-left: 20px !important; 
+    }
+    .all{
+         
+         padding: 0px !important; 
+flex-direction: column-reverse;
+    }
     
 }

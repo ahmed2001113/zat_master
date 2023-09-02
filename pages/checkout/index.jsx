@@ -30,7 +30,8 @@ export default function CheckOut() {
      {` Checkout - zat98`}
     </title>
   </Head>
-    <div className="row container-fluid " style={{height:'100vh'}}>
+ 
+  <div className={`row container-fluid ${styles.all}`}  >
 <div className={`${styles.left} col-md-7`}>
 <div className={`${styles.wrapper} container `}>
 <Box sx={{ width: '100%' }}>

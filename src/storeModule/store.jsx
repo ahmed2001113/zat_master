@@ -166,7 +166,7 @@ loading={loading}
 
    <ProdutItemMain  isLove={isWishlist(product.id)}
     className={`col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 pb-3
-     pb-md-6 pb-xl-8`} key={product.id} 
+     pb-md-6 pb-xl-8 ${styles.product}`} key={product.id} 
       product={product}/>
   }
   

@@ -117,10 +117,12 @@ const HandleOnChange = (event,isBillingOrShipping=false,isShipping=false)=>{
        
  if(value==="visa"){
   dispatch(checkoutActions.SetPaymentMethod([true,TotalCart]))
-
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
  }else{
   dispatch(checkoutActions.SetPaymentMethod([false,TotalCart]))
-
+  document.body.scrollTop =100;
+  document.documentElement.scrollTop = 100;
  }
       
     }else{
