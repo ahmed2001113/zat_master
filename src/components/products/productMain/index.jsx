@@ -57,7 +57,7 @@ return (
 
 {
 product.images.length > 1 ?
-<ProductCarouselImages images={product.images}id={product?.id}/>
+<ProductCarouselImages images={product.images} id={product?.id}/>
 
       :
       <Link href={`/product/${product?.id}`}>
