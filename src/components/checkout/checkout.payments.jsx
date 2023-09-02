@@ -122,7 +122,7 @@ const HandleOnChange = (event,isBillingOrShipping=false,isShipping=false)=>{
  }else{
   dispatch(checkoutActions.SetPaymentMethod([false,TotalCart]))
   document.body.scrollTop =100;
-  document.documentElement.scrollTop = 100;
+  document.documentElement.scrollTop = 120;
  }
       
     }else{
