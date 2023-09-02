@@ -2,7 +2,8 @@ import Image from 'next/image';
 import React from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import styles from './productMain/mainproduct.module.css'
- export default function ProductCarouselImages({images}) {
+import Link from 'next/link';
+  export default function ProductCarouselImages({images}) {
     console.log(images)
   return (
     <Carousel defaultActiveIndex={0} interval={null} className={'product_carousel'} data-bs-theme="dark">
@@ -15,6 +16,8 @@ import styles from './productMain/mainproduct.module.css'
                     key={image.sourceUrl}
 
                      >
+                              <Link href={`/product/${id}`}>
+                
                         <Image     
                         className={styles.image_carousel} 
                          height={500}
@@ -23,7 +26,8 @@ import styles from './productMain/mainproduct.module.css'
                         sizes='100vw'
                         alt={image?.altText}
                         src={image?.sourceUrl}
-/>
+/>                </Link>
+
                     </Carousel.Item>
                 )
             })
