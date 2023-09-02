@@ -12,9 +12,10 @@ import {motion} from 'framer-motion';
 import CustomButton_2 from '../../customsComponents/buttons/CustomButton_2';
 import { wishlistSelector } from '@/src/store/wishlist/wishlistSelector';
  import { userSelectMemo } from '@/src/store/user/user.selector';
+import ProductCarouselImages from '../productCarouselImages';
  function  ProdutItemMain({product,isLove=false,className}) {
  const dispatch= useDispatch();
- 
+console.log(product)
  const OpenPreview =()=> dispatch(PreviewActions.OPENPREVIEW(product));
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const {wishlistItems}=useSelector(wishlistSelector);
@@ -53,16 +54,24 @@ return (
       
 
         <div className={`${styles.imageWrapper}`} >
-<Link href={`/product/${product?.id}`}>
-<Image
-       src={product?.images[0]?.sourceUrl||product?.images[0]?.src}
-      height={500}
-       width={557} 
-       objectFit='cover'
-      sizes='100vw'
-      alt={product?.images[0]?.altText||product?.images[0]?.altText}
-      />
+
+{
+product.images.length > 1 ?
+<ProductCarouselImages images={product.images}/>
+
+      :
+      <Link href={`/product/${product?.id}`}>
+      <Image
+      src={product?.images[0]?.sourceUrl||product?.images[0]?.src}
+     height={500}
+      width={557} 
+      objectFit='cover'
+     sizes='100vw'
+     alt={product?.images[0]?.altText||product?.images[0]?.altText}
+     />
+
 </Link>
+}
       
       
   <div className={`${styles.flex_v}`}>

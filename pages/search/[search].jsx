@@ -69,20 +69,20 @@ import Head from "next/head";
         setPageInfo(data?.products?.pageInfo);
         setLoading(loading)
   
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+     
       }
     }
     );
    const FilterFunction = async()=>{
    
      setLoading(true)
-
+     document.body.scrollTop = 0;
+     document.documentElement.scrollTop = 0;
    dispatch(FiltersAction.setLoading(false))
    try{
     getData({
       variables:{
-        first:100,
+        first:10,
 
          ...Filters,
 
@@ -109,15 +109,19 @@ import Head from "next/head";
    const loadMore = async()=>{
    try {
      setLoading(true)
-     getData({
+    const {data}= await getData({
       variables:{
-        first:10,
+        first:6,
         after:pageInferomation.endCursor,
         ...Filters,
         search
        }
     }) 
-    
+    console.log(data)
+    setProductsData([...productsData,...ModifyObjectOrArray(data?.products?.nodes)]);
+    console.log(productsData)
+    setPageInfo(data?.products?.pageInfo);
+    setLoading(loading)
    } catch (error) {
      setLoading(false)
    
@@ -158,8 +162,15 @@ import Head from "next/head";
     {
         nodes.length?
  
+  <>
         <Store  setLoading={setLoading} loading={loadings} category="Search"
         products={productsData}/>
+
+      <button  disabled={!pageInferomation.hasNextPage} className={'showMoreBtn'} onClick={loadMore}>
+      {'show More'}
+      </button>
+  </>
+
         :<h1 className="searchNotFound">
             THere is no Search Found Please Try different Words
         </h1>
@@ -171,27 +182,7 @@ import Head from "next/head";
        
     }
    
-   {/* <div className="end_nav"> */}
-   {/* <Button  variant="dark" onClick={loadLess}
-    disabled={!pageInferomation.hasPreviousPage}>
-       
-           Previous Page
-       {
-         loadings&&    <>loading</>
-       }    */}
-         {/* </Button> 
-   <Button variant="dark" onClick={loadMore}  
-    disabled={!pageInferomation.hasNextPage}>
-       
-           Load More
-       {
-         loadings&&   <>loading</>
-       }   
-         </Button> 
-    
-   
-   </div>
-   {   loadings&&   <>loading</>} */}
+ 
             </RootLayout>
            </>
        )
@@ -212,7 +203,7 @@ let load =false;
 try {
      const { data: {products},loading } = await client.query({
       query:SearchQuery,
-      variables:{ first:100, search}
+      variables:{ first:10, search}
     });
     SearchData=products
     

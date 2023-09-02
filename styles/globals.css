@@ -403,6 +403,7 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-11zohuh-MuiSvgIcon-root {
     border-width: 3px 0px 3px 0px;
     border-color: #ffffff;
     width: fit-content;
+    color: #fff   !important;
 }
 .carousel-control-prev, .carousel-control-next{
   height: fit-content;
@@ -562,7 +563,35 @@ p.out_s {
 
  
 /* media */
-
+.product_carousel .carousel-control-prev-icon, .carousel-control-next-icon{
+  width: 1rem  !important;
+  height: 1rem !important;
+ }
+.product_carousel .carousel-control-prev, .carousel-control-next{
+  top: 91%  !important;
+ 
+}
+.product_carousel .carousel-indicators [data-bs-target] {
+  box-sizing: content-box;
+  flex: 0 1 auto;
+  width: 56%;
+ 
+}
+button.showMoreBtn {
+  padding: 8px 24px;
+  border: 1px solid #623c6b;
+  margin: auto;
+  width: fit-content;
+  display: flex;
+  color: #623c6b;
+  border-radius: 3px;
+}
+button.showMoreBtn:hover{
+  background: #eee;
+}
+button.showMoreBtn:disabled{
+  background-color: #eee ;
+}
 @media(max-width:768px){
   img.ic {
     width: 44px !IMPORTANT;
