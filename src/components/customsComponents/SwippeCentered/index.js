@@ -26,7 +26,7 @@ function SwippeCentered({products,isHome=true,...others}) {
     return (
 <div className={`${styles.wrapper}`} {...others}>
 
-{
+{ 
  isHome?
   <div>
 <h3 className={`${styles.new}`}>
