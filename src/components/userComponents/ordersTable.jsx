@@ -44,11 +44,14 @@ function Row(props) {
 
   try {
     const data = await OrderStatuesFunction(id);
+    console.log(data)
     setOrderStatues(data)
     setLoading(false)
   
     setShow(true)
   } catch (error) {
+        setOrderStatues({})
+
     setError(err)
         setLoading(false)
 

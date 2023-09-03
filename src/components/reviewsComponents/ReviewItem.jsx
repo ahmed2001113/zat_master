@@ -32,7 +32,7 @@ import { deepPurple } from "@mui/material/colors";
 
 </div>  
 {
-  replies?.edges?.length&&replies?.edges?.map(reply=>{
+  replies?.edges?.length?replies?.edges?.map(reply=>{
      return   <div key={reply?.node?.id} className={`col-md-12 col-sm-8 ${styles.replys} ${styles.re}`}  >
 
     <div className={`${styles.chip}`}
@@ -50,7 +50,7 @@ import { deepPurple } from "@mui/material/colors";
     </div>
     
           </div>
-  })
+  }):null
 }
  
                   </div>

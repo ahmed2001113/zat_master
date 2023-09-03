@@ -9,8 +9,7 @@ export default function SortDropDown({
     onChange,
     ...others
 }) {
-  console.log(options)
-  return (
+   return (
     <FormControl  variant="standard" sx={{ width:150 ,marginTop:0}} size="small">
     <InputLabel className='sortLabel' >Sort By</InputLabel>
     <Select

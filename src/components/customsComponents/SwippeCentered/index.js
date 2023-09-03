@@ -9,8 +9,8 @@ import { wishlistSelector } from '@/src/store/wishlist/wishlistSelector';
 import { useSelector } from 'react-redux';
 import CustomButton from '../buttons/button';
 
-function SwippeCentered({products}) {
-  const {wishlistItems} = useSelector(wishlistSelector);
+function SwippeCentered({products,isHome=true,...others}) {
+   const {wishlistItems} = useSelector(wishlistSelector);
   const isWishlist=(id)=>{
    return wishlistItems.some(item=>item.id===id)
   };
@@ -24,8 +24,12 @@ function SwippeCentered({products}) {
 		return null;
 	}
     return (
-<div className={`${styles.wrapper}`}>
-  <h3 className={`${styles.new}`}>
+<div className={`${styles.wrapper}`} {...others}>
+
+{
+ isHome?
+  <div>
+<h3 className={`${styles.new}`}>
     New Arrivals
   </h3>
    <div className={`${styles.fixed}`}>
@@ -42,12 +46,17 @@ function SwippeCentered({products}) {
    
 </div>
   </div>
+</div>
+  :null
+     
+}
+
 
 
   <Swiper
 
-        className={`${styles.sw} mySwiper sw_2`}
-  breakpoints={{
+        className={`${styles.sw} ${!isHome?`${styles.word}`:''} mySwiper sw_2`}
+   breakpoints={{
     // when window width is >= 640px
     0:{
       slidesPerView: 1.2,

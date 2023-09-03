@@ -114,8 +114,24 @@ import { wishlistSelector } from '../store/wishlist/wishlistSelector';
 },[products])
 
   return (
-   
-   <div {...others}>
+<>
+{category.toLocaleLowerCase()!=='search'&&
+<div className={`${styles.statics_words} `}>
+<h4 className={`${styles.title}  `}>
+    Shop 
+    </h4>
+{
+  category.toLocaleLowerCase()!=='shop'&&<h3 className={`${styles.title}  `}>
+  {category}
+</h3>
+
+}
+<p>
+Sale Now On Up To 30% OFF
+</p>
+</div>
+}
+<div {...others}>
       <h4 className={`${styles.title} ${styles.mob}`}>
       {category}
     </h4>
@@ -193,6 +209,6 @@ loading={loading}
 
    </div>
  
-   </div>
+   </div></>
   )
 }

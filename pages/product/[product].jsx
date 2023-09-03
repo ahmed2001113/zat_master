@@ -18,27 +18,29 @@ import { Breadcrumbs, Rating, Typography } from '@mui/material'
 import Link from 'next/link'
 import Head from 'next/head'
 import ProductCarouselImages from '@/src/components/products/productCarouselImages'
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
   export default function Product({product,footer_header}) {
   const [show ,setShow]=useState(false)
 const [imagePrev,setImage] = useState({});
 const [imageArray,setImageArray] =useState([]);
 const divRef = useRef(null);
-     const [match,setMatch]=useState(false);
-    useEffect(()=>{
-      function myFunction(x) {
-        if (x.matches) { // If media query matches
-    setMatch(true)
-    } else {
-    setMatch(false)
-           
-        }
-      }
-      
-      const  x = window.matchMedia("(max-width: 700px)")
-      myFunction(x) // Call listener function at run time
-      x.addListener(myFunction);
-    
-    },[])
+ const [match,setMatch]=useState(false);
+
+useEffect(()=>{
+  function myFunction(x) {
+    if (x.matches) { // If media query matches
+setMatch(true)
+} else {
+setMatch(false)
+       
+    }
+  }
+  
+  const  x = window.matchMedia("(max-width: 700px)")
+  myFunction(x) // Call listener function at run time
+  x.addListener(myFunction);
+
+},[])
  
 const {
     price,

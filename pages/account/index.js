@@ -16,8 +16,7 @@ import LoadingImage from '@/src/components/customsComponents/image';
 import { useEffect } from 'react';
 import Head from 'next/head';
 function User({seo,footer_header}) {
-console.log(seo)
-  const user = useSelector(userSelectMemo);
+   const user = useSelector(userSelectMemo);
     const router =useRouter();
     // useEffect(()=>{
 

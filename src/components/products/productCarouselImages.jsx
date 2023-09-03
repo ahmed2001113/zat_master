@@ -4,8 +4,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import styles from './productMain/mainproduct.module.css'
 import Link from 'next/link';
   export default function ProductCarouselImages({images,id,isItem}) {
-    console.log(images)
-  return (
+   return (
     <Carousel defaultActiveIndex={0} interval={null} 
     className={'product_carousel'} 
     >

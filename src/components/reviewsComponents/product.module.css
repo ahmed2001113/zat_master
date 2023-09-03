@@ -110,14 +110,14 @@ padding: 20px;
 }
 .review_header button{
     width: 20%;
-    background: none;
-    color: #333;
-     padding: 15px
-    ;
+      padding: 15px ;
     align-items: center;
     display: flex;
     justify-content: center;
+    margin-left: auto !important;
+    margin-right: unset !important;
 }
+ 
 ._itemR{
  
     background: #eee;

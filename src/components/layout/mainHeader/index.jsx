@@ -21,8 +21,8 @@ import SearchDrrawer from '../../searchDrawer/searchDrawer';
  const navigation = {
  
   pages: [
-    { name: 'shop', href: 'shop' },
-    { name: 'about us', href: 'about'},
+    { name: 'shop', href: '/shop' },
+    { name: 'about us', href:'/about'},
   ],
 }
 
@@ -121,7 +121,7 @@ useEffect(() => {
           <div className="space-y-6 border-t border-gray-200 px-4 py-6 mr-auto ">
             {navigation.pages.map((page) => (
               <div key={page.name} className="flow-root">
-                <Link href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
+                <Link href={`${page.href}`} className="-m-2 block p-2 font-medium text-gray-900">
                   {page.name}
                 </Link>
               </div>
@@ -247,7 +247,7 @@ src={siteLogoUrl}
             {navigation.pages.map((page) => (
               <Link
                 key={page.name}
-                href={`./${page.href}`}
+                href={`${page.href}`}
                 className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
               >
                 {page.name}

@@ -117,10 +117,8 @@ import Head from "next/head";
         search
        }
     }) 
-    console.log(data)
-    setProductsData([...productsData,...ModifyObjectOrArray(data?.products?.nodes)]);
-    console.log(productsData)
-    setPageInfo(data?.products?.pageInfo);
+     setProductsData([...productsData,...ModifyObjectOrArray(data?.products?.nodes)]);
+     setPageInfo(data?.products?.pageInfo);
     setLoading(loading)
    } catch (error) {
      setLoading(false)

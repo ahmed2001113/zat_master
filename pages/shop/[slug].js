@@ -29,8 +29,7 @@ const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi})=>{
   const {description,  image, name } =DefaultData
   const [pageInferomation,setPageInfo]=useState(DefaultData?.products?.pageInfo)
   const initialRender = useRef(true);
-console.log(name)
-   useEffect(() => {
+    useEffect(() => {
     // Compare the previous and current DefaultData objects
     if (!isEqual(DefaultData, productsData)) {
       dispatch(FiltersAction.addPrices(price))

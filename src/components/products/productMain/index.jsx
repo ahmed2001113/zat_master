@@ -15,8 +15,7 @@ import { wishlistSelector } from '@/src/store/wishlist/wishlistSelector';
 import ProductCarouselImages from '../productCarouselImages';
  function  ProdutItemMain({product,isLove=false,className}) {
  const dispatch= useDispatch();
-console.log(product)
- const OpenPreview =()=> dispatch(PreviewActions.OPENPREVIEW(product));
+  const OpenPreview =()=> dispatch(PreviewActions.OPENPREVIEW(product));
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const {wishlistItems}=useSelector(wishlistSelector);
 const user = useSelector(userSelectMemo);

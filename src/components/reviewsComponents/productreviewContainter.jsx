@@ -14,7 +14,7 @@ return<>
         Reviews
     </h3>
 {
-    reviews?.reviewsAllowed&&<button className="black" onClick={()=>setShow(true)}>
+    reviews?.reviewsAllowed&&<button className={`${styles.button} black`} onClick={()=>setShow(true)}>
     Write a Review
 </button>
 

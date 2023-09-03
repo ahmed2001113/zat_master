@@ -35,7 +35,7 @@ export default function Home({footer_header,products,categoriesWithNoParent,load
     <Swipecarousel />
    {loading?
 <SwippedCenteredSkelton/>:   
-  <SwippeCentered products={products}/>
+  <SwippeCentered isHome={true} products={products}/>
 } 
 
 <div ref={ref2} style={{width:'1px',height:'1px'}}></div>
