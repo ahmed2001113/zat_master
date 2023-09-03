@@ -24,7 +24,7 @@ export const getCreateOrderLineItems = ( products ,total=0) => {
 };
 
 
-const getCreateOrderData = ( order, products ) => {
+const getCreateOrderData = ( order, products,set_paid=false ) => {
 	// Set the billing Data to shipping, if applicable.
 	const billingData = order.billingDifferentThanShipping ? order.billing : order.shipping;
 	
@@ -65,7 +65,8 @@ const getCreateOrderData = ( order, products ) => {
 			  method_title: "Flat Rate",
 			  total: "65.00"
 			}
-		  ]
+		  ],
+		  set_paid
 	};
 };
 const createTheOrder = async ( orderData, setOrderFailedError, previousRequestError ) => {
@@ -86,7 +87,7 @@ const createTheOrder = async ( orderData, setOrderFailedError, previousRequestEr
 	setOrderFailedError( '' );
 	
 	try {
-		const request = await fetch( '/api/create-order', {
+		const request = await fetch( 'http://localhost:3000/api/create-order', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -115,6 +116,25 @@ const createTheOrder = async ( orderData, setOrderFailedError, previousRequestEr
 export const handleOtherPaymentMethodCheckout = async ( input, products, setRequestError, setIsOrderProcessing, setCreatedOrderData,total ) => {
 	setIsOrderProcessing( true );
 	const orderData = getCreateOrderData( input, products,total);
+	const customerOrderData = await createTheOrder( orderData, setRequestError, '' );
+  
+	setIsOrderProcessing( false );
+	console.log(orderData,customerOrderData)
+	if ( isEmpty( customerOrderData?.orderId ) ) {
+		setRequestError( 'Clear cart failed' );
+		return null;
+	}
+	
+	setCreatedOrderData( customerOrderData );
+	
+	return customerOrderData;
+};
+export const PaypalCheckout = async ( 
+	input, products,
+	 setRequestError, setIsOrderProcessing,
+	 setCreatedOrderData,total ,set_paid=false) => {
+	setIsOrderProcessing( true );
+	const orderData = getCreateOrderData( input, products,total,set_paid);
 	const customerOrderData = await createTheOrder( orderData, setRequestError, '' );
   
 	setIsOrderProcessing( false );

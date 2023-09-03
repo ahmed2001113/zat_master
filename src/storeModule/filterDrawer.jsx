@@ -11,6 +11,7 @@ import { FiltersAction } from "../store/filters/filter.slice";
 import { FilterSelector } from "../store/filters/filtersSelectores";
  import filterObjectValues from "../utls/functions/FilterObjectsWithTypes";
 import { SelectCategoriesLinks } from "../store/categories/category.selector";
+import { GlobalSelector } from "../store/global/globalStore.Selector";
 const initial=[
   { id: 1, checked: false, label: 'in stock' ,value:'IN_STOCK'},
   { id: 2, checked: false, label: 'Out of stock' ,value:'OUT_OF_STOCK'},
@@ -25,11 +26,11 @@ export default function FilterDrawer({
    
 }){
    const dispatch = useDispatch();
+   const {IsMatch} =useSelector(GlobalSelector) 
 
    const [Stock, SetStock] = useState(initial);
 const {prices:price,Filtered,Filters}=useSelector(FilterSelector) ;
-const categoriesLink=useSelector(SelectCategoriesLinks);
- 
+  
 const {minPrice,maxPrice}=price
 
 const [onSale, setOnSale] = useState(true);
@@ -85,8 +86,9 @@ const applyFilters = () => {
  
 
     return(
-      <Drawer   show={show} title={'Filter'} 
-      setShow={setShow} placement={'start '} 
+      <Drawer    show={show} title={'Filter'} 
+      setShow={setShow} placement={IsMatch?'bottom':'start'} 
+   
       className={`${styles.Drawer}` } >
             <div className="tags">
  

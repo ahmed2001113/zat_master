@@ -19,29 +19,14 @@ import Link from 'next/link'
 import Head from 'next/head'
 import ProductCarouselImages from '@/src/components/products/productCarouselImages'
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+import { useSelector } from 'react-redux'
+import { GlobalSelector } from '@/src/store/global/globalStore.Selector'
   export default function Product({product,footer_header}) {
   const [show ,setShow]=useState(false)
 const [imagePrev,setImage] = useState({});
 const [imageArray,setImageArray] =useState([]);
 const divRef = useRef(null);
- const [match,setMatch]=useState(false);
-
-useEffect(()=>{
-  function myFunction(x) {
-    if (x.matches) { // If media query matches
-setMatch(true)
-} else {
-setMatch(false)
-       
-    }
-  }
-  
-  const  x = window.matchMedia("(max-width: 700px)")
-  myFunction(x) // Call listener function at run time
-  x.addListener(myFunction);
-
-},[])
- 
+ const {IsMatch} =useSelector(GlobalSelector) 
 const {
     price,
     seo
@@ -98,7 +83,7 @@ const handleShow = (imag)=>{
 <div ref={divRef}  className="row" style={{background:'#fff',margin:'0px' ,padding:'0px' ,width:'100%'}}>
      
      <div className={`${styles.left} col-md-7`}>
-   {!match?
+   {!IsMatch?
      <div className="row" style={{padding:'0px'}}>
      <div className='col-md-12 image_holder'>
      <Image style={{objectFit:'cover'}} 
@@ -114,7 +99,7 @@ const handleShow = (imag)=>{
      </div>
      {
      
-    images?.length >1&& otherImages.map(image=>{
+    images?.length >1? otherImages.map(image=>{
          return<div key={image.id} className='col-md-6 col-6 image_holder position-relative' style={{padding:'0px'}}>
  
  {image !==null&&<Image src={image?.sourceUrl}
@@ -125,7 +110,7 @@ const handleShow = (imag)=>{
                   </button>
              </div>
            
-     })
+     }):null
  }
     
      </div>

@@ -6,8 +6,7 @@
  }
 .left h1{ 
     font-size: 30px;
-    font-weight: bold;
-}
+ }
 .g{
     margin-bottom: 20px;
 }
@@ -51,9 +50,17 @@ border-radius: 0px;
     height: 100%;
     display: flex;
     flex-direction: column;
-    width: 34%;
     text-align: center;
     justify-content: space-around;
+    background: #fff;
+    margin: 10px auto;
+    padding: 26px;
+}
+@media(min-width:768px){
+    .cooo{
+            width: 34%;
+
+    }
 }
 .cooo h1{
  

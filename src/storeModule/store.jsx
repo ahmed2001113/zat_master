@@ -117,7 +117,7 @@ import { wishlistSelector } from '../store/wishlist/wishlistSelector';
 <>
 {category.toLocaleLowerCase()!=='search'&&
 <div className={`${styles.statics_words} `}>
-<h4 className={`${styles.title}  `}>
+<h4     >
     Shop 
     </h4>
 {

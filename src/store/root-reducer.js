@@ -6,6 +6,7 @@ import { PreviewReducer } from './preview/preview.slice';
 import { CheckOutReducer } from './checkoutSteps/checkoutSteps';
 import {  wishlistReducer } from './wishlist/wishlistslice';
 import { FilterReducer } from './filters/filter.slice';
+import { GlobalReducer } from './global/globalStore.slice';
  export const combineReducer = combineReducers({
     user:UserReduser,
     Categories:categoriesReducer,
@@ -13,6 +14,7 @@ import { FilterReducer } from './filters/filter.slice';
     preview:PreviewReducer,
     checkout:CheckOutReducer,
     wishlist:wishlistReducer,
-    filter:FilterReducer
+    filter:FilterReducer,
+    global:GlobalReducer
  });
 

@@ -8,8 +8,12 @@ export const custemMiddleWare = (state)=>(next)=>(action)=>{
     }
   
     
+
+    console.log('type:' ,type);
+    console.log('payload:' ,payload);
+    console.log('currentState:',state.getState());
 next(action)    
-  
+console.log('NextState:',state.getState());
 
 
 if(action.type.slice(0,4) ==='cart' &&action.type!=='cart/setCartItems'){

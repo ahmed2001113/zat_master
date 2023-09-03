@@ -24,6 +24,8 @@ const InitialiZing ={
      },
      orders:[],
       
+     items:[],
+     input:{},
         paymentMethod:false,
         total:0 
 
@@ -65,6 +67,12 @@ action.orders=state.payload
             const [isPaypal,amount]=action.payload
             state.IsPaypal =  isPaypal,
             state.total=amount
+        },
+        setItems:(state,action)=>{
+            state.items=action.payload
+        },
+        setInput:(state,action)=>{
+state.input=action.payload
         }
     }
 })

@@ -62,6 +62,7 @@ export default async function handler( req, res ) {
 		 *
 		 * @see Data shape expected: https://stackoverflow.com/questions/49349396/create-an-order-with-coupon-lines-in-woocomerce-rest-api
 		 */
+		console.log(error)
 		responseData.error = error.message;
 		res.status( 500 ).json( responseData );
 	}

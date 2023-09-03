@@ -9,7 +9,7 @@ import { wishlistSelector } from '@/src/store/wishlist/wishlistSelector';
 import { useSelector } from 'react-redux';
 import CustomButton from '../buttons/button';
 
-function SwippeCentered({products,isHome=true,...others}) {
+function SwippeCentered({products,isHome=true,words="",...others}) {
    const {wishlistItems} = useSelector(wishlistSelector);
   const isWishlist=(id)=>{
    return wishlistItems.some(item=>item.id===id)
@@ -28,25 +28,47 @@ function SwippeCentered({products,isHome=true,...others}) {
 
 { 
  isHome?
+<>
+{
+  words.length>4?
   <div>
-<h3 className={`${styles.new}`}>
-    New Arrivals
-  </h3>
-   <div className={`${styles.fixed}`}>
-
-<h1>New 
-  <br/>
-   Arrivalls</h1>
-
-<div >
-  <CustomButton color={'#fff'} bk={'#000'}   onClick={ToShop} >
-   
-   Shop Now
-  </CustomButton>
-   
-</div>
+  <h3 className={`${styles.new} moNotFound`}>
+     {words}
+    </h3>
+     <div className={`${styles.fixed}`}>
+  
+  <h2 className='notfoundword'>
+    
+    { words}
+    </h2>
+  
+  <div >
+  
+     
   </div>
-</div>
+    </div>
+  </div>: 
+   <div>
+  <h3 className={`${styles.new}`}>
+      New Arrivals
+    </h3>
+     <div className={`${styles.fixed}`}>
+  
+  <h1>New 
+    <br/>
+     Arrivalls</h1>
+  
+  <div >
+    <CustomButton color={'#fff'} bk={'#000'}   onClick={ToShop} >
+     
+     Shop Now
+    </CustomButton>
+     
+  </div>
+    </div>
+  </div>
+}
+</>
   :null
      
 }

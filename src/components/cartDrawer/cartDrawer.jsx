@@ -6,23 +6,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles  from './cart.module.css'
 import CartItem from './cartItem';
 import { useRouter } from 'next/router';
+import { GlobalSelector } from '@/src/store/global/globalStore.Selector';
 export default function CartDrawer() {
   const cartOpenS = useSelector(CartOpen)
 const dispatch = useDispatch()
   const CartIems  = useSelector(cartItems);
   const Total = useSelector(totalPaid);
-  const router = useRouter()
+  const router = useRouter();
+  const {IsMatch} =useSelector(GlobalSelector) 
+
 const CheckoutCard = ()=>{
 
   router.push('/checkout');
-      const handleClose = () => dispatch(CartActions.setCartOpen(false));
+      const handleClose = () => {
+        router.push('/shop') 
+      dispatch(CartActions.setCartOpen(false))
+    
+    };
 
 }
   
     const handleClose = () => dispatch(CartActions.setCartOpen(false));
    return (
     < >
-          <Offcanvas show={cartOpenS} onHide={handleClose}>
+          <Offcanvas show={cartOpenS} placement={IsMatch?'bottom':'start'}  className={styles.CartDrawer} onHide={handleClose}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Cart</Offcanvas.Title>
         </Offcanvas.Header>
@@ -42,7 +49,7 @@ const CheckoutCard = ()=>{
    </p>
    <p>Shipping and taxes calculated at checkout.</p>
    <div className={`${styles.button}`}>
-    <button className={`${styles.ci}`}>
+    <button onClick={handleClose} className={`${styles.ci}`}>
       Continue shopping
     </button>
     <button className='black' onClick={CheckoutCard}>CheckOut</button>

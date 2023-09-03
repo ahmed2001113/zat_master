@@ -1,3 +1,4 @@
+
 import { CheckOutSelector, UserInferomationCheckoutSelector } from "@/src/store/checkoutSteps/checkout.selector"
 import { checkoutActions } from "@/src/store/checkoutSteps/checkoutSteps"
 import { useDispatch, useSelector } from "react-redux"
@@ -13,6 +14,7 @@ import { useRouter } from "next/router";
  
 import { CartActions } from "@/src/store/cart/cart.reducer";
 import Link from "next/link";
+import { isEmpty, isNull } from "lodash";
   const defaultUser = {
     firstname:'', 
     lastname:'',
@@ -21,9 +23,9 @@ import Link from "next/link";
     streetaddress:''
     ,apartment:'',
     city:''
-    ,government:''
+    ,state:''
     ,postcode:''
-    ,address2:''
+    ,address1:''
     ,errors:null,
     company:''
 
@@ -33,6 +35,7 @@ export const CheckOutPayments = ({item})=>{
     const router = useRouter()
     const [value, setSelectedValue] =  useState('option1');
     const {IsPaypal,current,total}= useSelector(CheckOutSelector);
+     const dispatch = useDispatch()
 
     let carts = [];
     let TotalCart = 0;
@@ -54,21 +57,17 @@ export const CheckOutPayments = ({item})=>{
     const [input,setInput]= useState(initial) ;
     const [requestError,setRequestError]=useState(null)
     const [isOrderProcessing,setIsOrderProcessing] =useState(false);
-    const [createOrderData,setCreateOrderData] = useState(initial);
-    const [orderData,submitOrderData]=useState({});
-    const [ createdOrderData, setCreatedOrderData ] = useState( {} );
-    const [paymentMethods, setPaymentMethods] = useState([]);
- 
+     const [ createdOrderData, setCreatedOrderData ] = useState( {} );
+    
 if(item){
  carts = [item]
 TotalCart = item.price
 } 
- 
 
- 
-
-
-
+useEffect(()=>{
+      dispatch(checkoutActions.setItems(carts));
+      dispatch(checkoutActions.setInput(input))
+    },[])
     const HandleFormSubmit  =async(e)=>{
       e.preventDefault();
        
@@ -77,20 +76,18 @@ TotalCart = item.price
         billing: { ...input.billing  },
        } );
        
-      if ( 'visa' === input.paymentMethod ) {
+       if ( 'visa' === input.paymentMethod ) {
   
   
-      }else{
-     
-        const createdOrderData= await handleOtherPaymentMethodCheckout(  input, carts, setRequestError,setIsOrderProcessing,setCreatedOrderData );
-
-  
-      }
+       }else{
+      
+         const createdOrderData= await handleOtherPaymentMethodCheckout(  input, carts, setRequestError,setIsOrderProcessing,setCreatedOrderData );
  
+   
+       }
 
     }
 
-const dispatch = useDispatch()
 const HandleOnChange = (event,isBillingOrShipping=false,isShipping=false)=>{    
     const {target:{name,value}} = event || {};
        if(name ==='billingDifferentThanShipping'){
@@ -108,8 +105,12 @@ const HandleOnChange = (event,isBillingOrShipping=false,isShipping=false)=>{
     setInput( newState );
         }else{
             //billing change
+                      setBillingValid(false)
             const newState = { ...input, billing: { ...input?.billing, [ name ]: value } };
         setInput( newState );
+        dispatch(checkoutActions.setInput(input));
+    
+
         }
     } else if(name==='paymentMethod'){
       const newState ={...input,[name]:value}
@@ -121,8 +122,8 @@ const HandleOnChange = (event,isBillingOrShipping=false,isShipping=false)=>{
   document.documentElement.scrollTop = 0;
  }else{
   dispatch(checkoutActions.SetPaymentMethod([false,TotalCart]))
-  document.body.scrollTop =100;
-  document.documentElement.scrollTop = 120;
+  document.body.scrollTop =190;
+  document.documentElement.scrollTop = 190;
  }
       
     }else{
@@ -204,23 +205,10 @@ Billing And Payment Process
 
     </div>
 
-{/* 
-<div>
-    <h6 className="mt-2 mb-2">Payment</h6>
- All transactions are secure and encrypted.</div>
-<div>
-    <h6 className="mt-2 mb-2">Billing address
-</h6>
-    
-    Select the address that matches your card or payment method.
-
-
-.</div> */}
+ 
 <div>
  <div>
-{/*  
-      <h6>
-      </h6> */}
+ 
         <>
   
   {carts?
@@ -245,7 +233,7 @@ Billing And Payment Process
 			{/*Check Payments*/}
 			<div className="form-check woo-next-payment-input-container mt-2">
 				<label className="form-check-label">
-					<input onChange={ HandleOnChange } value="visa"  
+					<input onChange={ HandleOnChange }   value="visa"  
            className="form-check-input mr-3 ra" name="paymentMethod" 
            type="radio" checked={'visa' === input.paymentMethod}/>
 					<span className="woo-next-payment-content">Pay with Visa</span>
@@ -255,7 +243,8 @@ Billing And Payment Process
 </div>
 
  
-<TextField fullWidth  name="ordernotes" label="ORDER NOTE " className="notes mt-5" onChange={HandleOnChange} id="fullWidth" />
+<TextField fullWidth  name="ordernotes" label="ORDER NOTE " className="notes mt-5" 
+onChange={HandleOnChange} id="fullWidth" />
 <CheckboxField  
 									name="billingDifferentThanShipping"
 									type="checkbox"

@@ -23,9 +23,7 @@ export default function RelatedProducts({products,id}) {
          }
       }) ||[];
 
-      const isWishlist=(id)=>{
-        return wishlistItems.some(item=>item.id===id)
-       };
+   
    return (
     
     

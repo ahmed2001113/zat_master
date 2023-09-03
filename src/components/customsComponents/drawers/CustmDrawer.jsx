@@ -1,11 +1,13 @@
  
+import { GlobalSelector } from '@/src/store/global/globalStore.Selector';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { useSelector } from 'react-redux';
 
 function Drawer({show,setShow,children,title,placement,...others}) {
 //   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+ 
 
   return (
     <>

@@ -48,3 +48,15 @@
     height: 90%;
     overflow: auto;
 }
+
+@media(max-width:768px){
+    .wishlistDrawer{
+        height: 90% !important;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+    .item img{
+        width: 100% !important;
+
+    }
+}

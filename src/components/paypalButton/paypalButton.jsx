@@ -1,37 +1,54 @@
 import { CheckOutSelector } from "@/src/store/checkoutSteps/checkout.selector"
+import { checkoutActions } from "@/src/store/checkoutSteps/checkoutSteps";
 import { PayPalButtons } from "@paypal/react-paypal-js"
-import { useState } from "react";
-import { useSelector } from "react-redux"
+import { isEmpty } from "lodash";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"
+import { PaypalCheckout } from "../checkout/functions";
 
 const PaypalButtonCheckout = ()=>{
+    const {IsPaypal,current,total,input,items}= useSelector(CheckOutSelector);
     const [paid,setPaid]=useState(false);
     const [error,setError]=useState(null);
-    const {IsPaypal,current,total}= useSelector(CheckOutSelector);
+     const [requestError,setRequestError]=useState(null)
+    const [isOrderProcessing,setIsOrderProcessing] =useState(false);
+     const [ createdOrderData, setCreatedOrderData ] = useState( {} );
+     const router = useRouter();
+     const dispatch = useDispatch()
+console.log(items,input);
+useEffect(()=>{
 
-    const HandleApproved = (data)=>{
-        //fullfuil the order
-
-
-
-        //set Paid To True
-        setPaid(true)
-        //refresh user Account With dispatch
-
-
-        //if the response ==error
-        alert(`Your Payment Was Processed succefully,However,
-        we're unable To fulfil Your purchesed please Contact Us for assistant
-        
-        `)
+    if(Object.keys(createdOrderData).length!==0){
+    
+    
+        dispatch(checkoutActions.SetUserOrder({
+          cartItems:carts,
+          orderCreation:createdOrderData,
+          TotalCart,
+          orderInferomation:input.billingDifferentThanShipping?input.billing:input.shipping
+      
+        }))
+ 
+          //  checkout/SetUserOrder
+       
+        dispatch(CartActions.EmptyCartItems())
+    
+    
+    
+     }
+    
+     },[createdOrderData]);
+    const HandleApproved = async(data)=>{
+         
+    const payment=  await PaypalCheckout(input,items,setRequestError,setIsOrderProcessing,setCreatedOrderData,total,true)
     }
-    if(paid){
-alert('thank you for')
-    }
+   
     if(error){
-        //display error 
-
+ 
         alert(error)
     }
+
       return(
         <div className="paypalButtons">
    {
@@ -62,13 +79,15 @@ const order = await actions.order.capture();
 HandleApproved(order.id)
 
 }}
+onInit={()=>{
+    console.log('clicked')
+}}
 onError={(err)=>{
     setError(err);
      
 }}
-onCancel={()=>{
-    alert('canceled')
-}}
+ 
+ 
     />
   :   null
    }
