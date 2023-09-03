@@ -90,7 +90,7 @@ const [states,setStates]=useState([])
           defaultValue={input?.city}
           onChange={handleOnChange}
           className={`${styles.input}`}
-        placeholder="House number and street name"
+        placeholder="City Name"
         name="city"
 
         />
@@ -113,6 +113,8 @@ const [states,setStates]=useState([])
         onChange={handleOnChange}
         required
         name="state"
+        defaultValue={input?.state}
+
       >
         <MenuItem value="">
          </MenuItem>

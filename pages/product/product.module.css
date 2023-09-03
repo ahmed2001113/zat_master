@@ -97,3 +97,15 @@
     padding: 20px;
     border-right: 1px solid #ddd;
  }
+ @media(max-width:768px){
+    .right{
+        padding: 0px;
+        padding-left: 21px  ;
+    }
+    .d div:first-child{
+        padding: 0px;
+    }
+    .think{
+        padding: 0px;
+    }
+}

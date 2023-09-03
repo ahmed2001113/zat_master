@@ -8,7 +8,7 @@ import { Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Address from "./NewAddress";
 import { userSelectMemo } from "@/src/store/user/user.selector";
- 
+import styles from './checkout.module.css'
  export const CheckOutForm = ({item})=>{
    const dispatch = useDispatch()
    const inintializeUserInferomation = useSelector(UserInferomationCheckoutSelector);
@@ -99,7 +99,7 @@ const HandleOnChange = (event,isShipping,isBilling)=>{
      
         </div>
         <div className="button">
-            <button className="black"   type="submit">
+            <button className={`black ${styles.button_ch}`}  type="submit">
                 Continue To Payment
             </button>
         </div>

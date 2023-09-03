@@ -3,10 +3,12 @@ import React from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import styles from './productMain/mainproduct.module.css'
 import Link from 'next/link';
-  export default function ProductCarouselImages({images,id}) {
+  export default function ProductCarouselImages({images,id,isItem}) {
     console.log(images)
   return (
-    <Carousel defaultActiveIndex={0} interval={null} className={'product_carousel'} data-bs-theme="dark">
+    <Carousel defaultActiveIndex={0} interval={null} 
+    className={'product_carousel'} 
+    >
         {
             images.map(image=>{
 
@@ -16,7 +18,9 @@ import Link from 'next/link';
                     key={image.sourceUrl}
 
                      >
-                              <Link href={`/product/${id}`}>
+                      {
+                        isItem?
+                        <Link href={`/product/${id}`}>
                 
                         <Image     
                         className={styles.image_carousel} 
@@ -27,7 +31,18 @@ import Link from 'next/link';
                         alt={image?.altText}
                         src={image?.sourceUrl}
 />                </Link>
-
+:
+<Image     
+className={styles.image_carousel} 
+ height={500}
+width={557} 
+objectFit='cover'
+sizes='100vw'
+alt={image?.altText}
+src={image?.sourceUrl}
+/>    
+                      }
+                             
                     </Carousel.Item>
                 )
             })

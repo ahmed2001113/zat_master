@@ -38,7 +38,7 @@ return (
  
  
     <>
-    <div className={className} style={{padding:'1px'}}>
+    <div className={className}>
 
     <motion.div
       initial="hidden"
@@ -57,7 +57,7 @@ return (
 
 {
 product.images.length > 1 ?
-<ProductCarouselImages images={product.images} id={product?.id}/>
+<ProductCarouselImages isItem={true} images={product.images} id={product?.id}/>
 
       :
       <Link href={`/product/${product?.id}`}>
@@ -72,16 +72,16 @@ product.images.length > 1 ?
 
 </Link>
 }
-      
+   
       
   <div className={`${styles.flex_v}`}>
   <button className={`${styles.heart}`} onClick={addToWishlist}>
       <i className="fa-solid fa-heart" style={{color:isLove?'#623d67':'#333'}}></i>
       </button>
-      
+{/*       
       <button onClick={OpenPreview} className={`${styles.heart}`}>
       <i className="fa-regular fa-eye" ></i>     
-       </button>
+       </button> */}
   </div>
   {product?.onSale&&
   <div className="sale">
@@ -100,7 +100,11 @@ On Sale
 
          </div>
          <div  dangerouslySetInnerHTML={{__html:product?.shortDescription}} className={`${styles.Desc}`}/> 
+         <p className={`${styles.new_style}`}>
+             New Style
+           </p>
          {
+            
           product?.stockStatus==="IN_STOCK"?
           <div className='centered'>
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import styles from './modal.module.css'
@@ -20,6 +20,22 @@ const {open,product}= useSelector(previewData);
  const minVal = 1;
  const maxVal=20
     const [value, setValue] = useState(minVal);
+    const [match,setMatch]=useState(false);
+    useEffect(()=>{
+      function myFunction(x) {
+        if (x.matches) { // If media query matches
+    setMatch(true)
+    } else {
+    setMatch(false)
+           
+        }
+      }
+      
+      const  x = window.matchMedia("(max-width: 700px)")
+      myFunction(x) // Call listener function at run time
+      x.addListener(myFunction);
+    
+    },[])
 const goProduct = ()=>{
   dispatch(PreviewActions.closepreview()) 
   route.push(`/product/${product.id}`);
@@ -35,6 +51,7 @@ const goProduct = ()=>{
         setValue(value - 1);
       }
     }
+
    return (
     <div>
       {Object.keys(product).length !==0&&

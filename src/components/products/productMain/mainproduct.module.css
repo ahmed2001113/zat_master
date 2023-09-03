@@ -27,8 +27,12 @@
     justify-content: center;
     border-radius: 15%;
     height: 34px;
-    background-color: #ffffff;
+    background: #fff;
+     border: 1px solid #fff !important;
+     color: #fff !important;
     border: 1px solid #fff !important;
+    border-radius: 50%;
+ 
 }
 .heart:hover{
     background: #eee;
@@ -63,7 +67,8 @@
     font-size: 14px !IMPORTANT;
     padding: 8px 20px !IMPORTANT;
     margin: 0px;
- }
+    padding-left:0px !important ;
+}
  .Title{
     display: flex;
     align-items: center;
@@ -90,10 +95,17 @@
 
  }
 
- 
+ .new_style{
+    margin: 0px;
+    color: gray;
+    font-size: 12px;
+ }
  @media (max-width:768px) {
+    .Desc{
+        display: none;
+    }
     .Add{
-        font-size: 14px !IMPORTANT;
+        font-size: 13px !IMPORTANT;
     padding: 3px 6px !IMPORTANT;
     margin: 0px;
     text-align: left;
@@ -102,13 +114,13 @@
     display: flex;
     }
     .Title p{
-        font-size: 11px;
+        font-size: 10px;
     }
     .Title h6{
         font-size: 12px !important;
     }
     .product img{
-        height: 500px !important;
+        height: 300px !important;
         object-fit: cover;
     }
     .heart{

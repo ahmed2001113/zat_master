@@ -49,7 +49,7 @@ export const CheckOutPayments = ({item})=>{
      },
       ordernotes:'',
      billingDifferentThanShipping :false,
-     paymentMethod:'cod'
+     paymentMethod:IsPaypal?'visa':'cod'
     }
     const [input,setInput]= useState(initial) ;
     const [requestError,setRequestError]=useState(null)
@@ -176,7 +176,7 @@ Shoping Information
 
   </button>,
   <Typography key="3" color="text.primary" className="link">
-Billing  Information
+Billing And Payment Process
 
   </Typography>,
 ];

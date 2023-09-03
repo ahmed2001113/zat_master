@@ -17,44 +17,29 @@ import ActionButtons, { TwoButtons } from '@/src/components/buttons3'
 import { Breadcrumbs, Rating, Typography } from '@mui/material'
 import Link from 'next/link'
 import Head from 'next/head'
+import ProductCarouselImages from '@/src/components/products/productCarouselImages'
   export default function Product({product,footer_header}) {
   const [show ,setShow]=useState(false)
 const [imagePrev,setImage] = useState({});
 const [imageArray,setImageArray] =useState([]);
 const divRef = useRef(null);
-  const isScrolledDownMoreThanDiv = () => {
-    // check if the ref is not null
-    if (divRef.current) {
-      // get the scroll position of the window
-      const scrollPosition = window.scrollY;
-      // get the offsetHeight of the div element
-      const divHeight = divRef.current.offsetHeight;
-      // compare the scroll position and the div height and return true or false
-      return scrollPosition > divHeight;
-    }
-     
-    // return false if the ref is null
-    return false;
-  };
-  useEffect(() => {
-    // define a function that handles the scroll event
-    const handleScroll = () => {
-      // call your function and store the result in a variable
-      const result = isScrolledDownMoreThanDiv();
-      // do something with the result, such as logging it to the console
-       ; // true or false
-    };
+     const [match,setMatch]=useState(false);
+    useEffect(()=>{
+      function myFunction(x) {
+        if (x.matches) { // If media query matches
+    setMatch(true)
+    } else {
+    setMatch(false)
+           
+        }
+      }
+      
+      const  x = window.matchMedia("(max-width: 700px)")
+      myFunction(x) // Call listener function at run time
+      x.addListener(myFunction);
+    
+    },[])
  
-    // check if the ref is not null
-    if (divRef.current) {
-      // add the event listener to the window object
-      window.addEventListener('scroll', handleScroll);
-      // return a cleanup function that removes the event listener
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }
-  }, []);
 const {
     price,
     seo
@@ -111,6 +96,7 @@ const handleShow = (imag)=>{
 <div ref={divRef}  className="row" style={{background:'#fff',margin:'0px' ,padding:'0px' ,width:'100%'}}>
      
      <div className={`${styles.left} col-md-7`}>
+   {!match?
      <div className="row" style={{padding:'0px'}}>
      <div className='col-md-12 image_holder'>
      <Image style={{objectFit:'cover'}} 
@@ -126,7 +112,7 @@ const handleShow = (imag)=>{
      </div>
      {
      
-    images?.length >2&& otherImages.map(image=>{
+    images?.length >1&& otherImages.map(image=>{
          return<div key={image.id} className='col-md-6 col-6 image_holder position-relative' style={{padding:'0px'}}>
  
  {image !==null&&<Image src={image?.sourceUrl}
@@ -141,6 +127,9 @@ const handleShow = (imag)=>{
  }
     
      </div>
+     :<>
+     <ProductCarouselImages isItem={false} images={images}/>
+     </>}
      </div>
      <div className={`${styles.right} container col-md-5`}>
      <Breadcrumbs aria-label="breadcrumb">

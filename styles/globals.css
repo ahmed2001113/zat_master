@@ -63,8 +63,7 @@ html, body {
   align-items: center;
   justify-content: space-between;
  
-  padding: 0px 7px;
-  text-align: left;
+   text-align: left;
 }
 .Add{
   padding: 10px;
@@ -111,10 +110,15 @@ button.black {
   background: #623c6b;
   color: #fff;
   padding: 4px;
-   transition: 0.3s all ease-in-out;
+  transition: 0.3s all ease-in-out;
   width: 100%;
   height: 40px;
-  margin:10px  auto;
+  margin: 10px auto;
+  width: fit-content;
+  padding: 6px 20px;
+  text-transform: capitalize !IMPORTANT;
+  margin: auto;
+  height: 39px !IMPORTANT;
 
 }
 span.priceBefore {
@@ -382,12 +386,14 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-11zohuh-MuiSvgIcon-root {
 
 .carousel-caption button {
   width: 160px;
-  padding: 3px 3px;
-  height: auto;
   font-size: 22px;
   background: #623c6b;
   color: #fff;
   padding: 8px 20px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 0px;
 }
 .carousel-caption h1{
   color: #FCFCF7;
@@ -470,8 +476,10 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-11zohuh-MuiSvgIcon-root {
   justify-content: center;
 }
 .end_nav button{
+  background: #623d69;
   margin: 10px;
   border-radius: 0px;
+  border: 1px solid #fff;
 }
 .MuiCheckbox-colorPrimary.Mui-checked {
   color: #000000 !IMPORTANT;
@@ -566,14 +574,18 @@ p.out_s {
 
  
 /* media */
-.product_carousel .carousel-control-prev-icon, .carousel-control-next-icon{
+.product_carousel .carousel-control-prev-icon,  .product_carousel  .carousel-control-next-icon{
   width: 1rem  !important;
   height: 1rem !important;
  }
-.product_carousel .carousel-control-prev, .carousel-control-next{
+.product_carousel .carousel-control-prev  {
   top: 91%  !important;
  
 }
+.product_carousel .carousel-control-next{
+  top: 91%  !important;
+} 
+
 .product_carousel .carousel-indicators [data-bs-target] {
   box-sizing: content-box;
   flex: 0 1 auto;

@@ -10,8 +10,7 @@
     padding: 14px 24px;
     position: relative;
     transition: color 0.35s ease;
-    border-radius: 24px;
-  }
+   }
 
   .c_btn:disabled{
     background: #eee !IMPORTANT;
@@ -24,12 +23,10 @@
   .c_btn:focus .c_btn__arrow {
     transform: translate3d(0, 0, 0);
     color: #fff  !important;
-    border-radius: 24px;
-  }
+   }
   .c_btn:hover .c_btn__arrow:before, .c_btn:focus .c_btn__arrow:before {
     transform: translate3d(0, -50%, 0) scale3d(1, 1, 1);
-    border-radius: 24px;
-
+ 
   }
   .c_btn:hover .c_btn__arrow:after, .c_btn:focus .c_btn__arrow:after {
     transition-delay: 0s;
