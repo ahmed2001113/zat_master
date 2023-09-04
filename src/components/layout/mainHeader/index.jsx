@@ -150,19 +150,14 @@ account
   </div>
 </div>
 }
-        
-
-          <div className="border-t border-gray-200 px-4 py-6">
-            <a href="#" className="-m-2 flex items-center p-2">
-              <img
-                src="https://tailwindui.com/img/flags/flag-canada.svg"
-                alt=""
-                className="block h-auto w-5 flex-shrink-0"
-              />
-              <span className="ml-3 block text-base font-medium text-gray-900">CAD</span>
-              <span className="sr-only">, change currency</span>
-            </a>
-          </div>
+<div>
+  
+<Link href="/order" className="m-2 block p-2 font-medium
+     text-gray-900">
+     Track Order
+    </Link>
+</div>
+  
         </Dialog.Panel>
       </Transition.Child>
     </div>
@@ -193,8 +188,9 @@ account
       <DropDownUser user={currentUser}/>
       </>:
       <div>
-                <Link href="/auth/signin" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-              Sign in
+                <Link href="/auth/signin" className="text-sm link_with_icon font-medium text-gray-700 hover:text-gray-800">
+              Sign In
+              <i class="fa-regular fa-user"></i>
             </Link>
             <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
             {/* <Link href="/auth/signup" className="text-sm font-medium text-gray-700 hover:text-gray-800">
@@ -204,7 +200,10 @@ account
       
       
       }
-    
+      <Link href="/order" className="text-sm link_with_icon font-medium text-gray-700 hover:text-gray-800">
+             Track Order
+             <i class="fa-regular fa-flag"></i>
+            </Link>
           </div>
 
     </div>

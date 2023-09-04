@@ -634,8 +634,74 @@ button.showMoreBtn:disabled{
   font-family: revert;
   text-align: center;
 }
-@media(max-width:768px){
+
  
+button.google  {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  padding: 6px;
+  margin: auto;
+  width: 54%;
+  font-size: 19px;
+  text-transform: capitalize;
+  border-radius: 1px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  color: #000;
+}
+button.google img{
+  margin: 0px 10px;
+}
+button.google:hover{
+  background: #eee !important;
+  color: #333 !important;
+}
+.link_with_icon i {
+  margin-left: 7px;
+}
+.link_with_icon{
+  text-decoration: none;
+}
+img.ic {
+  width: 20px;
+}
+
+.container.orderStatues {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: auto;
+  height: 50vh;
+  margin: auto;
+}
+.container.orderStatues .heading{
+   margin-bottom: 20px;
+
+}
+ .container.orderStatues .heading h1{
+  font-family: "Neue Haas Grotesk Txt W05_65 M",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,Oxygen,Oxygen-Sans,Ubuntu,Cantarell,"Fira Sans",sans-serif,"Times New Roman","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: 0.06em;
+ }
+ .container.orderStatues .input_{
+  width: 50%;
+  padding: 10px;
+  margin-top: 80px;
+ }
+ .container.orderStatues .submit{
+  width: 26%;
+  margin-right: auto;
+ }
+@media(max-width:768px){
+  .container.orderStatues{
+    padding-left: 20px;
+  }
+  .container.orderStatues .submit , .container.orderStatues .input_{
+    width: 100% !important;
+  }
   .notFound h1{
     font-size: 16px;
   }

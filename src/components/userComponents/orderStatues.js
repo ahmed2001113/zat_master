@@ -4,8 +4,7 @@ import Table from 'react-bootstrap/Table';
 
 function OrderStatuesModal({show,setShow,statues}) {
 
-  const {data}= statues;
-   return (
+    return (
     <>
    
 
@@ -25,7 +24,7 @@ function OrderStatuesModal({show,setShow,statues}) {
       <tbody>
       <tr>
 {
-   data&& Object.keys(data).map((key,idx)=>{
+   statues?.data? Object.keys(data).map((key,idx)=>{
     
          return(
            
@@ -34,7 +33,7 @@ function OrderStatuesModal({show,setShow,statues}) {
            
        
         )
-    })
+    }):null
 }
 </tr>  
       </tbody>

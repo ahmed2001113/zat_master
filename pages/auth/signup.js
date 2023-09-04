@@ -3,13 +3,16 @@
  import styles from './sign.module.css'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { EMAILSIGNUPSTART } from '@/src/store/user/user.actions';
+import { EMAILSIGNUPSTART, GoogleSignIn } from '@/src/store/user/user.actions';
 import { ErrorMessageSelector, loadingUser, userSelectMemo } from '@/src/store/user/user.selector';
 import { useRouter } from 'next/router';
 import { HEADER_FOOTER_ENDPOINT } from '@/src/EndPoints';
 import axios from 'axios';
 import RootLayout from '@/src/components/layout';
 import FormInputComponent from '@/src/components/customsComponents/FormLayouts/FormControl';
+import google from '../../public/svgs/google.svg'
+import Image from 'next/image';
+
 import Head from 'next/head';
 const initialData = {
 firstName:'',
@@ -32,7 +35,10 @@ function Signup({footer_header}) {
   const {firstName,lastName,email,password} = data;
 
   const err = useSelector(ErrorMessageSelector)
+  const signInUsingGoogle =   ()=>{
+    dispatch(GoogleSignIn())
   
+  }
   const setForm = ()=>{
     setData(initialData)
 }
@@ -153,6 +159,21 @@ create account
 </>
 }
  </button>
+ <p className='text-center m-2'>OR</p>
+<button className='google mt-3'  disabled={loading}
+onClick={signInUsingGoogle}
+       type='button'> 
+     
+     {
+      loading? <>loading...</>:<>
+      
+  sign in With  <Image src={google}  alt='google' height={30} width={30}/>
+  
+  
+  </>
+
+     }
+</button>
 
  {firebaseError?
         <p className='errorMessage'>

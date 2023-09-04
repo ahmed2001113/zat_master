@@ -126,14 +126,19 @@ function* OnSignInStart (){
 
  //google signin  
 function* GoogleSignIn(){
+        yield put(userAction.SetLoading(true))
+
       try{  
         const {user}= yield call( signInWithGoogle);;
         
         yield call(GetUserSnapShotData,user)
 
- 
+        yield put(userAction.SetLoading(false))
+
 }
         catch(err){
+                console.log(err)
+                yield put(userAction.SetLoading(false))
 
         }
  }

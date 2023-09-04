@@ -2,7 +2,7 @@
 import React, { useState ,useEffect, useLayoutEffect} from 'react'
  import styles from './sign.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { EmailSignInStart } from '@/src/store/user/user.actions';
+import { EmailSignInStart, GoogleSignIn } from '@/src/store/user/user.actions';
 import { ErrorMessageSelector, loadingUser, userSelectMemo } from '@/src/store/user/user.selector';
 import { useRouter } from 'next/router';
 import RootLayout from '@/src/components/layout';
@@ -10,8 +10,9 @@ import axios from 'axios';
 import { HEADER_FOOTER_ENDPOINT } from '@/src/EndPoints';
 import FormInputComponent from '@/src/components/customsComponents/FormLayouts/FormControl';
 import Head from 'next/head';
+import Image from 'next/image';
  const intial ={email:'',password:''};
-
+import google from '../../public/svgs/google.svg'
 const  Signin=({footer_header}) =>{
    const dispatch = useDispatch()
   const err = useSelector(ErrorMessageSelector);
@@ -76,7 +77,11 @@ useEffect(()=>{
   if(user){
     router.push('/')
   }
-},[user])
+},[user]);
+const signInUsingGoogle =   ()=>{
+  dispatch(GoogleSignIn())
+
+}
   return (
 <RootLayout headerFooter={footer_header}>
 <Head>
@@ -130,6 +135,22 @@ useEffect(()=>{
 
      }
 </button>
+<p className='text-center m-2'>OR</p>
+<button className='google mt-3'  disabled={loading}
+onClick={signInUsingGoogle}
+       type='button'> 
+     
+     {
+      loading? <>loading...</>:<>
+      
+  sign in With  <Image src={google}  alt='google' height={30} width={30}/>
+  
+  
+  </>
+
+     }
+</button>
+
 {firebaseError&&
         <p className='errorMessage'>
         {firebaseError}
@@ -140,7 +161,7 @@ useEffect(()=>{
 
 </div>
 <div className={`col-md-6 ${styles.right}`}>
-  <h1>Sign Up</h1>
+  <h1 className='text-center'>Sign Up</h1>
   <h3>
   Sign up now to get exclusive access to <br/>
   Zat98
