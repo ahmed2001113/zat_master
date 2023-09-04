@@ -19,8 +19,9 @@ export default function Custom404({footer_header,products,seo}) {
       </Head>
   <div className="row container notFound" style={{margin:'auto'}}>
   <div className=" container  col-md-6">
-    <h1>We can't locate that page. Try using the search icon or 
-        navigation above to find what you're looking for.</h1>
+    <h1>{`
+    We can't locate that page. Try using the search icon or 
+    navigation above to find what you're looking for.`}</h1>
     </div>
 <div className="col-md-6">
 <p className="assistant">
