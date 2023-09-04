@@ -42,7 +42,7 @@ function RootLayout({children, headerFooter,seo,uri}) {
 </Head>
     <MainHeader header={header}/>
 
-    <main className="  mx-auto  " style={{overflow:'hidden'}}> 
+    <main className="  mx-auto  " > 
 					{children}
 				</main>
 
