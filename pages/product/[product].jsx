@@ -218,7 +218,7 @@ Review Details
 
 
 
-export async function getServerSideProps({params}){
+export async function getStaticProps({params}){
     const {product:id} =params;
     let footer_header = {}
     let productData ={}
@@ -249,24 +249,24 @@ export async function getServerSideProps({params}){
       }
 }
 
-// export async function  getStaticPaths(){
+export async function  getStaticPaths(){
 
-//     const {data} = await client.query({
-//         query:ProductPathsQuery
-//      });
-//      const products = data?.products?.nodes;
+    const {data} = await client.query({
+        query:ProductPathsQuery
+     });
+     const products = data?.products?.nodes;
 
 
-//     const paths = products.map(product=>{
+    const paths = products.map(product=>{
 
-//         return{
-//             params:{product:product.id}
-//         }
-//     })
+        return{
+            params:{product:product.id}
+        }
+    })
 
-// return{
-//     paths,
-//     fallback:false
-// }
+return{
+    paths,
+    fallback:false
+}
 
-// }
+}
