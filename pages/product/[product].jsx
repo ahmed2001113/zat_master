@@ -80,7 +80,7 @@ const handleShow = (imag)=>{
      { `${name} - zat98`}
     </title>
   </Head>
-<div ref={divRef}  className="row" style={{background:'#fff',margin:'0px' ,padding:'0px' ,width:'100%'}}>
+<div ref={divRef}  className={`row ${styles.container}`} style={{background:'#fff',margin:'0px' ,padding:'0px' ,width:'100%'}}>
      
      <div className={`${styles.left} col-md-7`}>
    {!IsMatch?

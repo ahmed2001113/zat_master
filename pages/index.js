@@ -3,7 +3,7 @@
 import axios from 'axios'
 import { HEADER_FOOTER_ENDPOINT } from '../src/EndPoints'
   import client from '../src/utls/apolloConfigrations/apolloClient'
- import {  useRef, useState } from 'react'
+ import {  useEffect, useRef, useState } from 'react'
      import SwippeCentered from '@/src/components/customsComponents/SwippeCentered'
  import WithNoParentCategories from '@/src/components/productWithNoCategories/WithNoParentCategories'
  import { getPage } from '@/src/utls/functions/get-page-seo'
@@ -20,6 +20,9 @@ export default function Home({footer_header,products,categoriesWithNoParent,load
    
   let ref2=useRef();
   let isInView2 = useInView(ref2 , {once: true});
+  useEffect(()=>{
+    setLoading(false)
+  },[])
      return (
     <>
    <RootLayout headerFooter={footer_header} seo={seo}>
@@ -28,11 +31,11 @@ export default function Home({footer_header,products,categoriesWithNoParent,load
           {`Home - zat98`}
         </title>
       </Head>
- {/* {loading?<Big/>:
+ {loading?<Big/>:
 
+<Swipecarousel />
 
-}     */}
-    <Swipecarousel />
+}    
    {loading?
 <SwippedCenteredSkelton/>:   
   <SwippeCentered isHome={true} products={products}/>
@@ -52,7 +55,7 @@ export const   getStaticProps = async( )=>{
  const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
  let  productResults = [];
 let categoriesWithNoParent = [];
-let load=false;
+let load=true;
  const SpecifiedCategories = ["Shirts","Unisex Hoodes"];
  let seo = []
 try{
@@ -71,12 +74,15 @@ try{
     query:GETCATEGORIES_WITH_NO_PARENT });
 
     categoriesWithNoParent = nodes
-console.warn(categoriesWithNoParent)
- }catch(err){
+
+    load=false
+
+  }catch(err){
 
 }
 try {
   seo = await getPage('home');
+  load=false
 
 } catch (error) {
   

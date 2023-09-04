@@ -35,10 +35,10 @@ import OrderStatuesFunction from '@/src/utls/GlobalFunctions/OrderStatues';
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = useState(false);
-  const [show,setShow] =useState(false);
   const [OrderStatues,setOrderStatues]=useState({});
   const [loading , setLoading]=useState(false);
   const [err,setError] =useState(null)
+  const [show,setShow] =useState(false);
  const orderStatues=async(id)=>{
   setLoading(true)
 

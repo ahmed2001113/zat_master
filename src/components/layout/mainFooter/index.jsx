@@ -9,6 +9,42 @@ function Mainfooter({footer}) {
   return (
  
  <>
+<div className="container">
+  <p>Need Help ?</p>
+
+  <div className="three row">
+    <div className="col-md-3  mb-2 m-auto col-11 m-auto">
+      <p className="head_three">
+      <i class="fa-regular fa-message"></i>
+
+    Live Chat
+      </p>
+      <p className="othter">
+      Chat online in real-time With Zat98 Expert
+      </p>
+    </div>
+    <div className="col-md-3  mb-2 m-auto  col-11 m-auto">
+      <p className="head_three">
+      <i class="fa-solid fa-bag-shopping"></i>
+       </p>
+      <p className="othter">
+      RETURNS AND EXCHANGES
+
+      </p>
+    </div>
+    <div className="col-md-3  mb-2 m-auto col-11 m-auto">
+      <p className="head_three">
+      <i class="fa-solid fa-truck-fast"></i>
+Deleviry
+      </p>
+      <p className="othter">
+        ALL COUNTRY SHIPPING
+
+      </p>
+    </div>
+  </div>
+</div>
+
     <footer className="site-footer">
       <div className="container">
         <div className="row">
