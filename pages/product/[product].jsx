@@ -218,7 +218,7 @@ Review Details
 
 
 
-export async function getStaticProps({params}){
+export async function getServerSideProps({params}){
     const {product:id} =params;
     let footer_header = {}
     let productData ={}
