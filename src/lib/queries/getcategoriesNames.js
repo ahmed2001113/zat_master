@@ -7,6 +7,12 @@ export const CategoryName = gql`
                id
         slug
         name
+        image{
+         
+            sourceUrl,
+            altText
+        
+        }
           
    
       }

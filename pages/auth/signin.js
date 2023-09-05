@@ -13,7 +13,8 @@ import Head from 'next/head';
 import Image from 'next/image';
  const intial ={email:'',password:''};
 import google from '../../public/svgs/google.svg'
-const  Signin=({footer_header}) =>{
+import { FetchCategories } from '@/src/lib/FeatchCategories';
+const  Signin=({footer_header,categories}) =>{
    const dispatch = useDispatch()
   const err = useSelector(ErrorMessageSelector);
   const user = useSelector(userSelectMemo);
@@ -83,7 +84,7 @@ const signInUsingGoogle =   ()=>{
 
 }
   return (
-<RootLayout headerFooter={footer_header}>
+<RootLayout headerFooter={footer_header} categories={categories}>
 <Head>
         <title>
           {`Sign In - zat98`}
@@ -191,10 +192,17 @@ export default Signin
 
 export const getStaticProps =async ()=>{
   const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
+  let categories =[]
+  try {
+  categories =  await FetchCategories()
+
+ } catch (error) {
+  
+ }
   return{
     props:{
       footer_header:footer_header?.data||{},
-
+      categories:categories||[]
     }
   }
 }

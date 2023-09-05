@@ -12,7 +12,7 @@ import { GlobalSelector } from "@/src/store/global/globalStore.Selector";
 import { GlobalActions } from "@/src/store/global/globalStore.slice";
  
  
-function RootLayout({children, headerFooter,seo,uri}) {
+function RootLayout({children, headerFooter,seo,uri,categories}) {
     const dispatch  = useDispatch()
  	const { header, footer } = headerFooter?.data || {};
  
@@ -40,7 +40,7 @@ function RootLayout({children, headerFooter,seo,uri}) {
 <Head>
  
 </Head>
-    <MainHeader header={header}/>
+    <MainHeader header={header} categories={categories}/>
 
     <main className="  mx-auto  " > 
 					{children}
@@ -48,7 +48,7 @@ function RootLayout({children, headerFooter,seo,uri}) {
 
  <PreviewComponent/>
       <CartDrawer/>
-<Mainfooter footer={footer}/>
+<Mainfooter footer={footer} categories={categories}/>
 <WishListDrawer/>
     </>
 

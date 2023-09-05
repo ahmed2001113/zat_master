@@ -3,11 +3,9 @@ import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import Image from 'next/image';
 import Link from 'next/link';
-// import {  , MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import styles from './mainHeader.module.css'
+ import styles from './mainHeader.module.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { SelectCategoriesLinks } from '@/src/store/categories/category.selector';
-import cartSvg from '../../../../public/svgs/cart.svg';
+ import cartSvg from '../../../../public/svgs/cart.svg';
 import searchIcon from '../../../../public/svgs/search.svg'
 import Love from '../../../../public/svgs/love.svg'
 import { totalCart } from '@/src/store/cart/cart.selector';
@@ -30,8 +28,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function MainHeader({header}) {
-  const currentUser = useSelector(userSelectMemo);
+export default function MainHeader({header,categories}) {
+   const currentUser = useSelector(userSelectMemo);
   const dispatch= useDispatch()
    const quentity = useSelector(totalCart);
   const openCart = ()=>dispatch(CartActions.setCartOpen(true))
@@ -41,7 +39,7 @@ export default function MainHeader({header}) {
   
   const [scroll, setScroll] = useState(false);
    const {headerMenuItems,siteDescription,siteLogoUrl,siteTitle} = header
-const categoriesLinks = useSelector(SelectCategoriesLinks);
+const categoriesLinks = categories;
  function Scroll() {
   const scrolls = document.body.scrollTop > 50 || document.documentElement.scrollTop > 50;
   
@@ -105,10 +103,13 @@ useEffect(() => {
    {
    
              categoriesLinks&&categoriesLinks.map(cate=>{
-
-           return   <li key={cate.id}>
+              console.log(cate)
+           return   <li key={cate.id} className={styles.cate_image}>
                 <Link className={`${styles.li}`} href={`/shop/${cate.slug}`} onClick={() => setOpen(false)}>
                   {cate.name}
+
+                  <Image src={cate?.image?.sourceUrl} height={50} width={50}/>
+
                 </Link>
               </li>
 
@@ -230,6 +231,7 @@ src={siteLogoUrl}
                   href={`/shop/${category.slug}`}
                   >
                     {category.name}
+
                   </Link >
                 </div>
 

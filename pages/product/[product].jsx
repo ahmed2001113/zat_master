@@ -21,7 +21,8 @@ import ProductCarouselImages from '@/src/components/products/productCarouselImag
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import { useSelector } from 'react-redux'
 import { GlobalSelector } from '@/src/store/global/globalStore.Selector'
-  export default function Product({product,footer_header}) {
+import { FetchCategories } from '@/src/lib/FeatchCategories'
+  export default function Product({product,footer_header,categories}) {
   const [show ,setShow]=useState(false)
 const [imagePrev,setImage] = useState({});
 const [imageArray,setImageArray] =useState([]);
@@ -74,7 +75,7 @@ const handleShow = (imag)=>{
 //  const [ ,second,,...restImages] = productAfterValidate?.images;
    return (
 <>
-<RootLayout headerFooter={footer_header}>
+<RootLayout headerFooter={footer_header} categories={categories}>
 <Head>
     <title>
      { `${name} - zat98`}
@@ -221,8 +222,14 @@ Review Details
 export async function getStaticProps({params}){
     const {product:id} =params;
     let footer_header = {}
-    let productData ={}
- 
+    let productData ={};
+    let categories=[]
+    try {
+        categories =  await FetchCategories()
+        
+        } catch (error) {
+        
+        }
     try {
         footer_header =await axios.get(HEADER_FOOTER_ENDPOINT);
     } catch (error) {
@@ -244,6 +251,7 @@ export async function getStaticProps({params}){
         props:{
             product:productData||{},
             footer_header:footer_header?.data||{},
+            categories:categories||[]
          } ,
         revalidate:10
       }

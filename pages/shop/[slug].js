@@ -1,6 +1,7 @@
 import { HEADER_FOOTER_ENDPOINT } from "@/src/EndPoints";
 import LoadingImage from "@/src/components/customsComponents/image";
 import RootLayout from "@/src/components/layout";
+import { FetchCategories } from "@/src/lib/FeatchCategories";
  import { ProductsDataQuery } from "@/src/lib/queries/GET_PRODUCTSDATA";
 import { productCategoriesBySlug } from "@/src/lib/queries/productsBySlug";
 import { FiltersAction } from "@/src/store/filters/filter.slice";
@@ -20,7 +21,7 @@ import { useEffect,  useRef,  useState } from "react";
 import { Button } from "react-bootstrap";
  import { useDispatch, useSelector } from "react-redux";
 
-const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi})=>{
+const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi,categories:catLinks})=>{
    
   const [productsData,setProductsData] =useState(ModifyObjectOrArray(DefaultData?.products?.nodes));
   const {Filters,sort,Filtered} = useSelector(FilterSelector)
@@ -138,7 +139,7 @@ const loadLess = async()=>{
       {
         loadings? <LoadingImage/>:null
       } 
-  <RootLayout headerFooter={footer_header}>
+  <RootLayout headerFooter={footer_header} categories={catLinks}>
     {/* <div className="image_handler" > 
 
  {loadings?<Big/>:
@@ -195,7 +196,15 @@ export async function getStaticProps ({params}) {
   let MinPrice= 0;
   let loadingApi = true;
 	const { slug } = params || {};
-  let data = {}
+  let data = {};
+  let categories =[]
+  try {
+  categories =  await FetchCategories()
+ 
+ } catch (error) {
+  
+ }
+ 
    try {
 
    const  {data:{productCategories:{nodes}},loading,error}  = await client.query({
@@ -227,8 +236,9 @@ export async function getStaticProps ({params}) {
         footer_header:footer_header?.data,
         price:[MinPrice,MaxPrice]||[],
         slug:slug,
-        loadingApi
-    
+        loadingApi,
+        categories:categories||[]
+        
       },
       revalidate:10
     }

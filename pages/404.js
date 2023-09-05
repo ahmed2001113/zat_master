@@ -1,17 +1,18 @@
 import { HEADER_FOOTER_ENDPOINT } from "@/src/EndPoints";
 import SwippeCentered from "@/src/components/customsComponents/SwippeCentered";
 import RootLayout from "@/src/components/layout";
+import { FetchCategories } from "@/src/lib/FeatchCategories";
 import client from "@/src/utls/apolloConfigrations/apolloClient";
 import ModifyObjectOrArray from "@/src/utls/functions/ObjectArrayChange";
 import { PRODUCTS_QUERY } from "@/src/utls/queries";
 import axios from "axios";
 import Head from "next/head";
 
-export default function Custom404({footer_header,products,seo}) {
+export default function Custom404({footer_header,products,seo,categories}) {
     return(
 
         <>
-         <RootLayout headerFooter={footer_header} seo={seo}>
+         <RootLayout headerFooter={footer_header} seo={seo} categories={categories}>
    <Head>
         <title>
           {`404`}
@@ -49,7 +50,14 @@ export const   getStaticProps = async( )=>{
     const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
     let  productResults = [];
     let load=false;
-     let seo = []
+     let seo = [];
+     let categories =[]
+     try {
+     categories =  await FetchCategories()
+   
+    } catch (error) {
+     
+    }
    try{
      const products =  await client.query({query:PRODUCTS_QUERY});
      console.warn(products)
@@ -74,7 +82,8 @@ export const   getStaticProps = async( )=>{
        footer_header:footer_header?.data||{},
        products:productResults||[],
         seo:seo[0]||[],
-       load
+       load,
+       categories:categories||[]
       },
       revalidate:10
    

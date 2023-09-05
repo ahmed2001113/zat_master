@@ -18,7 +18,8 @@ import { Button } from "react-bootstrap";
  import { useDispatch, useSelector } from "react-redux";
 import LoadingImage from "@/src/components/customsComponents/image/index.jsx";
 import Head from "next/head";
-const AllCategoriesProducts = ({products,footer_header,seo,price,load,...others})=>{
+import { FetchCategories } from "@/src/lib/FeatchCategories";
+const AllCategoriesProducts = ({products,footer_header,seo,price,load,categories,...others})=>{
   const dispatch = useDispatch ()
  const {Filters,sort,Filtered} = useSelector(FilterSelector)
  
@@ -151,7 +152,7 @@ const loadLess = async()=>{
          {
         loadings? <LoadingImage/>:null
       } 
-          <RootLayout headerFooter={footer_header} seo={seo}>
+          <RootLayout headerFooter={footer_header} seo={seo}categories={categories}>
  
 
   <Store setLoading={setLoading} loading={loadings} category="Shop"
@@ -193,6 +194,14 @@ let MaxPrice = 0;
 let MinPrice= 0;
 let load =false;
  let productsData =[]; 
+ let categories =[]
+ try {
+ categories =  await FetchCategories()
+
+} catch (error) {
+ 
+}
+
  try {
   const { data: {products},loading } = await client.query({
     query:ProductsInfinteScroll,
@@ -232,7 +241,8 @@ try{
       footer_header:footer_header?.data||{},
       seo:seo[0]||{},
       price:[MinPrice,MaxPrice]||[],
-      load
+      load,
+      categories:categories||[]
      },
     revalidate:10
      }

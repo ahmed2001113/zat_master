@@ -15,20 +15,10 @@ import { useRouter } from 'next/router';
 import LoadingImage from '@/src/components/customsComponents/image';
 import { useEffect } from 'react';
 import Head from 'next/head';
-function User({seo,footer_header}) {
+import { FetchCategories } from '@/src/lib/FeatchCategories';
+function User({seo,footer_header,categories}) {
    const user = useSelector(userSelectMemo);
-    const router =useRouter();
-    // useEffect(()=>{
-
-    //   // const timing = setTimeout(()=>{
-    //   //   if(!!user){
-
-    //   //     router.push('/')
-    //   //   }
-    //   },3000);
-    //   return ()=> clearTimeout(timing)
-    // },[])
-  
+   
     
   return (
    <>
@@ -39,7 +29,7 @@ function User({seo,footer_header}) {
         </title>
       </Head>
 
-   <RootLayout headerFooter={footer_header}  >
+   <RootLayout headerFooter={footer_header} categories={categories} >
 {
   user?<div className={`${styles.center} container-fluid`}>
   <Tab.Container id="left-tabs-example" defaultActiveKey="Orders"  >
@@ -86,7 +76,13 @@ export const   getStaticProps = async()=>{
   const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
    let load=false;
    let seo = []
- 
+   let categories =[]
+  try {
+  categories =  await FetchCategories()
+
+ } catch (error) {
+  
+ }
  try {
    seo = await getPage('account');
  
@@ -98,7 +94,8 @@ export const   getStaticProps = async()=>{
     props:{
       footer_header:footer_header?.data||{},
         seo:seo[0]||[],
-      load
+      load,
+      categories:categories||[]
      },
      revalidate:10
   

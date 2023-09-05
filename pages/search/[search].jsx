@@ -20,7 +20,8 @@ import { SearchPriceuery } from "@/src/lib/queries/searchPrice";
 import { useLazyQuery } from "@apollo/client";
 import LoadingImage from "@/src/components/customsComponents/image";
 import Head from "next/head";
- const Search =({search,SearchData,footer_header,seo,price })=>{
+import { FetchCategories } from "@/src/lib/FeatchCategories";
+ const Search =({search,SearchData,footer_header,seo,price,categories:catLinks })=>{
     const dispatch = useDispatch()
     const {Filters,sort,Filtered} = useSelector(FilterSelector)
    
@@ -156,7 +157,7 @@ import Head from "next/head";
            {
             loadings&&<LoadingImage/>
            }
-             <RootLayout headerFooter={footer_header} seo={seo}>
+             <RootLayout headerFooter={footer_header} seo={seo} categories={catLinks}>
     {
         nodes.length?
  
@@ -198,6 +199,13 @@ let seo = []
  let MaxPrice = 0;
 let MinPrice= 0;
 let load =false;
+let categories =[]
+try {
+categories =  await FetchCategories()
+
+} catch (error) {
+
+}
 try {
      const { data: {products},loading } = await client.query({
       query:SearchQuery,
@@ -244,6 +252,7 @@ variables:{
         footer_header:footer_header?.data||{},
         seo:seo[0]||{},
         price:[MinPrice,MaxPrice]||[],
+        categories:categories||[]
     }
     }
 

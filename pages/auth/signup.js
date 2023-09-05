@@ -14,6 +14,7 @@ import google from '../../public/svgs/google.svg'
 import Image from 'next/image';
 
 import Head from 'next/head';
+import { FetchCategories } from '@/src/lib/FeatchCategories';
 const initialData = {
 firstName:'',
 lastName:'',
@@ -22,7 +23,7 @@ password:''
 
 }
 
-function Signup({footer_header}) {
+function Signup({footer_header,categories}) {
   const dispatch = useDispatch();
   const loading = useSelector(loadingUser);
   const user = useSelector(userSelectMemo);
@@ -91,7 +92,7 @@ useEffect(()=>{
   }
 },[user])
    return (
-<RootLayout  headerFooter={footer_header}>
+<RootLayout  headerFooter={footer_header}categories={categories}>
 <Head>
         <title>
           {`Sign Up - zat98`}
@@ -200,10 +201,17 @@ export default Signup
 
 export const getStaticProps =async ()=>{
   const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
+  let categories =[]
+  try {
+  categories =  await FetchCategories()
+
+ } catch (error) {
+  
+ }
   return{
     props:{
       footer_header:footer_header?.data||{},
-
+      categories:categories||[]
     }
   }
 }

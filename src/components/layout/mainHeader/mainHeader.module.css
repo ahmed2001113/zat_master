@@ -36,6 +36,12 @@
     }
     
 }
+.cate_image a{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+}
 .ml_auto{
      
     display: flex;

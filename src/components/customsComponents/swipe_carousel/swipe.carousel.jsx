@@ -46,7 +46,10 @@ import {Carousel} from "react-bootstrap";
             slides.map(slide=>{
               return(
                 <Carousel.Item key={slide.id} className={`${styles.car_item}`}  >
-                <Image src={slide.image}  alt={slide.title}  fill />
+                <Image src={slide.image}
+                placeholder='blur'
+                blurDataURL={slide.image}
+                  alt={slide.title}  fill />
                     <Carousel.Caption>
                     <h1>{slide.title}</h1>
                     <p>{slide.description}</p>

@@ -3,8 +3,8 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 
  
-function Mainfooter({footer}) {
-  const categories = useSelector(SelectCategoriesLinks)
+function Mainfooter({footer,categories:catLinks}) {
+  const categories = catLinks
    ;
   return (
  

@@ -15,9 +15,11 @@ import { PRODUCTS_QUERY } from '@/src/lib/queries/Product_query'
 import Swipecarousel from '@/src/components/customsComponents/swipe_carousel/swipe.carousel'
 import { useInView } from 'framer-motion'
 import Head from 'next/head'
-export default function Home({footer_header,products,categoriesWithNoParent,load,seo}) {
+import Big from '@/src/components/skelton/skeltonswippe'
+import { FetchCategories } from '@/src/lib/FeatchCategories'
+export default function Home({footer_header,products,categoriesWithNoParent,load,seo,categories}) {
  const [loading,setLoading]=useState(load);
-   
+   console.log(loading)
   let ref2=useRef();
   let isInView2 = useInView(ref2 , {once: true});
   useEffect(()=>{
@@ -25,7 +27,7 @@ export default function Home({footer_header,products,categoriesWithNoParent,load
   },[])
      return (
     <>
-   <RootLayout headerFooter={footer_header} seo={seo}>
+   <RootLayout headerFooter={footer_header} seo={seo} categories={categories}>
    <Head>
         <title>
           {`Home - zat98`}
@@ -55,18 +57,24 @@ export const   getStaticProps = async( )=>{
  const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
  let  productResults = [];
 let categoriesWithNoParent = [];
-let load=true;
- const SpecifiedCategories = ["Shirts","Unisex Hoodes"];
+let load=false;
+ let categories =[]
+  try {
+  categories =  await FetchCategories()
+
+ } catch (error) {
+  
+ }
  let seo = []
 try{
   const products =  await client.query({query:PRODUCTS_QUERY});
   console.warn(products)
   productResults =ModifyObjectOrArray( products?.data?.products?.nodes)
  ||[]
-load=false
+load=true
  }catch(error){
   ;
-  load=false
+  load=true
 }
 
 try{
@@ -75,26 +83,27 @@ try{
 
     categoriesWithNoParent = nodes
 
-    load=false
+    load=true
 
   }catch(err){
 
 }
 try {
   seo = await getPage('home');
-  load=false
+  load=true
 
 } catch (error) {
-  
 }
- 
+
  return   {
   props:{
     footer_header:footer_header?.data||{},
     products:productResults||[],
     categoriesWithNoParent:categoriesWithNoParent||[],
     seo:seo[0]||[],
-    load
+    load,
+    categories:categories||[]
+
    },
    revalidate:10
 

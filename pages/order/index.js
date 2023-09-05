@@ -2,12 +2,13 @@ import { HEADER_FOOTER_ENDPOINT } from '@/src/EndPoints'
 import LoadingImage from '@/src/components/customsComponents/image'
 import RootLayout from '@/src/components/layout'
 import OrderStatuesModal from '@/src/components/userComponents/orderStatues'
+import { FetchCategories } from '@/src/lib/FeatchCategories'
 import OrderStatuesFunction from '@/src/utls/GlobalFunctions/OrderStatues'
 import { TextField } from '@mui/material'
 import axios from 'axios'
 import React, { useState } from 'react'
 
-export default function Orderstatues({footer_header}) {
+export default function Orderstatues({footer_header,categories}) {
   const [number,setNumber] = useState(0);
   const [show,setShow] =useState(false);
   const [OrderStatues,setOrderStatues]=useState({});
@@ -39,7 +40,7 @@ orderStatues(number);
 setNumber(0)
   }
    return (
-       <RootLayout headerFooter={footer_header} >
+       <RootLayout headerFooter={footer_header}  categories={categories}>
 {
   loading&&<LoadingImage/>
 }
@@ -75,13 +76,20 @@ Check Status
 
 
 export const   getStaticProps = async( )=>{
+
   const footer_header = await axios.get(HEADER_FOOTER_ENDPOINT);
-    
+     let categories=[]
+    try {
+        categories =  await FetchCategories()
+        
+        } catch (error) {
+        
+        }
  
   return   {
    props:{
      footer_header:footer_header?.data||{},
-       
+     categories:categories||[]
     },
     revalidate:10
  
