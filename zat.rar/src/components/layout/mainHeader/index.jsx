@@ -13,6 +13,7 @@ import { CartActions } from '@/src/store/cart/cart.reducer';
 import { userSelectMemo } from '@/src/store/user/user.selector';
 import { DropDownUser } from './dropdownUser';
 import { wishlistActions } from '@/src/store/wishlist/wishlistslice';
+
 import MenuSvg from '../../../../public/svgs/menubar.svg'
 import SearchDrrawer from '../../searchDrawer/searchDrawer';
  const navigation = {
@@ -28,7 +29,6 @@ function classNames(...classes) {
 }
 
 export default function MainHeader({header,categories}) {
-  console.log(categories)
    const currentUser = useSelector(userSelectMemo);
   const dispatch= useDispatch()
    const quentity = useSelector(totalCart);

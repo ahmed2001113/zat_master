@@ -1,0 +1,116 @@
+.divbtn{
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+ 
+}
+.btn{
+    border: 1px solid white;
+    background-color:#212529;
+    text-align: center;
+    padding: 5px 10px;
+    color: #fff;
+    font-family: ui-sans-serif;
+ 
+
+}
+.new{
+    width: fit-content;
+    position: absolute;
+    right: 28px;
+    background: #000000ed;
+    padding: 1px 10px;
+    color: #fff;
+    border-radius: 3px;
+    text-transform: capitalize;
+}
+.btn:hover{
+    background-color: #eee ;
+    color: #333;
+}
+.btn_heart{
+    padding: 0;
+    background-color: #212529;
+    color: #fff;
+    font-size: 17px;
+    /* height: 34px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px;
+    height: 40px;
+    margin: auto;
+}
+.btn2{
+    text-align: center;
+    height: 100%;
+    width:45%;
+    border:1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+background-color: black;
+border: 1px solid white;
+color: white;
+}
+.btn2:hover{
+background-color: white;
+border: 1px solid black;
+color: black;
+transition: 0.7s;
+}
+@media (max-width:1320px) {
+    .divbtn{
+        height: 40px !important;
+    }   
+    .btn1{
+        width:12% !important;
+    }
+    .btn2{
+        width:44% !important;
+    }
+}
+@media (max-width:1020px) {
+    .divbtn{
+        height: 37px !important;
+    }   
+    .btn1{
+        width:16% !important;
+    }
+    .btn2{
+        width:42% !important;
+
+    }
+}
+@media (max-width:860px) {
+    .divbtn{
+        height: 35px !important;
+    }   
+    .btn1{
+        width:20% !important;
+    }
+    .btn2{
+        width:40% !important;
+    }
+}
+@media (max-width:350px) {
+    .btn2{
+font-size: 10px !important;
+    }
+}
+
+
+
+.b_2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 29%;
+    position: fixed;
+    right: 37px;
+    bottom: 10%;
+    background: #212529;
+    padding: 10px;
+}

@@ -1,0 +1,178 @@
+.Top_Bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: sticky;
+    top: 120px;
+    left: 0;
+    z-index: 5;
+    background: transparent;
+    padding: 20px 0px;
+    flex-direction: column;
+    align-items: flex-start;
+ 
+}
+.Top_Bar_scroll:before{
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(255,255,255,0.7);
+    z-index: -1;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+}
+
+.filterOptions{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 30%;
+    justify-content: space-around   ;
+}
+.res{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+    text-transform: capitalize;
+}
+.sorting{
+   
+    }
+.title{
+
+}
+.sorting label {
+    padding: 4PX !important;
+}
+.button{
+    display: flex;
+    background: #eee;
+    padding: 2px 16px;
+    border-radius: 1px;
+    text-transform: capitalize;
+    transition: 0.5s all ease-in-out;
+}
+.button:hover{
+    background: #ddd;
+}
+.chip{
+    display: flex;
+width: 90%;
+margin: auto;
+
+}
+.flex{
+    width: 90%;
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    height: 30px;
+
+}
+.Drawer{
+    display: flex;
+    flex-direction: column;
+}
+.chipItem{
+    border-radius: 0px !important;
+    background: #f4f4f4 !important;
+    font-size: smaller !IMPORTANT;
+    padding: 0px !IMPORTANT;
+    height: 26px !IMPORTANT;
+    border: 1px solid #623d6914 !IMPORTANT;
+    text-transform: capitalize;
+    margin-bottom: 10px !important;
+}
+
+.no_products{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.no_products button {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 50px;
+    text-transform: uppercase;
+    text-align: center;
+}
+.mob{
+    display: none ;
+}
+.statics_words{
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    padding-left: 0px;
+    text-align: left;
+   
+}
+.statics_words h3{
+        font-family: "Neue Haas Grotesk Txt W05_65 M",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,Oxygen,Oxygen-Sans,Ubuntu,Cantarell,"Fira Sans",sans-serif,"Times New Roman","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+text-align: left;
+    font-size: 40px !important;
+    color: #000 !important;
+    margin-bottom: 8px !important;
+}
+.statics_words h4{
+    font-family: "Neue Haas Grotesk Txt W05_65 M",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,Oxygen,Oxygen-Sans,Ubuntu,Cantarell,"Fira Sans",sans-serif,"Times New Roman","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 12px;
+    font-style: normal;
+    line-height: 18px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #000 !important;
+
+}
+.statics_words p{
+    font-family: "Neue Haas Grotesk Txt W05_55 R",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,Oxygen,Oxygen-Sans,Ubuntu,Cantarell,"Fira Sans",sans-serif,"Times New Roman","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 26px;
+    letter-spacing: 0.03em;
+
+}
+@media(max-width:768px){
+    .mob{
+        display: block ;
+    }
+    .Top_Bar{
+        top: 71px;
+        flex-direction: column;
+        padding-top: 19px;
+        height: 29px;
+    }
+   
+    .filterOptions{
+        width: 100%;
+        align-items: flex-end;
+        height: 26px;
+        justify-content: space-between;
+    }
+    .title{
+        display: none;
+    }
+  
+    .product{
+        padding: 0px !important;
+        padding: 6px   !important;
+    }
+    .Drawer{
+        display: flex;
+        flex-direction: column;
+        height: 50% !important;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+}

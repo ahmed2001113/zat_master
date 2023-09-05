@@ -1,0 +1,35 @@
+.right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.cartItem{
+    padding: 10px;
+}
+.image{
+    border-radius: 10px;
+}
+.left{
+    background: #f4f4f48c;
+     margin: 0px;
+    align-self: flex-start;
+    justify-self: flex-start;
+    margin-bottom: auto;
+    padding: 34px;
+ }
+
+.thankWrapper{
+    
+}
+@media (max-width:992px) {
+    .left{
+        padding: 0% !important;
+        padding-left: 20px !important; 
+    }
+    .all{
+         
+         padding: 0px !important; 
+flex-direction: column-reverse;
+    }
+    
+}

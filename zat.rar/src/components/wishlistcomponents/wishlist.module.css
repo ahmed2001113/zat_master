@@ -1,0 +1,62 @@
+.price{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 10px;
+
+}
+.item{
+    border: 1px solid #333;
+    margin: 10px;
+    padding: 10px;
+    align-items: center;
+    border-color: #746376;
+}
+.button{
+    color: #9b37b7;
+    padding: 2px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 47%;
+    font-size: large;
+    text-transform: capitalize;
+
+}
+.button:hover{
+    color: #000  !important;
+}
+.button i{
+    border: 1px solid;
+    border-radius: 51%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 31px;
+    font-size: small;
+    height: 31px;
+    margin-left: 10px;
+    padding: 12px;
+
+}
+.first{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.body{
+    height: 90%;
+    overflow: auto;
+}
+
+@media(max-width:768px){
+    .wishlistDrawer{
+        height: 90% !important;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+    .item img{
+        width: 100% !important;
+
+    }
+}

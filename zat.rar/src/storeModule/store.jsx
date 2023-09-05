@@ -14,7 +14,7 @@ import { FiltersAction } from '../store/filters/filter.slice';
 import { wishlistSelector } from '../store/wishlist/wishlistSelector';
  export default function Store({products=[],category='',loading,setLoading,...others}) {
    const dispatch = useDispatch()
-  const {Filters ,Filtered } = useSelector(FilterSelector)
+  const {Filters ,Filtered,sort:SORT } = useSelector(FilterSelector)
   const [scroll, setScroll] = useState(false);
   const {wishlistItems} = useSelector(wishlistSelector)
   const isWishlist=(id)=>{
@@ -150,7 +150,7 @@ Sale Now On Up To 30% OFF
       onChange={onChangeSort}
         label={Sortoptions.label}
         defaultValue='sort'
-        valueOpt={sort.toLocaleLowerCase()}
+        valueOpt={sort}
         name={Sortoptions.name} options={Sortoptions.innerOptions}/>
             <button className={`${styles.button}`} onClick={()=> showFilter()}>fliter 
             <Image 

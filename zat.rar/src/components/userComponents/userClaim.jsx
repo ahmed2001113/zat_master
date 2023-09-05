@@ -1,0 +1,2 @@
+export const Claim =({user={}})=>{
+ }
