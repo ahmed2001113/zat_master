@@ -5,9 +5,8 @@
 .right{
     height: 100%;
     position: sticky;
-    top: 115px;
+    top: 0px;
     background: #fff;
-    padding: 20px;
     padding: 56px 64px 60px;
 }
 @media(min-width:992px){

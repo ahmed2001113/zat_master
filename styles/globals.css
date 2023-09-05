@@ -695,7 +695,9 @@ img.ic {
   width: 26%;
   margin-right: auto;
  }
-
+ .cert img {
+  width: 58px;
+}
  .three  div{
   background: #fff;
   text-align: center
