@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const PRODUCTS_QUERY =gql`query{
-    products(last: 6) {
+    products(first: 6,  where: { type: SIMPLE}) {
       nodes {
         id
         slug

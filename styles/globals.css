@@ -709,6 +709,18 @@ img.ic {
   padding: 30px;
   height: 120px;
   }
+  .MuiButtonBase-root {
+   
+    width: fit-content !important;
+    margin: 5px !important;
+    border-radius: 12px !important;
+
+  }
+  .css-jd1zyo-MuiSelect-select-MuiInputBase-input-MuiInput-input:focus {
+
+    background: none !important;
+    color: #333;
+  }
  p.head_three {
   display: flex;
   align-items: center;

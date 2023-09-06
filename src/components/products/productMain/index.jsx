@@ -62,6 +62,8 @@ product.images.length > 1 ?
       <Link href={`/product/${product?.id}`}>
       <Image
       src={product?.images[0]?.sourceUrl||product?.images[0]?.src}
+      placeholder='blur'
+      blurDataURL={product?.images[0]?.sourceUrl||product?.images[0]?.src}
      height={500}
       width={557} 
       objectFit='cover'

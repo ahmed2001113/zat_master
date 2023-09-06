@@ -12,6 +12,7 @@ import { FilterSelector } from "../store/filters/filtersSelectores";
  import filterObjectValues from "../utls/functions/FilterObjectsWithTypes";
 import { SelectCategoriesLinks } from "../store/categories/category.selector";
 import { GlobalSelector } from "../store/global/globalStore.Selector";
+import { isBoolean, isObject } from "lodash";
 const initial=[
   { id: 1, checked: false, label: 'in stock' ,value:'IN_STOCK'},
   { id: 2, checked: false, label: 'Out of stock' ,value:'OUT_OF_STOCK'},
@@ -99,7 +100,10 @@ const applyFilters = () => {
         let icon;
 
 
-       return Object.keys(filters).map((key) => {
+       return Object.keys(filters).filter(key=>{
+        console.log(filters[key])
+return key
+       }).map((key) => {
    
   
  
@@ -108,7 +112,7 @@ const applyFilters = () => {
                key={key}
               className={`${styles.chipItem} col-md-6`}
                 icon={icon}
-                label={`${key} ${filters[key]}`}
+                label={`${key} ${isBoolean(filters[key])?'':filters[key]||isObject(filters[key]?'':filters[key])}`}
                 onDelete={ handleDelete(key)}
               />
            );

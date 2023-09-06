@@ -1,3 +1,5 @@
+import { isArray, isObject } from "lodash";
+
 // Define a function that takes an object as a parameter
 export default function filterObjectValues(obj,callback) {
     const keys = Object.keys(obj);
@@ -7,25 +9,26 @@ export default function filterObjectValues(obj,callback) {
         !(
           (Array.isArray(obj[key]) && obj[key].length === 0) ||
           obj[key] === "" ||
-          obj[key] === 0
-        )
-    );
+          obj[key] === 0  ||key ==="orderby" 
+        ) 
+    ) 
     // Reduce the filtered keys to a new object with the same values
     const filteredObject = filteredKeys.reduce((acc, key) => {
       // Check if the value is an object
-      if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
-        // Destructure the nested property and assign it to a new variable with the same name as the outer property
-
-        const { [key]: { [key]: value } } = obj;
-        
-        // Assign the value to the accumulator with the same key
-        acc[key] = value;
-      } else {
+      
         // Otherwise, assign the value as it is
+
+        if(isArray(obj[key])){
+          console.log(obj[key].filter(a=>!isObject(a)))
+          acc[key]  = obj[key].filter(a=>!isObject(a))
+
+        }
         acc[key] = obj[key];
-      }
+    
       return acc;
     }, {});
+
+    console.log(filteredObject)
     // Return the filtered object
      return callback(filteredObject);
   }
