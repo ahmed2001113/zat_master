@@ -126,7 +126,7 @@ LE  {(+CartTotal+65)}
 }
 
 
-export const getStaticProps =async ({params})=>{
+export const getServerSideProps =async ({params})=>{
 
 let {id}=params;
 let productItem = {}
@@ -150,24 +150,24 @@ return{
 }
 }
 
-export async function  getStaticPaths(){
+// export async function  getStaticPaths(){
 
-  const {data} = await client.query({
-      query:All_PRODUCTS_QUERY
-   });
-   const products = data?.products?.nodes;
+//   const {data} = await client.query({
+//       query:All_PRODUCTS_QUERY
+//    });
+//    const products = data?.products?.nodes;
 
 
-  const paths = products.map(product=>{
+//   const paths = products.map(product=>{
 
-      return{
-          params:{id:product.id}
-      }
-  })
+//       return{
+//           params:{id:product.id}
+//       }
+//   })
 
-return{
-  paths,
-  fallback:false
-}
+// return{
+//   paths,
+//   fallback:false
+// }
 
-}
+// }

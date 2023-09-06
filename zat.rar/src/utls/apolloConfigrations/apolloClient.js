@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-const http = require('http');
+const https = require('https');
 
 import { ApolloClient, ApolloLink, InMemoryCache, createHttpLink,ApolloProvider } from "@apollo/client";
 
@@ -71,21 +71,17 @@ export const afterware = new ApolloLink( ( operation, forward ) => {
 // 	rejectUnauthorized: false // This will disable certificate validation
 	 
 //   });
-  const  fetchOptions = { agent: new http.Agent({ rejectUnauthorized: false }) }
+  const  fetchOptions = { agent: new https.Agent({ rejectUnauthorized: false }) }
 
 // Apollo GraphQL client.
 const client = new ApolloClient({
-	
 	link: middleware.concat( afterware.concat(createHttpLink({
-		uri: `http://zat98.com/graphql`,
-		
+		uri: `https://zat98.com/graphql`,
 		fetch: fetch,
 		credentials:'same-origin',
-		fetchOptions:fetchOptions,
- 		
-	}) ),
-	 ),
-	 
+		fetchOptions:fetchOptions
+	}) ) ),
+	
 	cache: new InMemoryCache(),
 	
 });
