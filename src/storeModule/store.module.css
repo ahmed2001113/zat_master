@@ -171,7 +171,7 @@ text-align: left;
     .Drawer{
         display: flex;
         flex-direction: column;
-        height: 50% !important;
+        height: 80% !important;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
     }
