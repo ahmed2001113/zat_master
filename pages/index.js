@@ -19,8 +19,7 @@ import Big from '@/src/components/skelton/skeltonswippe'
 import { FetchCategories } from '@/src/lib/FeatchCategories'
 export default function Home({footer_header,products,categoriesWithNoParent,load,seo,categories}) {
  const [loading,setLoading]=useState(load);
-   console.log(loading)
-  let ref2=useRef();
+   let ref2=useRef();
   let isInView2 = useInView(ref2 , {once: true});
   useEffect(()=>{
     setLoading(false)

@@ -101,8 +101,7 @@ const applyFilters = () => {
 
 
        return Object.keys(filters).filter(key=>{
-        console.log(filters[key]);
-        
+         
 return key
        }).map((key) => {
    

@@ -80,8 +80,7 @@ HandleApproved(order.id)
 
 }}
 onInit={()=>{
-    console.log('clicked')
-}}
+ }}
 onError={(err)=>{
     setError(err);
      

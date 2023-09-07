@@ -3,7 +3,7 @@ const https = require('https');
 
 import { ApolloClient, ApolloLink, InMemoryCache, createHttpLink,ApolloProvider } from "@apollo/client";
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; 
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; 
 
 
 /**

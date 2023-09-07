@@ -28,8 +28,7 @@ function classNames(...classes) {
 }
 
 export default function MainHeader({header,categories}) {
-  console.log(categories)
-   const currentUser = useSelector(userSelectMemo);
+    const currentUser = useSelector(userSelectMemo);
   const dispatch= useDispatch()
    const quentity = useSelector(totalCart);
   const openCart = ()=>dispatch(CartActions.setCartOpen(true))
@@ -103,8 +102,7 @@ useEffect(() => {
    {
    
              categoriesLinks&&categoriesLinks.map(cate=>{
-              console.log(cate)
-           return   <li key={cate.id} className={styles.cate_image}>
+            return   <li key={cate.id} className={styles.cate_image}>
                 <Link className={`${styles.li}`} href={`/shop/${cate.slug}`} onClick={() => setOpen(false)}>
                   {cate.name}
 

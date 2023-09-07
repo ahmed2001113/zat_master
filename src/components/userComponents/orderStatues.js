@@ -24,12 +24,12 @@ function OrderStatuesModal({show,setShow,statues}) {
       <tbody>
       <tr>
 {
-   statues?.data? Object.keys(data).map((key,idx)=>{
+   statues?.data? Object.keys(statues?.data).map((key,idx)=>{
     
          return(
            
            <>
-             <td >{data[key]}</td></>
+             <td >{statues?.data[key]}</td></>
            
        
         )

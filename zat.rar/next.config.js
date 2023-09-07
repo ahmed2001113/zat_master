@@ -17,7 +17,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://zat98.com/:path*',
+        destination: 'http://zat98.com/:path*',
       },
     ]
   },
