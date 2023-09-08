@@ -1,4 +1,4 @@
-const allowedImageWordPressDomain = new URL( process.env.PUBLIC_WEBSITE_URL ).hostname;
+const allowedImageWordPressDomain = new URL( `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}` ).hostname;
 const allowedImageWordPressDomainz = new URL('https://images.canadagoose.com' ).hostname;
 const Colourdany = new URL('https://res.cloudinary.com' ).hostname;
 
@@ -7,7 +7,7 @@ const nextConfig = {
   reactStrictMode: false,
  
   images:{
-    loader:'default',
+    loader:'akamai',
     domains: [ allowedImageWordPressDomain,
       allowedImageWordPressDomainz,
       Colourdany ],
