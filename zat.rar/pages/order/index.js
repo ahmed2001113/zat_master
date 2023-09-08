@@ -19,8 +19,7 @@ export default function Orderstatues({footer_header,categories}) {
  
    try {
      const data = await OrderStatuesFunction(id);
-     console.log(data)
-     setOrderStatues(data)
+      setOrderStatues(data)
      setLoading(false)
    
      setShow(true)
