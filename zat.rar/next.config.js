@@ -1,4 +1,4 @@
-const allowedImageWordPressDomain = new URL( process.env.PUBLIC_WEBSITE_URL ).hostname;
+const allowedImageWordPressDomain = new URL('http://zat98.com').hostname;
 const allowedImageWordPressDomainz = new URL('https://images.canadagoose.com' ).hostname;
 const Colourdany = new URL('https://res.cloudinary.com' ).hostname;
 
