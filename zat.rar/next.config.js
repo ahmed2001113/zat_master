@@ -6,8 +6,8 @@ const Colourdany = new URL('https://res.cloudinary.com' ).hostname;
 const nextConfig = {
   reactStrictMode: false,
  
-  images:{
-    loader:'default',
+  images:{ 
+    loader:'default ',
     domains: [ allowedImageWordPressDomain,
       allowedImageWordPressDomainz,
       Colourdany ],
