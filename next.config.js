@@ -7,7 +7,7 @@ const nextConfig = {
   reactStrictMode: false,
  
   images:{
-    loader:'akamai',
+    loader:'default',
     domains: [ allowedImageWordPressDomain,
       allowedImageWordPressDomainz,
       Colourdany ],
