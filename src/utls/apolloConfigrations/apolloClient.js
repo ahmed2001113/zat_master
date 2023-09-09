@@ -71,12 +71,24 @@ export const afterware = new ApolloLink( ( operation, forward ) => {
 // 	rejectUnauthorized: false // This will disable certificate validation
 	 
 //   });
+
+const defaultOptions = {
+	watchQuery: {
+		fetchPolicy: "no-cache",
+		errorPolicy: "ignore",
+	},
+	query: {
+		fetchPolicy: "no-cache",
+		errorPolicy: "all",
+	},
+};
+
   const  fetchOptions = { agent: new https.Agent({ rejectUnauthorized: false }) }
 
 // Apollo GraphQL client.
 const client = new ApolloClient({
 	link: middleware.concat( afterware.concat(createHttpLink({
-		uri: `https://zat98.com/graphql`,
+		uri: `http://zat98.com/graphql`,
 		fetch: fetch,
 		credentials:'same-origin',
 		headers:{
@@ -84,8 +96,10 @@ const client = new ApolloClient({
 
 		},
 		fetchOptions:fetchOptions
-	}) ) ),
-	
+	}),
+	 ) ),
+	defaultOptions,
+	connectToDevTools:true,
 	cache: new InMemoryCache(),
 	
 });
