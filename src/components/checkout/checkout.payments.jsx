@@ -59,16 +59,6 @@ export const CheckOutPayments = ({item})=>{
     const [isOrderProcessing,setIsOrderProcessing] =useState(false);
      const [ createdOrderData, setCreatedOrderData ] = useState( {} );
     
-     useEffect(()=>{
-      if(user){
-        const totalPaidCart = user?.cart?.length!==0? user?.cart?.reduce((price,item)=>{
-       return price+item.price*item.quantity
-   },0):0;
-   TotalCart=totalPaidCart,
-   carts=user?.cart
-     }
-    
-         },[])
 if(item){
  carts = [item]
 TotalCart = item.price
