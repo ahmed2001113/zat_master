@@ -40,7 +40,8 @@ export default function MainHeader({header,categories}) {
    const {headerMenuItems,siteDescription,siteLogoUrl,siteTitle} = header
 const categoriesLinks = categories;
  function Scroll() {
-  const scrolls = document.body.scrollTop > 50 || document.documentElement.scrollTop > 50;
+  const scrolls = document.body.scrollTop > 50
+   || document.documentElement.scrollTop > 50;
   
   setScroll(scrolls)
 }
@@ -57,7 +58,7 @@ useEffect(() => {
    return (
     <>
 {domLoaded && ( <>
-<div className={scroll ? "fixed-class" : "ddd "}id='main_navigation'>
+<div className={scroll ? "fixed_class" : "ddd "}id='main_navigation'>
 {/* Mobile menu */}
 <Transition.Root show={open} as={Fragment}>
   <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -168,7 +169,8 @@ account
     Get free delivery on orders over $100
   </p> */}
 
-  <nav aria-label="Top" className={`mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 ${styles.nav_top}`}>
+  <nav aria-label="Top" className={`mx-auto max-w-8xl px-4 sm:px-6 lg:px-8
+   ${styles.nav_top}`}>
     
     <div className=" ">
       
@@ -189,7 +191,7 @@ account
       <div>
                 <Link href="/auth/signin" className="text-sm link_with_icon font-medium text-gray-700 hover:text-gray-800">
               Sign In
-              <i class="fa-regular fa-user"></i>
+              <i className="fa-regular fa-user"></i>
             </Link>
             <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
             {/* <Link href="/auth/signup" className="text-sm font-medium text-gray-700 hover:text-gray-800">
@@ -201,7 +203,7 @@ account
       }
       <Link href="/order" className="text-sm link_with_icon font-medium text-gray-700 hover:text-gray-800">
              Track Order
-             <i class="fa-regular fa-flag"></i>
+             <i className="fa-regular fa-flag"></i>
             </Link>
           </div>
 

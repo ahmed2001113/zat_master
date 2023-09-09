@@ -30,6 +30,7 @@ const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi,categories:ca
   const {description,  image, name } =DefaultData
   const [pageInferomation,setPageInfo]=useState(DefaultData?.products?.pageInfo)
   const initialRender = useRef(true);
+  console.log(price)
     useEffect(() => {
     // Compare the previous and current DefaultData objects
     if (!isEqual(DefaultData, productsData)) {
@@ -196,7 +197,7 @@ export async function getStaticProps ({params}) {
   let MinPrice= 0;
   let loadingApi = true;
 	const { slug } = params || {};
-  let data = {};
+   let data = {};
   let categories =[]
   try {
   categories =  await FetchCategories()
@@ -220,7 +221,10 @@ export async function getStaticProps ({params}) {
  }
  try{
   const {data:{products:{nodes}}, error,loading}
-  =await client.query({query:ProductsDataQuery});
+  =await client.query({query:ProductsDataQuery,
+    variables:{category:slug}
+
+ });
    ;
   
    MaxPrice = Math.max(...nodes.map(({price})=>price));

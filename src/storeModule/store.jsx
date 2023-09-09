@@ -14,7 +14,8 @@ import { FiltersAction } from '../store/filters/filter.slice';
 import { wishlistSelector } from '../store/wishlist/wishlistSelector';
  export default function Store({products=[],category='',loading,setLoading,...others}) {
    const dispatch = useDispatch()
-  const {Filters ,Filtered } = useSelector(FilterSelector)
+  const {Filters ,Filtered } = useSelector(FilterSelector);
+  console.log(Filters)
   const [scroll, setScroll] = useState(false);
   const {wishlistItems} = useSelector(wishlistSelector)
   const isWishlist=(id)=>{

@@ -44,6 +44,7 @@ query Product_Category($first: Int,
               name
               slug
               productId
+              shortDescription,
               ... on SimpleProduct {
                 price(format: RAW)
                 regularPrice(format: RAW)
