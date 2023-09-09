@@ -12,12 +12,17 @@ import { FilterSelector } from '../store/filters/filtersSelectores';
 import { FiltersAction } from '../store/filters/filter.slice';
    import Skelton2 from '../components/skelton/skeltonswipecenterd';
 import { wishlistSelector } from '../store/wishlist/wishlistSelector';
+import { userSelectMemo } from '../store/user/user.selector';
  export default function Store({products=[],category='',loading,setLoading,...others}) {
    const dispatch = useDispatch()
   const {Filters ,Filtered } = useSelector(FilterSelector)
   const [scroll, setScroll] = useState(false);
-  const {wishlistItems} = useSelector(wishlistSelector)
+  const {wishlistItems} = useSelector(wishlistSelector);
+  const user = useSelector(userSelectMemo)
   const isWishlist=(id)=>{
+    if(user){
+    return   user.wishlist.some(item=>item.id===id)
+    }
     return wishlistItems.some(item=>item.id===id)
    };
   function Scroll() {

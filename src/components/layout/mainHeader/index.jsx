@@ -28,16 +28,31 @@ function classNames(...classes) {
 }
 
 export default function MainHeader({header,categories}) {
+
     const currentUser = useSelector(userSelectMemo);
-  const dispatch= useDispatch()
+  console.log(currentUser)
+    const dispatch= useDispatch()
    const quentity = useSelector(totalCart);
+
   const openCart = ()=>dispatch(CartActions.setCartOpen(true))
    const [open, setOpen] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [searchShow,SetSearchShow]= useState(false)
-  
+  const [qu,setQu] = useState(quentity)
   const [scroll, setScroll] = useState(false);
-   const {headerMenuItems,siteDescription,siteLogoUrl,siteTitle} = header
+   const {headerMenuItems,siteDescription,siteLogoUrl,siteTitle} = header;
+
+   useEffect(()=>{
+    if(currentUser){
+  const TotalQuentity =     currentUser.cart.length!==0?currentUser.cart.reduce((que,product)=>{
+        return que+product.quantity
+    },0):0    ;
+  
+  setQu(TotalQuentity);
+  console.log(TotalQuentity)
+  }
+
+   },[currentUser])
 const categoriesLinks = categories;
  function Scroll() {
   const scrolls = document.body.scrollTop > 50 || document.documentElement.scrollTop > 50;
@@ -57,7 +72,7 @@ useEffect(() => {
    return (
     <>
 {domLoaded && ( <>
-<div className={scroll ? "fixed-class" : "ddd "}id='main_navigation'>
+<div className={scroll ? "fixed-className" : "ddd "}id='main_navigation'>
 {/* Mobile menu */}
 <Transition.Root show={open} as={Fragment}>
   <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -189,7 +204,7 @@ account
       <div>
                 <Link href="/auth/signin" className="text-sm link_with_icon font-medium text-gray-700 hover:text-gray-800">
               Sign In
-              <i class="fa-regular fa-user"></i>
+              <i className="fa-regular fa-user"></i>
             </Link>
             <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
             {/* <Link href="/auth/signup" className="text-sm font-medium text-gray-700 hover:text-gray-800">
@@ -201,7 +216,7 @@ account
       }
       <Link href="/order" className="text-sm link_with_icon font-medium text-gray-700 hover:text-gray-800">
              Track Order
-             <i class="fa-regular fa-flag"></i>
+             <i className="fa-regular fa-flag"></i>
             </Link>
           </div>
 

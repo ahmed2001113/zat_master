@@ -15,7 +15,7 @@ function Mainfooter({footer,categories:catLinks}) {
   <div className="three row">
     <div className="col-md-3  mb-2 m-auto col-11 m-auto">
       <p className="head_three">
-      <i class="fa-regular fa-message"></i>
+      <i className="fa-regular fa-message"></i>
 
     Live Chat
       </p>
@@ -25,7 +25,7 @@ function Mainfooter({footer,categories:catLinks}) {
     </div>
     <div className="col-md-3  mb-2 m-auto  col-11 m-auto">
       <p className="head_three">
-      <i class="fa-solid fa-bag-shopping"></i>
+      <i className="fa-solid fa-bag-shopping"></i>
        </p>
       <p className="othter">
       RETURNS AND EXCHANGES
@@ -34,7 +34,7 @@ function Mainfooter({footer,categories:catLinks}) {
     </div>
     <div className="col-md-3  mb-2 m-auto col-11 m-auto">
       <p className="head_three">
-      <i class="fa-solid fa-truck-fast"></i>
+      <i className="fa-solid fa-truck-fast"></i>
 Deleviry
       </p>
       <p className="othter">
