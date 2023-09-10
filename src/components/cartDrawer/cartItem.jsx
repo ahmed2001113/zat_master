@@ -29,12 +29,13 @@ if(!item){
             </div>
             <div className="col-md-8">
               <h6>{item.name}</h6>
-       <Quantity item={item}/>
+              <p>{item.price} LE</p>
+       {/* <Quantity item={item}/> */}
  
               <div className="buttons">
-              <p>
+              {/* <p>
                  QT <span>{item?.quantity}</span>
-              </p> 
+              </p>  */}
               <button onClick={RemoveItem.bind(null,item)}>remove</button>
               </div>
             </div>

@@ -75,6 +75,11 @@ query Product($id: ID!) {
       onSale
       manageStock
       regularPrice(format: RAW)
+      productCategories{
+        nodes{
+          name
+        }
+      }
       seo {
         metaKeywords
         fullHead
@@ -90,41 +95,35 @@ query Product($id: ID!) {
           text
         }
       }
-      productCategories {
-        
+      related(first: 6, where: {type: SIMPLE}) {
         nodes {
+          id
+          slug
           name
-          products(first: 6 where:{type:SIMPLE }) {
-            nodes {
-              id
-              slug
-              name
-              description
-              shortDescription
-              productId
-              image {
+          description
+          shortDescription
+          productId
+          image {
+            altText
+            srcSet
+            sourceUrl
+            title
+            uri
+            id
+          }
+          ... on SimpleProduct {
+            price(format: RAW)
+            regularPrice(format: RAW)
+            stockStatus
+            status
+            stockQuantity
+            onSale
+            manageStock
+            galleryImages {
+              nodes {
+                sourceUrl
                 altText
                 srcSet
-                sourceUrl
-                title
-                uri
-                id
-              }
-              ... on SimpleProduct {
-                price(format: RAW)
-                regularPrice(format: RAW)
-                stockStatus
-                status
-                stockQuantity
-                onSale
-                manageStock
-                galleryImages {
-                  nodes {
-                    sourceUrl
-                    altText
-                    srcSet
-                  }
-                }
               }
             }
           }

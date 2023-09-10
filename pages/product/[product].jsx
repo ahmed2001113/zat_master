@@ -37,7 +37,7 @@ const {
     stockStatus
     ,regularPrice,
     onSale,
-    productCategories,
+    related,
     averageRating,
     comments,
     galleryImages,
@@ -49,8 +49,8 @@ const {
     commentCount,
     commentStatus,
     databaseId,
-    status
-
+    status,
+    productCategories
 
 }=product
    
@@ -62,7 +62,7 @@ const reviews_={
     databaseId,
 
 }
-const similarProducts = productCategories?.nodes[0]?.products?.nodes;
+const similarProducts = related?.nodes;
 
 const images  = [image,...galleryImages?.nodes];
 const [first,...otherImages]=images
@@ -127,7 +127,9 @@ const handleShow = (imag)=>{
   </Link>
   <Typography  style={{color:'#333'}} color="inherit"  
   >
-        {productCategories?.nodes[0]?.name}
+       
+           {productCategories?.nodes[0]?.name}  
+       
 
   </Typography>
    <Typography color="text.primary">{name}</Typography>
