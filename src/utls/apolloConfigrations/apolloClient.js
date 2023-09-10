@@ -88,7 +88,7 @@ const defaultOptions = {
 // Apollo GraphQL client.
 const client = new ApolloClient({
 	link: middleware.concat( afterware.concat(createHttpLink({
-		uri: `http://zat98.com/graphql`,
+		uri: `https://zat98.com/graphql`,
 		fetch: fetch,
 		credentials:'same-origin',
 		headers:{
