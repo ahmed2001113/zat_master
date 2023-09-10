@@ -16,7 +16,7 @@ export default function ModifyObjectOrArray(products) {
            product_id:products?.productId,
            price:products.price,
            regularPrice:products.regularPrice,
-           category:products?.productCategories
+           categoryInfo:products?.productCategories||{}
          }
      })
        }else{

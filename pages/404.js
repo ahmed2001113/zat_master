@@ -9,6 +9,7 @@ import axios from "axios";
 import Head from "next/head";
 
 export default function Custom404({footer_header,products,seo,categories}) {
+  console.log(categories)
     return(
 
         <>
