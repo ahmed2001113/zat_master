@@ -3,6 +3,7 @@ import LoadingImage from "@/src/components/customsComponents/image";
 import RootLayout from "@/src/components/layout";
 import { FetchCategories } from "@/src/lib/FeatchCategories";
  import { ProductsDataQuery } from "@/src/lib/queries/GET_PRODUCTSDATA";
+import { ProductCategoryByCategory } from "@/src/lib/queries/productCategoryByCateg";
 import { productCategoriesBySlug } from "@/src/lib/queries/productsBySlug";
 import { FiltersAction } from "@/src/store/filters/filter.slice";
 import { FilterSelector } from "@/src/store/filters/filtersSelectores";
@@ -22,33 +23,35 @@ import { Button } from "react-bootstrap";
  import { useDispatch, useSelector } from "react-redux";
 
 const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi,categories:catLinks})=>{
-   
-  const [productsData,setProductsData] =useState(ModifyObjectOrArray(DefaultData?.products?.nodes));
+  const [productsData,setProductsData] =useState(ModifyObjectOrArray(DefaultData?.nodes));
+  console.log(productsData)
   const {Filters,sort,Filtered} = useSelector(FilterSelector)
   const [loadings,setLoading]=useState(loadingApi)
   const dispatch = useDispatch()
   const {description,  image, name } =DefaultData
-  const [pageInferomation,setPageInfo]=useState(DefaultData?.products?.pageInfo)
+  const [pageInferomation,setPageInfo]=useState(DefaultData?.pageInfo)
   const initialRender = useRef(true);
   console.log(price)
     useEffect(() => {
     // Compare the previous and current DefaultData objects
     if (!isEqual(DefaultData, productsData)) {
       dispatch(FiltersAction.addPrices(price))
+       // If they are different, update the state and save the current DefaultData as prevDefaultData
+       
 
-      // If they are different, update the state and save the current DefaultData as prevDefaultData
-      setProductsData(ModifyObjectOrArray(DefaultData?.products?.nodes));
+      setProductsData(ModifyObjectOrArray(DefaultData?.nodes));
+
       // productsData = DefaultData;
     }
   }, [DefaultData]); // Pass DefaultData as a dependency
 
  
   const [getData, { loading, error, data,refetch,fetchMore  }] =
-   useLazyQuery(productCategoriesBySlug,
+   useLazyQuery(ProductCategoryByCategory,
     {
       onCompleted:(data)=>{
-        const {productCategories:{nodes:productsCat}} =data;
-        const {products} =productsCat[0]
+        console.log(data)
+        const {products} =data;
         const {pageInfo,nodes}=products;
         
         setProductsData(ModifyObjectOrArray(nodes));
@@ -73,7 +76,7 @@ const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi,categories:ca
         variables:{
           first:6,
           ...Filters,
-          slug
+          category:slug
           }
       })
    
@@ -101,7 +104,7 @@ const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi,categories:ca
         first:6,
         ...Filters,
         after:pageInferomation.endCursor,
-        slug:slug
+        category:slug
       }
   })
    
@@ -116,7 +119,7 @@ const loadLess = async()=>{
       last:6,
       before:pageInferomation.startCursor,
       ...Filters,
-      slug:slug
+      category:slug
 
     }
   })
@@ -127,7 +130,7 @@ const loadLess = async()=>{
 }
 
  
- 
+ console.log(productsData)
 
       return(
 
@@ -208,12 +211,12 @@ export async function getStaticProps ({params}) {
  
    try {
 
-   const  {data:{productCategories:{nodes}},loading,error}  = await client.query({
-    query:productCategoriesBySlug ,
-    variables:{slug:slug,first:6}
+   const  {data:{products},loading,error}  = await client.query({
+    query:ProductCategoryByCategory ,
+    variables:{category:slug,first:6}
   });
   loadingApi=loading
- data =nodes[0]
+ data =products
   
 
   } catch (error) {
@@ -221,7 +224,7 @@ export async function getStaticProps ({params}) {
  }
  try{
   const {data:{products:{nodes}}, error,loading}
-  =await client.query({query:ProductsDataQuery,
+  =await client.query({query:ProductCategoryByCategory,
     variables:{category:slug}
 
  });

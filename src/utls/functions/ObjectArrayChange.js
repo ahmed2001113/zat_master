@@ -1,4 +1,5 @@
 export default function ModifyObjectOrArray(products) {
+
      if (Array.isArray(products)){
        if(products.length){
         
@@ -14,7 +15,8 @@ export default function ModifyObjectOrArray(products) {
            id:products?.id,
            product_id:products?.productId,
            price:products.price,
-           regularPrice:products.regularPrice
+           regularPrice:products.regularPrice,
+           category:products?.productCategories
          }
      })
        }else{
