@@ -13,7 +13,7 @@ export const CartOpen = createSelector([CartOpenReducer],(isOpen)=>
  isOpen)
 export const totalPaid = createSelector([cartItemsReducer],(cart)=> 
 cart.items.length!==0? cart.items.reduce((price,item)=>{
-      return price+item.price*item.quantity
+      return price+item.price* item.quantity
 },0):0
 )
 export const totalCart  = createSelector([cartItemsReducer],(cart)=>  
