@@ -87,15 +87,12 @@ const defaultOptions = {
 // Apollo GraphQL client.
 const client = new ApolloClient({
 	 uri:'http://zat98.com/graphql',
-	 fetch: fetch,
-	 credentials:'no-cors',
-	 headers:{
-		 "Content-Type": "application/json"
-
-	 },
+	  fetch,
+	 credentials:'include',
+	  
 	 defaultOptions,
 	 connectToDevTools:true,
-	 cache:new InMemoryCache
+	 cache:new InMemoryCache()
 	 
 })
 // const client = new ApolloClient({
