@@ -83,25 +83,36 @@ const defaultOptions = {
 	},
 };
 
-  const  fetchOptions = { agent: new https.Agent({ rejectUnauthorized: false }) }
-
+ 
 // Apollo GraphQL client.
 const client = new ApolloClient({
-	link: middleware.concat( afterware.concat(createHttpLink({
-		uri: `https://zat98.com/graphql`,
-		fetch: fetch,
-		credentials:'same-origin',
-		headers:{
-			"Content-Type": "application/json"
+	 uri:'https://zat98.com/graphql',
+	 fetch: fetch,
+	 credentials:'same-origin',
+	 headers:{
+		 "Content-Type": "application/json"
 
-		},
-		fetchOptions:fetchOptions
-	}),
-	 ) ),
-	defaultOptions,
-	connectToDevTools:true,
-	cache: new InMemoryCache(),
+	 },
+	 defaultOptions,
+	 connectToDevTools:true,
+	 cache:new InMemoryCache
+	 
+})
+// const client = new ApolloClient({
+// 	link: middleware.concat( afterware.concat(createHttpLink({
+// 		uri: `https://zat98.com/graphql`,
+// 		fetch: fetch,
+// 		credentials:'same-origin',
+// 		headers:{
+// 			"Content-Type": "application/json"
+
+// 		},
+//  	}),
+// 	 ) ),
+// 	defaultOptions,
+// 	connectToDevTools:true,
+// 	cache: new InMemoryCache(),
 	
-});
+// });
 
 export default client;
