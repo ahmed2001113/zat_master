@@ -88,7 +88,7 @@ const defaultOptions = {
 const client = new ApolloClient({
 	 uri:'http://zat98.com/graphql',
 	  fetch,
-	 credentials:'include',
+	 credentials:'same-origin',
 	  
 	 defaultOptions,
 	 connectToDevTools:true,
