@@ -18,11 +18,7 @@ const nextConfig = {
       {
         source: '/api/:path*',
         destination: 'https://zat98.com/:path*',
-      },
-      {
-        source:'https://zat.vercel.app/*',
-        destination:'https://www.zat98.com/graphql'
-      }
+      } 
     ]
   },
   async headers() {
