@@ -1,0 +1,13 @@
+{
+  "/404": {},
+  "/account": {},
+  "/auth/signin": {},
+  "/auth/signup": {},
+  "/checkout/[id]": {},
+  "/order": {},
+  "/": {},
+  "/product/[product]": {},
+  "/search/[search]": {},
+  "/shop/[slug]": {},
+  "/shop": {}
+}
