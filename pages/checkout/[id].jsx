@@ -126,7 +126,7 @@ LE  {(+CartTotal+65)}
 }
 
 
-export const getInitialProps =async ({params})=>{
+export const getServerSideProps =async ({params})=>{
 
 let {id}=params;
 let productItem = {}
