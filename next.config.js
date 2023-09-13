@@ -1,4 +1,4 @@
-const allowedImageWordPressDomain = new URL(`https://zat98.com` ).hostname;
+// const allowedImageWordPressDomain = new URL(`https://zat98.com` ).hostname;
 const allowedImageWordPressDomainz = new URL('https://images.canadagoose.com' ).hostname;
 const Colourdany = new URL('https://res.cloudinary.com' ).hostname;
 
@@ -8,7 +8,7 @@ const nextConfig = {
  
   images:{
     loader:'default',
-    domains: [ allowedImageWordPressDomain,
+    domains: [  
       allowedImageWordPressDomainz,
       Colourdany ],
 
