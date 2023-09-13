@@ -12,11 +12,7 @@ import { rootSaga } from './root-saga';
 //inject saga middleWareFirst
  const sagaMiddleWare =createSagaMiddleWare();
 //  //replace thunk with saga;
-const MiddleWares = [
-    process.env.NODE_ENV !== 'production'&& 
-    
-     custemMiddleWare
-].filter(Boolean);
+const MiddleWares = [custemMiddleWare] 
  
 
 // in order to use MiddleWare we have top applyMiddleware First

@@ -16,8 +16,7 @@ const PaypalButtonCheckout = ()=>{
      const [ createdOrderData, setCreatedOrderData ] = useState( {} );
      const router = useRouter();
      const dispatch = useDispatch()
-console.log(items,input);
-useEffect(()=>{
+ useEffect(()=>{
 
     if(Object.keys(createdOrderData).length!==0){
     

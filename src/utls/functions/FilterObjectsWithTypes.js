@@ -19,8 +19,7 @@ export default function filterObjectValues(obj,callback) {
         // Otherwise, assign the value as it is
 
         if(isArray(obj[key])){
-          console.log(obj[key].filter(a=>!isObject(a)))
-          acc[key]  = obj[key].filter(a=>!isObject(a))
+           acc[key]  = obj[key].filter(a=>!isObject(a))
 
         }
         acc[key] = obj[key];
@@ -28,8 +27,7 @@ export default function filterObjectValues(obj,callback) {
       return acc;
     }, {});
 
-    console.log(filteredObject)
-    // Return the filtered object
+     // Return the filtered object
      return callback(filteredObject);
   }
   

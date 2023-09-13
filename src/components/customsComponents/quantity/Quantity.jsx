@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function Quantity({item}) {
   const dispatch = useDispatch()
   const {id,quantity} = item;
-  console.log(quantity)
-  const [value, setValue] = useState(quantity||1);
+   const [value, setValue] = useState(quantity||1);
     const minVal = 1;
     const maxVal=20;
     const items = useSelector(cartItems)
@@ -42,8 +41,7 @@ const decreaseValue = () => {
 //   dispatch(CartActions.setCartItems(itemsArray));
 // }, [value]);
   const onChange = (value) => {
-    console.log(value)
-     const itemsArray = items.map((i,idx)=>{
+      const itemsArray = items.map((i,idx)=>{
              if(i.id===id){
             
                 return{

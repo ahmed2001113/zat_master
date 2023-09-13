@@ -24,34 +24,44 @@ import { Button } from "react-bootstrap";
 
 const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi,categories:catLinks})=>{
   const [productsData,setProductsData] =useState(ModifyObjectOrArray(DefaultData?.nodes));
-  console.log(productsData)
-  const {Filters,sort,Filtered} = useSelector(FilterSelector)
+   const {Filters,sort,Filtered} = useSelector(FilterSelector)
   const [loadings,setLoading]=useState(loadingApi)
   const dispatch = useDispatch()
   const {description,  image, name } =DefaultData
   const [pageInferomation,setPageInfo]=useState(DefaultData?.pageInfo)
   const initialRender = useRef(true);
-  console.log(price)
-    useEffect(() => {
-    // Compare the previous and current DefaultData objects
-    if (!isEqual(DefaultData, productsData)) {
+     useEffect(() => {
+     if (!isEqual(DefaultData, productsData)) {
       dispatch(FiltersAction.addPrices(price))
-       // If they are different, update the state and save the current DefaultData as prevDefaultData
-       
+        
 
       setProductsData(ModifyObjectOrArray(DefaultData?.nodes));
 
-      // productsData = DefaultData;
-    }
-  }, [DefaultData]); // Pass DefaultData as a dependency
+        // Define your function here
+       const handlePageLeave = () => {
+        // Do something when the user leaves the page
+        dispatch(FiltersAction.resetFilters())
+    
+      };
+    
+      // Add event listeners for both events
+      window.addEventListener("beforeunload", handlePageLeave);
+      router.events.on("routeChangeStart", handlePageLeave);
+    
+       return () => {
+        window.removeEventListener("beforeunload", handlePageLeave);
+        router.events.off("routeChangeStart", handlePageLeave);
+      };
 
+     }
+  }, [DefaultData]);  
+ 
  
   const [getData, { loading, error, data,refetch,fetchMore  }] =
    useLazyQuery(ProductCategoryByCategory,
     {
       onCompleted:(data)=>{
-        console.log(data)
-        const {products} =data;
+         const {products} =data;
         const {pageInfo,nodes}=products;
         
         setProductsData(ModifyObjectOrArray(nodes));
@@ -130,8 +140,7 @@ const loadLess = async()=>{
 }
 
  
- console.log(productsData)
-
+ 
       return(
 
         <>
