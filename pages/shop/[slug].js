@@ -30,6 +30,7 @@ const Cat = ({data:DefaultData,footer_header,price,slug,loadingApi,categories:ca
   const {description,  image, name } =DefaultData
   const [pageInferomation,setPageInfo]=useState(DefaultData?.pageInfo)
   const initialRender = useRef(true);
+  const router = useRouter()
      useEffect(() => {
      if (!isEqual(DefaultData, productsData)) {
       dispatch(FiltersAction.addPrices(price))
