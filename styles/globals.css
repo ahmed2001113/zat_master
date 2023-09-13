@@ -397,7 +397,23 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-11zohuh-MuiSvgIcon-root {
   height: fit-content;
   margin: auto;
 }
-
+.tab-content {
+  margin-left: 20px;
+  height: 500px;
+  overflow: auto;
+}
+.tab-content::-webkit-scrollbar{
+  width: 10px;
+  visibility: hidden;
+  background: #fff;
+}
+.tab-content:hover .tab-content::-webkit-scrollbar{
+  visibility: visible !important;
+}
+.tab-content::-webkit-scrollbar-thumb{
+  background-color: #333;
+  border-radius: 10px;
+}
 .fixed_class {
   position: fixed;
   background: #fff;

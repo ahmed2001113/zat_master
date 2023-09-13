@@ -1,4 +1,4 @@
-const allowedImageWordPressDomain = new URL( `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}` ).hostname;
+const allowedImageWordPressDomain = new URL( `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}`).hostname;
 const allowedImageWordPressDomainz = new URL('https://images.canadagoose.com' ).hostname;
 const Colourdany = new URL('https://res.cloudinary.com' ).hostname;
 
@@ -18,7 +18,7 @@ const nextConfig = {
       {
         source: '/api/:path*',
         destination: 'https://zat98.com/:path*',
-      } 
+      },
     ]
   },
   async headers() {
