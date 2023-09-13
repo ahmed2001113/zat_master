@@ -191,7 +191,7 @@ import { FetchCategories } from "@/src/lib/FeatchCategories";
 
 
 
- export async function getServerSideProps({params}){
+ export async function getInitialProps({params}){
 const {search}= params;
 let SearchData = []
   let footer_header ={}  ;
