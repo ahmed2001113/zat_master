@@ -24,7 +24,8 @@ const  Signin=({footer_header,categories}) =>{
     const [firebaseError,setFirebaseError]=useState("")
   const [data,setFormData]=useState(intial);
   const{email,password}=data
-  const resetForm = ()=>{
+  const resetForm = ()=>
+  { 
     setFormData(intial)
 }
 
