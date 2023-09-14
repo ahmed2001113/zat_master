@@ -20,6 +20,7 @@ import { PayPalScriptProvider } from '@paypal/react-paypal-js';
  config.autoAddCss = false;
  import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
 import Message from '@/src/components/message/message';
+import ErrorBoundary from '@/src/components/errorrhandling/ErrorBoundary';
  if (process.env.NODE_ENV === 'development') {
  
  }
@@ -70,8 +71,10 @@ useEffect(()=>{
   <ApolloProvider client={client}>
 
      <PersistGate  persistor={persistor}>
+<ErrorBoundary > 
 
   <Component {...pageProps} />
+</ErrorBoundary>
   <Message/>
 
   </PersistGate>
